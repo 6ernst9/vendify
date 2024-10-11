@@ -16,4 +16,5 @@ public class Product {
     private final double price;
     private final String description;
     private final double reviews;
+    private final int stock;
 }
