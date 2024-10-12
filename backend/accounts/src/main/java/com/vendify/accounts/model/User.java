@@ -27,7 +27,7 @@ public class User {
     private String phoneNumber;
     private long sessionId;
 
-    public User(@NonNull String username, @NonNull String firstName, @NonNull String lastName, int age, @NonNull String email, @NonNull String password, @NonNull String phoneNumber, long sessionId) {
+    public User(@NonNull String username, @NonNull String firstName, @NonNull String lastName, int age, @NonNull String email, @NonNull String password, @NonNull String phoneNumber) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,6 +35,5 @@ public class User {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.sessionId = sessionId;
     }
 }
