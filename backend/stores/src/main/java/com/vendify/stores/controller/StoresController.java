@@ -1,6 +1,7 @@
 package com.vendify.stores.controller;
 
 import com.vendify.stores.model.*;
+import com.vendify.stores.service.StoresService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,16 @@ import java.util.List;
 @RequestMapping("api/v1")
 @RequiredArgsConstructor
 public class StoresController {
+    private final StoresService storesService;
+
     @GetMapping("/get-stores-by-id/{id}")
     public Mono<Store> getStoreById(@PathVariable long id){
-
+        return storesService.getStoreById(id);
     }
 
     @GetMapping("/get-stores-by-owner/{id}")
     public Flux<Store> getStoresByOwner(@PathVariable long id){
-
+        return storesService.getStoresByOwner(id);
     }
 
     @PostMapping("/add-store")
