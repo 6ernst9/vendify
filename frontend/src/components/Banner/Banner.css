@@ -1,0 +1,35 @@
+.banner {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    width: calc(100vw - 40px);
+    margin: 0 20px;
+}
+
+.banner-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-content: center;
+    border-right: 1px solid #c4c4c4;
+    height: 600px;
+    width: 200px;
+    padding: 20px 0;
+}
+
+.banner-categories p{
+    margin: 0;
+    font-size: 18px;
+}
+
+.banner-img-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 40px;
+}
+
+.banner-img {
+    height: 600px;
+    width: auto;
+}
