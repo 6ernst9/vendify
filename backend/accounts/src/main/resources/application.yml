@@ -14,3 +14,11 @@ spring:
     url: r2dbc:postgresql://localhost:5432/vendify
     username: postgres
     password: sspostgres2022
+
+idp:
+  validity:
+    access-token: 1h
+    refresh-token: 2d
+  secrets:
+    access: 4Ga-Tv6JYtsOJKwD1pO1jlterG81IyUj4cswg2EqmIMqBrY8frJSz9gEE_tbZp3M8R-BhT3pQEW5FVlHd2sLUQ
+    refresh: a8ranETXjl5GC3Pn_U3fxKcY7AnouxJg8LF5UFjnv_tWl5ewRnomEN8Bj37uxu9rx70BN8hERGB6Q6boAXXYwA

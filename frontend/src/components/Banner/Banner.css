@@ -14,7 +14,7 @@
     border-right: 1px solid #c4c4c4;
     height: 600px;
     width: 200px;
-    padding: 20px 0;
+    padding: 40px 0;
 }
 
 .banner-categories p{
@@ -30,6 +30,7 @@
 }
 
 .banner-img {
-    height: 600px;
-    width: auto;
+    width: calc(100vw - 280px);
+    height: auto;
+    aspect-ratio: initial;
 }

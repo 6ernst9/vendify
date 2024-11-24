@@ -1,5 +1,7 @@
 import React from "react";
 import './Sales.css';
+import ProductCard from "../ProductCard/ProductCard";
+import {products} from "../../widgets/home-widget/mock/products";
 
 const Sales: React.FC = () => {
     return (
@@ -34,6 +36,11 @@ const Sales: React.FC = () => {
                 <div className="sales-title-button">
                     <p>View All Products</p>
                 </div>
+            </div>
+            <div className="sales-products">
+                {products.map((product) =>
+                    <ProductCard {...product}/>
+                )}
             </div>
         </div>
     )

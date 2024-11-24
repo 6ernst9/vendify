@@ -13,6 +13,8 @@ const Banner: React.FC = () => {
                 <p>Medicine</p>
                 <p>Sports & Outdoor</p>
                 <p>Baby's & Toys</p>
+                <p>Groceries & Pets</p>
+                <p>Health & Beauty</p>
             </div>
             <div className="banner-img-container">
                 <img src={image} className="banner-img"/>

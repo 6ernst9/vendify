@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @Setter
-@Table(name = "user")
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
