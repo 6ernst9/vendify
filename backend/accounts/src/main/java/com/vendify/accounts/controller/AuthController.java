@@ -18,14 +18,15 @@ import reactor.core.publisher.Mono;
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping("/login")
+    @PostMapping("/login/{storeId}")
     @WMTSecurityMapping(path = "login", tokenEnabled = false)
-    public Mono<LoginResponse> login(@RequestBody LoginDto loginDto) {
+    public Mono<LoginResponse> login(@PathVariable Long storeId,
+                                     @RequestBody LoginDto loginDto) {
         var placeholder = loginDto.placeholder();
         var password = loginDto.password();
         log.info("Performing POST /login request. Input: placeholder={}, password={}", placeholder, password);
 
-        return authService.login(placeholder, password).map(response -> {
+        return authService.login(storeId, placeholder, password).map(response -> {
             log.info("Performed POST /login request. Input: placeholder={}, password={}. Output: id={}", placeholder, password, response.id());
             return response;
         });

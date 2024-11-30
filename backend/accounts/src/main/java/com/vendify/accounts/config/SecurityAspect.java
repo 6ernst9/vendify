@@ -4,15 +4,17 @@ import com.vendify.accounts.config.annotations.WMTSecurityMapping;
 import com.vendify.accounts.repository.SessionRepository;
 import com.vendify.accounts.service.JwtGenerator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import com.vendify.accounts.exceptions.SecurityException;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Aspect
 @Component
 @RequiredArgsConstructor
@@ -29,35 +31,46 @@ public class SecurityAspect {
         var device = request.getHeader("X-FI-V-DEVICE");
         var ipAddress = request.getHeader("X-FI-V-IP");
 
-        Assert.notNull(requestMapping, "path cannot be null");
-        Assert.notNull(siteId, "siteId cannot be null");
-        Assert.notNull(device, "device cannot be null");
-        Assert.notNull(ipAddress, "ipAddress cannot be null");
+        if(requestMapping == null){
+            throw new SecurityException("Path not found", "Request should contain path mapping");
+        }
+        if(siteId == null){
+            throw new SecurityException("Site ID not found", "Request should contain site id");
+        }
+        if(device == null){
+            throw new SecurityException("Device not found", "Request should contain device");
+        }
+        if(ipAddress == null){
+            throw new SecurityException("IP Address not found", "Request should contain ip address");
+        }
 
         if(!requestMapping.contains(mapping.path())){
-            throw new SecurityException("Invalid request mapping");
+            throw new SecurityException("Invalid path", "Request should contain endpoint path");
         }
 
         var tokenEnabled = mapping.tokenEnabled();
         if(!tokenEnabled){
+            log.info("Skipping authorizations check for request");
             return;
         }
 
         var authorization = request.getHeader("Authorization");
-        Assert.notNull(authorization, "authorization cannot be null");
-
+        if (authorization == null) {
+            throw new SecurityException("Authorization not found", "Authorization header is required");
+        }
         if(!authorization.startsWith("Bearer")) {
-            throw new SecurityException("Invalid authorization");
+            throw new SecurityException("Invalid authorization", "Authorization should start with 'Bearer'");
         }
         var token = authorization.substring(7);
 
         if(!jwtGenerator.validateToken(token)) {
-            throw new SecurityException("Invalid token");
+            throw new SecurityException("Invalid token", "Token not matching claims");
         }
 
         var sessionId = jwtGenerator.getSessionFromToken(token);
         sessionRepository.findById(sessionId).flatMap(session -> {
             session.setLastActivity(LocalDateTime.now());
+            log.info("Saving new session {}", session);
             return sessionRepository.save(session);
         });
     }

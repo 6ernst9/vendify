@@ -2,11 +2,11 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
                           id SERIAL PRIMARY KEY,
-                          username VARCHAR(255) NOT NULL UNIQUE,
+                          username VARCHAR(255) NOT NULL,
                           password VARCHAR(255) NOT NULL,
                           first_name VARCHAR(255) NOT NULL,
                           last_name VARCHAR(255) NOT NULL,
                           age INTEGER NOT NULL,
-                          email VARCHAR(255) NOT NULL UNIQUE,
-                          phone_number VARCHAR(255) NOT NULL UNIQUE,
-                          session_id BIGINT);
+                          email VARCHAR(255) NOT NULL,
+                          phone_number VARCHAR(255) NOT NULL,
+                          store_id BIGINT);

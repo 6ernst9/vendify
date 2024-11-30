@@ -1,6 +1,7 @@
 package com.vendify.accounts.controller;
 
 import com.vendify.accounts.config.annotations.WMTSecurityMapping;
+import com.vendify.accounts.exceptions.UserNotFoundException;
 import com.vendify.accounts.model.ResponseDto;
 import com.vendify.accounts.service.AccountService;
 import com.vendify.accounts.model.User;
@@ -20,34 +21,41 @@ public class AccountController {
     @WMTSecurityMapping(path = "get-user-by-id")
     public Mono<User> getUserById(@PathVariable long id){
         log.info("Performing GET /get-user-by-id call. Input: id={}", id);
-        var user = accountService.getUserById(id);
+        var user = accountService.getUserById(id)
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for id " + id)));
         log.info("Performed GET /get-user-by-id call. Input: id={}. Output={}", id, user);
         return user;
     }
 
-    @GetMapping("/get-user-by-username/{username}")
+    @GetMapping("/get-user-by-username/{storeId}/{username}")
     @WMTSecurityMapping(path = "get-user-by-username")
-    public Mono<User> getUserByUsername(@PathVariable String username){
+    public Mono<User> getUserByUsername(@PathVariable Long storeId,
+                                        @PathVariable String username){
         log.info("Performing GET /get-user-by-username call. Input: username={}", username);
-        var user = accountService.getUserByUsername(username);
+        var user = accountService.getUserByUsername(storeId, username)
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for username " + username)));
         log.info("Performed GET /get-user-by-username call. Input: username={}. Output={}", username, user);
         return user;
     }
 
-    @GetMapping("/get-user-by-email/{email}")
+    @GetMapping("/get-user-by-email/{storeId}/{email}")
     @WMTSecurityMapping(path = "get-user-by-email")
-    public Mono<User> getUserByEmail(@PathVariable String email){
+    public Mono<User> getUserByEmail(@PathVariable Long storeId,
+                                     @PathVariable String email){
         log.info("Performing GET /get-user-by-email call. Input: email={}", email);
-        var user = accountService.getUserByEmail(email);
+        var user = accountService.getUserByEmail(storeId, email)
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for email " + email)));
         log.info("Performed GET /get-user-by-email call. Input: email={}. Output={}", email, user);
         return user;
     }
 
-    @GetMapping("/get-user-by-phone-number/{phone}")
+    @GetMapping("/get-user-by-phone-number/{storeId}/{phone}")
     @WMTSecurityMapping(path = "get-user-by-phone")
-    public Mono<User> getUserByPhoneNumber(@PathVariable String phone){
+    public Mono<User> getUserByPhoneNumber(@PathVariable Long storeId,
+                                           @PathVariable String phone){
         log.info("Performing GET /get-user-by-phone-number call. Input: phone-number={}", phone);
-        var user = accountService.getUserByPhoneNumber(phone);
+        var user = accountService.getUserByPhoneNumber(storeId, phone)
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for phone number " + phone)));
         log.info("Performed GET /get-user-by-phone-number call. Input: phone-number={}. Output={}", phone, user);
         return user;
     }

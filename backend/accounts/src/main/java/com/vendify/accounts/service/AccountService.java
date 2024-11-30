@@ -1,5 +1,6 @@
 package com.vendify.accounts.service;
 
+import com.vendify.accounts.exceptions.UserNotFoundException;
 import com.vendify.accounts.model.User;
 import com.vendify.accounts.model.UserDto;
 import com.vendify.accounts.repository.UserRepository;
@@ -14,23 +15,19 @@ public class AccountService {
     private final UserRepository userRepository;
 
     public Mono<User> getUserById(long id){
-        return userRepository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("User not found")));
+        return userRepository.findById(id);
     }
 
-    public Mono<User> getUserByUsername(String username){
-        return userRepository.findUserByUsername(username)
-                .switchIfEmpty(Mono.error(new RuntimeException("User not found")));
+    public Mono<User> getUserByUsername(Long storeId, String username){
+        return userRepository.findUserByUsername(storeId, username);
     }
 
-    public Mono<User> getUserByEmail(String email){
-        return userRepository.findUserByEmail(email)
-                .switchIfEmpty(Mono.error(new RuntimeException("User not found")));
+    public Mono<User> getUserByEmail(Long storeId, String email){
+        return userRepository.findUserByEmail(storeId, email);
     }
 
-    public Mono<User> getUserByPhoneNumber(String phoneNumber){
-        return userRepository.findUserByPhoneNumber(phoneNumber)
-                .switchIfEmpty(Mono.error(new RuntimeException("User not found")));
+    public Mono<User> getUserByPhoneNumber(Long storeId, String phoneNumber){
+        return userRepository.findUserByPhoneNumber(storeId, phoneNumber);
     }
 
     public Mono<User> addUser(UserDto userDto) {
@@ -42,19 +39,20 @@ public class AccountService {
                         userDto.getAge(),
                         userDto.getEmail(),
                         userDto.getPassword(),
-                        userDto.getPhoneNumber()
+                        userDto.getPhoneNumber(),
+                        userDto.getStoreId()
                 ));
     }
 
     public Mono<User> updateAccount(User userToUpdate) {
         return userRepository.findById(userToUpdate.getId())
                 .flatMap(account -> userRepository.save(userToUpdate))
-                .switchIfEmpty(Mono.error(new RuntimeException("User not found")));
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for id " + userToUpdate.getId())));
     }
 
     public Mono<Void> deleteAccount(@NonNull Long id){
         return userRepository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("User not found")))
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for id " + id)))
                 .flatMap(account -> userRepository.deleteById(id));
     }
 }
