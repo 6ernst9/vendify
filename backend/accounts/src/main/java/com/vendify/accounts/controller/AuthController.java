@@ -6,6 +6,7 @@ import com.vendify.accounts.model.LoginResponse;
 import com.vendify.accounts.model.ResponseDto;
 import com.vendify.accounts.model.UserDto;
 import com.vendify.accounts.service.AuthService;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -44,12 +45,23 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    @WMTSecurityMapping(path = "refresh", tokenEnabled = false)
+    @WMTSecurityMapping(path = "refresh")
     public Mono<String> refreshToken(@RequestBody String refreshToken) {
         log.info("Performing POST /refresh request.");
 
         return authService.refreshToken(refreshToken).map(response -> {
             log.info("Performed POST /refresh request.");
+            return response;
+        });
+    }
+
+    @PostMapping("/introspect")
+    @WMTSecurityMapping(path = "introspect")
+    public Mono<Claims> introspect(@RequestBody String accessToken) {
+        log.info("Performing POST /introspect request.");
+
+        return authService.introspect(accessToken).map(response -> {
+            log.info("Performed POST /introspect request.");
             return response;
         });
     }

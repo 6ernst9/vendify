@@ -9,6 +9,7 @@ import com.vendify.accounts.model.User;
 import com.vendify.accounts.model.UserDto;
 import com.vendify.accounts.repository.SessionRepository;
 import com.vendify.accounts.util.ValidationUtils;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -94,6 +95,10 @@ public class AuthService {
 
             return Mono.just(jwtGenerator.generateAccessToken(username, sessionId));
         });
+    }
+
+    public Mono<Claims> introspect(String accessToken) {
+        return Mono.just(jwtGenerator.getAllClaimsFromAccessToken(accessToken));
     }
 
     public Mono<Void> logout(String accessToken) {
