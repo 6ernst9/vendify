@@ -1,0 +1,13 @@
+.product-slider{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px; scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.product-slider::-webkit-scrollbar {
+    display: none;
+}

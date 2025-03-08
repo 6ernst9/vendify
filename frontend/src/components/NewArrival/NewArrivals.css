@@ -1,4 +1,4 @@
-.best-selling {
+.new-arrivals {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -7,7 +7,7 @@
     gap: 10px;
 }
 
-.best-selling-header {
+.new-arrivals-header {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -16,44 +16,40 @@
     gap: 10px;
 }
 
-.best-selling-header span {
+.new-arrivals-header span {
     background-color: red;
     width: 15px;
     height: 30px;
     border-radius: 5px;
 }
 
-.best-selling-header p {
+.new-arrivals-header p {
     margin: 0;
     color: red;
     font-weight: bold;
     font-size: 18px;
 }
 
-.best-selling-title {
+.new-arrivals-title {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-content: center;
 }
 
-.best-selling-title h2 {
+.new-arrivals-title h2 {
     font-size: 30px;
     font-weight: bold;
 }
 
-.best-selling-title-button {
-    cursor: pointer;
-    background-color: red;
-    border-radius: 5px;
+.new-arrivals-img-container{
     display: flex;
-    height: 45px;
     justify-content: center;
-    align-items: center;
+    align-content: center;
 }
 
-.best-selling-title-button p {
-    font-size: 18px;
-    padding: 0 30px;
-    color: white;
+.new-arrivals-img {
+    width: 100vw;
+    height: auto;
+    aspect-ratio: initial;
 }

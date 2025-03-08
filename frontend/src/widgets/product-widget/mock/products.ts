@@ -11,13 +11,13 @@ export const products = [
     },
     {
         "id": 2,
-        "title": "Logitech MX Master 3 Mouse",
-        "price": 99,
-        "oldPrice": 129,
-        "stars": 4.8,
-        "reviews": 112,
+        "title": "Samsung 27'' Curved Monitor",
+        "price": 300,
+        "oldPrice": 400,
+        "stars": 4.3,
+        "reviews": 130,
         "img": "https://zona.store/wp-content/uploads/2024/03/mx-master-3s-mouse-top-view-pale-gray-1000x859.webp",
-        "sale": 23
+        "sale": 25
     },
     {
         "id": 3,
@@ -38,16 +38,6 @@ export const products = [
         "reviews": 205,
         "img": "https://zona.store/wp-content/uploads/2024/03/mx-master-3s-mouse-top-view-pale-gray-1000x859.webp",
         "sale": 12
-    },
-    {
-        "id": 5,
-        "title": "Samsung 27'' Curved Monitor",
-        "price": 300,
-        "oldPrice": 400,
-        "stars": 4.3,
-        "reviews": 130,
-        "img": "https://zona.store/wp-content/uploads/2024/03/mx-master-3s-mouse-top-view-pale-gray-1000x859.webp",
-        "sale": 25
     },
     {
         "id": 5,
