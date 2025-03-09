@@ -49,4 +49,17 @@ export const products = [
         "img": "https://zona.store/wp-content/uploads/2024/03/mx-master-3s-mouse-top-view-pale-gray-1000x859.webp",
         "sale": 25
     }
-]
+];
+
+export const product =  {
+    "id": 5,
+    "title": "Samsung 27'' Curved Monitor",
+    "price": 300,
+    "category": "Electronics",
+    "description": "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+    "oldPrice": 400,
+    "stars": 4.3,
+    "reviews": 130,
+    "img": "https://zona.store/wp-content/uploads/2024/03/mx-master-3s-mouse-top-view-pale-gray-1000x859.webp",
+    "sale": 25
+}
