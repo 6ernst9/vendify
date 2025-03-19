@@ -16,7 +16,7 @@ const BestSelling: React.FC = () => {
                     <p>View All</p>
                 </div>
             </div>
-            <ProductSlider products={products}/>
+            <ProductSlider products={products} wishlist={false}/>
         </div>
     )
 }

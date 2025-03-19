@@ -107,7 +107,7 @@
     margin-top: 20px;
 }
 
-.quantity-selector {
+.product-quantity-selector {
     display: flex;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -170,7 +170,7 @@
     cursor: pointer;
 }
 
-.delivery-info {
+.product-delivery-info {
     margin-top: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;

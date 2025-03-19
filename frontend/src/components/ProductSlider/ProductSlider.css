@@ -1,7 +1,8 @@
-.product-slider{
+.product-slider {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 20px;
     overflow-x: auto;
     white-space: nowrap;
     padding-bottom: 10px; scrollbar-width: none;

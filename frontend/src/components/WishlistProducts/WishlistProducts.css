@@ -1,0 +1,8 @@
+.wishlist-products {
+    width: calc(100vw - 80px);
+    margin: 0 40px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px; scrollbar-width: none;
+    -ms-overflow-style: none;
+}

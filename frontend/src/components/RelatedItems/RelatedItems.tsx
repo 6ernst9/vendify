@@ -10,7 +10,7 @@ const RelatedItems: React.FC = () => {
                 <span/>
                 <p>Related Items</p>
             </div>
-            <ProductSlider products={products}/>
+            <ProductSlider products={products} wishlist={false}/>
         </div>
     )
 }
