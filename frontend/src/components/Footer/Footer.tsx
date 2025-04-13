@@ -7,8 +7,11 @@ import googleplay from '../../assets/img/google_play.png';
 import appstore from '../../assets/img/app_store.png';
 import qr from '../../assets/img/qr.png';
 import "./Footer.css";
+import {useNavigate} from "react-router-dom";
 
 const Footer: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <footer className="footer">
             <div className="footer-container">
@@ -32,21 +35,21 @@ const Footer: React.FC = () => {
                 <div className="footer-section">
                     <h3>Account</h3>
                     <ul className="footer-list">
-                        <li>My Account</li>
-                        <li>Login / Register</li>
-                        <li>Cart</li>
-                        <li>Wishlist</li>
-                        <li>Shop</li>
+                        <li onClick={() => navigate("/account")}>My Account</li>
+                        <li onClick={() => navigate("/login")}>Login / Register</li>
+                        <li onClick={() => navigate("/cart")}>Cart</li>
+                        <li onClick={() => navigate("/wishlist")}>Wishlist</li>
+                        <li onClick={() => navigate("/browse")}>Shop</li>
                     </ul>
                 </div>
 
                 <div className="footer-section">
                     <h3>Quick Link</h3>
                     <ul className="footer-list">
-                        <li>Privacy Policy</li>
-                        <li>Terms Of Use</li>
-                        <li>FAQ</li>
-                        <li>Contact</li>
+                        <li onClick={() => navigate("/privacy")}>Privacy Policy</li>
+                        <li onClick={() => navigate("/terms")}>Terms Of Use</li>
+                        <li onClick={() => navigate("/faq")}>FAQ</li>
+                        <li onClick={() => navigate("/contact")}>Contact</li>
                     </ul>
                 </div>
 

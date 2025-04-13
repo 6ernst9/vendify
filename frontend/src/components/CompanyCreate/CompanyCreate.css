@@ -1,0 +1,23 @@
+.company-create-container{
+    padding: 20px;
+}
+
+.company-create-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-create-header-button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #111;
+    color: white;
+    cursor: pointer;
+}
+
+.company-create-header h1 {
+    margin-bottom: 20px;
+    font-weight: normal;
+}

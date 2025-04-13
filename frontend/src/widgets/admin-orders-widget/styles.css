@@ -1,0 +1,11 @@
+.admin-orders-widget {
+    background-color: #111;
+}
+
+.widget-main-content {
+    width: calc(100% - 290px);
+    margin-left: 290px;
+    margin-top: 80px;
+    background-color: white;
+    border-radius: 10px 0 0 0;
+}
