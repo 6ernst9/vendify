@@ -1,7 +1,7 @@
 .navbar {
     width: calc(100% - 310px);
     height: 80px;
-    background: #111;
+    background: #001944;
     color: white;
     display: flex;
     align-items: center;
@@ -21,7 +21,8 @@
     width: 300px;
     padding: 10px;
     height: 25px;
-    background-color: #222;
+    background: rgba(255, 255, 255, 0.15);
+    outline: 1px solid white;
     border-radius: 5px;
 }
 
@@ -34,6 +35,10 @@
     background: none;
     border: none;
     outline: none;
+    color: white;
+}
+
+.navbar-search-bar input::placeholder{
     color: white;
 }
 

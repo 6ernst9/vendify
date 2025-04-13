@@ -1,6 +1,6 @@
 import React from "react";
 import './Sidebar.css';
-import {ReactComponent as Logo} from "../../assets/icons/logo.svg";
+import {ReactComponent as Logo} from "../../assets/icons/colored-logo.svg";
 import {ReactComponent as Menu} from "../../assets/icons/menu.svg";
 import {ReactComponent as Home} from "../../assets/icons/home.svg";
 import {ReactComponent as PieChart} from "../../assets/icons/pie-chart.svg";
