@@ -8,7 +8,7 @@ import {ReactComponent as Sale} from "../../assets/icons/ticket.svg";
 import {ReactComponent as List} from "../../assets/icons/list.svg";
 import {ReactComponent as Building} from "../../assets/icons/building.svg";
 import {ReactComponent as Archive} from "../../assets/icons/archive.svg";
-import {ReactComponent as File} from "../../assets/icons/file.svg";
+import {ReactComponent as User} from "../../assets/icons/user.svg";
 import {ReactComponent as Settings} from "../../assets/icons/settings.svg";
 import {NavLink} from "react-router-dom";
 
@@ -24,11 +24,11 @@ const Sidebar: React.FC = () => {
             </div>
             <ul>
                 <li>
-                    <NavLink to='/admin/dashboard' className={({isActive}) =>
+                    <NavLink to='/admin/home' className={({isActive}) =>
                         isActive ? "sidebar-li-container active" : "sidebar-li-container"
                         }>
                         <Home/>
-                        <p>Dashboard</p>
+                        <p>Home</p>
                     </NavLink>
                 </li>
                 <li>
@@ -62,9 +62,9 @@ const Sidebar: React.FC = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/admin/documents' className="sidebar-li-container">
-                        <File/>
-                        <p>Documents</p>
+                    <NavLink to='/admin/customers' className="sidebar-li-container">
+                        <User/>
+                        <p>Customers</p>
                     </NavLink>
                 </li>
                 <li>

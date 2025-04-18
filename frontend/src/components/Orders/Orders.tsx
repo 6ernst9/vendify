@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import './Orders.css';
 
 const orders = [
@@ -9,7 +9,16 @@ const orders = [
     { id: '#1161', date: 'Oct 5, 4:54pm EST', customer: 'Eryn Marvin', payment: 'Pending', fulfillment: 'Fulfilled', total: '$3,357.00' },
 ];
 
+const tabs = [
+    { id: 'all', label: 'All' },
+    { id: 'open', label: 'Open' },
+    { id: 'shipped', label: 'Shipped'},
+    { id: 'closed', label: 'Closed' }
+];
+
 const Orders: React.FC = () => {
+    const [activeTab, setActiveTab] = useState('all');
+
     return (
         <div className="orders-container">
             <div className="orders-header">
@@ -18,15 +27,26 @@ const Orders: React.FC = () => {
                     Export
                 </div>
             </div>
-            <table className="order-table">
-                <thead>
-                <tr>
-                    <th><input type="checkbox"/></th>
-                    <th>Order</th>
-                    <th>Date</th>
-                    <th>Customer</th>
-                    <th>Payment</th>
-                    <th>Fulfillment</th>
+            <div className="orders-tabs">
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`orders-tab-button ${activeTab === tab.id ? 'active' : ''}`}
+                    >
+                        {tab.label}
+                    </button>
+                ))}
+        </div>
+    <table className="order-table">
+        <thead>
+        <tr>
+            <th><input type="checkbox"/></th>
+            <th>Order</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Payment</th>
+            <th>Fulfillment</th>
                     <th>Total</th>
                 </tr>
                 </thead>
