@@ -8,6 +8,7 @@
     justify-content: space-between;
     padding: 0 20px  0 20px;
     position: fixed;
+    flex-shrink: 0;
     top: 0;
     right: 0;
     z-index: 3;

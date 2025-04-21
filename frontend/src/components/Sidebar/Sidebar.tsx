@@ -32,9 +32,9 @@ const Sidebar: React.FC = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/admin/reports' className="sidebar-li-container">
+                    <NavLink to='/admin/analytics' className="sidebar-li-container">
                         <PieChart/>
-                        <p>Report</p>
+                        <p>Analytics</p>
                     </NavLink>
                 </li>
                 <li>

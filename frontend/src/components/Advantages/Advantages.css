@@ -1,0 +1,41 @@
+.homepage-advantages {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    background: #000;
+    padding: 20px;
+    gap: 20px;
+}
+
+.homepage-advantages-header{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.homepage-advantages-header h2{
+    font-size: 60px;
+    font-weight: lighter;
+    color: white;
+}
+
+.homepage-advantages-header p{
+    font-size: 50px;
+    font-weight: lighter;
+    color: white;
+}
+
+.homepage-advantages-photos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.homepage-advantages-photos img {
+    height: 60vh;
+    border-radius: 10px;
+}

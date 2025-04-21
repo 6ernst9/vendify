@@ -4,6 +4,7 @@
     background: linear-gradient(to bottom, #001944 0px, #001944 90px, #0024a7 100%);
     color: white;
     position: fixed;
+    flex-shrink: 0;
     left: 0;
     top: 0;
     padding: 20px;
