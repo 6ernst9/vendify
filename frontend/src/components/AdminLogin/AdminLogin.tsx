@@ -1,32 +1,63 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './AdminLogin.css';
 
 import {ReactComponent as Logo} from "../../assets/icons/colored-logo.svg";
 import {useNavigate} from "react-router-dom";
+import {login} from "../../widgets/admin-login-widget/model/effects";
+import {useDispatch, useSelector} from "react-redux";
+import {authSelect} from "../../widgets/admin-login-widget/model/selectors";
 
 const AdminLogin: React.FC = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const errorMessage = useSelector(authSelect.authError);
+    const isLogged = useSelector(authSelect.isLogged);
+
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)
+    const handlePassChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)
+
+    const handleSubmit = async () => {
+        await login({username, password, dispatch});
+    };
+
+    useEffect(() => {
+        if (isLogged || errorMessage === 'NO-ERROR') {
+            navigate('/admin/home');
+        }
+    }, [errorMessage, isLogged]);
 
     return (
         <div className="admin-login-box">
             <div className="admin-login-logo">
                 <Logo/>
-                <h2>Vendify <span className="gradient-text">Admin</span></h2>
+                <h2>Vendify <span className="gradient-text">Manager</span></h2>
             </div>
             <div className="admin-login-container">
                 <h2 className="admin-login-title">Login</h2>
                 <form className="admin-login-form">
                     <label className="admin-login-label">
                         Username
-                        <input type="text" className="admin-login-input" placeholder="Your username"/>
+                        <input
+                            type="text"
+                            className="admin-login-input"
+                            onChange={handleEmailChange}
+                            placeholder="Your username"/>
                     </label>
 
                     <label className="admin-login-label">
                         Password
-                        <input type="password" className="admin-login-input" placeholder="Your password"/>
+                        <input
+                            type="password"
+                            className="admin-login-input"
+                            onChange={handlePassChange}
+                            placeholder="Your password"/>
                     </label>
 
-                    <div className="admin-login-button" onClick={() => navigate('/admin')}>Login</div>
+                    <div className="admin-login-button" onClick={handleSubmit}>Login</div>
                 </form>
             </div>
             <div className="admin-login-forgot" onClick={() => navigate('/sign-up')}>Don't have an account?</div>

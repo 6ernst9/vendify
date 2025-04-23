@@ -12,6 +12,7 @@
     border-radius: 10px;
     background: white;
     text-align: center;
+    gap: 20px;
     width: 360px;
 }
 
@@ -33,17 +34,25 @@
     height: 24px;
 }
 
+.admin-login-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 .gradient-text {
-    background: linear-gradient(135deg, #0024a7, #00E88F);
+    background: linear-gradient(45deg, #0024a7, #00E88F);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
 }
 
 .admin-login-title {
-    margin-bottom: 24px;
     font-size: 24px;
     color: #001944;
+    margin: 0;
 }
 
 .admin-login-form {

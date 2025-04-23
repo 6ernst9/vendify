@@ -17,17 +17,18 @@
 }
 
 .sales-header span {
-    background-color: red;
+    background-color: var(--primary-color);
     width: 15px;
     height: 30px;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
 }
 
 .sales-header p {
     margin: 0;
-    color: red;
+    color: var(--primary-color);;
     font-weight: bold;
     font-size: 18px;
+    font-family: var(--font-family), sans-serif;
 }
 
 .sales-title {
@@ -40,12 +41,13 @@
 .sales-title h2 {
     font-size: 30px;
     font-weight: bold;
+    font-family: var(--font-family), sans-serif;
 }
 
 .sales-title-button {
     cursor: pointer;
-    background-color: red;
-    border-radius: 5px;
+    background-color: var(--primary-color);;
+    border-radius: var(--button-radius) ;
     display: flex;
     height: 45px;
     justify-content: center;
@@ -56,6 +58,7 @@
     font-size: 18px;
     padding: 0 30px;
     color: white;
+    font-family: var(--font-family), sans-serif;
 }
 
 .sales-title-timer {
@@ -68,10 +71,11 @@
 .sales-title-timer-container h3 {
     font-size: 30px;
     font-weight: bold;
+    font-family: var(--font-family), sans-serif;
 }
 
 .sales-title-timer-points{
-    color: red;
+    color: var(--primary-color);;
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 5px;

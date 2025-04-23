@@ -9,3 +9,17 @@ html, body, #root {
   margin: 0;
   overflow: hidden;
 }
+
+:root {
+  --primary-color: red;
+  --background-color: white;
+
+  --font-family: 'Inter', sans-serif;
+  --title-color: #000000;
+  --text-secondary-color: #6b7280;
+
+  --button-radius: 6px;
+
+  --navbar-bg: rgba(255, 255, 255, 0.9);
+  --navbar-blur: blur(0px);
+}

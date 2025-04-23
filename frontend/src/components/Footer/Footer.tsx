@@ -8,15 +8,21 @@ import appstore from '../../assets/img/app_store.png';
 import qr from '../../assets/img/qr.png';
 import "./Footer.css";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {storeSelect} from "../../redux/core/store/selectors";
 
 const Footer: React.FC = () => {
     const navigate = useNavigate();
+    const store = useSelector(storeSelect.slug);
+    const name = useSelector(storeSelect.name);
+    const email = useSelector(storeSelect.email);
+    const phone = useSelector(storeSelect.phone);
 
     return (
         <footer className="footer">
             <div className="footer-container">
                 <div className="footer-section">
-                    <h3>Exclusive</h3>
+                    <h3>{name}</h3>
                     <p className="footer-subtitle">Subscribe</p>
                     <p className="footer-text">Get 10% off your first order</p>
                     <div className="footer-subscribe">
@@ -28,28 +34,28 @@ const Footer: React.FC = () => {
                 <div className="footer-section">
                     <h3>Support</h3>
                     <p className="footer-text">111 Bijoy Sarani, Dhaka, DH 1515, Bangladesh.</p>
-                    <p className="footer-text">exclusive@gmail.com</p>
-                    <p className="footer-text">+88015-88888-9999</p>
+                    <p className="footer-text">{email}</p>
+                    <p className="footer-text">{phone}</p>
                 </div>
 
                 <div className="footer-section">
                     <h3>Account</h3>
                     <ul className="footer-list">
-                        <li onClick={() => navigate("/account")}>My Account</li>
-                        <li onClick={() => navigate("/login")}>Login / Register</li>
-                        <li onClick={() => navigate("/cart")}>Cart</li>
-                        <li onClick={() => navigate("/wishlist")}>Wishlist</li>
-                        <li onClick={() => navigate("/browse")}>Shop</li>
+                        <li onClick={() => navigate(`/${store}/account`)}>My Account</li>
+                        <li onClick={() => navigate(`/${store}/login`)}>Login / Register</li>
+                        <li onClick={() => navigate(`/${store}/cart`)}>Cart</li>
+                        <li onClick={() => navigate(`/${store}/wishlist`)}>Wishlist</li>
+                        <li onClick={() => navigate(`/${store}/browse`)}>Shop</li>
                     </ul>
                 </div>
 
                 <div className="footer-section">
                     <h3>Quick Link</h3>
                     <ul className="footer-list">
-                        <li onClick={() => navigate("/privacy")}>Privacy Policy</li>
-                        <li onClick={() => navigate("/terms")}>Terms Of Use</li>
-                        <li onClick={() => navigate("/faq")}>FAQ</li>
-                        <li onClick={() => navigate("/contact")}>Contact</li>
+                        <li onClick={() => navigate(`/${store}/privacy`)}>Privacy Policy</li>
+                        <li onClick={() => navigate(`/${store}/terms`)}>Terms Of Use</li>
+                        <li onClick={() => navigate(`/${store}/faq`)}>FAQ</li>
+                        <li onClick={() => navigate(`/${store}/contact`)}>Contact</li>
                     </ul>
                 </div>
 
@@ -73,7 +79,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="footer-bottom">
-                <p>© Copyright Vendify 2025. All rights reserved.</p>
+                <p>© Copyright {name} 2025. All rights reserved.</p>
             </div>
         </footer>
     );

@@ -1,10 +1,16 @@
 import React from "react";
 import './Sales.css';
-import ProductCard from "../ProductCard/ProductCard";
 import {products} from "../../widgets/home-widget/mock/products";
 import ProductSlider from "../ProductSlider/ProductSlider";
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/store";
+import {useNavigate} from "react-router-dom";
+import {storeSelect} from "../../redux/core/store/selectors";
 
 const Sales: React.FC = () => {
+    const store = useSelector(storeSelect.slug);
+    const navigate = useNavigate();
+
     return (
         <div className="sales">
             <div className="sales-header">
@@ -34,7 +40,7 @@ const Sales: React.FC = () => {
                         <h3>56</h3>
                     </div>
                 </div>
-                <div className="sales-title-button">
+                <div className="sales-title-button" onClick={() => navigate(`/${store}/browse`)}>
                     <p>View All Products</p>
                 </div>
             </div>

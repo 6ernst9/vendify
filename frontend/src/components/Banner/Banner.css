@@ -11,15 +11,16 @@
     flex-direction: column;
     gap: 20px;
     align-content: center;
-    border-right: 1px solid #c4c4c4;
     height: 600px;
     width: 200px;
     padding: 20px 0;
 }
 
 .banner-categories p{
+    cursor: pointer;
     margin: 0;
     font-size: 18px;
+    font-family: var(--font-family), sans-serif;
 }
 
 .banner-img-container{

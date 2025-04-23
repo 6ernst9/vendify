@@ -24,6 +24,7 @@
     color: white;
     cursor: pointer;
     font-size: 16px;
+    font-family: var(--font-family), sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,6 +38,7 @@
     color: white;
     font-size: 14px;
     padding: 4px 8px;
+    font-family: var(--font-family), sans-serif;
     border-radius: 4px;
     font-weight: bold;
 }
@@ -62,7 +64,8 @@ h2 {
     font-size: 16px;
     font-weight: bold;
     margin: 12px 0;
-    color: #333;
+    color: var(--title-color);
+    font-family: var(--font-family), sans-serif;
 }
 
 .wishlist-product-card-price {
@@ -75,6 +78,7 @@ h2 {
 
 .wishlist-product-card-normal-price {
     font-size: 16px;
+    font-family: var(--font-family), sans-serif;
     color: #888;
     margin: 0;
 }
@@ -85,6 +89,7 @@ h2 {
 
 .wishlist-product-card-discounted-price {
     font-size: 18px;
+    font-family: var(--font-family), sans-serif;
     font-weight: bold;
     color: #ff4747;
     margin: 0;

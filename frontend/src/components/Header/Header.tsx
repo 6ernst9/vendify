@@ -6,28 +6,35 @@ import {ReactComponent as Heart} from '../../assets/icons/heart.svg';
 import {ReactComponent as User} from '../../assets/icons/user.svg';
 
 import './Header.css';
+import {useSelector} from "react-redux";
+import {storeSelect} from "../../redux/core/store/selectors";
 
 const Header: React.FC = () => {
+    const store = useSelector(storeSelect.slug);
+    const name = useSelector(storeSelect.name);
+
     return (
         <div className="store-header">
-            <Link to="/" className="store-header-logo">Exclusive</Link>
+            <Link to="/" className="store-header-logo">
+                <h2>{name}</h2>
+            </Link>
 
             <nav className="store-header-navbar">
-                <Link to="/">Home</Link>
-                <Link to="/browse">Browse</Link>
-                <Link to="/contact">Contact</Link>
-                <Link to="/about">About</Link>
+                <Link to={`/${store}`}>Home</Link>
+                <Link to={`/${store}/browse`}>Browse</Link>
+                <Link to={`/${store}/contact`}>Contact</Link>
+                <Link to={`/${store}/about`}>About</Link>
             </nav>
 
             <div className="store-header-account">
                 <input type="text" placeholder="Search..." className="store-header-search"/>
-                <Link to="/account" className="store-header-accounts">
+                <Link to={`/${store}/account`} className="store-header-accounts">
                     <User/>
                 </Link>
-                <Link to="/wishlist" className="store-header-accounts">
+                <Link to={`/${store}/wishlist`} className="store-header-accounts">
                     <Heart/>
                 </Link>
-                <Link to="/cart" className="store-header-accounts">
+                <Link to={`/${store}/cart`} className="store-header-accounts">
                    <Cart/>
                 </Link>
             </div>

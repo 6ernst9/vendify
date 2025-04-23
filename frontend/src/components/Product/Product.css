@@ -11,6 +11,7 @@
 .product-category {
     font-weight: bold;
     font-size: 18px;
+    font-family: var(--font-family), sans-serif;
     color: gray;
 }
 
@@ -57,6 +58,7 @@
 .product-title {
     font-size: 24px;
     font-weight: bold;
+    font-family: var(--font-family), sans-serif;
 }
 
 .product-rating {
@@ -80,22 +82,26 @@
 
 .product-reviews {
     font-size: 14px;
+    font-family: var(--font-family), sans-serif;
 }
 
 .product-stock-status {
     color: green;
     font-weight: bold;
+    font-family: var(--font-family), sans-serif;
 }
 
 .product-price {
     font-size: 26px;
     color: black;
     font-weight: bold;
+    font-family: var(--font-family), sans-serif;
     margin-top: 10px;
 }
 
 .product-description {
     font-size: 14px;
+    font-family: var(--font-family), sans-serif;
     color: #555;
     margin-top: 10px;
 }
@@ -110,7 +116,7 @@
 .product-quantity-selector {
     display: flex;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
     overflow: hidden;
 }
 
@@ -130,7 +136,7 @@
 }
 
 .plus-btn {
-    background-color: #d02c2c;
+    background-color: var(--primary-color);;
 }
 
 .product-quantity-btn svg {
@@ -143,15 +149,16 @@
 }
 
 .product-buy-now {
-    background-color: #d02c2c;
+    background-color: var(--primary-color);;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 40px;
     width: 150px;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
     cursor: pointer;
+    font-family: var(--font-family), sans-serif;
 }
 
 .product-wishlist-container {
@@ -159,7 +166,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
     width: 40px;
     height: 40px;
 }
@@ -173,7 +180,7 @@
 .product-delivery-info {
     margin-top: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -191,6 +198,7 @@
     font-size: 18px;
     font-weight: bold;
     color: black;
+    font-family: var(--font-family), sans-serif;
 }
 
 .product-delivery-text {
@@ -202,9 +210,11 @@
 
 .product-delivery-link {
     font-size: 16px;
+    font-family: var(--font-family), sans-serif;
     color: black;
 }
 
 .product-delivery-icon {
     font-size: 20px;
+    font-family: var(--font-family), sans-serif;
 }

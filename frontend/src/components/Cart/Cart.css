@@ -11,6 +11,7 @@
 .cart-category {
     font-weight: bold;
     font-size: 18px;
+    font-family: var(--font-family), sans-serif;
     color: gray;
 }
 
@@ -36,6 +37,7 @@
 
 .cart-header {
     font-weight: bold;
+    font-family: var(--font-family), sans-serif;
 }
 
 .cart-header-item {
@@ -64,8 +66,9 @@
     border: none;
     background: none;
     cursor: pointer;
-    color: red;
+    color: var(--primary-color);
     font-size: 16px;
+    font-family: var(--font-family), sans-serif;
 }
 
 .cart-price, .cart-subtotal {
@@ -81,7 +84,7 @@
 .cart-quantity-select {
     padding: 5px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
 }
 
 .cart-actions {
@@ -95,8 +98,9 @@
     border: 1px solid #000;
     background: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
     font-size: 14px;
+    font-family: var(--font-family), sans-serif;
 }
 
 .cart-return-shop:hover, .cart-update-cart:hover {
@@ -121,21 +125,18 @@
     flex: 1;
     padding: 10px 80px 10px 20px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
+    font-family: var(--font-family), sans-serif;
 }
 
 .cart-apply-coupon {
     padding: 10px 40px;
     border: none;
-    background: red;
+    background: var(--primary-color);;
     color: white;
     cursor: pointer;
     margin-left: 10px;
-    border-radius: 5px;
-}
-
-.cart-apply-coupon:hover {
-    background: darkred;
+    border-radius: var(--button-radius);
 }
 
 .cart-summary {
@@ -146,10 +147,16 @@
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
     padding: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.cart-summary h3 {
+    font-family: var(--font-family), sans-serif;
+    font-weight: bold;
+    color: var(--title-color);
 }
 
 .cart-summary-item {
@@ -158,20 +165,18 @@
     justify-content: space-between;
     padding: 5px 0;
     font-size: 16px;
+    font-family: var(--font-family), sans-serif;
     border-bottom: 1px solid #ddd;
 }
 
 .cart-checkout-btn {
     border: none;
     padding: 10px 60px;
-    background: red;
+    background: var(--primary-color);;
     color: white;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 5px;
+    font-family: var(--font-family), sans-serif;
+    border-radius: var(--button-radius);
     margin-top: 10px;
-}
-
-.cart-checkout-btn:hover {
-    background: darkred;
 }

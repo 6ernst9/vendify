@@ -1,7 +1,6 @@
 import React from "react";
 import './Sidebar.css';
 import {ReactComponent as Logo} from "../../assets/icons/colored-logo.svg";
-import {ReactComponent as Menu} from "../../assets/icons/menu.svg";
 import {ReactComponent as Home} from "../../assets/icons/home.svg";
 import {ReactComponent as PieChart} from "../../assets/icons/pie-chart.svg";
 import {ReactComponent as Sale} from "../../assets/icons/ticket.svg";
@@ -18,9 +17,8 @@ const Sidebar: React.FC = () => {
             <div className="sidebar-header">
                 <div className="sidebar-logo">
                     <Logo/>
-                    <h2>vendify</h2>
+                    <h2>vendify <span className="gradient-text">Manager</span></h2>
                 </div>
-               <Menu/>
             </div>
             <ul>
                 <li>

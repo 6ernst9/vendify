@@ -18,7 +18,6 @@ public class User {
     private String firstName;
     @NonNull
     private String lastName;
-    private int age;
     @NonNull
     private String email;
     @NonNull
@@ -28,11 +27,10 @@ public class User {
     @NonNull
     private Long storeId;
 
-    public User(@NonNull String username, @NonNull String firstName, @NonNull String lastName, int age, @NonNull String email, @NonNull String password, @NonNull String phoneNumber, @NonNull Long storeId) {
+    public User(@NonNull String username, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String phoneNumber, @NonNull Long storeId) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;

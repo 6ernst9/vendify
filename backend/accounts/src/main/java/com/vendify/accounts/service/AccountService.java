@@ -36,7 +36,6 @@ public class AccountService {
                         userDto.getUsername(),
                         userDto.getFirstName(),
                         userDto.getLastName(),
-                        userDto.getAge(),
                         userDto.getEmail(),
                         userDto.getPassword(),
                         userDto.getPhoneNumber(),

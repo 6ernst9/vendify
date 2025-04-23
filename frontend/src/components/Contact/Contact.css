@@ -58,7 +58,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #d02c2c;
+    background-color: var(--primary-color);;
     padding: 10px;
     border-radius: 50%;
 }
@@ -94,7 +94,7 @@
 .contact-send-message {
     padding: 10px 40px;
     border: none;
-    background: #d02c2c;
+    background: var(--primary-color);;
     color: white;
     cursor: pointer;
     margin-left: 10px;

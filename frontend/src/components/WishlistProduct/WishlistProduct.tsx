@@ -2,6 +2,8 @@ import React from "react";
 import './WishlistProduct.css';
 import {ReactComponent as Trash} from '../../assets/icons/trash.svg';
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {storeSelect} from "../../redux/core/store/selectors";
 
 interface ProductProps {
     id: number;
@@ -16,6 +18,7 @@ interface ProductProps {
 
 const WishlistProduct: React.FC<ProductProps> = ({title, price, oldPrice, img, sale}) => {
     const navigate = useNavigate();
+    const store = useSelector(storeSelect.slug);
 
     const truncateTitle = (title: string) => {
         if (title.length <= 25) {
@@ -24,9 +27,8 @@ const WishlistProduct: React.FC<ProductProps> = ({title, price, oldPrice, img, s
         return title.substring(0, 23) + '...';
     };
 
-
     return (
-        <div className="wishlist-product-card" onClick={() => navigate('/product')}>
+        <div className="wishlist-product-card" onClick={() => navigate(`/${store}/product`)}>
             <div className="wishlist-product-img-container">
                 <img src={img}/>
                 <div className="wishlist-product-cart">

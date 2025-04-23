@@ -4,6 +4,9 @@ import {ReactComponent as Heart} from '../../assets/icons/heart.svg';
 import {ReactComponent as Star} from '../../assets/icons/star.svg';
 import {ReactComponent as EmptyStar} from '../../assets/icons/star-half.svg';
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/store";
+import {storeSelect} from "../../redux/core/store/selectors";
 
 interface ProductProps {
     id: number;
@@ -18,6 +21,8 @@ interface ProductProps {
 
 const ProductCard: React.FC<ProductProps> = ({title, price, oldPrice, stars, reviews, img, sale}) => {
     const navigate = useNavigate();
+    const store = useSelector(storeSelect.slug);
+
     const calculateReviews = () => {
         const roundedStars: JSX.Element[] = [];
         const roundedReviews = Math.round(stars);
@@ -42,7 +47,7 @@ const ProductCard: React.FC<ProductProps> = ({title, price, oldPrice, stars, rev
 
 
     return (
-        <div className="product-card" onClick={() => navigate('/product')}>
+        <div className="product-card" onClick={() => navigate(`/${store}/product`)}>
             <div className="product-img-container">
                 <img src={img}/>
                 {sale && (
