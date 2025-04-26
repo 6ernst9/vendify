@@ -1,7 +1,7 @@
 import { RootState } from "../../store";
 
 export const storeSelect = ({
-    slug: (state: RootState) => state.store.slug,
+    path: (state: RootState) => state.store.path,
     name: (state: RootState) => state.store.name,
     theme: (state: RootState) => state.store.theme,
     primaryColor: (state: RootState) => state.store.theme.primaryColor,

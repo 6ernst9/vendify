@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/account")
 @RequiredArgsConstructor
 public class AccountController {

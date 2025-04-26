@@ -10,7 +10,7 @@ import {useSelector} from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
 
 const Header: React.FC = () => {
-    const store = useSelector(storeSelect.slug);
+    const store = useSelector(storeSelect.path);
     const name = useSelector(storeSelect.name);
 
     return (

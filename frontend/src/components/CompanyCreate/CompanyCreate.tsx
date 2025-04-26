@@ -1,10 +1,81 @@
-import React from "react";
+import React, {useState} from "react";
 import './CompanyCreate.css';
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {sessionSelect} from "../../redux/core/session/selectors";
+import {createStore} from "../../widgets/admin-store-create-widget/model/effects";
 
 const CompanyCreate: React.FC = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const accessToken = useSelector(sessionSelect.accessToken);
 
+    const [name, setStoreName] = useState('');
+    const [path, setStorePath] = useState('');
+
+    const handleStoreNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setStoreName(e.target.value);
+    const handleStorePathChange = (e: React.ChangeEvent<HTMLInputElement>) => setStorePath(e.target.value);
+
+    const [logo, setLogo] = useState<string>('');
+    const [banner, setBanner] = useState<string>('');
+
+    const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.files?.[0].name || '');
+    const handleBannerUpload = (e: React.ChangeEvent<HTMLInputElement>) => setBanner(e.target.files?.[0].name || '');
+
+    const [primaryColor, setPrimaryColor] = useState('#ff0000');
+    const [backgroundColor, setBackgroundColor] = useState('#ffffff');
+    const [titleColor, setTitleColor] = useState('#000000');
+    const [textSecondaryColor, setTextSecondaryColor] = useState('#6b7280');
+    const [font, setFont] = useState('Inter');
+    const [buttonRadius, setButtonRadius] = useState(6);
+    const [cardRadius, setCardRadius] = useState(10);
+    const [navbarStyle, setNavbarStyle] = useState<'solid' | 'blur'>('solid');
+
+    const handlePrimaryColorChange = (e: React.ChangeEvent<HTMLInputElement>) => setPrimaryColor(e.target.value);
+    const handleBackgroundColorChange = (e: React.ChangeEvent<HTMLInputElement>) => setBackgroundColor(e.target.value);
+    const handleTitleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => setTitleColor(e.target.value);
+    const handleTextSecondaryColorChange = (e: React.ChangeEvent<HTMLInputElement>) => setTextSecondaryColor(e.target.value);
+    const handleFontChange = (e: React.ChangeEvent<HTMLInputElement>) => setFont(e.target.value);
+    const handleButtonRadiusChange = (e: React.ChangeEvent<HTMLInputElement>) => setButtonRadius(Number(e.target.value));
+    const handleCardRadiusChange = (e: React.ChangeEvent<HTMLInputElement>) => setCardRadius(Number(e.target.value));
+    const handleNavbarStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => setNavbarStyle(e.target.value as 'solid' | 'blur');
+
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [facebook, setFacebook] = useState('');
+    const [twitter, setTwitter] = useState('');
+    const [instagram, setInstagram] = useState('');
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value);
+    const handleFacebookChange = (e: React.ChangeEvent<HTMLInputElement>) => setFacebook(e.target.value);
+    const handleTwitterChange = (e: React.ChangeEvent<HTMLInputElement>) => setTwitter(e.target.value);
+    const handleInstagramChange = (e: React.ChangeEvent<HTMLInputElement>) => setInstagram(e.target.value);
+
+    const handleSubmit = async () => {
+        await createStore(
+            {
+                name,
+                path,
+                theme: {
+                    primaryColor,
+                    titleColor,
+                    backgroundColor,
+                    textSecondaryColor,
+                    font,
+                    buttonRadius: buttonRadius.toString() + 'px',
+                    cardRadius: cardRadius.toString() + 'px',
+                    navbarStyle
+                },
+                banner,
+                logo,
+                contactLinks: {
+                    email, phone, instagram, facebook, twitter
+                },
+                accessToken,
+                dispatch
+            });
+    }
     return (
         <div className="company-create-container">
             <div className="company-create-header">
@@ -13,7 +84,6 @@ const CompanyCreate: React.FC = () => {
                     Back
                 </div>
             </div>
-            <hr className="company-create-divider"/>
             <div className="company-create-info-container">
                 <div className="company-create-info">
                     <h1>Store Info</h1>
@@ -22,14 +92,13 @@ const CompanyCreate: React.FC = () => {
                 </div>
                 <div className="company-create-selector">
                     <h1>Company Name</h1>
-                    <input type="text"/>
+                    <input type="text" onChange={handleStoreNameChange}/>
                 </div>
                 <div className="company-create-selector">
                     <h1>Path</h1>
-                    <input type="text"/>
+                    <input type="text" onChange={handleStorePathChange}/>
                 </div>
             </div>
-            <hr className="company-create-divider"/>
             <div className="company-create-info-container">
                 <div className="company-create-info">
                     <h1>Branding</h1>
@@ -49,7 +118,6 @@ const CompanyCreate: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <hr className="company-create-divider"/>
             <div className="company-create-info-container">
                 <div className="company-create-info">
                     <h1>Theme</h1>
@@ -57,23 +125,58 @@ const CompanyCreate: React.FC = () => {
                         style of your storefront and create a consistent brand experience.</p>
                 </div>
                 <div className="company-create-color">
-                    <input type="color"/>
+                    <input type="color" onChange={handlePrimaryColorChange}/>
                     <p>Primary Color</p>
                 </div>
-                <div className="company-create-color">
+                <div className="company-create-color" onChange={handleBackgroundColorChange}>
                     <input type="color"/>
-                    <p>Secondary Color</p>
+                    <p>Background Color</p>
                 </div>
-                <div className="company-create-color">
+                <div className="company-create-color" onChange={handleTitleColorChange}>
                     <input type="color"/>
-                    <p>Light Color</p>
+                    <p>Text Color</p>
                 </div>
-                <div className="company-create-color">
+                <div className="company-create-color" onChange={handleTextSecondaryColorChange}>
                     <input type="color"/>
-                    <p>Dark Color</p>
+                    <p>Secondary Text Color</p>
                 </div>
+                <div className="company-create-selector" onChange={handleFontChange}>
+                    <h1>Font Family</h1>
+                    <input type="text"/>
+                </div>
+                <div className="company-create-selector">
+                    <h1>Button Roundness: {buttonRadius}px</h1>
+                    <input
+                        type="range"
+                        min="0"
+                        max="50"
+                        value={buttonRadius}
+                        onChange={handleButtonRadiusChange}
+                        className="company-create-slider"
+                    />
+                </div>
+
+                <div className="company-create-selector">
+                    <h1>Cards Roundness: {cardRadius}px</h1>
+                    <input
+                        type="range"
+                        min="0"
+                        max="30"
+                        value={cardRadius}
+                        onChange={handleCardRadiusChange}
+                        className="company-create-slider"
+                    />
+                </div>
+
+                <div className="company-create-selector">
+                    <h1>Navbar Style</h1>
+                    <select className="company-create-select" onChange={handleNavbarStyleChange}>
+                        <option value="solid">Solid</option>
+                        <option value="blur">Blur</option>
+                    </select>
+                </div>
+
             </div>
-            <hr className="company-create-divider"/>
             <div className="company-create-info-container">
                 <div className="company-create-info">
                     <h1>Contact Links</h1>
@@ -82,28 +185,27 @@ const CompanyCreate: React.FC = () => {
                 </div>
                 <div className="company-create-selector">
                     <h1>Email</h1>
-                    <input type="text"/>
+                    <input type="text" onChange={handleEmailChange}/>
                 </div>
                 <div className="company-create-selector">
                     <h1>Phone</h1>
-                    <input type="text"/>
+                    <input type="text" onChange={handlePhoneChange}/>
                 </div>
                 <div className="company-create-selector">
                     <h1>Facebook</h1>
-                    <input type="text"/>
+                    <input type="text" onChange={handleFacebookChange}/>
                 </div>
                 <div className="company-create-selector">
                     <h1>Twitter</h1>
-                    <input type="text"/>
+                    <input type="text" onChange={handleTwitterChange}/>
                 </div>
                 <div className="company-create-selector">
                     <h1>Instagram</h1>
-                    <input type="text"/>
+                    <input type="text" onChange={handleInstagramChange}/>
                 </div>
             </div>
-            <hr className="company-create-divider"/>
             <div className="company-create-info">
-                <div className="company-create-final-button" onClick={() => navigate('/admin/company')}>
+                <div className="company-create-final-button" onClick={handleSubmit}>
                     Create
                 </div>
             </div>

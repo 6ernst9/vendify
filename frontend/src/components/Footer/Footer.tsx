@@ -13,7 +13,7 @@ import {storeSelect} from "../../redux/core/store/selectors";
 
 const Footer: React.FC = () => {
     const navigate = useNavigate();
-    const store = useSelector(storeSelect.slug);
+    const store = useSelector(storeSelect.path);
     const name = useSelector(storeSelect.name);
     const email = useSelector(storeSelect.email);
     const phone = useSelector(storeSelect.phone);

@@ -8,5 +8,6 @@ export const sessionSelect = ({
     username: (state: RootState) => state.session.username,
     firstName: (state: RootState) => state.session.firstName,
     lastName: (state: RootState) => state.session.lastName,
-    phoneNumber: (state: RootState) => state.session.phoneNumber
+    phoneNumber: (state: RootState) => state.session.phoneNumber,
+    exists: (state: RootState) => state.session.firstName !== ''
 });

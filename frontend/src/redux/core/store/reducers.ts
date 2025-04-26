@@ -1,13 +1,19 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {defaultStore} from "./defaultState";
+import {StoreState} from "./types";
 
 const storeSlice = createSlice({
     name: 'storeState',
     initialState: defaultStore,
     reducers: {
-
+        setCurrentStore: (state, action: PayloadAction<StoreState>) => {
+            state.name = action.payload.name;
+            state.path = action.payload.path;
+            state.theme = action.payload.theme;
+            state.contactLinks = action.payload.contactLinks;
+        }
     }
 });
 
-export const {  } = storeSlice.actions;
+export const { setCurrentStore } = storeSlice.actions;
 export default storeSlice.reducer;

@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useEffect, useMemo} from "react";
 import AdminHomeWidget from "./widgets/admin-home-widget/AdminHomeWidget";
 import AdminStoreWidget from "./widgets/admin-store-widget/AdminStoreWidget";
 import AdminStoreCreateWidget from "./widgets/admin-store-create-widget/AdminStoreCreateWidget";
@@ -16,23 +16,27 @@ import {useRoutes} from "react-router-dom";
 import HomePageWidget from "./widgets/home-page-widget/HomePageWidget";
 import AdminLoginWidget from "./widgets/admin-login-widget/AdminLoginWidget";
 import AdminSignUpWidget from "./widgets/admin-sign-up-widget/AdminSignUpWidget";
-
-const stores = [
-    {
-        slug: "exclusive",
-        name: "Exclusive Store",
-        theme: { /*...*/ },
-        contact: { /*...*/ }
-    },
-    {
-        slug: "freshmart",
-        name: "FreshMart",
-        theme: { /*...*/ },
-        contact: { /*...*/ }
-    }
-];
+import {request} from "./util/request";
+import {STORES_BASE_URL} from "./util/constants";
+import {useDispatch, useSelector} from "react-redux";
+import {setStores} from "./redux/core/stores/reducers";
+import {storesSelect} from "./redux/core/stores/selectors";
 
 const AppRoutes = () => {
+    const stores = useSelector(storesSelect.stores);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        request({
+            url: STORES_BASE_URL + '/get-stores',
+            method: "GET"
+        }).then((response) => {
+            dispatch(setStores(response.data));
+        }).catch((error) => {
+            console.error("Error fetching stores:", error);
+        });
+    }, []);
+
     const routes = useMemo(() => {
         const adminRoutes = [
             { path: "/", element: <HomePageWidget /> },
@@ -50,38 +54,39 @@ const AppRoutes = () => {
         ];
 
         const dynamicStoreRoutes = stores.flatMap((store) => {
-            const { slug } = store;
+            const { path } = store;
+            console.log(path);
 
             return [
                 {
-                    path: `/${slug}`,
+                    path: `/:path`,
                     element: <HomeWidget />
                 },
                 {
-                    path: `/${slug}/home`,
+                    path: `/:path/home`,
                     element: <HomeWidget />
                 },
                 {
-                    path: `/${slug}/product`,
+                    path: `/:path/product`,
                     element: <ProductWidget />
                 },
                 {
-                    path: `/${slug}/cart`,
+                    path: `/:path/cart`,
                     element: <CartWidget />
                 },
                 {
-                    path: `/${slug}/wishlist`,
+                    path: `/:path/wishlist`,
                     element: <WishlistWidget />
                 },
                 {
-                    path: `/${slug}/contact`,
+                    path: `/:path/contact`,
                     element: <ContactWidget />
                 }
             ];
         });
 
         return [...adminRoutes, ...dynamicStoreRoutes, { path: "*", element: <NotFoundWidget /> }];
-    }, []);
+    }, [stores]);
 
     return useRoutes(routes);
 };

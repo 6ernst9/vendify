@@ -2,12 +2,12 @@ import {loginFailure, loginSuccess, logout} from "./reducers";
 import {getSessionState, LoginProps} from "./types";
 import {continueSession, endSession, startSession} from "../../../redux/core/session/reducers";
 import {getAccountByUsername} from "../../admin-sign-up-widget/model/types";
-import {ACCOUNTS_BASE_URL} from "../../../util/constants";
+import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
 import {request} from "../../../util/request";
 
 export const login = async ({username, password, dispatch}: LoginProps) => {
     await request({
-        url: ACCOUNTS_BASE_URL + '/auth/login/0',
+        url: AUTH_BASE_URL + '/login/0',
         method: 'POST',
         data: {username, password},
         headers: {
@@ -18,7 +18,7 @@ export const login = async ({username, password, dispatch}: LoginProps) => {
         }
     }).then((response) => {
         dispatch(loginSuccess(response.data));
-        getAccount({username, dispatch})
+        getAccount({username, accessToken: response.data.accessToken, dispatch})
     }).catch((error) => {
         dispatch(loginFailure(error.response.data.message));
     })
@@ -26,7 +26,7 @@ export const login = async ({username, password, dispatch}: LoginProps) => {
 
 export const logOut = async ({id, dispatch}: getSessionState) => {
     await request({
-        url: ACCOUNTS_BASE_URL + '/auth/logout',
+        url: AUTH_BASE_URL + '/logout',
         method: 'POST',
         headers: {
             'X-FI-V-IP' : '127.0.0',
@@ -41,12 +41,12 @@ export const logOut = async ({id, dispatch}: getSessionState) => {
     })
 }
 
-export const getAccount = async({username ,dispatch} : getAccountByUsername) => {
+export const getAccount = async({username, accessToken, dispatch} : getAccountByUsername) => {
     await request({
         url: ACCOUNTS_BASE_URL + '/account/get-user-by-username/0/' + username,
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaGSh23zOl21k4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ',
+            'Authorization': 'Bearer ' + accessToken,
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
             'X-FI-V-DEVICE': 'DESKTOP',

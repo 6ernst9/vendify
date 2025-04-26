@@ -9,11 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 public class StoreDto {
     private final String name;
-    private final List<Long> owners;
     private final String logo;
     private final String path;
     private final String banner;
-    private final List<Category> categories;
     private final Theme theme;
     private final ContactLinks contactLinks;
 }

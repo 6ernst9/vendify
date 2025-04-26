@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {storeSelect} from "../../redux/core/store/selectors";
 
 const Sales: React.FC = () => {
-    const store = useSelector(storeSelect.slug);
+    const store = useSelector(storeSelect.path);
     const navigate = useNavigate();
 
     return (

@@ -21,7 +21,7 @@ interface ProductProps {
 
 const ProductCard: React.FC<ProductProps> = ({title, price, oldPrice, stars, reviews, img, sale}) => {
     const navigate = useNavigate();
-    const store = useSelector(storeSelect.slug);
+    const store = useSelector(storeSelect.path);
 
     const calculateReviews = () => {
         const roundedStars: JSX.Element[] = [];

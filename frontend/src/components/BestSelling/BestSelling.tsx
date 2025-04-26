@@ -8,7 +8,7 @@ import {storeSelect} from "../../redux/core/store/selectors";
 
 const BestSelling: React.FC = () => {
     const navigate = useNavigate();
-    const store = useSelector(storeSelect.slug);
+    const store = useSelector(storeSelect.path);
 
     return (
         <div className="best-selling">

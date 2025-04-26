@@ -7,8 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Theme {
     private final String primaryColor;
-    private final String secondaryColor;
-    private final String lightColor;
-    private final String darkColor;
+    private final String backgroundColor;
+    private final String titleColor;
+    private final String textSecondaryColor;
     private final String font;
+    private final String buttonRadius;
+    private final String cardRadius;
+    private final String navbarStyle;
 }

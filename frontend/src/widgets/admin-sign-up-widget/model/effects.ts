@@ -2,13 +2,13 @@ import {getAccountByUsername, RegisterProps} from "./types";
 import {startSession} from "../../../redux/core/session/reducers";
 import {registrationFailure, registrationSuccess} from "../../admin-login-widget/model/reducers";
 import {request} from "../../../util/request";
-import {ACCOUNTS_BASE_URL} from "../../../util/constants";
+import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
 
 export const register = async ({email, username, password, firstName, lastName, phoneNumber, dispatch }: RegisterProps) => {
     await request({
-        url: ACCOUNTS_BASE_URL + + '/auth/register/0',
+        url: AUTH_BASE_URL + '/register',
         method: 'POST',
-        data: {email, firstName, lastName, phoneNumber, username, password},
+        data: {email, firstName, lastName, phoneNumber, username, password, storeId: 0},
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
@@ -17,16 +17,23 @@ export const register = async ({email, username, password, firstName, lastName, 
         }
     }).then((response) => {
         dispatch(registrationSuccess(response.data));
-        getAccount({username, dispatch});
+        getAccount({username, accessToken: response.data.accessToken, dispatch});
     }).catch((error) => {
         dispatch(registrationFailure(error.response.data.message));
     })
 }
 
-export const getAccount = async({username ,dispatch} : getAccountByUsername) => {
+export const getAccount = async({username, accessToken, dispatch} : getAccountByUsername) => {
     await request({
-        url: ACCOUNTS_BASE_URL + '/account/get-user-by-username/0/' + username,
+        url: ACCOUNTS_BASE_URL + '/get-user-by-username/0/' + username,
         method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'account.get-user-by-username'
+        }
     }).then((response) => {
         dispatch(startSession(response.data));
     }).catch((error) => {

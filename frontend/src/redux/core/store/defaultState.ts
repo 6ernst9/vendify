@@ -1,19 +1,20 @@
 import {StoreState} from "./types";
 
 export const defaultStore: StoreState = {
-    slug: 'exclusive',
-    name: 'Exclusive',
+    path: '',
+    name: '',
     theme: {
-        primaryColor: '#0024a7',
-        backgroundColor: '#ffffff',
-        titleColor: '#000',
-        textSecondaryColor: '#6b7280',
-        font: 'Poppins',
-        buttonRadius: '20px',
-        navbarStyle: 'blur'
+        primaryColor: '',
+        backgroundColor: '',
+        titleColor: '',
+        textSecondaryColor: '',
+        font: '',
+        buttonRadius: '',
+        cardRadius: '',
+        navbarStyle: 'solid'
     },
     contactLinks: {
-        email: 'exclusive@gmail.com',
-        phone: '+88015-88888-9999',
+        email: '',
+        phone: '',
     },
 }

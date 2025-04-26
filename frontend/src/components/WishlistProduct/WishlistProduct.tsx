@@ -18,7 +18,7 @@ interface ProductProps {
 
 const WishlistProduct: React.FC<ProductProps> = ({title, price, oldPrice, img, sale}) => {
     const navigate = useNavigate();
-    const store = useSelector(storeSelect.slug);
+    const store = useSelector(storeSelect.path);
 
     const truncateTitle = (title: string) => {
         if (title.length <= 25) {

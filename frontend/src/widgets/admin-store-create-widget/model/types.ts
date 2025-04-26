@@ -1,3 +1,5 @@
+import {Dispatch} from "redux";
+
 type Theme = {
     primaryColor: string;
     backgroundColor: string;
@@ -6,7 +8,7 @@ type Theme = {
     font: string;
     buttonRadius: string;
     cardRadius: string;
-    navbarStyle: 'solid' | 'blur';
+    navbarStyle: string;
 };
 
 type ContactLinks = {
@@ -17,9 +19,13 @@ type ContactLinks = {
     instagram?: string;
 };
 
-export type StoreState = {
+export type StoreProps = {
     path: string;
     name: string;
     theme: Theme;
     contactLinks: ContactLinks;
+    banner: string;
+    logo: string;
+    accessToken: string;
+    dispatch: Dispatch;
 }

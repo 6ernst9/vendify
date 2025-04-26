@@ -12,5 +12,6 @@ export type RegisterProps = {
 
 export type getAccountByUsername = {
     username: string;
+    accessToken: string;
     dispatch: Dispatch;
 }
