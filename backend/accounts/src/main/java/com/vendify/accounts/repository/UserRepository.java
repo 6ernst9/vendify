@@ -7,11 +7,11 @@ import reactor.core.publisher.Mono;
 
 public interface UserRepository extends ReactiveCrudRepository<User, Long> {
     @Query("SELECT * FROM users WHERE store_id = :storeId AND username = :username")
-    Mono<User> findUserByUsername(Long storeId, String username);
+    Mono<User> findUserByUsername(String storeId, String username);
 
     @Query("SELECT * FROM users WHERE store_id = :storeId AND email = :email")
-    Mono<User> findUserByEmail(Long storeId, String email);
+    Mono<User> findUserByEmail(String storeId, String email);
 
     @Query("SELECT * FROM users WHERE store_id = :storeId AND phone_number = :phoneNumber")
-    Mono<User> findUserByPhoneNumber(Long storeId, String phoneNumber);
+    Mono<User> findUserByPhoneNumber(String storeId, String phoneNumber);
 }

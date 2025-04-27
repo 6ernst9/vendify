@@ -21,6 +21,7 @@ import {STORES_BASE_URL} from "./util/constants";
 import {useDispatch, useSelector} from "react-redux";
 import {setStores} from "./redux/core/stores/reducers";
 import {storesSelect} from "./redux/core/stores/selectors";
+import AdminStorePageWidget from "./widgets/admin-store-page-widget/AdminStorePageWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -81,6 +82,10 @@ const AppRoutes = () => {
                 {
                     path: `/:path/contact`,
                     element: <ContactWidget />
+                },
+                {
+                    path: '/admin/company/:path',
+                    element: <AdminStorePageWidget/>
                 }
             ];
         });

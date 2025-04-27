@@ -18,15 +18,15 @@ public class AccountService {
         return userRepository.findById(id);
     }
 
-    public Mono<User> getUserByUsername(Long storeId, String username){
+    public Mono<User> getUserByUsername(String storeId, String username){
         return userRepository.findUserByUsername(storeId, username);
     }
 
-    public Mono<User> getUserByEmail(Long storeId, String email){
+    public Mono<User> getUserByEmail(String storeId, String email){
         return userRepository.findUserByEmail(storeId, email);
     }
 
-    public Mono<User> getUserByPhoneNumber(Long storeId, String phoneNumber){
+    public Mono<User> getUserByPhoneNumber(String storeId, String phoneNumber){
         return userRepository.findUserByPhoneNumber(storeId, phoneNumber);
     }
 

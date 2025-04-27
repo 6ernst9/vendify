@@ -17,9 +17,14 @@ public class StoresService {
         return storesRepository.findAll();
     }
 
+    public Flux<Store> getStoreByOwner(long id) {
+        return storesRepository.findByOwnerId(id);
+    }
+
     public Mono<Store> addStore(StoreDto storeDto) {
         return storesRepository.save(
                 new Store(
+                        storeDto.getOwner(),
                         storeDto.getName(),
                         storeDto.getLogo(),
                         storeDto.getPath(),
@@ -32,6 +37,11 @@ public class StoresService {
 
     public Mono<Store> getStoreById(long id){
         return storesRepository.findById(id)
+                .switchIfEmpty(Mono.error(new RuntimeException("Store not found")));
+    }
+
+    public Mono<Store> getStoreByName(String path){
+        return storesRepository.findByPath(path)
                 .switchIfEmpty(Mono.error(new RuntimeException("Store not found")));
     }
 }

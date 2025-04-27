@@ -18,8 +18,12 @@ type ContactLinks = {
 };
 
 export type StoreState = {
+    id: string;
+    owner: number;
     path: string;
     name: string;
+    logo: string;
+    banner: string;
     theme: Theme;
     contactLinks: ContactLinks;
 }

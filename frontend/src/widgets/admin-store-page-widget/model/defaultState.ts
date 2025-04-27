@@ -1,4 +1,4 @@
-import {StoreState} from "./types";
+import {StoreState} from "../../../redux/core/store/types";
 
 export const defaultStore: StoreState = {
     id: '',

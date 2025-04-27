@@ -20,6 +20,7 @@ type ContactLinks = {
 };
 
 export type StoreProps = {
+    owner: number;
     path: string;
     name: string;
     theme: Theme;

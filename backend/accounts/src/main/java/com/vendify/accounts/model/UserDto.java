@@ -14,5 +14,5 @@ public class UserDto {
     private final String email;
     private final String phoneNumber;
     private final String password;
-    private final Long storeId;
+    private final String storeId;
 }

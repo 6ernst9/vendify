@@ -8,4 +8,4 @@ CREATE TABLE users (
                           last_name VARCHAR(255) NOT NULL,
                           email VARCHAR(255) NOT NULL,
                           phone_number VARCHAR(255) NOT NULL,
-                          store_id BIGINT);
+                          store_id VARCHAR(255) NOT NULL);

@@ -8,6 +8,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class StoreDto {
+    private final long owner;
     private final String name;
     private final String logo;
     private final String path;

@@ -25,9 +25,9 @@ public class User {
     @NonNull
     private String phoneNumber;
     @NonNull
-    private Long storeId;
+    private String storeId;
 
-    public User(@NonNull String username, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String phoneNumber, @NonNull Long storeId) {
+    public User(@NonNull String username, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String phoneNumber, @NonNull String storeId) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

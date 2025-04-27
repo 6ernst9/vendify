@@ -30,7 +30,7 @@ public class AccountController {
 
     @GetMapping("/get-user-by-username/{storeId}/{username}")
     @WMTSecurityMapping(path = "get-user-by-username")
-    public Mono<User> getUserByUsername(@PathVariable Long storeId,
+    public Mono<User> getUserByUsername(@PathVariable String storeId,
                                         @PathVariable String username){
         log.info("Performing GET /get-user-by-username call. Input: username={}", username);
         var user = accountService.getUserByUsername(storeId, username)
@@ -41,7 +41,7 @@ public class AccountController {
 
     @GetMapping("/get-user-by-email/{storeId}/{email}")
     @WMTSecurityMapping(path = "get-user-by-email")
-    public Mono<User> getUserByEmail(@PathVariable Long storeId,
+    public Mono<User> getUserByEmail(@PathVariable String storeId,
                                      @PathVariable String email){
         log.info("Performing GET /get-user-by-email call. Input: email={}", email);
         var user = accountService.getUserByEmail(storeId, email)
@@ -52,7 +52,7 @@ public class AccountController {
 
     @GetMapping("/get-user-by-phone-number/{storeId}/{phone}")
     @WMTSecurityMapping(path = "get-user-by-phone")
-    public Mono<User> getUserByPhoneNumber(@PathVariable Long storeId,
+    public Mono<User> getUserByPhoneNumber(@PathVariable String storeId,
                                            @PathVariable String phone){
         log.info("Performing GET /get-user-by-phone-number call. Input: phone-number={}", phone);
         var user = accountService.getUserByPhoneNumber(storeId, phone)

@@ -3,13 +3,16 @@ import sessionReducer from './core/session/reducers';
 import storeReducer from './core/store/reducers';
 import authReducer from '../widgets/admin-login-widget/model/reducers';
 import storesReducer from './core/stores/reducers';
+import adminStoreReducer from '../widgets/admin-store-page-widget/model/reducers';
+import userStoresReducer from '../widgets/admin-store-widget/model/reducers';
 
 const rootReducer = {
     stores: storesReducer,
     store: storeReducer,
+    adminStore: adminStoreReducer,
+    userStores: userStoresReducer,
     auth: authReducer,
-    session: sessionReducer,
-
+    session: sessionReducer
 }
 export const store = configureStore({
     reducer: rootReducer,

@@ -6,8 +6,7 @@ import {useSelector} from "react-redux";
 import {sessionSelect} from "../../redux/core/session/selectors";
 
 const Navbar: React.FC = () => {
-    const firstName = useSelector(sessionSelect.firstName);
-    const lastName = useSelector(sessionSelect.lastName);
+    const email = useSelector(sessionSelect.email);
     return (
         <div className="navbar">
             <div className="navbar-search-bar">
@@ -16,7 +15,7 @@ const Navbar: React.FC = () => {
             </div>
             <div className="navbar-user-info">
                 <User/>
-                <span>{firstName + ' ' + lastName}</span>
+                <span>{email}</span>
             </div>
         </div>
     );

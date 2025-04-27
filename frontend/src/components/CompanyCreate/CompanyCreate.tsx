@@ -9,6 +9,7 @@ const CompanyCreate: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const accessToken = useSelector(sessionSelect.accessToken);
+    const id = useSelector(sessionSelect.id);
 
     const [name, setStoreName] = useState('');
     const [path, setStorePath] = useState('');
@@ -56,6 +57,7 @@ const CompanyCreate: React.FC = () => {
         await createStore(
             {
                 name,
+                owner: id,
                 path,
                 theme: {
                     primaryColor,
@@ -75,6 +77,7 @@ const CompanyCreate: React.FC = () => {
                 accessToken,
                 dispatch
             });
+        navigate("/admin/home");
     }
     return (
         <div className="company-create-container">

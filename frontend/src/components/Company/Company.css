@@ -3,6 +3,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .company-header,
@@ -20,6 +21,14 @@
     background-color: #1255cb;
     color: white;
     cursor: pointer;
+}
+
+.company-header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 .company-header h1 {
@@ -45,24 +54,6 @@
     font-size: 18px;
 }
 
-.company-configuration-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #d3d3d3;
-}
-
-.company-configuration-header h1{
-    margin-bottom: 10px;
-    font-size: 24px;
-    color: #001944;
-    font-weight: normal;
-}
-
 .company-configuration-header-button{
     padding: 10px 20px;
     border-radius: 20px;
@@ -73,46 +64,69 @@
     cursor: pointer;
 }
 
-.company-configuration-content{
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    align-items: center;
-}
-
-.company-configuration-content h1{
-    font-size: 18px;
-}
-
-.company-configuration-content p{
-    font-size: 18px;
-}
-
-.highlighted-text{
+.highlighted-text {
     color: #0024a7;
 }
 
-.company-divider {
+.company-table {
     width: 100%;
-    margin: 10px 0;
-    border: none;
-    height: 1px;
-    background-color: #d3d3d3;
+    border-collapse: collapse;
 }
 
-.company-configuration-colors {
+.company-table th,
+.company-table td {
+    padding: 12px;
+    border-bottom: 1px solid #d3d3d3;
+    text-align: left;
+}
+
+.company-table td {
+    cursor: pointer;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.company-search {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.company-configuration-color {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
-    display: inline-block;
-    background-color: #d1ecf1;
-    color: #0c5460;
+.company-search p{
+    font-size: 18px;
+    color: #6B7280;
+}
+
+.company-search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    width: 300px;
+    padding: 10px;
+    height: 25px;
+    outline: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+.company-search-bar svg {
+    width: 24px;
+    height: 24px;
+    color: #1255cb;
+
+}
+
+.company-search-bar input{
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
+}
+
+.company-search-bar input::placeholder{
+    color: #6B7280;
 }

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/api/store")
@@ -22,15 +20,20 @@ public class StoresController {
         return storesService.getStoreById(id);
     }
 
+    @GetMapping("/get-store-by-path/{path}")
+    public Mono<Store> getStoreByPath(@PathVariable String path){
+        return storesService.getStoreByName(path);
+    }
+
     @GetMapping("/get-stores")
     public Flux<Store> getAllStores(){
         return storesService.getStores();
     }
 
-//    @GetMapping("/get-stores-by-owner/{id}")
-//    public Flux<Store> getStoresByOwner(@PathVariable long id){
-//        return storesService.getStoresByOwner(id);
-//    }
+    @GetMapping("/get-stores-by-owner/{id}")
+    public Flux<Store> getStoreByOwner(@PathVariable long id){
+        return storesService.getStoreByOwner(id);
+    }
 
     @PostMapping("/add-store")
     public Mono<ResponseDto> addStore(@RequestBody StoreDto storeDto){

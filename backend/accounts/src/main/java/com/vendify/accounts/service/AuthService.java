@@ -23,7 +23,7 @@ public class AuthService {
     private final SessionRepository sessionRepository;
     private final JwtGenerator jwtGenerator;
 
-    public Mono<LoginResponse> login(Long storeId, String placeHolder, String password) {
+    public Mono<LoginResponse> login(String storeId, String placeHolder, String password) {
         Mono<User> userMono;
         if(ValidationUtils.isEmail(placeHolder)) {
             userMono = accountService.getUserByEmail(storeId, placeHolder)

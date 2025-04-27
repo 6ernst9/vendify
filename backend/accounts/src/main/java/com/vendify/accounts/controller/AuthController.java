@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/login/{storeId}")
     @WMTSecurityMapping(path = "login", tokenEnabled = false)
-    public Mono<LoginResponse> login(@PathVariable Long storeId,
+    public Mono<LoginResponse> login(@PathVariable String storeId,
                                      @RequestBody LoginDto loginDto) {
         var placeholder = loginDto.placeholder();
         var password = loginDto.password();

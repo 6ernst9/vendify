@@ -18,6 +18,7 @@ import java.util.List;
 public class Store {
     @Id
     private String id;
+    private long owner;
     private String name;
     private String logo;
     private String path;
@@ -26,9 +27,10 @@ public class Store {
     private Theme theme;
     private ContactLinks contactLinks;
 
-    public Store(String name, String logo, String path, String banner, List<String> categories, Theme theme, ContactLinks contactLinks) {
+    public Store(long owner, String name, String logo, String path, String banner, List<String> categories, Theme theme, ContactLinks contactLinks) {
         this.name = name;
         this.logo = logo;
+        this.owner = owner;
         this.path = path;
         this.banner = banner;
         this.categories = categories;
@@ -36,8 +38,9 @@ public class Store {
         this.contactLinks = contactLinks;
     }
 
-    public Store(String name, String logo, String path, String banner, Theme theme, ContactLinks contactLinks) {
+    public Store(long owner, String name, String logo, String path, String banner, Theme theme, ContactLinks contactLinks) {
         this.name = name;
+        this.owner = owner;
         this.logo = logo;
         this.path = path;
         this.banner = banner;
