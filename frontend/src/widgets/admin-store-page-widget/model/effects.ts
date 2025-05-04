@@ -3,9 +3,9 @@ import {STORES_BASE_URL} from "../../../util/constants";
 import {getStoreProps} from "./types";
 import {setCurrentAdminStore} from "./reducers";
 
-export const getStore = async ({path, accessToken, dispatch }: getStoreProps) => {
+export const getStore = async ({id, accessToken, dispatch }: getStoreProps) => {
     await request({
-        url: STORES_BASE_URL + '/get-store-by-path/' + path,
+        url: STORES_BASE_URL + '/get-store-by-id/' + id,
         method: 'GET',
         headers: {
             'X-FI-V-IP' : '127.0.0',

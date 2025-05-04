@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 public class StoresController {
     private final StoresService storesService;
 
-    @GetMapping("/get-stores-by-id/{id}")
+    @GetMapping("/get-store-by-id/{id}")
     public Mono<Store> getStoreById(@PathVariable long id){
         return storesService.getStoreById(id);
     }

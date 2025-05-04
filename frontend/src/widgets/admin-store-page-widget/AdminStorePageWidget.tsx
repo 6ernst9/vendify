@@ -10,14 +10,14 @@ import {sessionSelect} from "../../redux/core/session/selectors";
 const AdminStorePageWidget: React.FC = () => {
     const pathname = window.location.pathname;
     const segments = pathname.split('/').filter(Boolean);
-    const path = segments[segments.length - 1];
+    const id = segments[segments.length - 1];
     
     const dispatch = useDispatch();
     const accessToken = useSelector(sessionSelect.accessToken);
     
     useEffect(() => {
-        getStore({path, accessToken, dispatch})
-    }, [accessToken, path])
+        getStore({id, accessToken, dispatch})
+    }, [accessToken, id])
 
     return (
         <div className="admin-store-page-widget">

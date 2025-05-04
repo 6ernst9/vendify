@@ -22,6 +22,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setStores} from "./redux/core/stores/reducers";
 import {storesSelect} from "./redux/core/stores/selectors";
 import AdminStorePageWidget from "./widgets/admin-store-page-widget/AdminStorePageWidget";
+import AdminProductCreateWidget from "./widgets/admin-product-create-widget/AdminProductCreateWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -51,11 +52,12 @@ const AppRoutes = () => {
             { path: "/admin/orders", element: <AdminOrdersWidget /> },
             { path: "/admin/deals", element: <AdminDealsWidget /> },
             { path: "/admin/products", element: <AdminProductsWidget /> },
+            { path: "/admin/products/create", element: <AdminProductCreateWidget /> },
             { path: "/admin/customers", element: <AdminCustomersWidget /> },
         ];
 
         const dynamicStoreRoutes = stores.flatMap((store) => {
-            const { path } = store;
+            const { id, path } = store;
             console.log(path);
 
             return [
@@ -84,7 +86,7 @@ const AppRoutes = () => {
                     element: <ContactWidget />
                 },
                 {
-                    path: '/admin/company/:path',
+                    path: '/admin/company/:id',
                     element: <AdminStorePageWidget/>
                 }
             ];

@@ -24,7 +24,7 @@ const Company: React.FC = () => {
 
     const selectStore = (store: StoreState) => {
         dispatch(setCurrentAdminStore(store));
-        navigate(`/admin/company/${store.path}`)
+        navigate(`/admin/company/${store.id}`)
     }
 
     return (
@@ -67,8 +67,8 @@ const Company: React.FC = () => {
                     </thead>
                     <tbody>
                     {stores.map((store) => (
-                        <tr key={store.name} onClick={() => selectStore(store)}>
-                            <td className="order-id">#{store.id}</td>
+                        <tr key={store.name}>
+                            <td className="store-id" onClick ={() => selectStore(store)}>#{store.id}</td>
                             <td>{store.name}</td>
                             <td className="highlighted-text">/{store.path}</td>
                             <td>245</td>
