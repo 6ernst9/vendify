@@ -11,6 +11,7 @@
 .contact-category {
     font-weight: bold;
     font-size: 18px;
+    font-family: var(--font-family), sans-serif;
     color: gray;
 }
 

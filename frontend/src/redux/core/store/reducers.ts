@@ -7,6 +7,10 @@ const storeSlice = createSlice({
     initialState: defaultStore,
     reducers: {
         setCurrentStore: (state, action: PayloadAction<StoreState>) => {
+            state.banner = action.payload.banner;
+            state.logo = action.payload.logo;
+            state.owner = action.payload.owner;
+            state.id = action.payload.id;
             state.name = action.payload.name;
             state.path = action.payload.path;
             state.theme = action.payload.theme;

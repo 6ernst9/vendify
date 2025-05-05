@@ -2,16 +2,21 @@
     background-color: white;
     border-radius: 8px;
     cursor: pointer;
-    min-width: 300px;
+    width: 300px;
 }
 
 .product-img-container {
     position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
 }
 
 .product-img-container img {
     width: 100%;
-    background-color: darkgrey;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
     border-radius: 8px;
 }
 

@@ -9,7 +9,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface StoresRepository extends ReactiveMongoRepository<Store, Long> {
+public interface StoresRepository extends ReactiveMongoRepository<Store, String> {
     @Query("{ 'owner' : ?0 }")
     Flux<Store> findByOwnerId(Long id);
 

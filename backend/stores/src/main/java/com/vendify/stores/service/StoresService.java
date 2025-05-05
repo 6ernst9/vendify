@@ -35,7 +35,7 @@ public class StoresService {
         );
     }
 
-    public Mono<Store> getStoreById(long id){
+    public Mono<Store> getStoreById(String id){
         return storesRepository.findById(id)
                 .switchIfEmpty(Mono.error(new RuntimeException("Store not found")));
     }

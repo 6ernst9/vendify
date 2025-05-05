@@ -68,7 +68,7 @@ const Products: React.FC = () => {
                         <tr key={product.id}>
                             <td><input type="checkbox"/></td>
                             <td>#{product.id}</td>
-                            <td><img src={image}/></td>
+                            <td><img src={product.images[0]}/></td>
                             <td>{product.name}</td>
                             <td><span className='badge'>active</span></td>
                             <td>{product.price}$</td>

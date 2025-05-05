@@ -23,6 +23,7 @@ import {setStores} from "./redux/core/stores/reducers";
 import {storesSelect} from "./redux/core/stores/selectors";
 import AdminStorePageWidget from "./widgets/admin-store-page-widget/AdminStorePageWidget";
 import AdminProductCreateWidget from "./widgets/admin-product-create-widget/AdminProductCreateWidget";
+import ProductsBrowseWidget from "./widgets/products-browse-widget/ProductsBrowseWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -57,7 +58,7 @@ const AppRoutes = () => {
         ];
 
         const dynamicStoreRoutes = stores.flatMap((store) => {
-            const { id, path } = store;
+            const { path } = store;
             console.log(path);
 
             return [
@@ -80,6 +81,10 @@ const AppRoutes = () => {
                 {
                     path: `/:path/wishlist`,
                     element: <WishlistWidget />
+                },
+                {
+                    path: `/:path/browse`,
+                    element: <ProductsBrowseWidget/>
                 },
                 {
                     path: `/:path/contact`,

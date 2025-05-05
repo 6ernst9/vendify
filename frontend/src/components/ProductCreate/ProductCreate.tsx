@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './ProductCreate.css';
 import {useNavigate} from "react-router-dom";
 import {createProduct} from "../../widgets/admin-product-create-widget/model/effects";
@@ -10,11 +10,15 @@ import {
     uploadBytes
 } from "firebase/storage";
 import {storage} from "../../util/firebase";
+import {getStores} from "../../widgets/admin-store-widget/model/effects";
+import {storesSelect} from "../../redux/core/stores/selectors";
 
 const ProductCreate: React.FC = () => {
     const navigate = useNavigate();
     const accessToken = useSelector(sessionSelect.accessToken);
+    const id = useSelector(sessionSelect.id);
     const dispatch = useDispatch();
+    const stores = useSelector(storesSelect.stores);
 
     const [productName, setProductName] = useState('');
     const [productStore, setProductStore] = useState('');
@@ -71,6 +75,10 @@ const ProductCreate: React.FC = () => {
         createProduct(newProduct);
     };
 
+    useEffect(() => {
+        getStores({id, accessToken, dispatch});
+    }, [accessToken, id]);
+
     return (
         <div className="product-create-container">
             <div className="product-create-header">
@@ -92,8 +100,7 @@ const ProductCreate: React.FC = () => {
                 <div className="product-create-selector">
                     <h1>Product Store</h1>
                     <select className="product-create-select" onChange={handleProductStoreChange}>
-                        <option value="superb">Superb</option>
-                        <option value="exclusive">Exclusive</option>
+                        {stores.map((store) => <option value={store.id}>{store.name}</option>)}
                     </select>
                 </div>
                 <div className="product-create-selector">

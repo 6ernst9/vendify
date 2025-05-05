@@ -5,7 +5,6 @@ import {ReactComponent as Star} from '../../assets/icons/star.svg';
 import {ReactComponent as EmptyStar} from '../../assets/icons/star-half.svg';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {RootState} from "../../redux/store";
 import {storeSelect} from "../../redux/core/store/selectors";
 
 interface ProductProps {
@@ -16,7 +15,7 @@ interface ProductProps {
     stars: number;
     reviews: number;
     img: string;
-    sale: number;
+    sale?: number;
 }
 
 const ProductCard: React.FC<ProductProps> = ({title, price, oldPrice, stars, reviews, img, sale}) => {

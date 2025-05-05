@@ -16,7 +16,7 @@ public class StoresController {
     private final StoresService storesService;
 
     @GetMapping("/get-store-by-id/{id}")
-    public Mono<Store> getStoreById(@PathVariable long id){
+    public Mono<Store> getStoreById(@PathVariable String id){
         return storesService.getStoreById(id);
     }
 

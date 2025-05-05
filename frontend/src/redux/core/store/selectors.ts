@@ -1,6 +1,7 @@
 import { RootState } from "../../store";
 
 export const storeSelect = ({
+    id: (state: RootState) => state.store.id,
     path: (state: RootState) => state.store.path,
     name: (state: RootState) => state.store.name,
     theme: (state: RootState) => state.store.theme,

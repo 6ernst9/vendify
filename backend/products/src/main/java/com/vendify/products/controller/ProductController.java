@@ -28,7 +28,7 @@ public class ProductController {
         return product;
     }
 
-    @GetMapping("/get-products-by-store/{store}}")
+    @GetMapping("/get-products-by-store/{store}")
     public Flux<Product> getProductsByStore(@PathVariable String store){
         log.info("Performing GET /get-products-by-store call. Input: store={}", store);
         var products = productsService.getAllStoreProducts(store);

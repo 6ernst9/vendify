@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {createStore} from "../../widgets/admin-store-create-widget/model/effects";
+import {uploadImageToFirebase} from "../../util/upload";
 
 const CompanyCreate: React.FC = () => {
     const navigate = useNavigate();
@@ -20,8 +21,21 @@ const CompanyCreate: React.FC = () => {
     const [logo, setLogo] = useState<string>('');
     const [banner, setBanner] = useState<string>('');
 
-    const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.files?.[0].name || '');
-    const handleBannerUpload = (e: React.ChangeEvent<HTMLInputElement>) => setBanner(e.target.files?.[0].name || '');
+    const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const url = await uploadImageToFirebase(file, 'logos');
+        setLogo(url);
+    };
+
+    const handleBannerUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const url = await uploadImageToFirebase(file, 'banners');
+        setBanner(url);
+    };
 
     const [primaryColor, setPrimaryColor] = useState('#ff0000');
     const [backgroundColor, setBackgroundColor] = useState('#ffffff');
@@ -110,15 +124,32 @@ const CompanyCreate: React.FC = () => {
                 </div>
                 <div className="company-create-selector">
                     <h1>Logo</h1>
-                    <div className="company-create-header-button">
+                    <input
+                        type="file"
+                        id="logo-upload"
+                        style={{ display: 'none' }}
+                        onChange={handleLogoUpload}
+                    />
+                    <label htmlFor="logo-upload" className="company-create-header-button">
                         Upload
-                    </div>
+                    </label>
+                    {logo && <p className="company-create-file-name">{logo.split('/').pop()?.split('?')[0]}</p>}
+
                 </div>
                 <div className="company-create-selector">
                     <h1>Banner</h1>
-                    <div className="company-create-header-button">
+                    <input
+                        type="file"
+                        id="banner-upload"
+                        style={{ display: 'none' }}
+                        onChange={handleBannerUpload}
+                    />
+                    <label htmlFor="banner-upload" className="company-create-header-button">
                         Upload
-                    </div>
+                    </label>
+
+                    {banner && <p className="company-create-file-name">{banner.split('/').pop()?.split('?')[0]}</p>}
+
                 </div>
             </div>
             <div className="company-create-info-container">
