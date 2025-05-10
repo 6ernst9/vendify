@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sessionReducer from './core/session/reducers';
+import adminSessionReducer from './core/adminSession/reducers';
 import storeReducer from './core/store/reducers';
 import authReducer from '../widgets/admin-login-widget/model/reducers';
 import storesReducer from './core/stores/reducers';
@@ -15,7 +16,8 @@ const rootReducer = {
     userProducts: userProductsReducer,
     products: productsReducer,
     auth: authReducer,
-    session: sessionReducer
+    session: sessionReducer,
+    adminSession: adminSessionReducer
 }
 export const store = configureStore({
     reducer: rootReducer,

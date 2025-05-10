@@ -4,7 +4,7 @@ import { User } from "./types";
 
 const loadSession = () => {
     try {
-        const serializedSession = localStorage.getItem('session');
+        const serializedSession = localStorage.getItem('adminSession');
         if (serializedSession === null) return defaultSession;
         return JSON.parse(serializedSession);
     } catch (e) {
@@ -13,7 +13,7 @@ const loadSession = () => {
 };
 
 const sessionSlice = createSlice({
-    name: 'sessionState',
+    name: 'adminSessionState',
     initialState: loadSession(),
     reducers: {
         startSession: (state, action: PayloadAction<User>) => {
@@ -32,10 +32,10 @@ const sessionSlice = createSlice({
             state.email = action.payload.email;
             state.id = action.payload.id;
             state.phoneNumber = action.payload.phoneNumber;
-            localStorage.setItem('session', JSON.stringify(state));
+            localStorage.setItem('adminSession', JSON.stringify(state));
         },
         endSession: (state) => {
-            localStorage.removeItem('session');
+            localStorage.removeItem('adminSession');
             state = defaultSession
         }
     }

@@ -1,13 +1,12 @@
-import {loginFailure, loginSuccess, logout} from "./reducers";
-import {getSessionState, LoginProps} from "./types";
-import {continueSession, endSession, startSession} from "../../../redux/core/adminSession/reducers";
-import {getAccountByUsername} from "../../admin-sign-up-widget/model/types";
+import {getAccountByUsername, getSessionState, LoginProps} from "./types";
+import {endSession, startSession} from "../../../redux/core/session/reducers";
 import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
 import {request} from "../../../util/request";
+import {loginFailure, loginSuccess, logout} from "../../admin-login-widget/model/reducers";
 
-export const login = async ({username, password, dispatch}: LoginProps) => {
+export const login = async ({username, password, store, dispatch}: LoginProps) => {
     await request({
-        url: AUTH_BASE_URL + '/login/0',
+        url: AUTH_BASE_URL + '/login/' + store,
         method: 'POST',
         data: {username, password},
         headers: {
@@ -18,7 +17,7 @@ export const login = async ({username, password, dispatch}: LoginProps) => {
         }
     }).then((response) => {
         dispatch(loginSuccess(response.data));
-        getAccount({username, accessToken: response.data.accessToken, dispatch})
+        getAccount({username, accessToken: response.data.accessToken, store, dispatch})
     }).catch((error) => {
         dispatch(loginFailure(error.response.data.message));
     })
@@ -41,9 +40,9 @@ export const logOut = async ({id, dispatch}: getSessionState) => {
     })
 }
 
-export const getAccount = async({username, accessToken, dispatch} : getAccountByUsername) => {
+export const getAccount = async({username, accessToken, store, dispatch} : getAccountByUsername) => {
     await request({
-        url: ACCOUNTS_BASE_URL + '/account/get-user-by-username/0/' + username,
+        url: ACCOUNTS_BASE_URL + '/account/get-user-by-username/' + store + '/' + username,
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
@@ -54,24 +53,6 @@ export const getAccount = async({username, accessToken, dispatch} : getAccountBy
         }
     }).then((response) => {
         dispatch(startSession(response.data));
-    }).catch((error) => {
-        console.error(error);
-    })
-}
-
-export const getSession = async({id ,dispatch} : getSessionState) => {
-    await request({
-        url: ACCOUNTS_BASE_URL,
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaGSh23zOl21k4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ',
-            'X-FI-V-IP' : '127.0.0',
-            'X-FI-V-SITE-ID': 'COM',
-            'X-FI-V-DEVICE': 'DESKTOP',
-            'X-FI-V-PATH': 'account.get-account'
-        }
-    }).then((response) => {
-        dispatch(continueSession(response.data));
     }).catch((error) => {
         console.error(error);
     })

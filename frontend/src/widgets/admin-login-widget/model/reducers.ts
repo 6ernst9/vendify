@@ -7,9 +7,6 @@ const loginSlice = createSlice({
     initialState: defaultAuth,
     reducers: {
         loginSuccess: (state, action: PayloadAction<LoginResponse>) => {
-            localStorage.setItem('id', action.payload.id);
-            localStorage.setItem('accessToken', action.payload.accessToken);
-            localStorage.setItem('refreshToken', action.payload.refreshToken);
            state.logged = true;
            state.error = 'NO-ERROR';
         },
@@ -27,9 +24,6 @@ const loginSlice = createSlice({
             state.error = null;
         },
         registrationSuccess: (state,action: PayloadAction<LoginResponse>) => {
-            localStorage.setItem('id', action.payload.id);
-            localStorage.setItem('accessToken', action.payload.accessToken);
-            localStorage.setItem('refreshToken', action.payload.refreshToken);
             state.logged = true;
             state.error = 'NO-ERROR';
         },
@@ -58,9 +52,7 @@ const loginSlice = createSlice({
             }
         },
         logout: (state) => {
-            localStorage.removeItem('id');
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('session');
             state = defaultAuth;
         }
     }

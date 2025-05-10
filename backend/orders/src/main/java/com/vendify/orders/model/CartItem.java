@@ -6,27 +6,22 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("orders")
-public class Order {
+@Document("cartItems")
+public class CartItem {
     @Id
     private String id;
     private String storeId;
     private long customerId;
-    private List<OrderItem> items;
-    private OrderStatus status;
-    private LocalDateTime createdAt;
+    private long productId;
+    private int quantity;
 
-    public Order(String storeId, long customerId, List<OrderItem> items, OrderStatus status, LocalDateTime createdAt) {
+    public CartItem(String storeId, long customerId, long productId, int quantity) {
         this.storeId = storeId;
         this.customerId = customerId;
-        this.items = items;
-        this.status = status;
-        this.createdAt = createdAt;
+        this.productId = productId;
+        this.quantity = quantity;
     }
 }

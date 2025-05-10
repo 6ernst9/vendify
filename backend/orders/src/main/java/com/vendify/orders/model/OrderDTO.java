@@ -3,11 +3,14 @@ package com.vendify.orders.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
-public class Cart {
+public class OrderDTO {
     private String storeId;
     private long customerId;
-    private long productId;
-    private int quantity;
+    private List<OrderItem> items;
+    private LocalDateTime createdAt;
 }

@@ -5,9 +5,10 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {authSelect} from "./model/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 
 const AdminLoginWidget: React.FC = () => {
-    const sessionExists = useSelector(sessionSelect.exists);
+    const sessionExists = useSelector(adminSessionSelect.exists);
     const isLogged = useSelector(authSelect.isLogged);
     const navigate = useNavigate();
 

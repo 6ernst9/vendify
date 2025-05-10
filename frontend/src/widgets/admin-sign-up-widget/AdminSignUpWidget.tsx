@@ -2,14 +2,14 @@ import React, {useEffect} from "react";
 import './styles.css';
 import AdminSignUp from "../../components/AdminSignUp/AdminSignUp";
 import {useSelector} from "react-redux";
-import {sessionSelect} from "../../redux/core/session/selectors";
 import {authSelect} from "../admin-login-widget/model/selectors";
 import {useNavigate} from "react-router-dom";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 
 const AdminSignUpWidget: React.FC = () => {
     const navigate = useNavigate();
 
-    const sessionExists = useSelector(sessionSelect.exists);
+    const sessionExists = useSelector(adminSessionSelect.exists);
     const isLogged = useSelector(authSelect.isLogged);
 
     useEffect(() => {

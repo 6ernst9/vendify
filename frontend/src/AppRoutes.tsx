@@ -24,6 +24,8 @@ import {storesSelect} from "./redux/core/stores/selectors";
 import AdminStorePageWidget from "./widgets/admin-store-page-widget/AdminStorePageWidget";
 import AdminProductCreateWidget from "./widgets/admin-product-create-widget/AdminProductCreateWidget";
 import ProductsBrowseWidget from "./widgets/products-browse-widget/ProductsBrowseWidget";
+import LoginWidget from "./widgets/login-widget/LoginWidget";
+import SignUpWidget from "./widgets/sign-up-widget/SignUpWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -89,6 +91,14 @@ const AppRoutes = () => {
                 {
                     path: `/:path/contact`,
                     element: <ContactWidget />
+                },
+                {
+                    path: `/:path/login`,
+                    element: <LoginWidget/>
+                },
+                {
+                    path: `/:path/sign-up`,
+                    element: <SignUpWidget/>
                 },
                 {
                     path: '/admin/company/:id',
