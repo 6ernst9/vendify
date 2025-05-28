@@ -2,15 +2,15 @@ import React, {useState} from "react";
 import './CompanyCreate.css';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {sessionSelect} from "../../redux/core/session/selectors";
 import {createStore} from "../../widgets/admin-store-create-widget/model/effects";
 import {uploadImageToFirebase} from "../../util/upload";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 
 const CompanyCreate: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const accessToken = useSelector(sessionSelect.accessToken);
-    const id = useSelector(sessionSelect.id);
+    const accessToken = useSelector(adminSessionSelect.accessToken);
+    const id = useSelector(adminSessionSelect.id);
 
     const [name, setStoreName] = useState('');
     const [path, setStorePath] = useState('');

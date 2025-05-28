@@ -18,13 +18,17 @@ public class Order {
     private String id;
     private String storeId;
     private long customerId;
+    private Address address;
+    private double price;
     private List<OrderItem> items;
     private OrderStatus status;
     private LocalDateTime createdAt;
 
-    public Order(String storeId, long customerId, List<OrderItem> items, OrderStatus status, LocalDateTime createdAt) {
+    public Order(String storeId, long customerId, Address address, double price, List<OrderItem> items, OrderStatus status, LocalDateTime createdAt) {
         this.storeId = storeId;
         this.customerId = customerId;
+        this.address = address;
+        this.price = price;
         this.items = items;
         this.status = status;
         this.createdAt = createdAt;

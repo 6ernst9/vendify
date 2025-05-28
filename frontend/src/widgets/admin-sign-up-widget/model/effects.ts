@@ -17,13 +17,18 @@ export const register = async ({email, username, password, firstName, lastName, 
         }
     }).then((response) => {
         dispatch(registrationSuccess(response.data));
-        getAccount({username, accessToken: response.data.accessToken, dispatch});
+        getAccount({
+                username,
+                accessToken: response.data.accessToken,
+                refreshToken: response.data.refreshToken,
+                dispatch
+            });
     }).catch((error) => {
         dispatch(registrationFailure(error.response.data.message));
     })
 }
 
-export const getAccount = async({username, accessToken, dispatch} : getAccountByUsername) => {
+export const getAccount = async({username, accessToken, refreshToken, dispatch} : getAccountByUsername) => {
     await request({
         url: ACCOUNTS_BASE_URL + '/get-user-by-username/0/' + username,
         method: 'GET',
@@ -35,7 +40,11 @@ export const getAccount = async({username, accessToken, dispatch} : getAccountBy
             'X-FI-V-PATH': 'account.get-user-by-username'
         }
     }).then((response) => {
-        dispatch(startSession(response.data));
+        dispatch(startSession({
+            ...response.data,
+            accessToken,
+            refreshToken
+        }));
     }).catch((error) => {
         console.error(error);
     })

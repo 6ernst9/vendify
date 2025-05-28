@@ -8,14 +8,14 @@ import {StoreState} from "../../redux/core/store/types";
 import {setCurrentAdminStore} from "../../widgets/admin-store-page-widget/model/reducers";
 import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
 import {getStores} from "../../widgets/admin-store-widget/model/effects";
-import {sessionSelect} from "../../redux/core/session/selectors";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 
 const Company: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
-    const id = useSelector(sessionSelect.id);
-    const accessToken = useSelector(sessionSelect.accessToken);
+    const id = useSelector(adminSessionSelect.id);
+    const accessToken = useSelector(adminSessionSelect.accessToken);
     const stores = useSelector(userStoresSelect.stores);
 
     useEffect(() => {

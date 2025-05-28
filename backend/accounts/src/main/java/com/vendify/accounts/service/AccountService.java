@@ -7,6 +7,7 @@ import com.vendify.accounts.repository.UserRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -24,6 +25,10 @@ public class AccountService {
 
     public Mono<User> getUserByEmail(String storeId, String email){
         return userRepository.findUserByEmail(storeId, email);
+    }
+
+    public Flux<User> getUsersByStore(String storeId){
+        return userRepository.findUsersByStore(storeId);
     }
 
     public Mono<User> getUserByPhoneNumber(String storeId, String phoneNumber){

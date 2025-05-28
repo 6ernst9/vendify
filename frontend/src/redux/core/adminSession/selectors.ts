@@ -1,13 +1,13 @@
 import {RootState} from "../../store";
 
 export const adminSessionSelect = ({
-    accessToken: (state: RootState) => state.session.accessToken,
-    refreshToken: (state: RootState) => state.session.refreshToken,
-    id: (state: RootState) => state.session.id,
-    email: (state: RootState) => state.session.email,
-    username: (state: RootState) => state.session.username,
-    firstName: (state: RootState) => state.session.firstName,
-    lastName: (state: RootState) => state.session.lastName,
-    phoneNumber: (state: RootState) => state.session.phoneNumber,
-    exists: (state: RootState) => state.session.firstName !== ''
+    accessToken: (state: RootState) => state.adminSession.accessToken,
+    refreshToken: (state: RootState) => state.adminSession.refreshToken,
+    id: (state: RootState) => state.adminSession.id,
+    email: (state: RootState) => state.adminSession.email,
+    username: (state: RootState) => state.adminSession.username,
+    firstName: (state: RootState) => state.adminSession.firstName,
+    lastName: (state: RootState) => state.adminSession.lastName,
+    phoneNumber: (state: RootState) => state.adminSession.phoneNumber,
+    exists: (state: RootState) => state.adminSession.firstName !== ''
 });

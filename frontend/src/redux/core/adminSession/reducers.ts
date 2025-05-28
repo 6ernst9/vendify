@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { defaultSession } from "./defaultState";
-import { User } from "./types";
+import {User, UserSession} from "./types";
 
 const loadSession = () => {
     try {
@@ -16,22 +16,26 @@ const sessionSlice = createSlice({
     name: 'adminSessionState',
     initialState: loadSession(),
     reducers: {
-        startSession: (state, action: PayloadAction<User>) => {
+        startSession: (state, action: PayloadAction<UserSession>) => {
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
             state.username = action.payload.username;
             state.email = action.payload.email;
             state.id = action.payload.id;
             state.phoneNumber = action.payload.phoneNumber;
-            localStorage.setItem('session', JSON.stringify(state));
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
+            localStorage.setItem('adminSession', JSON.stringify(state));
         },
-        continueSession: (state, action: PayloadAction<User>) => {
+        continueSession: (state, action: PayloadAction<UserSession>) => {
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
             state.username = action.payload.username;
             state.email = action.payload.email;
             state.id = action.payload.id;
             state.phoneNumber = action.payload.phoneNumber;
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
             localStorage.setItem('adminSession', JSON.stringify(state));
         },
         endSession: (state) => {

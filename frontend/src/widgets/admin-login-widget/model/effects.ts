@@ -9,7 +9,7 @@ export const login = async ({username, password, dispatch}: LoginProps) => {
     await request({
         url: AUTH_BASE_URL + '/login/0',
         method: 'POST',
-        data: {username, password},
+        data: {placeholder: username, password},
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
@@ -18,7 +18,11 @@ export const login = async ({username, password, dispatch}: LoginProps) => {
         }
     }).then((response) => {
         dispatch(loginSuccess(response.data));
-        getAccount({username, accessToken: response.data.accessToken, dispatch})
+        getAccount({
+            username,
+            accessToken: response.data.accessToken,
+            refreshToken: response.data.refreshToken,
+            dispatch})
     }).catch((error) => {
         dispatch(loginFailure(error.response.data.message));
     })
@@ -41,19 +45,23 @@ export const logOut = async ({id, dispatch}: getSessionState) => {
     })
 }
 
-export const getAccount = async({username, accessToken, dispatch} : getAccountByUsername) => {
+export const getAccount = async({username, accessToken, refreshToken, dispatch} : getAccountByUsername) => {
     await request({
-        url: ACCOUNTS_BASE_URL + '/account/get-user-by-username/0/' + username,
+        url: ACCOUNTS_BASE_URL + '/get-user-by-username/0/' + username,
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
             'X-FI-V-DEVICE': 'DESKTOP',
-            'X-FI-V-PATH': 'account.get-account-by-username'
+            'X-FI-V-PATH': 'account.get-user-by-username'
         }
     }).then((response) => {
-        dispatch(startSession(response.data));
+        dispatch(startSession({
+            ...response.data,
+            accessToken,
+            refreshToken
+        }));
     }).catch((error) => {
         console.error(error);
     })

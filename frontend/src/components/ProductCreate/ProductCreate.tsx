@@ -3,7 +3,6 @@ import './ProductCreate.css';
 import {useNavigate} from "react-router-dom";
 import {createProduct} from "../../widgets/admin-product-create-widget/model/effects";
 import {useDispatch, useSelector} from "react-redux";
-import {sessionSelect} from "../../redux/core/session/selectors";
 import {
     getDownloadURL,
     ref as storageRef,
@@ -12,11 +11,12 @@ import {
 import {storage} from "../../util/firebase";
 import {getStores} from "../../widgets/admin-store-widget/model/effects";
 import {storesSelect} from "../../redux/core/stores/selectors";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 
 const ProductCreate: React.FC = () => {
     const navigate = useNavigate();
-    const accessToken = useSelector(sessionSelect.accessToken);
-    const id = useSelector(sessionSelect.id);
+    const accessToken = useSelector(adminSessionSelect.accessToken);
+    const id = useSelector(adminSessionSelect.id);
     const dispatch = useDispatch();
     const stores = useSelector(storesSelect.stores);
 

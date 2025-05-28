@@ -1,19 +1,29 @@
-import React, { useState } from "react";
-import {mockCartItems} from '../../widgets/cart-widget/mock/cartItem';
+import React, {useEffect, useState} from "react";
 import "./Cart.css";
+import {getCart, updateCart} from "../../widgets/cart-widget/model/effects";
+import {useDispatch, useSelector} from "react-redux";
+import {sessionSelect} from "../../redux/core/session/selectors";
+import {Cart} from "../../widgets/cart-widget/model/types";
+import {storeSelect} from "../../redux/core/store/selectors";
+import {useNavigate} from "react-router-dom";
+import {cartSelect} from "../../widgets/cart-widget/model/selectors";
 
-const Cart: React.FC = () => {
+const CartComponent: React.FC = () => {
     const [coupon, setCoupon] = useState("");
-    const [cartItems, setCartItems] = useState(mockCartItems);
+    const accessToken = useSelector(sessionSelect.accessToken);
+    const storeId = useSelector(storeSelect.id);
+    const store = useSelector(storeSelect.path);
+    const id = useSelector(sessionSelect.id);
+    const cartItems = useSelector(cartSelect.cartItems);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const handleQuantityChange = (id: number, quantity: number) => {
-        if(quantity === 0) {
-            setCartItems((prevCart) => prevCart.filter((item) => item.id !== id));
-        } else {
-            setCartItems((prevCart) =>
-                prevCart.map((item) => (item.id === id ? { ...item, quantity } : item))
-            );
-        }
+    useEffect(() => {
+        getCart({customerId: id, accessToken, dispatch});
+    }, [accessToken, id]);
+
+    const handleQuantityChange = (cartItem: Cart, newQuantity: number) => {
+        updateCart({storeId: storeId, quantity: newQuantity, productId: cartItem.productId, customerId: id, dispatch, accessToken});
     };
 
     const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -33,14 +43,14 @@ const Cart: React.FC = () => {
                 {cartItems.map((item) => (
                     <div key={item.id} className="cart-item">
                         <div className="cart-product">
-                            <img src={item.image} className="cart-product-image" />
+                            <img src={item.img} className="cart-product-image" />
                             <div className="cart-product-name">{item.name}</div>
                         </div>
                         <div className="cart-price">${item.price}</div>
                         <div className="cart-quantity">
                             <select
                                 value={item.quantity}
-                                onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
+                                onChange={(e) => handleQuantityChange(item, Number(e.target.value))}
                                 className="cart-quantity-select"
                             >
                                 {[0, 1, 2, 3, 4, 5].map((num) => (
@@ -85,11 +95,11 @@ const Cart: React.FC = () => {
                         <div className="cart-summary-label">Total:</div>
                         <div className="cart-summary-value">${subtotal}</div>
                     </div>
-                    <button className="cart-checkout-btn">Proceed to checkout</button>
+                    <button className="cart-checkout-btn" onClick={() => navigate(`/${store}/checkout`)}>Proceed to checkout</button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Cart;
+export default CartComponent;

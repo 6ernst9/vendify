@@ -7,10 +7,14 @@ import storesReducer from './core/stores/reducers';
 import adminStoreReducer from '../widgets/admin-store-page-widget/model/reducers';
 import userStoresReducer from '../widgets/admin-store-widget/model/reducers';
 import userProductsReducer from '../widgets/admin-products-widget/model/reducers'
+import adminOrderReducer from '../widgets/admin-orders-widget/model/reducers'
 import productsReducer from '../widgets/products-browse-widget/model/reducers';
+import cartReducer from '../widgets/cart-widget/model/reducers';
 const rootReducer = {
     stores: storesReducer,
     store: storeReducer,
+    cart: cartReducer,
+    adminOrders: adminOrderReducer,
     adminStore: adminStoreReducer,
     userStores: userStoresReducer,
     userProducts: userProductsReducer,

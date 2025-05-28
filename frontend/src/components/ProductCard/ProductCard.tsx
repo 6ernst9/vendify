@@ -9,16 +9,16 @@ import {storeSelect} from "../../redux/core/store/selectors";
 
 interface ProductProps {
     id: number;
-    title: string;
+    name: string;
     price: number;
     oldPrice?: number;
     stars: number;
     reviews: number;
-    img: string;
+    images: string[];
     sale?: number;
 }
 
-const ProductCard: React.FC<ProductProps> = ({title, price, oldPrice, stars, reviews, img, sale}) => {
+const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, reviews, images, sale}) => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
 
@@ -46,9 +46,9 @@ const ProductCard: React.FC<ProductProps> = ({title, price, oldPrice, stars, rev
 
 
     return (
-        <div className="product-card" onClick={() => navigate(`/${store}/product`)}>
+        <div className="product-card" onClick={() => navigate(`/${store}/product/${id}`)}>
             <div className="product-img-container">
-                <img src={img}/>
+                <img src={images[0]}/>
                 {sale && (
                     <div className="product-sale-container">
                         <p>-{sale}%</p>
@@ -58,7 +58,7 @@ const ProductCard: React.FC<ProductProps> = ({title, price, oldPrice, stars, rev
                     <Heart/>
                 </div>
             </div>
-            <h2>{truncateTitle(title)}</h2>
+            <h2>{truncateTitle(name)}</h2>
             <div className="product-card-price">
                 <p className={oldPrice? 'product-card-discounted-price' : 'product-card-normal-price' }>{price}$</p>
                 {oldPrice &&

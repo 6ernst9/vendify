@@ -5,7 +5,7 @@ import './styles.css';
 import CompanyPage from "../../components/CompanyPage/CompanyPage";
 import {getStore} from "./model/effects";
 import {useDispatch, useSelector} from "react-redux";
-import {sessionSelect} from "../../redux/core/session/selectors";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 
 const AdminStorePageWidget: React.FC = () => {
     const pathname = window.location.pathname;
@@ -13,7 +13,7 @@ const AdminStorePageWidget: React.FC = () => {
     const id = segments[segments.length - 1];
     
     const dispatch = useDispatch();
-    const accessToken = useSelector(sessionSelect.accessToken);
+    const accessToken = useSelector(adminSessionSelect.accessToken);
     
     useEffect(() => {
         getStore({id, accessToken, dispatch})

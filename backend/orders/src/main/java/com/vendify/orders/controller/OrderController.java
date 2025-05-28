@@ -1,6 +1,7 @@
 package com.vendify.orders.controller;
 
 import com.vendify.orders.model.Order;
+import com.vendify.orders.model.OrderDTO;
 import com.vendify.orders.model.OrderStatus;
 import com.vendify.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,9 @@ public class OrderController {
         return orderService.getOrdersByStore(storeId);
     }
 
-    @PostMapping("/create-order/{storeId}/{customerId}")
-    public Mono<Order> createOrder(@PathVariable String storeId,
-                                   @PathVariable long customerId) {
-        return orderService.createOrder(storeId, customerId);
+    @PostMapping("/create-order")
+    public Mono<Order> createOrder(@RequestBody OrderDTO order) {
+        return orderService.createOrder(order);
     }
 
     @PutMapping("/update-order/{orderId}/{status}")

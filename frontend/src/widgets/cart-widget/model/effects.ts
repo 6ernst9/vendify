@@ -1,0 +1,77 @@
+import {Cart, CartItem, GetCart, GetProduct} from "./types";
+import {request} from "../../../util/request";
+import {CART_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
+import {Product} from "../../../types/products";
+import {AddToCart} from "../../product-widget/model/types";
+import {setCartItems} from "./reducers";
+
+export const updateCart = async ({storeId, productId, customerId, quantity, dispatch, accessToken} :AddToCart) => {
+    await request({
+        url: CART_BASE_URL + '/update-cart',
+        method: 'PUT',
+        data: {storeId, productId, customerId, quantity},
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'orders.update-cart'
+        }
+    }).then((response) => {
+        console.log(response.data);
+        getCart({customerId, accessToken, dispatch});
+    }).catch((error) => {
+        console.error(error);
+    })
+}
+
+export const getCart = async ({customerId, accessToken, dispatch} :GetCart) => {
+    await request({
+        url: CART_BASE_URL + '/get-cart/' + customerId,
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'orders.get-cart'
+        }
+    }).then(async (response) => {
+        const cartItems: CartItem[] = response.data;
+        const fullCartItems: Cart[] = await Promise.all(
+            cartItems.map(async (cartItem) => {
+                const product = await getProduct({productId: cartItem.productId, accessToken});
+                return {
+                    id: cartItem.id,
+                    productId: cartItem.productId,
+                    quantity: cartItem.quantity,
+                    storeId: cartItem.storeId,
+                    name: product.name,
+                    img: product.images[0],
+                    price: product.price
+                }
+            }));
+        dispatch(setCartItems(fullCartItems));
+    }).catch((error) => {
+        console.error(error);
+    })
+}
+
+export const getProduct = async({productId, accessToken}: GetProduct): Promise<Product> => {
+    return await request({
+        url: PRODUCTS_BASE_URL + '/get-product-by-id/' + productId,
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-FI-V-IP': '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'products.get-product-by-id'
+        }
+    }).then((response) => {
+        return response.data;
+    }).catch((error) => {
+        console.error(error);
+        return null;
+    });
+}

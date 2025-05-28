@@ -7,16 +7,16 @@ import {storeSelect} from "../../redux/core/store/selectors";
 
 interface ProductProps {
     id: number;
-    title: string;
+    name: string;
     price: number;
     oldPrice?: number;
     stars: number;
     reviews: number;
-    img: string;
+    images: string[];
     sale: number;
 }
 
-const WishlistProduct: React.FC<ProductProps> = ({title, price, oldPrice, img, sale}) => {
+const WishlistProduct: React.FC<ProductProps> = ({name, price, oldPrice, images, sale}) => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
 
@@ -30,7 +30,7 @@ const WishlistProduct: React.FC<ProductProps> = ({title, price, oldPrice, img, s
     return (
         <div className="wishlist-product-card" onClick={() => navigate(`/${store}/product`)}>
             <div className="wishlist-product-img-container">
-                <img src={img}/>
+                <img src={images[0]}/>
                 <div className="wishlist-product-cart">
                     <p>Add To Cart</p>
                 </div>
@@ -43,7 +43,7 @@ const WishlistProduct: React.FC<ProductProps> = ({title, price, oldPrice, img, s
                     <Trash/>
                 </div>
             </div>
-            <h2>{truncateTitle(title)}</h2>
+            <h2>{truncateTitle(name)}</h2>
             <div className="wishlist-product-card-price">
                 <p className={oldPrice? 'wishlist-product-card-discounted-price' : 'wishlist-product-card-normal-price' }>{price}$</p>
                 {oldPrice &&

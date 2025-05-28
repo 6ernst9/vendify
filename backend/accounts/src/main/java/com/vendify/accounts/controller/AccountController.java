@@ -8,6 +8,7 @@ import com.vendify.accounts.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -59,6 +60,15 @@ public class AccountController {
                 .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for phone number " + phone)));
         log.info("Performed GET /get-user-by-phone-number call. Input: phone-number={}. Output={}", phone, user);
         return user;
+    }
+
+    @GetMapping("/get-users-by-store/{storeId}")
+    @WMTSecurityMapping(path = "get-users-by-store")
+    public Flux<User> getUsersByStore(@PathVariable String storeId){
+        log.info("Performing GET /get-users-by-store call. Input: store={}", storeId);
+        var users = accountService.getUsersByStore(storeId);
+        log.info("Performed GET /get-users-by-store call. Input: store={}. Output={}", storeId, users);
+        return users;
     }
 
     @PutMapping("/update-user")

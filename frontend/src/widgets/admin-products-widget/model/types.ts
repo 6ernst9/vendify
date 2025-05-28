@@ -20,5 +20,4 @@ export type Products = {
 export type getProductsProps = {
     store: string;
     accessToken: string;
-    dispatch: Dispatch;
 }

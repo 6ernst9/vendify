@@ -24,8 +24,8 @@ public class OrderService {
         return orderRepository.findByStoreId(storeId);
     }
 
-    public Mono<Order> createOrder(String storeId, long customerId) {
-        return cartRepository.findByCustomerIdAndStoreId(customerId, storeId)
+    public Mono<Order> createOrder(OrderDTO orderDTO) {
+        return cartRepository.findByCustomerIdAndStoreId(orderDTO.getCustomerId(), orderDTO.getStoreId())
                 .collectList()
                 .flatMap(cartItems -> {
                     if (cartItems.isEmpty()) return Mono.error(new RuntimeException("Cart is empty"));
@@ -34,7 +34,7 @@ public class OrderService {
                             .map(c -> new OrderItem(c.getProductId(), c.getQuantity()))
                             .toList();
 
-                    var order = new Order(storeId, customerId, items, OrderStatus.PLACED, LocalDateTime.now());
+                    var order = new Order(orderDTO.getStoreId(), orderDTO.getCustomerId(), orderDTO.getAddress(), orderDTO.getPrice(), items, OrderStatus.PLACED, LocalDateTime.now());
                     return orderRepository.save(order)
                             .doOnSuccess(o -> cartRepository.deleteAll(cartItems).subscribe());
                 });

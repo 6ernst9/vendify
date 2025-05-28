@@ -4,18 +4,17 @@ import Navbar from "../../components/Navbar/Navbar";
 import Products from "../../components/Products/Products";
 import './styles.css'
 import {useDispatch, useSelector} from "react-redux";
-import {sessionSelect} from "../../redux/core/session/selectors";
-import {adminStoreSelect} from "../admin-store-page-widget/model/selectors";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 import {getProducts} from "./model/effects";
 
 const AdminProductsWidget: React.FC = () => {
-    const accessToken = useSelector(sessionSelect.accessToken);
+    const accessToken = useSelector(adminSessionSelect.accessToken);
     const dispatch = useDispatch();
-    const store = useSelector(adminStoreSelect.id);
+    const id = useSelector(adminSessionSelect.id);
 
     useEffect(() => {
-        getProducts({store, dispatch, accessToken});
-    }, [accessToken, dispatch, store]);
+        getProducts({id, dispatch, accessToken});
+    }, [accessToken, dispatch, id]);
 
     return (
         <div className='admin-products-widget'>

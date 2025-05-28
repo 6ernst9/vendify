@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import './Products.css';
 import {ReactComponent as Search} from "../../assets/icons/search.svg";
-import image from '../../assets/img/img.png';
 import {useSelector} from "react-redux";
 import {userProductsSelect} from "../../widgets/admin-products-widget/model/selectors";
 import {useNavigate} from "react-router-dom";

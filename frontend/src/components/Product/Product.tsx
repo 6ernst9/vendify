@@ -8,9 +8,18 @@ import {ReactComponent as Refresh} from "../../assets/icons/refresh.svg";
 import {ReactComponent as Minus} from "../../assets/icons/minus.svg";
 import {ReactComponent as Plus} from "../../assets/icons/plus.svg";
 import './Product.css';
+import {useDispatch, useSelector} from "react-redux";
+import {sessionSelect} from "../../redux/core/session/selectors";
+import {storeSelect} from "../../redux/core/store/selectors";
+import {addToCart} from "../../widgets/product-widget/model/effects";
 
-const Product: React.FC<ProductDetails> = ({title, stars, price, reviews, description, img, category}) => {
+const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, description, images, category}) => {
     const [quantity, setQuantity] = useState(1);
+    const accessToken = useSelector(sessionSelect.accessToken);
+    const customerId = useSelector(sessionSelect.id);
+    const storeId = useSelector(storeSelect.id);
+    const dispatch = useDispatch();
+
     const calculateReviews = () => {
         const roundedStars: JSX.Element[] = [];
         const roundedReviews = Math.round(stars);
@@ -26,23 +35,27 @@ const Product: React.FC<ProductDetails> = ({title, stars, price, reviews, descri
         return roundedStars;
     }
 
+    const handleCart = () => {
+        addToCart({storeId, customerId, quantity, accessToken, dispatch, productId: id});
+    }
+
     return (
         <div className="product">
             <div className="product-category">
-                <p>{category} / {title}</p>
+                <p>{category} / {name}</p>
             </div>
             <div className="product-container">
                 <div className="product-images">
                     <div className="product-thumbnail-images">
-                        {[img, img, img, img].map((img, index) => (
+                        {images.map((img, index) => (
                             <img key={index} src={img} className="product-thumbnail"/>
                         ))}
                     </div>
-                    <img src={img} className="product-image"/>
+                    <img src={images[0]} className="product-image"/>
                 </div>
 
                 <div className="product-details">
-                    <h1 className="product-title">{title}</h1>
+                    <h1 className="product-title">{name}</h1>
                     <div className="product-rating">
                         <div className="product-stars">
                             {calculateReviews()}
@@ -64,7 +77,7 @@ const Product: React.FC<ProductDetails> = ({title, stars, price, reviews, descri
                             </button>
                         </div>
 
-                        <div className="product-buy-now">Buy Now</div>
+                        <div className="product-buy-now" onClick={handleCart}>Add to cart</div>
                         <div className="product-wishlist-container">
                              <Heart className="product-wishlist-icon"/>
                         </div>

@@ -29,7 +29,7 @@ const Customers: React.FC = () => {
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>No. orders</th>
+                    <th>Store</th>
                     <th>Last logged</th>
                 </tr>
                 </thead>
@@ -40,7 +40,7 @@ const Customers: React.FC = () => {
                         <td>{customer.id}</td>
                         <td>{customer.name}</td>
                         <td>{customer.email}</td>
-                        <td>{customer.orders}</td>
+                        <td>Exclusive</td>
                         <td><span className='badge'>{customer.lastLogged}</span></td>
                     </tr>
                 ))}

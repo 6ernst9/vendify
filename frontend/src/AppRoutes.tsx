@@ -26,6 +26,7 @@ import AdminProductCreateWidget from "./widgets/admin-product-create-widget/Admi
 import ProductsBrowseWidget from "./widgets/products-browse-widget/ProductsBrowseWidget";
 import LoginWidget from "./widgets/login-widget/LoginWidget";
 import SignUpWidget from "./widgets/sign-up-widget/SignUpWidget";
+import CheckoutWidget from "./widgets/checkout-widget/CheckoutWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -73,12 +74,16 @@ const AppRoutes = () => {
                     element: <HomeWidget />
                 },
                 {
-                    path: `/:path/product`,
+                    path: `/:path/product/:productId`,
                     element: <ProductWidget />
                 },
                 {
                     path: `/:path/cart`,
                     element: <CartWidget />
+                },
+                {
+                    path: `/:path/checkout`,
+                    element: <CheckoutWidget />
                 },
                 {
                     path: `/:path/wishlist`,
