@@ -1,15 +1,12 @@
 import React from "react";
 import './Customers.css';
 import {ReactComponent as Search} from "../../assets/icons/search.svg";
+import {useSelector} from "react-redux";
+import {adminCustomersSelect} from "../../widgets/admin-customers-widget/model/selectors";
 
-const customers = [
-    { id: '#1165', email: 'alekcrona@gmail.com', name: 'Alek Crona', orders: '2', lastLogged: '1min ago' },
-    { id: '#1164', email: 'skuvalis12@yahoo.com', name: 'Santos Kuvalis', orders: '3', lastLogged: '3h ago' },
-    { id: '#1163', email: 'she_braun@hotmail.com', name: 'Sheila Braun', orders: '16', lastLogged: '2w ago' },
-    { id: '#1162', email: 'akundingcandine1@gmail.com', name: 'Candice Ankunding', orders: '1', lastLogged: 'never' },
-    { id: '#1161', email: 'marviner@outlook.com', name: 'Eryn Marvin', orders: '0', lastLogged: '5d ago' },
-]
 const Customers: React.FC = () => {
+    const customers = useSelector(adminCustomersSelect.customers);
+
     return (
         <div className="customers-container">
             <div className="customers-header">
@@ -20,7 +17,7 @@ const Customers: React.FC = () => {
                     <Search/>
                     <input type="text" className="search-bar" placeholder="Search customers..."/>
                 </div>
-                <p>5322 customers</p>
+                <p>{customers.length} customers</p>
             </div>
             <table className="customers-table">
                 <thead>
@@ -37,10 +34,10 @@ const Customers: React.FC = () => {
                 {customers.map((customer) => (
                     <tr key={customer.id}>
                         <td><input type="checkbox"/></td>
-                        <td>{customer.id}</td>
-                        <td>{customer.name}</td>
+                        <td>#{customer.id}</td>
+                        <td>{customer.firstName} {customer.lastName}</td>
                         <td>{customer.email}</td>
-                        <td>Exclusive</td>
+                        <td>{customer.store}</td>
                         <td><span className='badge'>{customer.lastLogged}</span></td>
                     </tr>
                 ))}

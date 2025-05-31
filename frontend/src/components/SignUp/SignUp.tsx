@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
                     className="customer-signup-input"
                 />
                 <button className="customer-signup-button" onClick={handleSignUp}>Sign Up</button>
-                <p>Already have an account? Log in</p>
+                <a href={`/${store}/login`} className="customer-signup-forgot">Already have an account? Log in</a>
             </div>
         </div>
     );

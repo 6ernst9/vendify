@@ -16,7 +16,8 @@ public class ConnectionInitializer {
         initializer.setConnectionFactory(connectionFactory);
         var populator = new CompositeDatabasePopulator();
         populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("db/schema.sql")));
-        //populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("db/data.sql")));
+        populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("db/sales.sql")));
+        populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("db/data.sql")));
         initializer.setDatabasePopulator(populator);
         return initializer;
     }

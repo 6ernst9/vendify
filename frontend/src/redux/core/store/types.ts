@@ -24,6 +24,7 @@ export type StoreState = {
     name: string;
     logo: string;
     banner: string;
+    categories: string[];
     theme: Theme;
     contactLinks: ContactLinks;
 }

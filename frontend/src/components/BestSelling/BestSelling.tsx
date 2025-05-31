@@ -1,14 +1,15 @@
 import React from "react";
 import './BestSelling.css'
-import {products} from "../../widgets/home-widget/mock/products";
 import ProductSlider from "../ProductSlider/ProductSlider";
 import {useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
+import {homeProductsSelect} from "../../widgets/home-widget/model/selectors";
 
 const BestSelling: React.FC = () => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
+    const products = useSelector(homeProductsSelect.bestSelling);
 
     return (
         <div className="best-selling">

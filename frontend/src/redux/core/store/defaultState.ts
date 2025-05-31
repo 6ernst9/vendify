@@ -5,6 +5,7 @@ export const defaultStore: StoreState = {
     owner: 0,
     logo: '',
     banner: '',
+    categories: [],
     path: '',
     name: '',
     theme: {

@@ -78,9 +78,9 @@ export const getCustomerName = async({customerId, accessToken}: GetAccount): Pro
             'X-FI-V-PATH': 'account.get-user-by-id'
         }
     }).then((response) => {
-        return response.data.firstName + response.data.lastName;
+        return response.data.firstName + ' ' + response.data.lastName;
     }).catch((error) => {
         console.error(error);
-        return null;
+        return '';
     });
 }

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import './Deals.css';
+import {useNavigate} from "react-router-dom";
 
 const discounts = [
     { id: 1, name: "Spring Sale", code: "SPRING20", percentage: 20, productsAffected: 12 },
@@ -23,12 +24,13 @@ const tabs = [
 
 const Deals: React.FC = () => {
     const [activeTab, setActiveTab] = useState('all');
+    const navigate = useNavigate();
 
     return (
         <div className='deals-container'>
             <div className='deals-header'>
                 <h1>Deals</h1>
-                <div className="products-header-button">
+                <div className="products-header-button" onClick={() => navigate('/admin/deals/create')}>
                     Add
                 </div>
             </div>

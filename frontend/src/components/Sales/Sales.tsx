@@ -1,15 +1,15 @@
 import React from "react";
 import './Sales.css';
-import {products} from "../../widgets/home-widget/mock/products";
 import ProductSlider from "../ProductSlider/ProductSlider";
 import {useSelector} from "react-redux";
-import {RootState} from "../../redux/store";
 import {useNavigate} from "react-router-dom";
 import {storeSelect} from "../../redux/core/store/selectors";
+import {homeProductsSelect} from "../../widgets/home-widget/model/selectors";
 
 const Sales: React.FC = () => {
     const store = useSelector(storeSelect.path);
     const navigate = useNavigate();
+    const products = useSelector(homeProductsSelect.saleProducts);
 
     return (
         <div className="sales">

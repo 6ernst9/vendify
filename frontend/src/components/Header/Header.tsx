@@ -8,10 +8,12 @@ import {ReactComponent as User} from '../../assets/icons/user.svg';
 import './Header.css';
 import {useSelector} from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
+import {sessionSelect} from "../../redux/core/session/selectors";
 
 const Header: React.FC = () => {
     const store = useSelector(storeSelect.path);
     const name = useSelector(storeSelect.name);
+    const exists = useSelector(sessionSelect.exists);
 
     return (
         <div className="store-header">
@@ -28,7 +30,7 @@ const Header: React.FC = () => {
 
             <div className="store-header-account">
                 <input type="text" placeholder="Search..." className="store-header-search"/>
-                <Link to={`/${store}/account`} className="store-header-accounts">
+                <Link to={exists ? `/${store}/account` : `/${store}/login`} className={exists? "store-header-accounts-logged" : "store-header-accounts"}>
                     <User/>
                 </Link>
                 <Link to={`/${store}/wishlist`} className="store-header-accounts">

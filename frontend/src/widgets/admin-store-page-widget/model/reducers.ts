@@ -11,6 +11,7 @@ const storeSlice = createSlice({
             state.logo = action.payload.banner;
             state.banner = action.payload.banner;
             state.name = action.payload.name;
+            state.categories = action.payload.categories;
             state.path = action.payload.path;
             state.theme = action.payload.theme;
             state.contactLinks = action.payload.contactLinks;

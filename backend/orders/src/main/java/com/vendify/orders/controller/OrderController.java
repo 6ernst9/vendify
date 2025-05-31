@@ -27,6 +27,12 @@ public class OrderController {
         return orderService.getOrdersByStore(storeId);
     }
 
+    @GetMapping("/get-best-selling-orders/{storeId}/{limit}")
+    public Flux<Long> getOrdersByStore(@PathVariable String storeId,
+                                        @PathVariable int limit) {
+        return orderService.getTopSellingProductIds(storeId, limit);
+    }
+
     @PostMapping("/create-order")
     public Mono<Order> createOrder(@RequestBody OrderDTO order) {
         return orderService.createOrder(order);

@@ -1,10 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Customers from "../../components/Customers/Customers";
 import './styles.css';
+import {useDispatch, useSelector} from "react-redux";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
+import {getCustomers} from "./model/effects";
 
 const AdminCustomersWidget: React.FC = () => {
+    const id = useSelector(adminSessionSelect.id);
+    const accessToken = useSelector(adminSessionSelect.accessToken);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        getCustomers({id, dispatch, accessToken});
+    }, [accessToken, dispatch, id]);
+    
     return (
         <div className="admin-customers-widget">
             <Sidebar/>

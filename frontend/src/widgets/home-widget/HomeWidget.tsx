@@ -7,15 +7,27 @@ import BestSelling from "../../components/BestSelling/BestSelling";
 import NewArrivals from "../../components/NewArrival/NewArrivals";
 import Benefits from "../../components/Benefits/Benefits";
 import Footer from "../../components/Footer/Footer";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
+import {storeSelect} from "../../redux/core/store/selectors";
+import {sessionSelect} from "../../redux/core/session/selectors";
+import {getBestSellingProducts, getDiscountedProducts, getNewestProducts} from "./model/effects";
 
 const HomeWidget: React.FC = () => {
     const name = useSelector((state: RootState) => state.store.name);
+    const id = useSelector(storeSelect.id);
+    const accessToken = useSelector(sessionSelect.accessToken);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         document.title = `Home | ${name}`;
     }, [name]);
+
+    useEffect(() => {
+        getDiscountedProducts({storeId: id, accessToken, dispatch});
+        getNewestProducts({storeId: id, accessToken, dispatch});
+        getBestSellingProducts({storeId: id, accessToken, dispatch});
+    }, [accessToken, id]);
 
     return (
         <div className="home-widget">

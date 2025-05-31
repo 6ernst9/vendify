@@ -18,13 +18,14 @@ interface ProductProps {
     sale?: number;
 }
 
-const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, reviews, images, sale}) => {
+const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, reviews, images}) => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
+    const sale = calculateSalePercentage(price, oldPrice);
 
     const calculateReviews = () => {
         const roundedStars: JSX.Element[] = [];
-        const roundedReviews = Math.round(stars);
+        const roundedReviews = Math.round(reviews);
 
         for (let i = 1; i <= 5; i++) {
             if (i <= roundedReviews) {
@@ -44,14 +45,18 @@ const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, 
         return title.substring(0, 23) + '...';
     };
 
+    function calculateSalePercentage(price: number, oldPrice: number | undefined): number {
+        if (oldPrice === 0 || oldPrice === undefined) return 0;
+        return Math.round(((oldPrice - price) / oldPrice) * 100);
+    }
 
     return (
         <div className="product-card" onClick={() => navigate(`/${store}/product/${id}`)}>
             <div className="product-img-container">
                 <img src={images[0]}/>
-                {sale && (
+                {sale > 0 && (
                     <div className="product-sale-container">
-                        <p>-{sale}%</p>
+                            <p>-{sale}%</p>
                     </div>
                 )}
                 <div className="product-like">
@@ -60,8 +65,8 @@ const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, 
             </div>
             <h2>{truncateTitle(name)}</h2>
             <div className="product-card-price">
-                <p className={oldPrice? 'product-card-discounted-price' : 'product-card-normal-price' }>{price}$</p>
-                {oldPrice &&
+                <p className={sale > 0? 'product-card-discounted-price' : 'product-card-normal-price' }>{price}$</p>
+                {sale > 0 &&
                     <p className='product-card-normal-price discounted'>{oldPrice}$</p>
                 }
             </div>

@@ -48,6 +48,10 @@ public class OrderService {
                 });
     }
 
+    public Flux<Long> getTopSellingProductIds(String storeId, int limit) {
+        return orderRepository.findTopSellingProductIdsByStore(storeId, limit);
+    }
+
     public Mono<Void> deleteOrder(String orderId) {
         return orderRepository.deleteById(orderId);
     }

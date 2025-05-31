@@ -10,14 +10,22 @@ import userProductsReducer from '../widgets/admin-products-widget/model/reducers
 import adminOrderReducer from '../widgets/admin-orders-widget/model/reducers'
 import productsReducer from '../widgets/products-browse-widget/model/reducers';
 import cartReducer from '../widgets/cart-widget/model/reducers';
+import adminCustomersReducer from '../widgets/admin-customers-widget/model/reducers';
+import homeProductsReducer from '../widgets/home-widget/model/reducers';
+import userOrdersReducer from '../widgets/account-widget/model/reducers';
+import userWishlistReducer from '../widgets/wishlist-widget/model/reducers';
 const rootReducer = {
     stores: storesReducer,
     store: storeReducer,
     cart: cartReducer,
     adminOrders: adminOrderReducer,
     adminStore: adminStoreReducer,
+    adminCustomers: adminCustomersReducer,
+    homeProducts: homeProductsReducer,
     userStores: userStoresReducer,
     userProducts: userProductsReducer,
+    userWishlist: userWishlistReducer,
+    userOrders: userOrdersReducer,
     products: productsReducer,
     auth: authReducer,
     session: sessionReducer,

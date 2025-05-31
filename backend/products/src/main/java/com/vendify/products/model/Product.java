@@ -23,6 +23,7 @@ public class Product {
     private String category;
     private List<String> sizes;
     private double price;
+    private double oldPrice;
     private String description;
     private double reviews;
     private int stock;

@@ -59,7 +59,7 @@ const Orders: React.FC = () => {
                             <td className="order-id">#{order.id}</td>
                             <td>{order.createdAt}</td>
                             <td>{order.customer}</td>
-                            <td>{order.items.length} items</td>
+                            <td>{order.items.length} item{order.items.length > 1 ? 's' : ''}</td>
                             <td><span className='badge'>{order.status}</span></td>
                             <td className="total">${order.price}</td>
                         </tr>

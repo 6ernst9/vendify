@@ -2,7 +2,8 @@
     background-color: white;
     border-radius: 8px;
     cursor: pointer;
-    width: 300px;
+    flex: 0 0 250px;
+    width: 250px;
 }
 
 .product-img-container {

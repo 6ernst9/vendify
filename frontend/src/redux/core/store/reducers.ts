@@ -13,6 +13,7 @@ const storeSlice = createSlice({
             state.id = action.payload.id;
             state.name = action.payload.name;
             state.path = action.payload.path;
+            state.categories = action.payload.categories;
             state.theme = action.payload.theme;
             state.contactLinks = action.payload.contactLinks;
         }

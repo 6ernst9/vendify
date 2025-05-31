@@ -28,6 +28,16 @@ public class ProductController {
         return product;
     }
 
+    @GetMapping("/get-discounted-products/{storeId}")
+    public Flux<Product> getDiscountedProducts(@PathVariable String storeId) {
+        return productsService.getDiscountedProducts(storeId);
+    }
+
+    @GetMapping("/get-newest-products/{storeId}")
+    public Flux<Product> getNewestProducts(@PathVariable String storeId) {
+        return productsService.getNewestProducts(storeId);
+    }
+
     @GetMapping("/get-products-by-store/{store}")
     public Flux<Product> getProductsByStore(@PathVariable String store){
         log.info("Performing GET /get-products-by-store call. Input: store={}", store);

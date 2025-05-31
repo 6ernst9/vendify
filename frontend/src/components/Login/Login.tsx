@@ -45,7 +45,7 @@ const Login: React.FC = () => {
 
                 <div className="customer-login-actions">
                     <button className="customer-login-button" onClick={handleLogin}>Log In</button>
-                    <a href="#" className="customer-login-forgot">Forget Password?</a>
+                    <a href={`/${store}/sign-up`} className="customer-login-forgot">Don't have an account?</a>
                 </div>
             </div>
         </div>

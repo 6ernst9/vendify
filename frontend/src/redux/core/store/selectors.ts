@@ -5,6 +5,7 @@ export const storeSelect = ({
     path: (state: RootState) => state.store.path,
     name: (state: RootState) => state.store.name,
     theme: (state: RootState) => state.store.theme,
+    categories: (state: RootState) => state.store.categories,
     primaryColor: (state: RootState) => state.store.theme.primaryColor,
     backgroundColor: (state: RootState) => state.store.theme.backgroundColor,
     titleColor: (state: RootState) => state.store.theme.titleColor,

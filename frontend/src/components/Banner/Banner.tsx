@@ -1,20 +1,15 @@
 import React from "react";
 import image from '../../assets/img/banner.png';
 import './Banner.css';
+import {useSelector} from "react-redux";
+import {storeSelect} from "../../redux/core/store/selectors";
 
 const Banner: React.FC = () => {
+    const categories = useSelector(storeSelect.categories);
     return (
         <div className="banner">
             <div className="banner-categories">
-                <p>Women's Fashion</p>
-                <p>Men's Fashion</p>
-                <p>Electronics</p>
-                <p>Home & Lifestyle</p>
-                <p>Medicine</p>
-                <p>Sports & Outdoor</p>
-                <p>Baby's & Toys</p>
-                <p>Groceries & Pets</p>
-                <p>Health & Beauty</p>
+                {categories.map((category) => <p>{category}</p>)}
             </div>
             <div className="banner-img-container">
                 <img src={image} className="banner-img"/>

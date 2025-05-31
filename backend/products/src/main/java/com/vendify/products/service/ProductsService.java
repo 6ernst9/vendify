@@ -23,6 +23,14 @@ public class ProductsService {
         return productsRepository.findProductsByStore(store);
     }
 
+    public Flux<Product> getDiscountedProducts(String storeId) {
+        return productsRepository.findDiscountedProductsByStore(storeId);
+    }
+
+    public Flux<Product> getNewestProducts(String storeId) {
+        return productsRepository.findNewestProductsByStore(storeId);
+    }
+
     public Mono<Product> addProduct(ProductDto product) {
         return productsRepository.save(
                 new Product(

@@ -1,8 +1,12 @@
 import React from "react";
-import image from "../../assets/img/new_arrivals.png";
 import "./NewArrivals.css";
+import ProductSlider from "../ProductSlider/ProductSlider";
+import {useSelector} from "react-redux";
+import {homeProductsSelect} from "../../widgets/home-widget/model/selectors";
 
 const NewArrivals: React.FC = () => {
+    const products = useSelector(homeProductsSelect.newProducts);
+
     return (
         <div className="new-arrivals">
             <div className="new-arrivals-header">
@@ -12,9 +16,7 @@ const NewArrivals: React.FC = () => {
             <div className="new-arrivals-title">
                 <h2>New Arrivals</h2>
             </div>
-            <div className="new-arrivals-img-container">
-                <img src={image} className="new-arrivals-img"/>
-            </div>
+            <ProductSlider products={products} wishlist={false}/>
         </div>
     )
 }
