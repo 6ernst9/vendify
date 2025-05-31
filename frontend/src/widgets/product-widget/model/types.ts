@@ -9,6 +9,13 @@ export interface AddToCart {
     accessToken: string;
 }
 
+export interface AddToWishlist {
+    customerId: number;
+    productId: number;
+    storeId: string;
+    accessToken: string;
+}
+
 export interface GetProductById {
     productId: string;
     accessToken: string;

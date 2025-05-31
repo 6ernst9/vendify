@@ -34,8 +34,12 @@ public class CartService {
     public Mono<CartItem> updateQuantity(long customerId, String storeId, long productId, int quantity) {
         return cartRepository.findByCustomerIdAndStoreIdAndProductId(customerId, storeId, productId)
                 .flatMap(existing -> {
-                    existing.setQuantity(quantity);
-                    return cartRepository.save(existing);
+                    if(quantity == 0) {
+                        return cartRepository.deleteById(existing.getId()).then(Mono.just(existing));
+                    } else {
+                        existing.setQuantity(quantity);
+                        return cartRepository.save(existing);
+                    }
                 });
     }
 

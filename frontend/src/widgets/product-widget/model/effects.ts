@@ -1,6 +1,6 @@
-import {AddToCart, GetProductById} from "./types";
+import {AddToCart, AddToWishlist, GetProductById} from "./types";
 import {request} from "../../../util/request";
-import {CART_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
+import {CART_BASE_URL, PRODUCTS_BASE_URL, WISHLIST_BASE_URL} from "../../../util/constants";
 
 export const addToCart = async ({storeId, productId, customerId, quantity, accessToken} :AddToCart) => {
     await request({
@@ -13,6 +13,25 @@ export const addToCart = async ({storeId, productId, customerId, quantity, acces
             'X-FI-V-SITE-ID': 'COM',
             'X-FI-V-DEVICE': 'DESKTOP',
             'X-FI-V-PATH': 'orders.add-to-cart'
+        }
+    }).then((response) => {
+        console.log(response.data);
+    }).catch((error) => {
+        console.error(error);
+    })
+}
+
+export const addToWishlist = async ({storeId, productId, customerId, accessToken} :AddToWishlist) => {
+    await request({
+        url: WISHLIST_BASE_URL + '/add-to-wishlist',
+        method: 'POST',
+        data: {storeId, productId, customerId},
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'wishlist.add-to-wishlist'
         }
     }).then((response) => {
         console.log(response.data);

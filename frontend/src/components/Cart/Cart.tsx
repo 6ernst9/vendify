@@ -31,73 +31,86 @@ const CartComponent: React.FC = () => {
     return (
         <div className="cart-container">
             <h2 className="cart-category">Home / Cart</h2>
-
-            <div className="cart-table">
-                <div className="cart-header">
-                    <div className="cart-header-item">Product</div>
-                    <div className="cart-header-item">Price</div>
-                    <div className="cart-header-item">Quantity</div>
-                    <div className="cart-header-item">Subtotal</div>
+            {cartItems.length === 0 ? (
+                <div className="cart-empty-message">
+                    <h2>Your cart is currently empty</h2>
+                    <p>Browse our products and add items to your cart to see them here.</p>
+                    <button onClick={() => navigate(`/${store}/browse`)} className="browse-btn">
+                        Start Shopping
+                    </button>
                 </div>
-
-                {cartItems.map((item) => (
-                    <div key={item.id} className="cart-item">
-                        <div className="cart-product">
-                            <img src={item.img} className="cart-product-image" />
-                            <div className="cart-product-name">{item.name}</div>
+            ) : (
+                <>
+                    <div className="cart-table">
+                        <div className="cart-header">
+                            <div className="cart-header-item">Product</div>
+                            <div className="cart-header-item">Price</div>
+                            <div className="cart-header-item">Quantity</div>
+                            <div className="cart-header-item">Subtotal</div>
                         </div>
-                        <div className="cart-price">${item.price}</div>
-                        <div className="cart-quantity">
-                            <select
-                                value={item.quantity}
-                                onChange={(e) => handleQuantityChange(item, Number(e.target.value))}
-                                className="cart-quantity-select"
-                            >
-                                {[0, 1, 2, 3, 4, 5].map((num) => (
-                                    <option key={num} value={num}>
-                                        {num}
-                                    </option>
-                                ))}
-                            </select>
+
+                        {cartItems.map((item) => (
+                            <div key={item.id} className="cart-item">
+                                <div className="cart-product">
+                                    <img src={item.img} className="cart-product-image"/>
+                                    <div className="cart-product-name">{item.name}</div>
+                                </div>
+                                <div className="cart-price">${item.price}</div>
+                                <div className="cart-quantity">
+                                    <select
+                                        value={item.quantity}
+                                        onChange={(e) => handleQuantityChange(item, Number(e.target.value))}
+                                        className="cart-quantity-select"
+                                    >
+                                        {[0, 1, 2, 3, 4, 5].map((num) => (
+                                            <option key={num} value={num}>
+                                                {num}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="cart-subtotal">${item.price * item.quantity}</div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="cart-actions">
+                        <div className="cart-return-shop">Return To Shop</div>
+                        <div className="cart-update-cart">Update Cart</div>
+                    </div>
+                    <div className="cart-final">
+                        <div className="cart-coupon-section">
+                            <input
+                                type="text"
+                                placeholder="Coupon Code"
+                                value={coupon}
+                                onChange={(e) => setCoupon(e.target.value)}
+                                className="cart-coupon-input"
+                            />
+                            <div className="cart-apply-coupon">Apply Coupon</div>
                         </div>
-                        <div className="cart-subtotal">${item.price * item.quantity}</div>
-                    </div>
-                ))}
-            </div>
 
-            <div className="cart-actions">
-                <div className="cart-return-shop">Return To Shop</div>
-                <div className="cart-update-cart">Update Cart</div>
-            </div>
-            <div className="cart-final">
-                <div className="cart-coupon-section">
-                    <input
-                        type="text"
-                        placeholder="Coupon Code"
-                        value={coupon}
-                        onChange={(e) => setCoupon(e.target.value)}
-                        className="cart-coupon-input"
-                    />
-                    <div className="cart-apply-coupon">Apply Coupon</div>
-                </div>
+                        <div className="cart-summary">
+                            <h3>Cart Total</h3>
+                            <div className="cart-summary-item">
+                                <div className="cart-summary-label">Subtotal:</div>
+                                <div className="cart-summary-value">${subtotal}</div>
+                            </div>
+                            <div className="cart-summary-item">
+                                <div className="cart-summary-label">Shipping:</div>
+                                <div className="cart-summary-value">Free</div>
+                            </div>
+                            <div className="cart-summary-item">
+                                <div className="cart-summary-label">Total:</div>
+                                <div className="cart-summary-value">${subtotal}</div>
+                            </div>
+                            <button className="cart-checkout-btn" onClick={() => navigate(`/${store}/checkout`)}>Proceed
+                                to checkout
+                            </button>
+                        </div>
+                    </div>
+                </>
+            )}
 
-                <div className="cart-summary">
-                    <h3>Cart Total</h3>
-                    <div className="cart-summary-item">
-                        <div className="cart-summary-label">Subtotal:</div>
-                        <div className="cart-summary-value">${subtotal}</div>
-                    </div>
-                    <div className="cart-summary-item">
-                        <div className="cart-summary-label">Shipping:</div>
-                        <div className="cart-summary-value">Free</div>
-                    </div>
-                    <div className="cart-summary-item">
-                        <div className="cart-summary-label">Total:</div>
-                        <div className="cart-summary-value">${subtotal}</div>
-                    </div>
-                    <button className="cart-checkout-btn" onClick={() => navigate(`/${store}/checkout`)}>Proceed to checkout</button>
-                </div>
-            </div>
         </div>
     );
 };

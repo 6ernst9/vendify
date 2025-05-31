@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cad8fce5-0c6c-40f7-a123-3ac8de0a6a2b" name="Changes" comment="create the stores microservice">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/src/main/resources/db/data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/orders/src/main/java/com/vendify/orders/config/MongoDataConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/controller/SaleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/model/Sale.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/model/SaleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/repository/SaleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/service/SalesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/src/main/resources/db/data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products/src/main/resources/db/sales.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stores/src/main/java/com/vendify/stores/config/MongoDataConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/.idea/frontend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/DealsCreate/DealsCreate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/DealsCreate/DealsCreate.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-customers-widget/model/defaultState.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-customers-widget/model/effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-customers-widget/model/reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-customers-widget/model/selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-customers-widget/model/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-deals-create-widget/AdminDealsCreateWidget.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-deals-create-widget/model/effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-deals-create-widget/model/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-deals-create-widget/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/home-widget/model/defaultState.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/home-widget/model/effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/home-widget/model/reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/home-widget/model/selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/widgets/home-widget/model/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/src/main/java/com/vendify/accounts/config/ConnectionInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/src/main/java/com/vendify/accounts/config/ConnectionInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders/src/main/java/com/vendify/orders/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders/src/main/java/com/vendify/orders/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders/src/main/java/com/vendify/orders/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders/src/main/java/com/vendify/orders/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders/src/main/java/com/vendify/orders/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders/src/main/java/com/vendify/orders/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/config/ConnectionInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/config/ConnectionInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/repository/ProductsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/repository/ProductsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/service/ProductsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/products/src/main/java/com/vendify/products/service/ProductsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products/src/main/resources/db/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/products/src/main/resources/db/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/AppRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/AppRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Banner/Banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/BestSelling/BestSelling.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/BestSelling/BestSelling.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/BrowseProducts/BrowseProducts.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/BrowseProducts/BrowseProducts.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Customers/Customers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Customers/Customers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Deals/Deals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Deals/Deals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/NewArrival/NewArrivals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/NewArrival/NewArrivals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Orders/Orders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Orders/Orders.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Sales/Sales.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Sales/Sales.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SignUp/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SignUp/SignUp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SignUp/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SignUp/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/core/store/defaultState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/core/store/defaultState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/core/store/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/core/store/reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/core/store/selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/core/store/selectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/core/store/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/core/store/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/redux/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/redux/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/util/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/util/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/widgets/admin-customers-widget/AdminCustomersWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-customers-widget/AdminCustomersWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/widgets/admin-orders-widget/model/effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-orders-widget/model/effects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/widgets/admin-store-page-widget/model/defaultState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-store-page-widget/model/defaultState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/widgets/admin-store-page-widget/model/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/widgets/admin-store-page-widget/model/reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/widgets/home-widget/HomeWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/widgets/home-widget/HomeWidget.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ElmWorkspace">
+    <elmProjects />
+    <settings elmCompilerPath="" elmFormatPath="" elmTestPath="" isElmFormatOnSaveEnabled="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;6ernst9&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/6ernst9/vendify.git&quot;,
+    &quot;accountId&quot;: &quot;093aa99e-e7e9-42d2-9e1f-5bc7144eebb6&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2nHfkUk1h31yIRHsosCBuTnlllb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.AccountsApplication.executor": "Run",
+    "Spring Boot.OrdersApplication.executor": "Run",
+    "Spring Boot.ProductsApplication.executor": "Run",
+    "Spring Boot.StoresApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Users/rerns/Documents/vendify/backend/accounts/pom.xml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.elm.workspace.PROJECT_DISCOVERY": "true",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.vendify.stores.model" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.OrdersApplication">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AccountsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="accounts" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.vendify.accounts.AccountsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrdersApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="orders" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.vendify.orders.OrdersApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="products" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.vendify.products.ProductsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StoresApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="stores" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.vendify.stores.StoresApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cad8fce5-0c6c-40f7-a123-3ac8de0a6a2b" name="Changes" comment="" />
+      <created>1728635067386</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728635067386</updated>
+      <workItem from="1728635068640" duration="13123000" />
+      <workItem from="1729164820566" duration="720000" />
+      <workItem from="1730201252899" duration="283000" />
+      <workItem from="1730201569622" duration="90000" />
+      <workItem from="1730201882399" duration="82000" />
+      <workItem from="1732389892494" duration="71000" />
+      <workItem from="1744644028128" duration="1498000" />
+      <workItem from="1744998333105" duration="67000" />
+      <workItem from="1745009236105" duration="710000" />
+      <workItem from="1745263959477" duration="165000" />
+      <workItem from="1748597707720" duration="20092000" />
+    </task>
+    <task id="LOCAL-00001" summary="initialize repo">
+      <option name="closed" value="true" />
+      <created>1728635841312</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728635841312</updated>
+    </task>
+    <task id="LOCAL-00002" summary="initialize repo">
+      <option name="closed" value="true" />
+      <created>1728636165368</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1728636165368</updated>
+    </task>
+    <task id="LOCAL-00003" summary="start the work">
+      <option name="closed" value="true" />
+      <created>1728639494724</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728639494725</updated>
+    </task>
+    <task id="LOCAL-00004" summary="create the accounts microservice">
+      <option name="closed" value="true" />
+      <created>1728650170482</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1728650170482</updated>
+    </task>
+    <task id="LOCAL-00005" summary="create the stores microservice">
+      <option name="closed" value="true" />
+      <created>1728744710800</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1728744710801</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initialize repo" />
+    <MESSAGE value="start the work" />
+    <MESSAGE value="create the accounts microservice" />
+    <MESSAGE value="create the stores microservice" />
+    <option name="LAST_COMMIT_MESSAGE" value="create the stores microservice" />
+  </component>
+</project>

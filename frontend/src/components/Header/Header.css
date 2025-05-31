@@ -83,8 +83,18 @@
     text-decoration: none;
 }
 
+.store-header-accounts-logged {
+    text-decoration: none;
+}
+
 .store-header-accounts svg{
     height: 24px;
     width: 24px;
     color: black;
+}
+
+.store-header-accounts-logged svg{
+    height: 24px;
+    width: 24px;
+    color: var(--primary-color);
 }

@@ -1,0 +1,40 @@
+Index: src/widgets/home-widget/model/types.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/home-widget/model/types.ts b/src/widgets/home-widget/model/types.ts
+new file mode 100644
+--- /dev/null	(date 1748623271217)
++++ b/src/widgets/home-widget/model/types.ts	(date 1748623271217)
+@@ -0,0 +1,29 @@
++import {Dispatch} from "redux";
++
++export interface Product {
++    id: number;
++    name: string;
++    images: string[];
++    sale: number;
++    price: number;
++    oldPrice: number;
++    reviews: number;
++    stars: number;
++}
++
++export type Products = {
++    news: Product[];
++    sales: Product[];
++    bestSelling: Product[];
++}
++
++export type getProductsProps = {
++    storeId: string;
++    accessToken: string;
++    dispatch: Dispatch;
++}
++
++export type getProductProps = {
++    id: number;
++    accessToken: string;
++}
+\ No newline at end of file

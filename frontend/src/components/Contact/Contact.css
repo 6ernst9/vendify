@@ -99,7 +99,7 @@
     color: white;
     cursor: pointer;
     margin-left: 10px;
-    border-radius: 5px;
+    border-radius: var(--button-radius);
 }
 
 .contact-form input, .contact-form textarea {

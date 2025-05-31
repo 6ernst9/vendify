@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="35c92ea1-4772-4536-943a-e31c3101f59c" name="Changes" comment="admin pages">
+      <change afterPath="$PROJECT_DIR$/../backend/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/accounts/src/main/resources/db/data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/orders/src/main/java/com/vendify/orders/config/MongoDataConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/controller/SaleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/model/Sale.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/model/SaleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/repository/SaleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/service/SalesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/products/src/main/resources/db/data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/products/src/main/resources/db/sales.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/stores/src/main/java/com/vendify/stores/config/MongoDataConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/frontend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/DealsCreate/DealsCreate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/DealsCreate/DealsCreate.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-customers-widget/model/defaultState.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-customers-widget/model/effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-customers-widget/model/reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-customers-widget/model/selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-customers-widget/model/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-deals-create-widget/AdminDealsCreateWidget.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-deals-create-widget/model/effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-deals-create-widget/model/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/admin-deals-create-widget/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/home-widget/model/defaultState.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/home-widget/model/effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/home-widget/model/reducers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/home-widget/model/selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/widgets/home-widget/model/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/accounts/src/main/java/com/vendify/accounts/config/ConnectionInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/accounts/src/main/java/com/vendify/accounts/config/ConnectionInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/orders/src/main/java/com/vendify/orders/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/orders/src/main/java/com/vendify/orders/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/orders/src/main/java/com/vendify/orders/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/orders/src/main/java/com/vendify/orders/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/orders/src/main/java/com/vendify/orders/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/orders/src/main/java/com/vendify/orders/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/config/ConnectionInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/config/ConnectionInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/repository/ProductsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/repository/ProductsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/service/ProductsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/products/src/main/java/com/vendify/products/service/ProductsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/products/src/main/resources/db/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/products/src/main/resources/db/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppRoutes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BestSelling/BestSelling.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BestSelling/BestSelling.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BrowseProducts/BrowseProducts.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BrowseProducts/BrowseProducts.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Customers/Customers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Customers/Customers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Deals/Deals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Deals/Deals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NewArrival/NewArrivals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewArrival/NewArrivals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Orders/Orders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Orders/Orders.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProductCard/ProductCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductCard/ProductCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProductCard/ProductCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductCard/ProductCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Sales/Sales.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sales/Sales.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignUp/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp/SignUp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignUp/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignUp/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/core/store/defaultState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/core/store/defaultState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/core/store/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/core/store/reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/core/store/selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/core/store/selectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/core/store/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/core/store/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/admin-customers-widget/AdminCustomersWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/admin-customers-widget/AdminCustomersWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/admin-orders-widget/model/effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/admin-orders-widget/model/effects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/admin-store-page-widget/model/defaultState.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/admin-store-page-widget/model/defaultState.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/admin-store-page-widget/model/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/admin-store-page-widget/model/reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/home-widget/HomeWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/home-widget/HomeWidget.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ElmWorkspace">
+    <elmProjects />
+    <settings elmCompilerPath="" elmFormatPath="" elmTestPath="" isElmFormatOnSaveEnabled="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;6ernst9&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/6ernst9/vendify.git&quot;,
+    &quot;accountId&quot;: &quot;093aa99e-e7e9-42d2-9e1f-5bc7144eebb6&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2nZ6dSgtvJEt8MrGaA2WKLyQiOl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Users/rerns/Documents/vendify/frontend/src/widgets/wishlist-widget",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.elm.workspace.PROJECT_DISCOVERY": "true",
+    "ts.external.directory.path": "D:\\Users\\rerns\\Documents\\vendify\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\widgets\wishlist-widget" />
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\widgets\account-widget\model" />
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\widgets\home-widget\model" />
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\widgets\admin-orders-widget\model" />
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\widgets\checkout-widget" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\widgets\admin-sign-up-widget\model" />
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\util" />
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\components\Sales" />
+      <recent name="D:\Users\rerns\Documents\vendify\frontend\src\components\Banner" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="35c92ea1-4772-4536-943a-e31c3101f59c" name="Changes" comment="" />
+      <created>1729168343406</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729168343406</updated>
+      <workItem from="1729168345707" duration="219000" />
+      <workItem from="1729168588463" duration="957000" />
+      <workItem from="1729424629934" duration="1026000" />
+      <workItem from="1729426270138" duration="8154000" />
+      <workItem from="1731943177042" duration="6192000" />
+      <workItem from="1732389483705" duration="400000" />
+      <workItem from="1732390004387" duration="16000" />
+      <workItem from="1741430298916" duration="12956000" />
+      <workItem from="1741525591919" duration="4454000" />
+      <workItem from="1741674135486" duration="91000" />
+      <workItem from="1741961790329" duration="3020000" />
+      <workItem from="1742198472148" duration="322000" />
+      <workItem from="1742219900659" duration="4516000" />
+      <workItem from="1742391502882" duration="8891000" />
+      <workItem from="1742933668346" duration="2362000" />
+      <workItem from="1743440815390" duration="2398000" />
+      <workItem from="1744466935144" duration="7660000" />
+      <workItem from="1744643766961" duration="6244000" />
+      <workItem from="1744998408036" duration="7641000" />
+      <workItem from="1745064579189" duration="7937000" />
+      <workItem from="1745090314134" duration="27813000" />
+      <workItem from="1745264579481" duration="188000" />
+      <workItem from="1745338943699" duration="6787000" />
+      <workItem from="1745409448276" duration="19738000" />
+      <workItem from="1745683741862" duration="1234000" />
+      <workItem from="1745685025622" duration="127000" />
+      <workItem from="1745685167504" duration="52000" />
+      <workItem from="1745685302839" duration="1543000" />
+      <workItem from="1745748262005" duration="5826000" />
+      <workItem from="1746359307249" duration="3886000" />
+      <workItem from="1746469361135" duration="6500000" />
+      <workItem from="1746519015375" duration="1198000" />
+      <workItem from="1746877766754" duration="5392000" />
+      <workItem from="1747248486042" duration="4554000" />
+      <workItem from="1748087310261" duration="9805000" />
+      <workItem from="1748430014008" duration="11742000" />
+      <workItem from="1748597680523" duration="29727000" />
+    </task>
+    <task id="LOCAL-00001" summary="created frontend">
+      <option name="closed" value="true" />
+      <created>1729169314826</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729169314826</updated>
+    </task>
+    <task id="LOCAL-00002" summary="refined store homepage skeleton">
+      <option name="closed" value="true" />
+      <created>1729439264283</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729439264283</updated>
+    </task>
+    <task id="LOCAL-00003" summary="finished homepage and started product page">
+      <option name="closed" value="true" />
+      <created>1741463614393</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741463614393</updated>
+    </task>
+    <task id="LOCAL-00004" summary="finished homepage and started product page">
+      <option name="closed" value="true" />
+      <created>1741463709990</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741463709990</updated>
+    </task>
+    <task id="LOCAL-00005" summary="cart page and wishlist page">
+      <option name="closed" value="true" />
+      <created>1741536562644</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741536562644</updated>
+    </task>
+    <task id="LOCAL-00006" summary="finished rest of pages">
+      <option name="closed" value="true" />
+      <created>1742393761430</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742393761430</updated>
+    </task>
+    <task id="LOCAL-00007" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1744544780390</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744544780393</updated>
+    </task>
+    <task id="LOCAL-00008" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1744546973358</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744546973358</updated>
+    </task>
+    <task id="LOCAL-00009" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1745013867046</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745013867047</updated>
+    </task>
+    <task id="LOCAL-00010" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1745237704959</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745237704959</updated>
+    </task>
+    <task id="LOCAL-00011" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1745408587204</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745408587204</updated>
+    </task>
+    <task id="LOCAL-00012" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1745671063771</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745671063771</updated>
+    </task>
+    <task id="LOCAL-00013" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1746366091864</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1746366091865</updated>
+    </task>
+    <task id="LOCAL-00014" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1746476104131</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1746476104131</updated>
+    </task>
+    <task id="LOCAL-00015" summary="admin pages">
+      <option name="closed" value="true" />
+      <created>1748711513965</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748711513966</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="created frontend" />
+    <MESSAGE value="refined store homepage skeleton" />
+    <MESSAGE value="finished homepage and started product page" />
+    <MESSAGE value="cart page and wishlist page" />
+    <MESSAGE value="finished rest of pages" />
+    <MESSAGE value="admin pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="admin pages" />
+  </component>
+</project>

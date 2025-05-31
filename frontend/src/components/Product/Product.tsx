@@ -11,18 +11,22 @@ import './Product.css';
 import {useDispatch, useSelector} from "react-redux";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {storeSelect} from "../../redux/core/store/selectors";
-import {addToCart} from "../../widgets/product-widget/model/effects";
+import {addToCart, addToWishlist} from "../../widgets/product-widget/model/effects";
+import {useNavigate} from "react-router-dom";
 
 const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, description, images, category}) => {
     const [quantity, setQuantity] = useState(1);
     const accessToken = useSelector(sessionSelect.accessToken);
     const customerId = useSelector(sessionSelect.id);
+    const exists = useSelector(sessionSelect.exists);
     const storeId = useSelector(storeSelect.id);
+    const store = useSelector(storeSelect.path);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const calculateReviews = () => {
         const roundedStars: JSX.Element[] = [];
-        const roundedReviews = Math.round(stars);
+        const roundedReviews = Math.round(reviews);
 
         for (let i = 1; i <= 5; i++) {
             if (i <= roundedReviews) {
@@ -36,8 +40,22 @@ const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, des
     }
 
     const handleCart = () => {
-        addToCart({storeId, customerId, quantity, accessToken, dispatch, productId: id});
+        if(exists){
+            addToCart({storeId, customerId, quantity, accessToken, dispatch, productId: id});
+        } else {
+            navigate(`/${store}/login`);
+        }
     }
+
+    const handleWishlist = () => {
+        if(exists){
+            addToWishlist({storeId, customerId, accessToken, productId: id});
+        } else {
+            navigate(`/${store}/login`);
+        }
+    }
+
+    const handleRemo
 
     return (
         <div className="product">
@@ -78,7 +96,7 @@ const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, des
                         </div>
 
                         <div className="product-buy-now" onClick={handleCart}>Add to cart</div>
-                        <div className="product-wishlist-container">
+                        <div className="product-wishlist-container" onClick={handleWishlist}>
                              <Heart className="product-wishlist-icon"/>
                         </div>
                     </div>

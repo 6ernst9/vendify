@@ -1,17 +1,36 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './styles.css';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Wishlist from "../../components/Wishlist/Wishlist";
 import BestSelling from "../../components/BestSelling/BestSelling";
-import WishlistProducts from "../../components/WishlistProducts/WishlistProducts";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../redux/store";
+import {storeSelect} from "../../redux/core/store/selectors";
+import {sessionSelect} from "../../redux/core/session/selectors";
+import {getBestSellingProducts} from "../home-widget/model/effects";
+import {getWishlist} from "./model/effects";
 
 const WishlistWidget: React.FC = () => {
+    const name = useSelector((state: RootState) => state.store.name);
+    const id = useSelector(storeSelect.id);
+    const accessToken = useSelector(sessionSelect.accessToken);
+    const customerId = useSelector(sessionSelect.id);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        document.title = `Wishlist | ${name}`;
+    }, [name]);
+
+    useEffect(() => {
+        getBestSellingProducts({storeId: id, accessToken, dispatch});
+        getWishlist({customerId, accessToken, dispatch});
+    }, [accessToken, customerId, id]);
+
     return (
         <div className="wishlist-widget">
             <Header/>
             <Wishlist/>
-            <WishlistProducts/>
             <BestSelling/>
             <Footer/>
         </div>

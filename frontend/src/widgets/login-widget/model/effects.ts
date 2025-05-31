@@ -8,7 +8,7 @@ export const login = async ({username, password, store, dispatch}: LoginProps) =
     await request({
         url: AUTH_BASE_URL + '/login/' + store,
         method: 'POST',
-        data: {username, password},
+        data: {placeholder: username, password},
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
@@ -42,14 +42,14 @@ export const logOut = async ({id, dispatch}: getSessionState) => {
 
 export const getAccount = async({username, accessToken, store, dispatch} : getAccountByUsername) => {
     await request({
-        url: ACCOUNTS_BASE_URL + '/account/get-user-by-username/' + store + '/' + username,
+        url: ACCOUNTS_BASE_URL + '/get-user-by-username/' + store + '/' + username,
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
             'X-FI-V-DEVICE': 'DESKTOP',
-            'X-FI-V-PATH': 'account.get-account-by-username'
+            'X-FI-V-PATH': 'account.get-user-by-username'
         }
     }).then((response) => {
         dispatch(startSession(response.data));

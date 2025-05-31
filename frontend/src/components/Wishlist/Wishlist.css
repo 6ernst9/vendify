@@ -1,6 +1,6 @@
 .wishlist {
     width: calc(100vw - 80px);
-    margin: 20px 40px 0 40px;
+    margin: 0 40px;
     display: flex;
     height: auto;
     flex-direction: column;
@@ -37,4 +37,11 @@
 .wishlist-button:hover {
     background: black;
     color: white;
+}
+
+.wishlist-products {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
