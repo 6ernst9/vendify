@@ -97,6 +97,10 @@ const AppRoutes = () => {
                     element: <ProductsBrowseWidget/>
                 },
                 {
+                    path: `/:path/browse/:category`,
+                    element: <ProductsBrowseWidget/>
+                },
+                {
                     path: `/:path/contact`,
                     element: <ContactWidget />
                 },

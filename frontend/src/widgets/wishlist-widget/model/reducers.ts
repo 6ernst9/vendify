@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {defaultWishlist} from "./defaultState";
-import {WishlistProduct} from "./types";
+import {Product} from "../../../types/products";
 
 const wishlistSlice = createSlice({
     name: 'userWishlistState',
     initialState: defaultWishlist,
     reducers: {
-        setWishlistItems: (state, action: PayloadAction<WishlistProduct[]>) => {
+        setWishlistItems: (state, action: PayloadAction<Product[]>) => {
             state.wishlist = action.payload;
         },
     }

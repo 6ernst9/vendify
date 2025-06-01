@@ -12,7 +12,7 @@ export const addToCart = async ({storeId, productId, customerId, quantity, acces
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
             'X-FI-V-DEVICE': 'DESKTOP',
-            'X-FI-V-PATH': 'orders.add-to-cart'
+            'X-FI-V-PATH': 'cart.add-to-cart'
         }
     }).then((response) => {
         console.log(response.data);

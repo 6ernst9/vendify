@@ -1,4 +1,4 @@
-import {GetCart, GetProduct, WishlistDelProps, WishlistItemResponse, WishlistProduct} from "./types";
+import {GetCart, GetProduct, WishlistDelProps, WishlistItemResponse} from "./types";
 import {request} from "../../../util/request";
 import {PRODUCTS_BASE_URL, WISHLIST_BASE_URL} from "../../../util/constants";
 import {Product} from "../../../types/products";
@@ -17,13 +17,9 @@ export const getWishlist = async ({customerId, accessToken, dispatch} :GetCart) 
         }
     }).then(async (response) => {
         const wishlistItemResponses: WishlistItemResponse[] = response.data;
-        const wishlistItems: WishlistProduct[] = await Promise.all(
+        const wishlistItems: Product[] = await Promise.all(
             wishlistItemResponses.map(async (wishlistItem) => {
-                const item = await getProduct({productId: wishlistItem.productId, accessToken});
-                return {
-                    ...item,
-                    wishlistId: wishlistItem.id
-                }
+                return await getProduct({productId: wishlistItem.productId, accessToken});
             }));
         dispatch(setWishlistItems(wishlistItems));
     }).catch((error) => {
@@ -31,9 +27,9 @@ export const getWishlist = async ({customerId, accessToken, dispatch} :GetCart) 
     })
 }
 
-export const removeWishlist = async ({id, customerId, accessToken, dispatch} :WishlistDelProps) => {
+export const removeFromWishlist = async ({storeId, customerId, productId, accessToken, dispatch} :WishlistDelProps) => {
     await request({
-        url: WISHLIST_BASE_URL + '/remove-from-wishlist/' + id,
+        url: WISHLIST_BASE_URL + '/remove-from-wishlist/' + customerId + '/' + storeId + '/' + productId,
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + accessToken,

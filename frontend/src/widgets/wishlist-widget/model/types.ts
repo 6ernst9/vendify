@@ -1,4 +1,5 @@
 import {Dispatch} from "redux";
+import {Product} from "../../../types/products";
 
 export interface GetCart {
     customerId: number;
@@ -12,8 +13,9 @@ export interface GetProduct {
 }
 
 export interface WishlistDelProps {
-    id: string;
+    storeId: string;
     customerId: number;
+    productId: number;
     accessToken: string;
     dispatch: Dispatch;
 }
@@ -26,17 +28,5 @@ export interface WishlistItemResponse {
 }
 
 export interface WishlistType {
-    wishlist: WishlistProduct[];
-}
-
-export interface WishlistProduct {
-    id: number;
-    wishlistId: string;
-    name: string;
-    price: number;
-    oldPrice?: number;
-    stars: number;
-    reviews: number;
-    images: string[];
-    sale: number;
+    wishlist: Product[];
 }

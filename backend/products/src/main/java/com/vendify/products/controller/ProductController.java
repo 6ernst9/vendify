@@ -46,6 +46,15 @@ public class ProductController {
         return products;
     }
 
+    @GetMapping("/get-products-by-store-and-category/{store}/{category}")
+    public Flux<Product> getProductsByStoreAndCategory(@PathVariable String store,
+                                            @PathVariable String category) {
+        log.info("Performing GET /get-products-by-store-and-category call. Input: store={}, category={}", store, category);
+        var products = productsService.getAllStoreProductsByCategory(store, category);
+        log.info("Performed GET get-products-by-store-and-category call. Input: store={}, category={}. Output={}", store, category, products);
+        return products;
+    }
+
     @PostMapping("/add-product")
     public Mono<ResponseDto> addProduct(@RequestBody ProductDto productDto){
         log.info("Performing POST /add-product call. Input: product={}", productDto);

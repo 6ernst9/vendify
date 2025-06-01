@@ -55,8 +55,6 @@ const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, des
         }
     }
 
-    const handleRemo
-
     return (
         <div className="product">
             <div className="product-category">

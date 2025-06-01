@@ -23,6 +23,10 @@ public class ProductsService {
         return productsRepository.findProductsByStore(store);
     }
 
+    public Flux<Product> getAllStoreProductsByCategory(String store, String category) {
+        return productsRepository.findProductsByStoreAndCategory(store, category);
+    }
+
     public Flux<Product> getDiscountedProducts(String storeId) {
         return productsRepository.findDiscountedProductsByStore(storeId);
     }

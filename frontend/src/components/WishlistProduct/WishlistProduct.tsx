@@ -2,8 +2,10 @@ import React from "react";
 import './WishlistProduct.css';
 import {ReactComponent as Trash} from '../../assets/icons/trash.svg';
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
+import {sessionSelect} from "../../redux/core/session/selectors";
+import {removeFromWishlist} from "../../widgets/wishlist-widget/model/effects";
 
 interface ProductProps {
     id: number;
@@ -19,6 +21,10 @@ interface ProductProps {
 const WishlistProduct: React.FC<ProductProps> = ({id, name, price, oldPrice, images}) => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
+    const storeId = useSelector(storeSelect.id);
+    const customerId = useSelector(sessionSelect.id);
+    const accessToken = useSelector(sessionSelect.accessToken);
+    const dispatch = useDispatch();
     const sale = calculateSalePercentage(price, oldPrice);
 
     const truncateTitle = (title: string) => {
@@ -33,10 +39,14 @@ const WishlistProduct: React.FC<ProductProps> = ({id, name, price, oldPrice, ima
         return Math.round(((oldPrice - price) / oldPrice) * 100);
     }
 
+    const removeWishlist = () => {
+        removeFromWishlist({storeId, productId : id, customerId, accessToken, dispatch});
+    }
+
     return (
-        <div className="wishlist-product-card" onClick={() => navigate(`/${store}/product/${id}`)}>
+        <div className="wishlist-product-card">
             <div className="wishlist-product-img-container">
-                <img src={images[0]}/>
+                <img src={images[0]} onClick={() => navigate(`/${store}/product/${id}`)}/>
                 <div className="wishlist-product-cart">
                     <p>Add To Cart</p>
                 </div>
@@ -45,11 +55,11 @@ const WishlistProduct: React.FC<ProductProps> = ({id, name, price, oldPrice, ima
                         <p>-{sale}%</p>
                     </div>
                 )}
-                <div className="wishlist-product-delete">
+                <div className="wishlist-product-delete" onClick={removeWishlist}>
                     <Trash/>
                 </div>
             </div>
-            <h2>{truncateTitle(name)}</h2>
+            <h2 onClick={() => navigate(`/${store}/product/${id}`)}>{truncateTitle(name)}</h2>
             <div className="wishlist-product-card-price">
                 <p className={sale > 0? 'wishlist-product-card-discounted-price' : 'wishlist-product-card-normal-price' }>{price}$</p>
                 {sale > 0 &&

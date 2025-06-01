@@ -20,7 +20,7 @@ const WishlistWidget: React.FC = () => {
 
     useEffect(() => {
         document.title = `Wishlist | ${name}`;
-    }, [name]);
+        }, [name]);
 
     useEffect(() => {
         getBestSellingProducts({storeId: id, accessToken, dispatch});

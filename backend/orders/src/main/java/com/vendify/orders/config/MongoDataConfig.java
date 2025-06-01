@@ -1,9 +1,6 @@
 package com.vendify.orders.config;
 
-import com.vendify.orders.model.Address;
-import com.vendify.orders.model.Order;
-import com.vendify.orders.model.OrderItem;
-import com.vendify.orders.model.OrderStatus;
+import com.vendify.orders.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -35,6 +32,8 @@ public class MongoDataConfig implements CommandLineRunner {
                 89.99, List.of(new OrderItem(4L, 1)), OrderStatus.PLACED, LocalDateTime.now());
 
         var initFlow = mongoTemplate.dropCollection(Order.class)
+                .then(mongoTemplate.dropCollection(CartItem.class))
+                .then(mongoTemplate.dropCollection(WishlistItem.class))
                 .thenMany(mongoTemplate.insertAll(List.of(order1, order2, order3, order4)))
                 .then()
                 .onErrorResume(e -> {

@@ -20,4 +20,7 @@ public interface ProductsRepository extends ReactiveCrudRepository<Product, Long
 
     @Query("SELECT * FROM products WHERE store = :storeId ORDER BY id DESC LIMIT 6")
     Flux<Product> findNewestProductsByStore(String storeId);
+
+    @Query("SELECT * FROM products WHERE store = :store AND category = :category")
+    Flux<Product> findProductsByStoreAndCategory(String store, String category);
 }
