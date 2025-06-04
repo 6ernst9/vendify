@@ -4,6 +4,7 @@ import {continueSession, endSession, startSession} from "../../../redux/core/adm
 import {getAccountByUsername} from "../../admin-sign-up-widget/model/types";
 import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
 import {request} from "../../../util/request";
+import {getOrCreateSessionId} from "../../../util/session";
 
 export const login = async ({username, password, dispatch}: LoginProps) => {
     await request({
@@ -13,6 +14,7 @@ export const login = async ({username, password, dispatch}: LoginProps) => {
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-SESSION-ID': getOrCreateSessionId(),
             'X-FI-V-DEVICE': 'DESKTOP',
             'X-FI-V-PATH': 'auth.login'
         }

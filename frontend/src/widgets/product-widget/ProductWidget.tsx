@@ -14,6 +14,7 @@ import {defaultProduct} from "./model/default";
 
 const ProductWidget: React.FC = () => {
     const name = useSelector(storeSelect.name);
+    const storeId = useSelector(storeSelect.id);
     const accessToken = useSelector(sessionSelect.accessToken);
     const [product, setProduct] = useState<ProductDetails>(defaultProduct);
     const { productId } = useParams();
@@ -27,7 +28,7 @@ const ProductWidget: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        getProductById({productId: productId || '', accessToken}).then((response) => {
+        getProductById({productId: productId || '', storeId, accessToken}).then((response) => {
             setProduct(response);
             console.log(response);
         });

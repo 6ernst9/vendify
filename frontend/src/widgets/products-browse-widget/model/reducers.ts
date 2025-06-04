@@ -8,9 +8,13 @@ const productsSlice = createSlice({
     reducers: {
         setProducts: (state, action: PayloadAction<Product[]>) => {
             state.products = action.payload;
+            state.hasPreloaded = true;
         },
+        setPreloaded: (state, action: PayloadAction<boolean>) => {
+            state.hasPreloaded = action.payload;
+        }
     }
 });
 
-export const { setProducts } = productsSlice.actions;
+export const { setProducts, setPreloaded } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -33,6 +33,8 @@ export interface OrderItem {
 }
 
 export interface GetOrders {
+    id: number;
     storeId: string;
     accessToken: string;
+    dispatch: Dispatch;
 }

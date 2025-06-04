@@ -3,8 +3,10 @@ import {request} from "../../../util/request";
 import {CART_BASE_URL, ORDERS_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
 import {Product} from "../../../types/products";
 import {PlaceOrder} from "./types";
+import {updateActivity} from "../../../util/session";
 
 export const placeOrder = async ({customerId, storeId, price, address, accessToken}: PlaceOrder) => {
+    await updateActivity("checkout", storeId);
     await request({
         url: ORDERS_BASE_URL + '/create-order',
         method: 'POST',
@@ -22,7 +24,8 @@ export const placeOrder = async ({customerId, storeId, price, address, accessTok
         console.error(error);
     })
 }
-export const getCart = async ({customerId, accessToken} :GetCart) => {
+export const getCart = async ({customerId, storeId, accessToken} :GetCart) => {
+    await updateActivity("checkout", storeId);
     return await request({
         url: CART_BASE_URL + '/get-cart/' + customerId,
         method: 'GET',

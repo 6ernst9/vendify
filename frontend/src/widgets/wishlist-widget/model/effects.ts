@@ -3,8 +3,10 @@ import {request} from "../../../util/request";
 import {PRODUCTS_BASE_URL, WISHLIST_BASE_URL} from "../../../util/constants";
 import {Product} from "../../../types/products";
 import {setWishlistItems} from "./reducers";
+import {updateActivity} from "../../../util/session";
 
-export const getWishlist = async ({customerId, accessToken, dispatch} :GetCart) => {
+export const getWishlist = async ({customerId, storeId, accessToken, dispatch} :GetCart) => {
+    await updateActivity("wishlist", storeId);
     await request({
         url: WISHLIST_BASE_URL + '/get-wishlist/' + customerId,
         method: 'GET',
@@ -28,6 +30,7 @@ export const getWishlist = async ({customerId, accessToken, dispatch} :GetCart) 
 }
 
 export const removeFromWishlist = async ({storeId, customerId, productId, accessToken, dispatch} :WishlistDelProps) => {
+    await updateActivity("wishlist", storeId)
     await request({
         url: WISHLIST_BASE_URL + '/remove-from-wishlist/' + customerId + '/' + storeId + '/' + productId,
         method: 'DELETE',
@@ -40,7 +43,7 @@ export const removeFromWishlist = async ({storeId, customerId, productId, access
         }
     }).then((response) => {
         console.log(response.data);
-        getWishlist({customerId, accessToken, dispatch});
+        getWishlist({customerId, accessToken, storeId, dispatch});
     }).catch((error) => {
         console.error(error);
     });

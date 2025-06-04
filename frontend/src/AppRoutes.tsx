@@ -29,6 +29,7 @@ import SignUpWidget from "./widgets/sign-up-widget/SignUpWidget";
 import CheckoutWidget from "./widgets/checkout-widget/CheckoutWidget";
 import AdminDealsCreateWidget from "./widgets/admin-deals-create-widget/AdminDealsCreateWidget";
 import AccountWidget from "./widgets/account-widget/AccountWidget";
+import AdminAnalyticsWidget from "./widgets/admin-analytics-widget/AdminAnalyticsWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -53,6 +54,7 @@ const AppRoutes = () => {
             { path: "/sign-up", element: <AdminSignUpWidget /> },
             { path: "/admin", element: <AdminHomeWidget /> },
             { path: "/admin/home", element: <AdminHomeWidget /> },
+            { path: "/admin/analytics", element: <AdminAnalyticsWidget /> },
             { path: "/admin/company", element: <AdminStoreWidget /> },
             { path: "/admin/company/create", element: <AdminStoreCreateWidget /> },
             { path: "/admin/orders", element: <AdminOrdersWidget /> },

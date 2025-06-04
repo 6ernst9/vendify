@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,19 +16,37 @@ import java.time.LocalDateTime;
 public class Session {
     @Id
     private long id;
-    @NonNull
     private Long userId;
+    @NonNull
+    private String storeId;
+    @NonNull
+    private String sessionCookie;
     @NonNull
     private LocalDateTime lastActivity;
     @NonNull
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private String accessToken;
-    @NonNull
     private String refreshToken;
+    @NonNull
+    private List<String> pagesVisited;
 
-    public Session(@NonNull Long userId, @NonNull String accessToken, @NonNull String refreshToken) {
+    public Session(Long userId, @NonNull String storeId, @NonNull String sessionCookie, String accessToken, String refreshToken) {
+        this.userId = userId;
+        this.storeId = storeId;
+        this.sessionCookie = sessionCookie;
+        this.lastActivity = LocalDateTime.now();
+        this.startTime = LocalDateTime.now();
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.userId = userId;
+        this.pagesVisited = new ArrayList<>();
+    }
+
+    public Session(@NonNull String storeId, @NonNull String sessionCookie, List<String> pagesVisited) {
+        this.storeId = storeId;
+        this.sessionCookie = sessionCookie;
         this.lastActivity = LocalDateTime.now();
+        this.startTime = LocalDateTime.now();
+        this.pagesVisited = pagesVisited;
     }
 }

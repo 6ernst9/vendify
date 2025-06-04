@@ -11,12 +11,13 @@ import './styles.css';
 const AccountWidget: React.FC = () => {
     const dispatch = useDispatch();
     const name = useSelector(storeSelect.name);
+    const storeId = useSelector(storeSelect.id);
     const accessToken = useSelector(sessionSelect.accessToken);
     const id = useSelector(sessionSelect.id);
 
     useEffect(() => {
-        getOrdersByCustomer({id, accessToken, dispatch});
-    }, [accessToken, dispatch, id]);
+        getOrdersByCustomer({id, storeId, accessToken, dispatch});
+    }, [accessToken, storeId, dispatch, id]);
 
     useEffect(() => {
         document.title = `Account | ${name}`;

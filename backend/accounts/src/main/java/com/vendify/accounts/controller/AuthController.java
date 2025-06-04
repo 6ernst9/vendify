@@ -23,12 +23,13 @@ public class AuthController {
     @PostMapping("/login/{storeId}")
     @WMTSecurityMapping(path = "login", tokenEnabled = false)
     public Mono<LoginResponse> login(@PathVariable String storeId,
+                                     @RequestHeader("X-FI-V-SESSION-ID") String sessionId,
                                      @RequestBody LoginDto loginDto) {
         var placeholder = loginDto.placeholder();
         var password = loginDto.password();
         log.info("Performing POST /login request. Input: placeholder={}, password={}", placeholder, password);
 
-        return authService.login(storeId, placeholder, password).map(response -> {
+        return authService.login(storeId, sessionId, placeholder, password).map(response -> {
             log.info("Performed POST /login request. Input: placeholder={}, password={}. Output: id={}", placeholder, password, response.id());
             return response;
         });
@@ -36,10 +37,11 @@ public class AuthController {
 
     @PostMapping("/register")
     @WMTSecurityMapping(path = "register", tokenEnabled = false)
-    public Mono<LoginResponse> register(@RequestBody UserDto userDto) {
+    public Mono<LoginResponse> register(@RequestBody UserDto userDto,
+                                        @RequestHeader("X-FI-V-SESSION-ID") String sessionId) {
         log.info("Performing POST /register request. Input: user={}", userDto);
 
-        return authService.register(userDto).map(response -> {
+        return authService.register(sessionId, userDto).map(response -> {
             log.info("Performed POST /register request. Input: user={}. Output: id={}", userDto, response.id());
             return response;
         });
@@ -54,6 +56,19 @@ public class AuthController {
             log.info("Performed POST /refresh request.");
             return response;
         });
+    }
+
+    @PutMapping("/update-activity/{sessionId}/{store}/{path}")
+    @WMTSecurityMapping(path = "update-activity", tokenEnabled = false)
+    public Mono<String> updateActivity(@PathVariable String sessionId,
+                                       @PathVariable String store,
+                                       @PathVariable String path) {
+        log.info("Performing PATCH /update-activity request.");
+
+        return authService.updateActivity(sessionId, store,path).then(Mono.fromCallable(() -> {
+            log.info("Performed PATCH /update-activity request.");
+            return "Session updated successfully";
+        }));
     }
 
     @PostMapping("/introspect")

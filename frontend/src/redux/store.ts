@@ -14,6 +14,8 @@ import adminCustomersReducer from '../widgets/admin-customers-widget/model/reduc
 import homeProductsReducer from '../widgets/home-widget/model/reducers';
 import userOrdersReducer from '../widgets/account-widget/model/reducers';
 import userWishlistReducer from '../widgets/wishlist-widget/model/reducers';
+import adminHomeReducer from '../widgets/admin-home-widget/model/reducers';
+
 const rootReducer = {
     stores: storesReducer,
     store: storeReducer,
@@ -28,6 +30,7 @@ const rootReducer = {
     userOrders: userOrdersReducer,
     products: productsReducer,
     auth: authReducer,
+    adminHome: adminHomeReducer,
     session: sessionReducer,
     adminSession: adminSessionReducer
 }

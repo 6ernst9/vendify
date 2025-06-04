@@ -3,6 +3,7 @@ import {startSession} from "../../../redux/core/adminSession/reducers";
 import {registrationFailure, registrationSuccess} from "../../admin-login-widget/model/reducers";
 import {request} from "../../../util/request";
 import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
+import {getOrCreateSessionId} from "../../../util/session";
 
 export const register = async ({email, username, password, firstName, lastName, phoneNumber, dispatch }: RegisterProps) => {
     await request({
@@ -12,6 +13,7 @@ export const register = async ({email, username, password, firstName, lastName, 
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-SESSION-ID': getOrCreateSessionId(),
             'X-FI-V-DEVICE': 'DESKTOP',
             'X-FI-V-PATH': 'auth.register'
         }

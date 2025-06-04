@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {Product} from "../../../types/products";
 
 export interface GetCart {
+    storeId: string;
     customerId: number;
     accessToken: string;
     dispatch: Dispatch;

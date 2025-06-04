@@ -4,8 +4,10 @@ import {CART_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
 import {Product} from "../../../types/products";
 import {AddToCart} from "../../product-widget/model/types";
 import {setCartItems} from "./reducers";
+import {updateActivity} from "../../../util/session";
 
 export const updateCart = async ({storeId, productId, customerId, quantity, dispatch, accessToken} :AddToCart) => {
+    await updateActivity("cart", storeId);
     await request({
         url: CART_BASE_URL + '/update-cart',
         method: 'PUT',
@@ -19,13 +21,14 @@ export const updateCart = async ({storeId, productId, customerId, quantity, disp
         }
     }).then((response) => {
         console.log(response.data);
-        getCart({customerId, accessToken, dispatch});
+        getCart({customerId, storeId, accessToken, dispatch});
     }).catch((error) => {
         console.error(error);
     })
 }
 
-export const getCart = async ({customerId, accessToken, dispatch} :GetCart) => {
+export const getCart = async ({customerId, storeId, accessToken, dispatch} :GetCart) => {
+    await updateActivity("cart", storeId);
     await request({
         url: CART_BASE_URL + '/get-cart/' + customerId,
         method: 'GET',

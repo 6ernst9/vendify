@@ -1,9 +1,11 @@
 import {request} from "../../../util/request";
 import {ORDERS_BASE_URL} from "../../../util/constants";
 import {setOrderItems} from "./reducers";
-import {getStoresProps} from "../../admin-store-widget/model/types";
+import {updateActivity} from "../../../util/session";
+import {GetOrders} from "./types";
 
-export const getOrdersByCustomer = async ({id, dispatch, accessToken} :getStoresProps) => {
+export const getOrdersByCustomer = async ({id, storeId, dispatch, accessToken} :GetOrders) => {
+    await updateActivity("account", storeId);
     await request({
         url: ORDERS_BASE_URL + '/get-orders/' + id,
         method: 'GET',

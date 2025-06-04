@@ -27,6 +27,7 @@ public class ConnectionInitializer {
         initializer.setConnectionFactory(connectionFactory);
         var populator = new CompositeDatabasePopulator();
         populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("db/session.sql")));
+        populator.addPopulators(new ResourceDatabasePopulator(new ClassPathResource("db/session-data.sql")));
         initializer.setDatabasePopulator(populator);
         return initializer;
     }

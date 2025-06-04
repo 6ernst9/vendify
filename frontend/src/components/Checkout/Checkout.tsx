@@ -31,7 +31,7 @@ const Checkout: React.FC = () => {
     const [couponCode, setCouponCode] = useState('');
 
     useEffect(() => {
-        getCart({customerId: id, accessToken, dispatch}).then((response) => setCartItems(response));
+        getCart({customerId: id, storeId, accessToken, dispatch}).then((response) => setCartItems(response));
     }, [accessToken, id]);
 
     const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value);

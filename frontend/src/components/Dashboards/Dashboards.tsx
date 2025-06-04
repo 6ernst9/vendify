@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './Dashboards.css';
 import {ReactComponent as Up} from "../../assets/icons/arrow-up-right.svg";
 import {ReactComponent as Down} from "../../assets/icons/arrow-down-right.svg";
@@ -12,6 +12,11 @@ import {
     Area,
     AreaChart, YAxis, XAxis, CartesianGrid
 } from "recharts";
+import {useDispatch, useSelector} from "react-redux";
+import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
+import {adminHomeSelect} from "../../widgets/admin-home-widget/model/selectors";
+import {getSessionCount, getTotalSessions} from "../../widgets/admin-home-widget/model/effects";
+import {adminStoreSelect} from "../../widgets/admin-store-page-widget/model/selectors";
 
 const data = [
     {label: '12AM', value: 50},
@@ -24,12 +29,25 @@ const data = [
 ];
 
 const Dashboards: React.FC = () => {
+    const name = useSelector(adminSessionSelect.firstName);
+    const accessToken = useSelector(adminSessionSelect.accessToken);
+    const storeId = useSelector(adminStoreSelect.id);
+    const dispatch = useDispatch();
+
+    const sessionPerHour = useSelector(adminHomeSelect.sessionCount);
+    const totalSessions = useSelector(adminHomeSelect.totalSessions);
+
+    useEffect(() => {
+        getSessionCount({accessToken, storeId, dispatch});
+        getTotalSessions({accessToken, storeId, dispatch});
+    }, [accessToken, storeId]);
+
     return (
         <div className="dashboard">
             <div className="dashboard-container">
                 <div className='dashboard-header'>
                     <h1>Overview</h1>
-                    <p>Welcome back, Antonio! Here’s a quick look at how your store is performing today.</p>
+                    <p>Welcome back, {name}! Here’s a quick look at how your store is performing today.</p>
                 </div>
                 <div className="dashboard-widgets">
                     <h2>Today's summary</h2>
@@ -37,14 +55,14 @@ const Dashboards: React.FC = () => {
                         <div className="dashboard-stat-card">
                             <p className="dashboard-stat-label">Total Sessions</p>
                             <div className="dashboard-stat-value-container">
-                                <p className="dashboard-stat-value">1,821</p>
+                                <p className="dashboard-stat-value">{totalSessions}</p>
                                 <div className="dashboard-stat-increase">
                                     <Up/>
                                     <p>1%</p>
                                 </div>
                             </div>
                             <ResponsiveContainer width="100%" height={200}>
-                                <AreaChart data={data}>
+                                <AreaChart data={sessionPerHour}>
                                     <defs>
                                         <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
                                             <stop offset="0%" stopColor="#1255cb" stopOpacity={0.4}/>

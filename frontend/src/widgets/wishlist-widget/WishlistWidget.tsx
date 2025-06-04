@@ -24,7 +24,7 @@ const WishlistWidget: React.FC = () => {
 
     useEffect(() => {
         getBestSellingProducts({storeId: id, accessToken, dispatch});
-        getWishlist({customerId, accessToken, dispatch});
+        getWishlist({customerId, storeId: id, accessToken, dispatch});
     }, [accessToken, customerId, id]);
 
     return (

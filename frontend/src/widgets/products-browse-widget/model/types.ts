@@ -15,6 +15,7 @@ export type Product = {
 
 export type Products = {
     products: Product[];
+    hasPreloaded: boolean;
 }
 
 export type getProductsProps = {

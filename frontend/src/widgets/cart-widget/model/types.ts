@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 
 export interface GetCart {
+    storeId: string;
     customerId: number;
     accessToken: string;
     dispatch: Dispatch;

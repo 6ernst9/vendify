@@ -19,7 +19,7 @@ const CartComponent: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getCart({customerId: id, accessToken, dispatch});
+        getCart({customerId: id,storeId, accessToken, dispatch});
     }, [accessToken, id]);
 
     const handleQuantityChange = (cartItem: Cart, newQuantity: number) => {

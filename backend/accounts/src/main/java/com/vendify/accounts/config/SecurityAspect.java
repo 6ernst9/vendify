@@ -1,7 +1,6 @@
 package com.vendify.accounts.config;
 
 import com.vendify.accounts.config.annotations.WMTSecurityMapping;
-import com.vendify.accounts.repository.SessionRepository;
 import com.vendify.accounts.service.JwtGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,15 +11,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import com.vendify.accounts.exceptions.SecurityException;
 
-import java.time.LocalDateTime;
-
 @Slf4j
 @Aspect
 @Component
 @RequiredArgsConstructor
 public class SecurityAspect {
     private final JwtGenerator jwtGenerator;
-    private final SessionRepository sessionRepository;
 
     @Before("@annotation(mapping)")
     public void securityFilterChain(WMTSecurityMapping mapping){
@@ -66,12 +62,5 @@ public class SecurityAspect {
         if(!jwtGenerator.validateToken(token)) {
             throw new SecurityException("Invalid token", "Token not matching claims");
         }
-
-        var sessionId = jwtGenerator.getSessionFromToken(token);
-        sessionRepository.findById(sessionId).flatMap(session -> {
-            session.setLastActivity(LocalDateTime.now());
-            log.info("Saving new session {}", session);
-            return sessionRepository.save(session);
-        });
     }
 }

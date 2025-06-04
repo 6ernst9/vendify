@@ -3,8 +3,10 @@ import {endSession, startSession} from "../../../redux/core/session/reducers";
 import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
 import {request} from "../../../util/request";
 import {loginFailure, loginSuccess, logout} from "../../admin-login-widget/model/reducers";
+import {getOrCreateSessionId, updateActivity} from "../../../util/session";
 
 export const login = async ({username, password, store, dispatch}: LoginProps) => {
+    await updateActivity("login", store);
     await request({
         url: AUTH_BASE_URL + '/login/' + store,
         method: 'POST',
@@ -12,6 +14,7 @@ export const login = async ({username, password, store, dispatch}: LoginProps) =
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-SESSION-ID': getOrCreateSessionId(),
             'X-FI-V-DEVICE': 'DESKTOP',
             'X-FI-V-PATH': 'auth.login'
         }
@@ -24,6 +27,7 @@ export const login = async ({username, password, store, dispatch}: LoginProps) =
 }
 
 export const logOut = async ({id, dispatch}: getSessionState) => {
+    //await updateActivity("logout", );
     await request({
         url: AUTH_BASE_URL + '/logout',
         method: 'POST',

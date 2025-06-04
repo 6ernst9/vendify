@@ -1,8 +1,10 @@
 import {AddToCart, AddToWishlist, GetProductById} from "./types";
 import {request} from "../../../util/request";
 import {CART_BASE_URL, PRODUCTS_BASE_URL, WISHLIST_BASE_URL} from "../../../util/constants";
+import {updateActivity} from "../../../util/session";
 
 export const addToCart = async ({storeId, productId, customerId, quantity, accessToken} :AddToCart) => {
+    await updateActivity("product:" + productId, storeId);
     await request({
         url: CART_BASE_URL + '/add-to-cart',
         method: 'POST',
@@ -22,6 +24,7 @@ export const addToCart = async ({storeId, productId, customerId, quantity, acces
 }
 
 export const addToWishlist = async ({storeId, productId, customerId, accessToken} :AddToWishlist) => {
+    await updateActivity("product:" + productId, storeId);
     await request({
         url: WISHLIST_BASE_URL + '/add-to-wishlist',
         method: 'POST',
@@ -40,7 +43,8 @@ export const addToWishlist = async ({storeId, productId, customerId, accessToken
     })
 }
 
-export const getProductById = async ({ productId, accessToken }: GetProductById) => {
+export const getProductById = async ({ productId, storeId, accessToken }: GetProductById) => {
+    await updateActivity("product:" + productId, storeId)
     try {
         const response = await request({
             url: `${PRODUCTS_BASE_URL}/get-product-by-id/${productId}`,

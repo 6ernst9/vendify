@@ -15,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -23,7 +26,7 @@ public class AuthService {
     private final SessionRepository sessionRepository;
     private final JwtGenerator jwtGenerator;
 
-    public Mono<LoginResponse> login(String storeId, String placeHolder, String password) {
+    public Mono<LoginResponse> login(String storeId, String sessionId, String placeHolder, String password) {
         Mono<User> userMono;
         if(ValidationUtils.isEmail(placeHolder)) {
             userMono = accountService.getUserByEmail(storeId, placeHolder)
@@ -41,17 +44,18 @@ public class AuthService {
                 return Mono.error(new InvalidCredentials("Invalid password", "Account's password doesn't match"));
             }
 
-            return sessionRepository.save(new Session(user.getId(), "", "")).flatMap(session -> {
+            return sessionRepository.save(new Session(user.getId(), storeId, sessionId, "", "")).flatMap(session -> {
                 var accessToken = jwtGenerator.generateAccessToken(user.getUsername(), session.getId());
                 var refreshToken = jwtGenerator.generateRefreshToken();
 
                 session.setAccessToken(accessToken);
+                session.setRefreshToken(refreshToken);
                 return sessionRepository.save(session).then(Mono.just(new LoginResponse(user.getId(), accessToken, refreshToken)));
             });
         });
     }
 
-    public Mono<LoginResponse> register(UserDto userDto) {
+    public Mono<LoginResponse> register(String sessionId, UserDto userDto) {
         var emailUser = accountService.getUserByEmail(userDto.getStoreId(), userDto.getEmail());
         var usernameUser = accountService.getUserByUsername(userDto.getStoreId(), userDto.getUsername());
         var phoneNumberUser = accountService.getUserByPhoneNumber(userDto.getStoreId(), userDto.getPhoneNumber());
@@ -71,11 +75,12 @@ public class AuthService {
                 return Mono.error(new UserConflictException("Invalid phone number", "User with phone number already exists"));
             }
             return Mono.empty();
-        })).then(accountService.addUser(userDto).flatMap(user -> sessionRepository.save(new Session(user.getId(), "", "")).flatMap(session -> {
+        })).then(accountService.addUser(userDto).flatMap(user -> sessionRepository.save(new Session(user.getId(), user.getStoreId(), sessionId, "", "")).flatMap(session -> {
             var accessToken = jwtGenerator.generateAccessToken(user.getUsername(), session.getId());
             var refreshToken = jwtGenerator.generateRefreshToken();
 
             session.setAccessToken(accessToken);
+            session.setRefreshToken(refreshToken);
             return sessionRepository.save(session).then(Mono.just(new LoginResponse(user.getId(), accessToken, refreshToken)));
         })));
     }
@@ -99,6 +104,25 @@ public class AuthService {
 
     public Mono<Claims> introspect(String accessToken) {
         return Mono.just(jwtGenerator.getAllClaimsFromAccessToken(accessToken));
+    }
+
+    public Mono<Void> updateActivity(String sessionId, String store, String path) {
+        return sessionRepository.findLatestByUser(sessionId).flatMap(session -> {
+            if(session.getLastActivity().isAfter(LocalDateTime.now().minusMinutes(30))) {
+                session.setLastActivity(LocalDateTime.now());
+                var pages = session.getPagesVisited();
+                pages.add(path);
+                session.setPagesVisited(pages);
+                return sessionRepository.save(session);
+            } else {
+                session.setEndTime(session.getLastActivity());
+                return sessionRepository.save(session)
+                        .then(sessionRepository.save(new Session(store, sessionId, List.of(path))));
+            }
+        }).switchIfEmpty(Mono.defer(() -> {
+            var session = new Session(store, sessionId, List.of(path));
+            return sessionRepository.save(session);
+        })).then(Mono.empty());
     }
 
     public Mono<Void> logout(String accessToken) {

@@ -1,9 +1,11 @@
 import {request} from "../../../util/request";
 import {PRODUCTS_BASE_URL} from "../../../util/constants";
-import {setProducts} from "./reducers";
+import {setPreloaded, setProducts} from "./reducers";
 import {getProductsProps} from "./types";
+import {updateActivity} from "../../../util/session";
 
 export const getAllProducts = async ({store, accessToken, dispatch }: getProductsProps) => {
+    await updateActivity("browse", store);
     await request({
         url: PRODUCTS_BASE_URL + '/get-products-by-store/' + store,
         method: 'GET',
@@ -18,5 +20,6 @@ export const getAllProducts = async ({store, accessToken, dispatch }: getProduct
         dispatch(setProducts(response.data));
     }).catch((error) => {
         console.log("Error fetching products: ", error);
+        dispatch(setPreloaded(true));
     })
 }
