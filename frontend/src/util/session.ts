@@ -10,9 +10,9 @@ export function getOrCreateSessionId(): string {
     return sessionId;
 }
 
-export const updateActivity = async (path :string, store: string) => {
+export const updateActivity = async (path :string, action: string, store: string) => {
     await request({
-        url: AUTH_BASE_URL + '/update-activity/' + getOrCreateSessionId() + '/' + store + '/' + path,
+        url: AUTH_BASE_URL + '/update-activity/' + getOrCreateSessionId() + '/' + store + '/' + path + '/' + action,
         method: 'PUT',
         headers: {
             'X-FI-V-IP' : '127.0.0',

@@ -6,7 +6,7 @@ import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
 import {getOrCreateSessionId, updateActivity} from "../../../util/session";
 
 export const register = async ({email, username, password, firstName, lastName, store, phoneNumber, dispatch }: RegisterProps) => {
-    await updateActivity("sign-up", store);
+    await updateActivity("sign-up","sign-up", store);
     await request({
         url: AUTH_BASE_URL + '/register',
         method: 'POST',

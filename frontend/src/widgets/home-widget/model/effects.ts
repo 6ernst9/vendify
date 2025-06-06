@@ -5,7 +5,7 @@ import {getProductProps, getProductsProps, Product} from "./types";
 import {updateActivity} from "../../../util/session";
 
 export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
-    await updateActivity("home", storeId);
+    await updateActivity("home", "view-home", storeId);
     await request({
         url: PRODUCTS_BASE_URL + '/get-discounted-products/' + storeId,
         method: 'GET',
@@ -24,7 +24,6 @@ export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: g
 }
 
 export const getNewestProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
-    await updateActivity("home", storeId);
     await request({
         url: PRODUCTS_BASE_URL + '/get-newest-products/' + storeId,
         method: 'GET',
@@ -43,7 +42,6 @@ export const getNewestProducts = async ({storeId, accessToken, dispatch }: getPr
 }
 
 export const getBestSellingProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
-    await updateActivity("home", storeId);
     await request({
         url: ORDERS_BASE_URL + '/get-best-selling-orders/' + storeId + '/6',
         method: 'GET',

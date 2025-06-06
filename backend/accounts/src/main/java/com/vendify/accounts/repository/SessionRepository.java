@@ -1,9 +1,7 @@
 package com.vendify.accounts.repository;
 
-import com.vendify.accounts.model.AvgDurationPerHour;
-import com.vendify.accounts.model.Session;
-import com.vendify.accounts.model.SessionCountPerHour;
-import com.vendify.accounts.model.UserTotalSessionTime;
+import com.vendify.accounts.model.*;
+import com.vendify.accounts.model.analytics.*;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
@@ -39,7 +37,7 @@ public interface SessionRepository extends ReactiveCrudRepository<Session, Long>
         SELECT COUNT(*) 
         FROM session 
         WHERE store_id = :storeId 
-          AND start_time >= date_trunc('day', NOW())
+        AND session.last_activity >= date_trunc('day', NOW())
     """)
     Mono<Integer> getTotalSessionsToday(String storeId);
 
@@ -54,9 +52,21 @@ public interface SessionRepository extends ReactiveCrudRepository<Session, Long>
         SELECT COUNT(*) 
         FROM session 
         WHERE store_id = :storeId 
-          AND last_activity >= NOW() - INTERVAL ':minutes minutes'
+        AND last_activity >= NOW() - INTERVAL '10 minutes'
     """)
-    Mono<Integer> getActiveUsers(String storeId, int minutes);
+    Mono<Integer> getActiveUsers(String storeId);
+
+    @Query("""
+        SELECT
+          CASE WHEN user_id IS NOT NULL THEN 'Logged-in' ELSE 'Non logged-in' END AS type,
+          COUNT(*) AS count
+        FROM session
+        WHERE store_id = :storeId
+          AND start_time >= NOW() - INTERVAL '24 hours'
+        GROUP BY type
+    """)
+    Flux<SessionTypeRatio> getSessionLoginRatio(String storeId);
+
 
     @Query("""
         SELECT COUNT(*) 
@@ -88,12 +98,48 @@ public interface SessionRepository extends ReactiveCrudRepository<Session, Long>
     Flux<UserTotalSessionTime> getTopUsersByTotalTime(String storeId);
 
     @Query("""
-        SELECT date_trunc('hour', start_time) AS hour,
-               AVG(EXTRACT(EPOCH FROM (session.last_activity - session.start_time))) AS avg_duration
-        FROM session
-        WHERE store_id = :storeId AND session.start_time >= NOW() - INTERVAL '24 HOURS'
-        GROUP BY hour
-        ORDER BY hour
+        WITH hours AS (
+            SELECT generate_series(0, 23) AS hour
+        )
+        SELECT h.hour,
+               COALESCE(AVG(EXTRACT(EPOCH FROM (s.last_activity - s.start_time))) / 60, 0) AS avg_minutes
+        FROM hours h
+        LEFT JOIN session s
+          ON EXTRACT(HOUR FROM s.start_time) = h.hour
+         AND s.store_id = :storeId
+         AND s.start_time >= NOW() - INTERVAL '24 hours'
+        GROUP BY h.hour
+        ORDER BY h.hour
     """)
-    Flux<AvgDurationPerHour> getHourlyAvgSessionDuration(String storeId);
+    Flux<AvgDurationPerHour> getAvgSessionDurationPerHour(String storeId);
+
+    @Query("""
+            SELECT split_part(action, ':', 2)::varchar AS product, COUNT(*) AS count
+        FROM session, unnest(actions) AS action
+        WHERE session.store_id = :storeId AND action LIKE 'view-product:%'
+        GROUP BY product
+        ORDER BY count DESC
+        LIMIT 10
+    """)
+    Flux<ProductActionCount> getMostViewedProducts(String storeId);
+
+    @Query("""
+        SELECT split_part(action, ':', 2)::varchar AS product, COUNT(*) AS count
+        FROM session, unnest(actions) AS action
+        WHERE session.store_id = :storeId AND action LIKE 'add-to-cart:%'
+        GROUP BY product
+        ORDER BY count DESC
+        LIMIT 10
+    """)
+    Flux<ProductActionCount> getMostAddedToCartProducts(String storeId);
+
+    @Query("""
+        SELECT split_part(action, ':', 2)::varchar AS product, COUNT(*) AS count
+        FROM session, unnest(actions) AS action
+        WHERE session.store_id = :storeId AND action LIKE 'add-to-wishlist:%'
+        GROUP BY product
+        ORDER BY count DESC
+        LIMIT 10
+    """)
+    Flux<ProductActionCount> getMostWishlistedProducts(String storeId);
 }

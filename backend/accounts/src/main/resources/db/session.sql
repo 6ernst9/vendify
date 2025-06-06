@@ -10,6 +10,7 @@ CREATE TABLE session (
                          start_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
                          last_activity TIMESTAMP WITHOUT TIME ZONE NOT NULL,
                          end_time TIMESTAMP WITHOUT TIME ZONE,
-                         pages_visited TEXT[]
+                         pages_visited TEXT[],
+                         actions TEXT[]
 
 );

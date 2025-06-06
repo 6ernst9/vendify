@@ -58,14 +58,15 @@ public class AuthController {
         });
     }
 
-    @PutMapping("/update-activity/{sessionId}/{store}/{path}")
+    @PutMapping("/update-activity/{sessionId}/{store}/{path}/{action}")
     @WMTSecurityMapping(path = "update-activity", tokenEnabled = false)
     public Mono<String> updateActivity(@PathVariable String sessionId,
                                        @PathVariable String store,
-                                       @PathVariable String path) {
+                                       @PathVariable String path,
+                                       @PathVariable String action) {
         log.info("Performing PATCH /update-activity request.");
 
-        return authService.updateActivity(sessionId, store,path).then(Mono.fromCallable(() -> {
+        return authService.updateActivity(sessionId, store, path, action).then(Mono.fromCallable(() -> {
             log.info("Performed PATCH /update-activity request.");
             return "Session updated successfully";
         }));

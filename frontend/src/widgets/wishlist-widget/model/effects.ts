@@ -6,7 +6,7 @@ import {setWishlistItems} from "./reducers";
 import {updateActivity} from "../../../util/session";
 
 export const getWishlist = async ({customerId, storeId, accessToken, dispatch} :GetCart) => {
-    await updateActivity("wishlist", storeId);
+    await updateActivity("wishlist", "view-wishlist", storeId);
     await request({
         url: WISHLIST_BASE_URL + '/get-wishlist/' + customerId,
         method: 'GET',
@@ -30,7 +30,7 @@ export const getWishlist = async ({customerId, storeId, accessToken, dispatch} :
 }
 
 export const removeFromWishlist = async ({storeId, customerId, productId, accessToken, dispatch} :WishlistDelProps) => {
-    await updateActivity("wishlist", storeId)
+    await updateActivity("wishlist", "remove-from-wishlist:" + productId, storeId)
     await request({
         url: WISHLIST_BASE_URL + '/remove-from-wishlist/' + customerId + '/' + storeId + '/' + productId,
         method: 'DELETE',

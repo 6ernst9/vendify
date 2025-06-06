@@ -30,6 +30,8 @@ public class Session {
     private String refreshToken;
     @NonNull
     private List<String> pagesVisited;
+    @NonNull
+    private List<String> actions;
 
     public Session(Long userId, @NonNull String storeId, @NonNull String sessionCookie, String accessToken, String refreshToken) {
         this.userId = userId;
@@ -40,13 +42,15 @@ public class Session {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.pagesVisited = new ArrayList<>();
+        this.actions = new ArrayList<>();
     }
 
-    public Session(@NonNull String storeId, @NonNull String sessionCookie, List<String> pagesVisited) {
+    public Session(@NonNull String storeId, @NonNull String sessionCookie, List<String> pagesVisited, List<String> actions) {
         this.storeId = storeId;
         this.sessionCookie = sessionCookie;
         this.lastActivity = LocalDateTime.now();
         this.startTime = LocalDateTime.now();
         this.pagesVisited = pagesVisited;
+        this.actions = actions;
     }
 }

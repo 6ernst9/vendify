@@ -106,21 +106,24 @@ public class AuthService {
         return Mono.just(jwtGenerator.getAllClaimsFromAccessToken(accessToken));
     }
 
-    public Mono<Void> updateActivity(String sessionId, String store, String path) {
+    public Mono<Void> updateActivity(String sessionId, String store, String path, String action) {
         return sessionRepository.findLatestByUser(sessionId).flatMap(session -> {
             if(session.getLastActivity().isAfter(LocalDateTime.now().minusMinutes(30))) {
                 session.setLastActivity(LocalDateTime.now());
                 var pages = session.getPagesVisited();
                 pages.add(path);
+                var actions = session.getActions();
+                actions.add(action);
                 session.setPagesVisited(pages);
+                session.setActions(actions);
                 return sessionRepository.save(session);
             } else {
                 session.setEndTime(session.getLastActivity());
                 return sessionRepository.save(session)
-                        .then(sessionRepository.save(new Session(store, sessionId, List.of(path))));
+                        .then(sessionRepository.save(new Session(store, sessionId, List.of(path), List.of(action))));
             }
         }).switchIfEmpty(Mono.defer(() -> {
-            var session = new Session(store, sessionId, List.of(path));
+            var session = new Session(store, sessionId, List.of(path), List.of(action));
             return sessionRepository.save(session);
         })).then(Mono.empty());
     }

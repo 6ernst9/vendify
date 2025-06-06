@@ -1,8 +1,6 @@
 package com.vendify.accounts.service;
 
-import com.vendify.accounts.model.AvgDurationPerHour;
-import com.vendify.accounts.model.SessionCountPerHour;
-import com.vendify.accounts.model.UserTotalSessionTime;
+import com.vendify.accounts.model.analytics.*;
 import com.vendify.accounts.repository.SessionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,10 +20,14 @@ public class SessionService {
         return sessionRepository.getTotalSessionsToday(storeId);
     }
 
+    public Flux<SessionTypeRatio> getSessionTypeRatio(String storeId) {
+        return sessionRepository.getSessionLoginRatio(storeId);
+    }
+
     public Flux<Double> getQuickKPIs(String storeId) {
         var totalSessions = sessionRepository.getTotalSessionsToday(storeId);
         var avgDuration = sessionRepository.getAverageSessionDuration(storeId);
-        var activeUsers = sessionRepository.getActiveUsers(storeId, 10);
+        var activeUsers = sessionRepository.getActiveUsers(storeId);
         var returningUsers = sessionRepository.getReturningUserCount(storeId);
         var totalUsers = sessionRepository.getTotalUserCount(storeId);
 
@@ -51,6 +53,18 @@ public class SessionService {
     }
 
     public Flux<AvgDurationPerHour> getAvgDurationPerHour(String storeId) {
-        return sessionRepository.getHourlyAvgSessionDuration(storeId);
+        return sessionRepository.getAvgSessionDurationPerHour(storeId);
+    }
+
+    public Flux<ProductActionCount> getMostViewedProducts(String storeId) {
+        return sessionRepository.getMostViewedProducts(storeId);
+    }
+
+    public Flux<ProductActionCount> getMostAddedToCartProducts(String storeId) {
+        return sessionRepository.getMostAddedToCartProducts(storeId);
+    }
+
+    public Flux<ProductActionCount> getMostWishlistedProducts(String storeId) {
+        return sessionRepository.getMostWishlistedProducts(storeId);
     }
 }

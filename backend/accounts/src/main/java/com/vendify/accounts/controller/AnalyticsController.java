@@ -1,6 +1,9 @@
 package com.vendify.accounts.controller;
 
-import com.vendify.accounts.model.SessionCountPerHour;
+import com.vendify.accounts.model.analytics.AvgDurationPerHour;
+import com.vendify.accounts.model.analytics.ProductActionCount;
+import com.vendify.accounts.model.analytics.SessionCountPerHour;
+import com.vendify.accounts.model.analytics.SessionTypeRatio;
 import com.vendify.accounts.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +39,49 @@ public class AnalyticsController {
 
     @GetMapping("/get-quick-kpis/{storeId}")
     public Flux<Double> getQuickKPIs(@PathVariable String storeId) {
-        log.info("Performing GET /et-quick-kpis. Input: storeId={}", storeId);
+        log.info("Performing GET /get-quick-kpis. Input: storeId={}", storeId);
         var kpis = sessionService.getQuickKPIs(storeId);
-        log.info("Performed GET /et-quick-kpis. Input: storeId={}, kpis={}", storeId, kpis);
+        log.info("Performed GET /get-quick-kpis. Input: storeId={}, kpis={}", storeId, kpis);
         return kpis;
+    }
+
+    @GetMapping("/get-session-ratio/{storeId}")
+    public Flux<SessionTypeRatio> getSessionRatio(@PathVariable String storeId) {
+        log.info("Performing GET /get-session-ratio. Input: storeId={}", storeId);
+        var sessionRatio = sessionService.getSessionTypeRatio(storeId);
+        log.info("Performed GET /get-session-ratio. Input: storeId={}, sessionRatio={}", storeId, sessionRatio);
+        return sessionRatio;
+    }
+
+    @GetMapping("/get-avg-duration/{storeId}")
+    public Flux<AvgDurationPerHour> getAvgDuration(@PathVariable String storeId) {
+        log.info("Performing GET /get-avg-duration. Input: storeId={}", storeId);
+        var avgDuration = sessionService.getAvgDurationPerHour(storeId);
+        log.info("Performed GET /get-avg-duration. Input: storeId={}, avgDuration={}", storeId, avgDuration);
+        return avgDuration;
+    }
+
+    @GetMapping("/get-most-viewed-products/{storeId}")
+    public Flux<ProductActionCount> getMostViewedProducts(@PathVariable String storeId) {
+        log.info("Performing GET /get-most-viewed-products. Input: storeId={}", storeId);
+        var products = sessionService.getMostViewedProducts(storeId);
+        log.info("Performed GET /get-most-viewed-products. Input: storeId={}, products={}", storeId, products);
+        return products;
+    }
+
+    @GetMapping("/get-most-added-to-cart-products/{storeId}")
+    public Flux<ProductActionCount> getMostAddedToCart(@PathVariable String storeId) {
+        log.info("Performing GET /get-most-added-to-cart-products. Input: storeId={}", storeId);
+        var products = sessionService.getMostAddedToCartProducts(storeId);
+        log.info("Performed GET /get-most-added-to-cart-products. Input: storeId={}, products={}", storeId, products);
+        return products;
+    }
+
+    @GetMapping("/get-most-added-to-wishlist-products/{storeId}")
+    public Flux<ProductActionCount> getMostWishlisted(@PathVariable String storeId) {
+        log.info("Performing GET /get-most-added-to-wishlist-products. Input: storeId={}", storeId);
+        var products = sessionService.getMostWishlistedProducts(storeId);
+        log.info("Performed GET /get-most-added-to-wishlist-products. Input: storeId={}, products={}", storeId, products);
+        return products;
     }
 }

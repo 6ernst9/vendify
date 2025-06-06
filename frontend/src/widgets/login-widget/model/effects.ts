@@ -6,7 +6,7 @@ import {loginFailure, loginSuccess, logout} from "../../admin-login-widget/model
 import {getOrCreateSessionId, updateActivity} from "../../../util/session";
 
 export const login = async ({username, password, store, dispatch}: LoginProps) => {
-    await updateActivity("login", store);
+    await updateActivity("login", "login", store);
     await request({
         url: AUTH_BASE_URL + '/login/' + store,
         method: 'POST',
@@ -44,7 +44,7 @@ export const logOut = async ({id, dispatch}: getSessionState) => {
     })
 }
 
-export const getAccount = async({username, accessToken, store, dispatch} : getAccountByUsername) => {
+    export const getAccount = async({username, accessToken, store, dispatch} : getAccountByUsername) => {
     await request({
         url: ACCOUNTS_BASE_URL + '/get-user-by-username/' + store + '/' + username,
         method: 'GET',

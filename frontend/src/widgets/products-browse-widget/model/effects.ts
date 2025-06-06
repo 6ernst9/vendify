@@ -5,7 +5,7 @@ import {getProductsProps} from "./types";
 import {updateActivity} from "../../../util/session";
 
 export const getAllProducts = async ({store, accessToken, dispatch }: getProductsProps) => {
-    await updateActivity("browse", store);
+    await updateActivity("browse", "view-all-products", store);
     await request({
         url: PRODUCTS_BASE_URL + '/get-products-by-store/' + store,
         method: 'GET',

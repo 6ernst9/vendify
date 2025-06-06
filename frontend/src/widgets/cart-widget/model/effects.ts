@@ -7,7 +7,12 @@ import {setCartItems} from "./reducers";
 import {updateActivity} from "../../../util/session";
 
 export const updateCart = async ({storeId, productId, customerId, quantity, dispatch, accessToken} :AddToCart) => {
-    await updateActivity("cart", storeId);
+    if(quantity === 0) {
+        await updateActivity("cart", "remove-from-cart:" + productId, storeId);
+    } else {
+        await updateActivity("cart", "add-to-cart:" + productId, storeId);
+    }
+
     await request({
         url: CART_BASE_URL + '/update-cart',
         method: 'PUT',
@@ -28,7 +33,7 @@ export const updateCart = async ({storeId, productId, customerId, quantity, disp
 }
 
 export const getCart = async ({customerId, storeId, accessToken, dispatch} :GetCart) => {
-    await updateActivity("cart", storeId);
+    await updateActivity("cart", "view-cart", storeId);
     await request({
         url: CART_BASE_URL + '/get-cart/' + customerId,
         method: 'GET',

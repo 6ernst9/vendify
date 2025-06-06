@@ -5,7 +5,7 @@ import {updateActivity} from "../../../util/session";
 import {GetOrders} from "./types";
 
 export const getOrdersByCustomer = async ({id, storeId, dispatch, accessToken} :GetOrders) => {
-    await updateActivity("account", storeId);
+    await updateActivity("account", "view-account", storeId);
     await request({
         url: ORDERS_BASE_URL + '/get-orders/' + id,
         method: 'GET',

@@ -16,31 +16,22 @@ import {useDispatch, useSelector} from "react-redux";
 import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 import {adminHomeSelect} from "../../widgets/admin-home-widget/model/selectors";
 import {getSessionCount, getTotalSessions} from "../../widgets/admin-home-widget/model/effects";
-import {adminStoreSelect} from "../../widgets/admin-store-page-widget/model/selectors";
-
-const data = [
-    {label: '12AM', value: 50},
-    {label: '4AM', value: 100},
-    {label: '8AM', value: 80},
-    {label: '12PM', value: 120},
-    {label: '4PM', value: 150},
-    {label: '8PM', value: 200},
-    {label: '12AM', value: 180},
-];
+import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
 
 const Dashboards: React.FC = () => {
     const name = useSelector(adminSessionSelect.firstName);
     const accessToken = useSelector(adminSessionSelect.accessToken);
-    const storeId = useSelector(adminStoreSelect.id);
+    const stores = useSelector(userStoresSelect.stores);
     const dispatch = useDispatch();
-
     const sessionPerHour = useSelector(adminHomeSelect.sessionCount);
     const totalSessions = useSelector(adminHomeSelect.totalSessions);
 
     useEffect(() => {
-        getSessionCount({accessToken, storeId, dispatch});
-        getTotalSessions({accessToken, storeId, dispatch});
-    }, [accessToken, storeId]);
+        if(stores.length > 0) {
+            getSessionCount({accessToken, storeId: stores[0].id, dispatch});
+            getTotalSessions({accessToken,  storeId: stores[0].id, dispatch});
+        }
+    }, [accessToken, stores]);
 
     return (
         <div className="dashboard">
