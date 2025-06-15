@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './Orders.css';
 import {useSelector} from "react-redux";
 import {adminOrderSelect} from "../../widgets/admin-orders-widget/model/selectors";
+import {formatNumber} from "../../util/numbers";
 
 const tabs = [
     { id: 'all', label: 'All' },
@@ -61,7 +62,7 @@ const Orders: React.FC = () => {
                             <td>{order.customer}</td>
                             <td>{order.items.length} item{order.items.length > 1 ? 's' : ''}</td>
                             <td><span className='badge'>{order.status}</span></td>
-                            <td className="total">${order.price}</td>
+                            <td className="total">${formatNumber(order.price)}</td>
                         </tr>
                     ))}
                     </tbody>

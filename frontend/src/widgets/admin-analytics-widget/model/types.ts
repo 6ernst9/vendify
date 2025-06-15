@@ -28,6 +28,18 @@ export interface ProductAction {
     count: number;
 }
 
+export interface PagesVisit {
+    page: string;
+    hits: number;
+}
+
+export interface MostActiveUser {
+    sessionCookie: string;
+    userId: number;
+    totalMinutes: number;
+    favouritePage: string;
+}
+
 export interface ProductActionState {
     productId: number;
     name: string;
@@ -42,4 +54,6 @@ export interface AnalyticsState {
     mostViewedProducts: ProductActionState[];
     mostCartedProducts: ProductActionState[];
     mostWishlistedProducts: ProductActionState[];
+    mostVisitedPages: PagesVisit[];
+    mostActiveUsers: MostActiveUser[];
 }

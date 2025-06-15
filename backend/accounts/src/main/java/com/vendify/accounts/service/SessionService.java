@@ -67,4 +67,12 @@ public class SessionService {
     public Flux<ProductActionCount> getMostWishlistedProducts(String storeId) {
         return sessionRepository.getMostWishlistedProducts(storeId);
     }
+
+    public Flux<ActiveUserStat> getMostActiveUsers(String storeId) {
+        return sessionRepository.getTopUsersWithSessionAndFavoritePage(storeId);
+    }
+
+    public Flux<PageViewStat> getMostVisitedPages(String storeId) {
+        return sessionRepository.getMostVisitedPages(storeId);
+    }
 }

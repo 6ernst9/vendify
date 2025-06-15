@@ -8,7 +8,7 @@ import {ReactComponent as List} from "../../assets/icons/list.svg";
 import {ReactComponent as Building} from "../../assets/icons/building.svg";
 import {ReactComponent as Archive} from "../../assets/icons/archive.svg";
 import {ReactComponent as User} from "../../assets/icons/user.svg";
-import {ReactComponent as Settings} from "../../assets/icons/settings.svg";
+import {ReactComponent as Trending} from "../../assets/icons/trending-up.svg";
 import {NavLink} from "react-router-dom";
 
 const Sidebar: React.FC = () => {
@@ -24,7 +24,7 @@ const Sidebar: React.FC = () => {
                 <li>
                     <NavLink to='/admin/home' className={({isActive}) =>
                         isActive ? "sidebar-li-container active" : "sidebar-li-container"
-                        }>
+                    }>
                         <Home/>
                         <p>Home</p>
                     </NavLink>
@@ -33,6 +33,12 @@ const Sidebar: React.FC = () => {
                     <NavLink to='/admin/analytics' className="sidebar-li-container">
                         <PieChart/>
                         <p>Analytics</p>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='/admin/finances' className="sidebar-li-container">
+                        <Trending/>
+                        <p>Finances</p>
                     </NavLink>
                 </li>
                 <li>
@@ -63,12 +69,6 @@ const Sidebar: React.FC = () => {
                     <NavLink to='/admin/customers' className="sidebar-li-container">
                         <User/>
                         <p>Customers</p>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to='/admin/settings' className="sidebar-li-container">
-                        <Settings/>
-                        <p>Settings</p>
                     </NavLink>
                 </li>
             </ul>

@@ -2,9 +2,9 @@ import {getProductsProps} from "../../home-widget/model/types";
 import {request} from "../../../util/request";
 import {ACCOUNTS_ANALYTICS_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
 import {
-    setAvgSession,
+    setAvgSession, setMostActiveUsers,
     setMostCartedProducts,
-    setMostViewedProducts, setMostWishlistedProducts,
+    setMostViewedProducts, setMostVisitedPages, setMostWishlistedProducts,
     setQuickKPIs,
     setSessionCount,
     setSessionType
@@ -93,6 +93,42 @@ export const getQuickKPIs = async ({storeId, accessToken, dispatch }: getProduct
         }
     }).then(async (response) => {
         dispatch(setQuickKPIs(response.data));
+    }).catch((error) => {
+        console.log("Error fetching stores ", error);
+    })
+}
+
+export const getMostVisitedPages = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+    await request({
+        url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-most-visited-pages/' + storeId,
+        method: 'GET',
+        headers: {
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'analytics.get-quick-kpis',
+            'Authorization' : 'Bearer ' + accessToken
+        }
+    }).then(async (response) => {
+        dispatch(setMostVisitedPages(response.data));
+    }).catch((error) => {
+        console.log("Error fetching stores ", error);
+    })
+}
+
+export const getMostActiveUsers = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+    await request({
+        url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-most-active-users/' + storeId,
+        method: 'GET',
+        headers: {
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'analytics.get-quick-kpis',
+            'Authorization' : 'Bearer ' + accessToken
+        }
+    }).then(async (response) => {
+        dispatch(setMostActiveUsers(response.data));
     }).catch((error) => {
         console.log("Error fetching stores ", error);
     })

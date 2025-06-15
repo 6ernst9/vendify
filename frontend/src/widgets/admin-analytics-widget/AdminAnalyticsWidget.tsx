@@ -6,7 +6,7 @@ import Analytics from "../../components/Analytics/Analytics";
 import {useDispatch, useSelector} from "react-redux";
 import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 import {
-    getAvgSessions, getMostCartedProducts, getMostViewedProducts,
+    getAvgSessions, getMostActiveUsers, getMostCartedProducts, getMostViewedProducts, getMostVisitedPages,
     getMostWishlistedProducts,
     getQuickKPIs,
     getSessionCount,
@@ -34,6 +34,8 @@ const AdminAnalyticsWidget: React.FC = () => {
             getMostWishlistedProducts({accessToken, storeId: stores[0].id, dispatch});
             getMostViewedProducts({accessToken, storeId: stores[0].id, dispatch});
             getMostCartedProducts({accessToken, storeId: stores[0].id, dispatch});
+            getMostActiveUsers({accessToken, storeId: stores[0].id, dispatch});
+            getMostVisitedPages({accessToken, storeId: stores[0].id, dispatch});
         }
     }, [accessToken, stores]);
     return (

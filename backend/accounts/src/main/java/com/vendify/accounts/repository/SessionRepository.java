@@ -142,4 +142,42 @@ public interface SessionRepository extends ReactiveCrudRepository<Session, Long>
         LIMIT 10
     """)
     Flux<ProductActionCount> getMostWishlistedProducts(String storeId);
+
+    @Query("""
+        SELECT s.user_id,
+               s.session_cookie,
+               SUM(EXTRACT(EPOCH FROM (COALESCE(s.end_time, s.last_activity) - s.start_time)) / 60) AS total_minutes,
+               (
+                   SELECT page
+                   FROM (
+                       SELECT unnest(pages_visited) AS page
+                       FROM session s2
+                       WHERE s2.session_cookie = s.session_cookie AND s2.store_id = :storeId
+                   ) AS page_data
+                   GROUP BY page
+                   ORDER BY COUNT(*) DESC
+                   LIMIT 1
+               ) AS favourite_page
+        FROM session s
+        WHERE s.store_id = :storeId
+        GROUP BY s.user_id, s.session_cookie
+        ORDER BY total_minutes DESC
+        LIMIT 10
+    """)
+    Flux<ActiveUserStat> getTopUsersWithSessionAndFavoritePage(String storeId);
+
+
+    @Query("""
+        SELECT page, COUNT(*) AS hits
+        FROM (
+            SELECT unnest(pages_visited) AS page
+            FROM session
+            WHERE store_id = :storeId
+        ) AS page_data
+        GROUP BY page
+        ORDER BY hits DESC
+        LIMIT 10
+    """)
+    Flux<PageViewStat> getMostVisitedPages(String storeId);
+
 }

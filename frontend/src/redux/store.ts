@@ -16,6 +16,7 @@ import userOrdersReducer from '../widgets/account-widget/model/reducers';
 import userWishlistReducer from '../widgets/wishlist-widget/model/reducers';
 import adminHomeReducer from '../widgets/admin-home-widget/model/reducers';
 import adminAnalyticsReducer from '../widgets/admin-analytics-widget/model/reducers';
+import adminFinancesReducer from '../widgets/admin-finances-widget/model/reducers';
 
 const rootReducer = {
     stores: storesReducer,
@@ -34,7 +35,8 @@ const rootReducer = {
     adminHome: adminHomeReducer,
     session: sessionReducer,
     adminSession: adminSessionReducer,
-    adminAnalytics: adminAnalyticsReducer
+    adminAnalytics: adminAnalyticsReducer,
+    adminFinances: adminFinancesReducer
 }
 export const store = configureStore({
     reducer: rootReducer,

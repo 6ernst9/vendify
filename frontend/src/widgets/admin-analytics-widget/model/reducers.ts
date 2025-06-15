@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {defaultState} from "./defaultState";
-import {AvgSessionResponse, ProductActionState, SessionCount, SessionRatio} from "./types";
+import {AvgSessionResponse, MostActiveUser, PagesVisit, ProductActionState, SessionCount, SessionRatio} from "./types";
 
 const adminHomeSlice = createSlice({
     name: 'adminAnalyticsState',
@@ -26,9 +26,15 @@ const adminHomeSlice = createSlice({
         },
         setMostWishlistedProducts: (state, action: PayloadAction<ProductActionState[]>) => {
             state.mostWishlistedProducts = action.payload;
+        },
+        setMostVisitedPages: (state, action: PayloadAction<PagesVisit[]>) => {
+            state.mostVisitedPages = action.payload;
+        },
+        setMostActiveUsers: (state, action: PayloadAction<MostActiveUser[]>) => {
+            state.mostActiveUsers = action.payload;
         }
     }
 });
 
-export const { setSessionCount, setQuickKPIs, setSessionType, setAvgSession, setMostWishlistedProducts, setMostViewedProducts, setMostCartedProducts } = adminHomeSlice.actions;
+export const { setSessionCount, setQuickKPIs, setSessionType, setAvgSession, setMostWishlistedProducts, setMostViewedProducts, setMostCartedProducts, setMostVisitedPages, setMostActiveUsers } = adminHomeSlice.actions;
 export default adminHomeSlice.reducer;

@@ -2,7 +2,7 @@ import {AnalyticsState} from "./types";
 
 export const defaultState: AnalyticsState = {
     sessionCount: [],
-    kpis: [],
+    kpis: [0, 0, 0, 0],
     avgSessions: [],
     sessionType: {
         data: [],
@@ -10,5 +10,7 @@ export const defaultState: AnalyticsState = {
     },
     mostViewedProducts: [],
     mostCartedProducts: [],
-    mostWishlistedProducts: []
+    mostWishlistedProducts: [],
+    mostActiveUsers: [],
+    mostVisitedPages: []
 }

@@ -1,9 +1,6 @@
 package com.vendify.accounts.controller;
 
-import com.vendify.accounts.model.analytics.AvgDurationPerHour;
-import com.vendify.accounts.model.analytics.ProductActionCount;
-import com.vendify.accounts.model.analytics.SessionCountPerHour;
-import com.vendify.accounts.model.analytics.SessionTypeRatio;
+import com.vendify.accounts.model.analytics.*;
 import com.vendify.accounts.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -83,5 +80,21 @@ public class AnalyticsController {
         var products = sessionService.getMostWishlistedProducts(storeId);
         log.info("Performed GET /get-most-added-to-wishlist-products. Input: storeId={}, products={}", storeId, products);
         return products;
+    }
+
+    @GetMapping("/get-most-active-users/{storeId}")
+    public Flux<ActiveUserStat> getMostActiveUsers(@PathVariable String storeId) {
+        log.info("Performing GET /get-most-active-users. Input: storeId={}", storeId);
+        var users = sessionService.getMostActiveUsers(storeId);
+        log.info("Performed GET /get-most-active-users. Input: storeId={}, users={}", storeId, users);
+        return users;
+    }
+
+    @GetMapping("/get-most-visited-pages/{storeId}")
+    public Flux<PageViewStat> getMostVisitedPages(@PathVariable String storeId) {
+        log.info("Performing GET /get-most-visited-pages. Input: storeId={}", storeId);
+        var pages = sessionService.getMostVisitedPages(storeId);
+        log.info("Performed GET /get-most-visited-pages. Input: storeId={}, users={}", storeId, pages);
+        return pages;
     }
 }

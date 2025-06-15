@@ -8,4 +8,6 @@ export const adminAnalyticsSelect = ({
     mostViewed: (state: RootState) => state.adminAnalytics.mostViewedProducts,
     mostCarted: (state: RootState) => state.adminAnalytics.mostCartedProducts,
     mostWishlisted: (state: RootState) => state.adminAnalytics.mostWishlistedProducts,
+    mostActiveUsers: (state: RootState) => state.adminAnalytics.mostActiveUsers,
+    mostVisitedPages: (state: RootState) => state.adminAnalytics.mostVisitedPages
 });
