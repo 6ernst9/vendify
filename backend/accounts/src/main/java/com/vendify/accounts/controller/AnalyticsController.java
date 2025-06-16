@@ -4,6 +4,8 @@ import com.vendify.accounts.model.analytics.*;
 import com.vendify.accounts.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +13,37 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
+
+import static com.vendify.accounts.config.StoreLogger.LOG_DIR;
+
 @Slf4j
 @RestController
 @RequestMapping("/analytics")
 @RequiredArgsConstructor
 public class AnalyticsController {
     private final SessionService sessionService;
+
+    @GetMapping("/logs/{storeId}")
+    public ResponseEntity<?> getLogsForStore(@PathVariable String storeId) {
+        var filePath = LOG_DIR + "/store-" + storeId + ".log";
+        var file = new File(filePath);
+
+        if (!file.exists()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No logs found for store: " + storeId);
+        }
+
+        try {
+            List<String> lines = Files.readAllLines(file.toPath());
+            return ResponseEntity.ok(lines);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error reading logs: " + e.getMessage());
+        }
+    }
 
     @GetMapping("/get-sessions-per-hour/{storeId}")
     public Flux<SessionCountPerHour> getSessionCountPerHour(@PathVariable String storeId) {

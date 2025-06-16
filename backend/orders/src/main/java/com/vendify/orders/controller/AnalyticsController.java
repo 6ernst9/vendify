@@ -51,4 +51,19 @@ public class AnalyticsController {
     public Flux<ProductSalesMetrics> getProductMetrics(@PathVariable String storeId) {
         return analyticsService.getProductConversion(storeId);
     }
+
+    @GetMapping("/get-customer-ratio/{storeId}")
+    public Flux<CustomerType> getCustomerRatio(@PathVariable String storeId) {
+        return analyticsService.getCustomerRatio(storeId);
+    }
+
+    @GetMapping("/get-customer-revenue/{storeId}")
+    public Flux<CustomerRevenue> getCustomerRevenue(@PathVariable String storeId) {
+        return analyticsService.getCustomerRevenue(storeId);
+    }
+
+    @GetMapping("/get-customer-orders/{storeId}")
+    public Flux<CustomerOrderCount> getCustomerOrders(@PathVariable String storeId) {
+        return analyticsService.getCustomerOrders(storeId);
+    }
 }

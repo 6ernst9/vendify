@@ -8,10 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import reactor.core.publisher.Mono;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,24 +23,28 @@ public class MongoDataConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        List<Order> orders = new ArrayList<>();
+        var orders = new ArrayList<Order>();
 
         String[] storeIds = {"6839d4104106e209e93ea39c", "6839d4104106e209e93ea39d"};
         long[] customerIds = {1L, 2L, 3L, 4L, 5L};
 
         for (int i = 0; i < 60; i++) {
-            String storeId = storeIds[i % storeIds.length];
-            long customerId = customerIds[random.nextInt(customerIds.length)];
+            var storeId = storeIds[i % storeIds.length];
+            var customerId = customerIds[random.nextInt(customerIds.length)];
 
-            int productId = random.nextInt(10) + 1;
-            int quantity = random.nextInt(3) + 1;
-            double unitPrice = 20 + random.nextInt(100);
-            double price = unitPrice * quantity;
+            if(i >= 58) {
+                customerId = 6L;
+            }
 
-            LocalDateTime localDateTime = LocalDateTime.now().minusDays(random.nextInt(30));
-            Instant instant = localDateTime.toInstant(ZoneOffset.UTC);
+            var productId = random.nextInt(10) + 1;
+            var quantity = random.nextInt(3) + 1;
+            var unitPrice = 20 + random.nextInt(100);
+            var price = unitPrice * quantity;
 
-            Order order = new Order(
+            var localDateTime = LocalDateTime.now().minusDays(random.nextInt(30));
+            var instant = localDateTime.toInstant(ZoneOffset.UTC);
+
+            var order = new Order(
                     storeId,
                     customerId,
                     new Address("Street " + i, "City", "Region", "0000", "07000000" + i),

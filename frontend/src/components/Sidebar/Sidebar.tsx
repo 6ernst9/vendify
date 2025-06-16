@@ -9,6 +9,7 @@ import {ReactComponent as Building} from "../../assets/icons/building.svg";
 import {ReactComponent as Archive} from "../../assets/icons/archive.svg";
 import {ReactComponent as User} from "../../assets/icons/user.svg";
 import {ReactComponent as Trending} from "../../assets/icons/trending-up.svg";
+import {ReactComponent as File} from "../../assets/icons/file-text.svg";
 import {NavLink} from "react-router-dom";
 
 const Sidebar: React.FC = () => {
@@ -69,6 +70,12 @@ const Sidebar: React.FC = () => {
                     <NavLink to='/admin/customers' className="sidebar-li-container">
                         <User/>
                         <p>Customers</p>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='/admin/logs' className="sidebar-li-container">
+                        <File/>
+                        <p>Logs</p>
                     </NavLink>
                 </li>
             </ul>

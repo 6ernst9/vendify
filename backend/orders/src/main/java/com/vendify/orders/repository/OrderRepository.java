@@ -102,4 +102,28 @@ public interface OrderRepository extends ReactiveCrudRepository<Order, String> {
             "{ $project: { productId: '$_id', totalSold: 1, revenue: 1, _id: 0 } }"
     })
     Flux<ProductSalesMetrics> getProductSalesByStore(String storeId);
+
+    @Aggregation(pipeline = {
+            "{ $match: { storeId: ?0 } }",
+            "{ $group: { _id: '$customerId', orderCount: { $sum: 1 } } }",
+            "{ $group: { _id: null, newCustomers: { $sum: { $cond: [{ $eq: ['$orderCount', 1] }, 1, 0] } }, returningCustomers: { $sum: { $cond: [{ $gt: ['$orderCount', 1] }, 1, 0] } }} }",
+            "{ $project: { _id: 0, newCustomers: 1, returningCustomers: 1 } }"
+            })
+    Mono<CustomerRatio> getReturningVsNewCustomers(String storeId);
+
+    @Aggregation(pipeline = {
+            "{ $match: { storeId: ?0 } }",
+            "{ $group: { _id: '$customerId', orderCount: { $sum: 1 } } }",
+            "{ $sort: { orderCount: -1 } }",
+            "{ $project: { customerId: '$_id', orderCount: 1, _id: 0 } }"
+    })
+    Flux<CustomerOrderCount> getCustomersByOrderVolume(String storeId);
+
+    @Aggregation(pipeline = {
+            "{ $match: { storeId: ?0 } }",
+            "{ $group: { _id: '$customerId', totalRevenue: { $sum: '$price' } } }",
+            "{ $sort: { totalRevenue: -1 } }",
+            "{ $project: { customerId: '$_id', totalRevenue: 1, _id: 0 } }"
+    })
+    Flux<CustomerRevenue> getRevenueByCustomer(String storeId);
 }

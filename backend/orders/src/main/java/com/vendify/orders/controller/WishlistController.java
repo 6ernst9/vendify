@@ -44,7 +44,7 @@ public class WishlistController {
     }
 
     @PostMapping("/promote-wishlist/{id}")
-    public Mono<String> promoteWishlist(@PathVariable String id) {
+    public Mono<String> promoteWishlist(@PathVariable long id) {
         log.info("Performing POST /promote-wishlist. Input: wishlist={}", id);
         var wishlistItem = wishlistService.promoteWishlist(id);
         log.info("Performed POST /promote-wishlist. Input: wishlist={}. Output: cartItem = {}", id, wishlistItem);

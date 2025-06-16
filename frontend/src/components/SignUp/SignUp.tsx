@@ -29,7 +29,7 @@ const SignUp: React.FC = () => {
     return (
         <div className="signup-container">
             <div className="signup-box">
-                <h2>Create your account</h2>
+                <h1>Create your account</h1>
                 <p>Enter your details below</p>
                 <input
                     type="text"
@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
                     className="customer-signup-input"
                 />
                 <button className="customer-signup-button" onClick={handleSignUp}>Sign Up</button>
-                <a href={`/${store}/login`} className="customer-signup-forgot">Already have an account? Log in</a>
+                <a href={`/${store}/login`} className="customer-signup-forgot">Already have an account?</a>
             </div>
         </div>
     );

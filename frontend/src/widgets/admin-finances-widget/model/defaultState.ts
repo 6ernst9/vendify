@@ -7,5 +7,8 @@ export const defaultState: FinancesState = {
     ordersPerDay: [],
     productPerformance: [],
     productRevenue: [],
-    topSellingProduct: []
+    topSellingProduct: [],
+    customerRatio: [],
+    customerOrders: [],
+    customerRevenue: []
 }

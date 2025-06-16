@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
 import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 import {
-    getAverageOrder,
+    getAverageOrder, getCustomerOrders, getCustomerRatio, getCustomerRevenue,
     getOrdersPerDay, getProductPerformance, getProductRevenue,
     getQuickKPIs,
     getRevenuePerDay, getTopSellingProducts
@@ -47,6 +47,9 @@ const Finances: React.FC = () => {
     const topSellingProducts = useSelector(adminFinancesSelect.topSellingProducts);
     const productRevenue = useSelector(adminFinancesSelect.productRevenue);
     const productPerformance = useSelector(adminFinancesSelect.productPerformance);
+    const customerRevenue = useSelector(adminFinancesSelect.customerRevenue);
+    const customerOrders = useSelector(adminFinancesSelect.customerOrders);
+    const customerRatio = useSelector(adminFinancesSelect.customerRatio);
 
     const handleChangeStore = async (id: string) => {
         setActiveTab(id);
@@ -57,6 +60,9 @@ const Finances: React.FC = () => {
         await getTopSellingProducts({accessToken, storeId: id, dispatch});
         await getProductRevenue({accessToken, storeId: id, dispatch});
         await getProductPerformance({accessToken, storeId: id, dispatch});
+        await getCustomerRatio({accessToken, storeId: id, dispatch});
+        await getCustomerOrders({accessToken, storeId: id, dispatch});
+        await getCustomerRevenue({accessToken, storeId: id, dispatch});
     }
 
     return (
@@ -293,7 +299,7 @@ const Finances: React.FC = () => {
                                         innerRadius={40}
                                         outerRadius={90}
                                         paddingAngle={3}
-                                        label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                                        label={({name, percent}) => `${name}: ${(percent * 100).toFixed(0)}%`}
                                     >
                                         {productRevenue.map((_, index) => (
                                             <Cell
@@ -338,6 +344,97 @@ const Finances: React.FC = () => {
                                         labelFormatter={(label) => `Product ID ${label}`}
                                     />
                                     <Bar dataKey="conversionRate" fill="url(#blueGradient)"/>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                </div>
+                <div className="analytics-kpis">
+                    <h2>Customer Behavior</h2>
+                    <div className="analytics-stats">
+                        <div className="analytics-stat-card">
+                            <p className="analytics-stat-label">Customer Ratio</p>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <PieChart>
+                                    <Pie
+                                        data={customerRatio}
+                                        dataKey="count"
+                                        nameKey="type"
+                                        cx="50%"
+                                        cy="50%"
+                                        outerRadius={80}
+                                        label={({name, percent}) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                                    >
+                                        {customerRatio.map((_, index) => (
+                                            <Cell key={`cell-${index}`}
+                                                  fill={donutColors[index % 2]}/>
+                                        ))}
+                                    </Pie>
+                                    <Tooltip/>
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <div className="analytics-stat-card">
+                            <p className="analytics-stat-label">Top Customers by Revenue</p>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={customerRevenue}>
+                                    <defs>
+                                        <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stopColor="#1255cb" stopOpacity={1}/>
+                                            <stop offset="100%" stopColor="#1255cb" stopOpacity={0.7}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" horizontal vertical={false}/>
+                                    <XAxis
+                                        dataKey="customerId"
+                                        tick={{fontSize: 10, fill: "#6B7280"}}
+                                        axisLine={false}
+                                        tickLine={false}
+                                    />
+                                    <YAxis
+                                        dataKey="totalRevenue"
+                                        domain={[0, 'dataMax']}
+                                        tick={{fontSize: 10, fill: "#6B7280"}}
+                                        axisLine={false}
+                                        tickLine={false}
+                                    />
+                                    <Tooltip
+                                        formatter={(value: number) => `${formatNumber(value)}$`}
+                                        labelFormatter={(label) => `User ID ${label}`}
+                                    />
+                                    <Bar dataKey="totalRevenue" fill="url(#blueGradient)"/>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <div className="analytics-stat-card">
+                            <p className="analytics-stat-label">Top Customers by Orders</p>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={customerOrders}>
+                                    <defs>
+                                        <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stopColor="#1255cb" stopOpacity={1}/>
+                                            <stop offset="100%" stopColor="#1255cb" stopOpacity={0.7}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" horizontal vertical={false}/>
+                                    <XAxis
+                                        dataKey="customerId"
+                                        tick={{fontSize: 10, fill: "#6B7280"}}
+                                        axisLine={false}
+                                        tickLine={false}
+                                    />
+                                    <YAxis
+                                        dataKey="orderCount"
+                                        domain={[0, 'dataMax']}
+                                        tick={{fontSize: 10, fill: "#6B7280"}}
+                                        axisLine={false}
+                                        tickLine={false}
+                                    />
+                                    <Tooltip
+                                        formatter={(value: number) => `${value}`}
+                                        labelFormatter={(label) => `User ID ${label}`}
+                                    />
+                                    <Bar dataKey="orderCount" fill="url(#blueGradient)"/>
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>

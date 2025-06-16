@@ -8,4 +8,7 @@ export const adminFinancesSelect = ({
     productPerformance: (state: RootState) => state.adminFinances.productPerformance,
     topSellingProducts: (state: RootState) => state.adminFinances.topSellingProduct,
     productRevenue: (state: RootState) => state.adminFinances.productRevenue,
+    customerRatio: (state: RootState) => state.adminFinances.customerRatio,
+    customerOrders: (state: RootState) => state.adminFinances.customerOrders,
+    customerRevenue: (state: RootState) => state.adminFinances.customerRevenue,
 });

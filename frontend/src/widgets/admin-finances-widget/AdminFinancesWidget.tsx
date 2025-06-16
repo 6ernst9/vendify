@@ -9,7 +9,7 @@ import {getStores} from "../admin-store-widget/model/effects";
 import Finances from "../../components/Finances/Finances";
 import {userStoresSelect} from "../admin-store-widget/model/selectors";
 import {
-    getAverageOrder,
+    getAverageOrder, getCustomerOrders, getCustomerRatio, getCustomerRevenue,
     getOrdersPerDay, getProductPerformance,
     getProductRevenue,
     getQuickKPIs,
@@ -36,6 +36,9 @@ const AdminFinancesWidget: React.FC = () => {
             getProductRevenue({accessToken, storeId: stores[0].id, dispatch});
             getTopSellingProducts({accessToken, storeId: stores[0].id, dispatch});
             getProductPerformance({accessToken, storeId: stores[0].id, dispatch});
+            getCustomerOrders({accessToken, storeId: stores[0].id, dispatch});
+            getCustomerRevenue({accessToken, storeId: stores[0].id, dispatch});
+            getCustomerRatio({accessToken, storeId: stores[0].id, dispatch});
         }
     }, [accessToken, stores]);
     return (

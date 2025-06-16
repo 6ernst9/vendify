@@ -23,10 +23,10 @@ public class AnalyticsService {
         var ldt = LocalDate.now().atStartOfDay();
         var date = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
 
-        var totalRevenue = orderRepository.getTotalRevenue(storeId);
-        var todayRevenue = orderRepository.getRevenueToday(storeId, date);
-        var todayOrders = orderRepository.getOrdersToday(storeId, date);
-        var avgOrder = orderRepository.getAverageOrderValue(storeId);
+        var totalRevenue = orderRepository.getTotalRevenue(storeId).defaultIfEmpty(0.0);;
+        var todayRevenue = orderRepository.getRevenueToday(storeId, date).defaultIfEmpty(0.0);;
+        var todayOrders = orderRepository.getOrdersToday(storeId, date).defaultIfEmpty(0L);
+        var avgOrder = orderRepository.getAverageOrderValue(storeId).defaultIfEmpty(0.0);
 
         return Mono.zip(totalRevenue, todayRevenue, todayOrders, avgOrder)
                 .flatMapMany(tuple -> {
@@ -88,6 +88,21 @@ public class AnalyticsService {
 
     public Flux<ProductSalesCount> getTopSellingProducts(String storeId) {
         return orderRepository.getTopSellingProducts(storeId, 10);
+    }
+
+    public Flux<CustomerOrderCount> getCustomerOrders(String storeId) {
+        return orderRepository.getCustomersByOrderVolume(storeId);
+    }
+
+    public Flux<CustomerRevenue> getCustomerRevenue(String storeId) {
+        return orderRepository.getRevenueByCustomer(storeId);
+    }
+
+    public Flux<CustomerType> getCustomerRatio(String storeId) {
+        return orderRepository.getReturningVsNewCustomers(storeId).flatMapMany(customerRatio -> Flux.just(
+                new CustomerType("New", customerRatio.newCustomers()),
+                new CustomerType("Old", customerRatio.returningCustomers())
+        ));
     }
 
     private List<String> generateLastNDays(int n) {

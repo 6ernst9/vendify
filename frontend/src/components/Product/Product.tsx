@@ -3,6 +3,7 @@ import {ProductDetails} from "../../types/products";
 import {ReactComponent as Star} from "../../assets/icons/star.svg";
 import {ReactComponent as EmptyStar} from "../../assets/icons/star-half.svg";
 import {ReactComponent as Heart} from "../../assets/icons/heart.svg";
+import {ReactComponent as HeartFilled} from "../../assets/icons/heart-fill.svg";
 import {ReactComponent as Truck} from "../../assets/icons/truck.svg";
 import {ReactComponent as Refresh} from "../../assets/icons/refresh.svg";
 import {ReactComponent as Minus} from "../../assets/icons/minus.svg";
@@ -13,12 +14,16 @@ import {sessionSelect} from "../../redux/core/session/selectors";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {addToCart, addToWishlist} from "../../widgets/product-widget/model/effects";
 import {useNavigate} from "react-router-dom";
+import {userWishlistSelect} from "../../widgets/wishlist-widget/model/selectors";
+import {removeFromWishlist} from "../../widgets/wishlist-widget/model/effects";
 
-const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, description, images, category}) => {
+const Product: React.FC<ProductDetails> = ({id, name, price, reviews, description, images, category}) => {
     const [quantity, setQuantity] = useState(1);
     const accessToken = useSelector(sessionSelect.accessToken);
     const customerId = useSelector(sessionSelect.id);
     const exists = useSelector(sessionSelect.exists);
+    const wishlistItems = useSelector(userWishlistSelect.wishlist);
+    const isWishlited = wishlistItems.filter((product) => product.id === id).length === 1;
     const storeId = useSelector(storeSelect.id);
     const store = useSelector(storeSelect.path);
     const dispatch = useDispatch();
@@ -49,7 +54,11 @@ const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, des
 
     const handleWishlist = () => {
         if(exists){
-            addToWishlist({storeId, customerId, accessToken, productId: id});
+            if(isWishlited) {
+                removeFromWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+            } else {
+                addToWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+            }
         } else {
             navigate(`/${store}/login`);
         }
@@ -95,7 +104,7 @@ const Product: React.FC<ProductDetails> = ({id, name, stars, price, reviews, des
 
                         <div className="product-buy-now" onClick={handleCart}>Add to cart</div>
                         <div className="product-wishlist-container" onClick={handleWishlist}>
-                             <Heart className="product-wishlist-icon"/>
+                            {isWishlited ? <HeartFilled className="product-wishlist-icon-wishlisted"/> :  <Heart className="product-wishlist-icon"/>}
                         </div>
                     </div>
 

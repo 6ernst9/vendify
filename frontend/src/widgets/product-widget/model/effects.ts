@@ -2,8 +2,10 @@ import {AddToCart, AddToWishlist, GetProductById} from "./types";
 import {request} from "../../../util/request";
 import {CART_BASE_URL, PRODUCTS_BASE_URL, WISHLIST_BASE_URL} from "../../../util/constants";
 import {updateActivity} from "../../../util/session";
+import {getWishlist} from "../../wishlist-widget/model/effects";
+import {getCart} from "../../cart-widget/model/effects";
 
-export const addToCart = async ({storeId, productId, customerId, quantity, accessToken} :AddToCart) => {
+export const addToCart = async ({storeId, productId, customerId, quantity, dispatch, accessToken} :AddToCart) => {
     await updateActivity("product:" + productId, "add-to-cart:" + productId, storeId);
     await request({
         url: CART_BASE_URL + '/add-to-cart',
@@ -17,13 +19,13 @@ export const addToCart = async ({storeId, productId, customerId, quantity, acces
             'X-FI-V-PATH': 'cart.add-to-cart'
         }
     }).then((response) => {
-        console.log(response.data);
+        getCart({customerId, accessToken, dispatch, storeId});
     }).catch((error) => {
         console.error(error);
     })
 }
 
-export const addToWishlist = async ({storeId, productId, customerId, accessToken} :AddToWishlist) => {
+export const addToWishlist = async ({storeId, productId, customerId, accessToken, dispatch} :AddToWishlist) => {
     await updateActivity("product:" + productId, "add-to-wishlist:"+ productId, storeId);
     await request({
         url: WISHLIST_BASE_URL + '/add-to-wishlist',
@@ -36,8 +38,8 @@ export const addToWishlist = async ({storeId, productId, customerId, accessToken
             'X-FI-V-DEVICE': 'DESKTOP',
             'X-FI-V-PATH': 'wishlist.add-to-wishlist'
         }
-    }).then((response) => {
-        console.log(response.data);
+    }).then(() => {
+        getWishlist({customerId, accessToken, storeId, dispatch});
     }).catch((error) => {
         console.error(error);
     })

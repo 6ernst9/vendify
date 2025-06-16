@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {removeFromWishlist} from "../../widgets/wishlist-widget/model/effects";
+import {addToCart} from "../../widgets/product-widget/model/effects";
 
 interface ProductProps {
     id: number;
@@ -43,11 +44,16 @@ const WishlistProduct: React.FC<ProductProps> = ({id, name, price, oldPrice, ima
         removeFromWishlist({storeId, productId : id, customerId, accessToken, dispatch});
     }
 
+    const toCart = () => {
+        addToCart({customerId, productId: id, quantity: 1, accessToken, storeId, dispatch});
+        removeFromWishlist({storeId, productId : id, customerId, accessToken, dispatch});
+    }
+
     return (
         <div className="wishlist-product-card">
             <div className="wishlist-product-img-container">
                 <img src={images[0]} onClick={() => navigate(`/${store}/product/${id}`)}/>
-                <div className="wishlist-product-cart">
+                <div className="wishlist-product-cart" onClick={toCart}>
                     <p>Add To Cart</p>
                 </div>
                 {sale > 0 && (

@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(45deg, var(--primary-color), #343434);
+    background: var(--primary-color);
 }
 
 .signup-box {

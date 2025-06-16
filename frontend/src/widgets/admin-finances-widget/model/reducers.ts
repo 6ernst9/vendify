@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {defaultState} from "./defaultState";
 import {
-    AverageOrderValue,
+    AverageOrderValue, CustomerOrders, CustomerRatio, CustomerRevenue,
     OrdersPerDay,
     ProductPerformance,
     ProductRevenue,
@@ -34,8 +34,17 @@ const adminHomeSlice = createSlice({
         setProductPerformance: (state, action: PayloadAction<ProductPerformance[]>) => {
             state.productPerformance = action.payload;
         },
+        setCustomerRatio: (state, action: PayloadAction<CustomerRatio[]>) => {
+            state.customerRatio = action.payload;
+        },
+        setCustomerOrders: (state, action: PayloadAction<CustomerOrders[]>) => {
+            state.customerOrders = action.payload;
+        },
+        setCustomerRevenue: (state, action: PayloadAction<CustomerRevenue[]>) => {
+            state.customerRevenue = action.payload;
+        },
     }
 });
 
-export const { setQuickKPIs, setRevenuePerDay, setOrdersPerDay, setAverageOrderTrend, setProductPerformance, setProductRevenue, setTopSellingProducts } = adminHomeSlice.actions;
+export const { setQuickKPIs, setRevenuePerDay, setOrdersPerDay, setAverageOrderTrend, setProductPerformance, setProductRevenue, setTopSellingProducts, setCustomerRevenue, setCustomerRatio, setCustomerOrders } = adminHomeSlice.actions;
 export default adminHomeSlice.reducer;

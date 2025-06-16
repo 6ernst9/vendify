@@ -6,6 +6,9 @@ export interface FinancesState {
     topSellingProduct: TopSellingProducts[];
     productRevenue: ProductRevenue[];
     productPerformance: ProductPerformance[];
+    customerRatio: CustomerRatio[];
+    customerOrders: CustomerOrders[];
+    customerRevenue: CustomerRevenue[];
 }
 
 export interface RevenuePerDay {
@@ -51,3 +54,18 @@ export type ProductPerformance = {
     revenue: number;
     conversionRate: number;
 };
+
+export type CustomerRatio = {
+    type: string;
+    count: number;
+}
+
+export type CustomerRevenue = {
+    customerId: number;
+    totalRevenue: number;
+}
+
+export type CustomerOrders = {
+    customerId: number;
+    orderCount: number;
+}

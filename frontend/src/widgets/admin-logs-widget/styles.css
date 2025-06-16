@@ -1,0 +1,15 @@
+.admin-logs-widget {
+    background-color: #001944;
+    height: 100%;
+    display: flex;
+}
+
+.widget-main-content {
+    display: flex;
+    width: calc(100% - 290px);
+    flex: 1;
+    margin-left: 290px;
+    margin-top: 80px;
+    background-color: white;
+    border-radius: 20px 0 0 0;
+}

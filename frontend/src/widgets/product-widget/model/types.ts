@@ -14,6 +14,7 @@ export interface AddToWishlist {
     productId: number;
     storeId: string;
     accessToken: string;
+    dispatch: Dispatch;
 }
 
 export interface GetProductById {

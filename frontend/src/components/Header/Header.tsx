@@ -1,19 +1,37 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import {ReactComponent as Cart} from '../../assets/icons/cart.svg';
 import {ReactComponent as Heart} from '../../assets/icons/heart.svg';
 import {ReactComponent as User} from '../../assets/icons/user.svg';
+import {ReactComponent as Login} from '../../assets/icons/log-in.svg';
 
 import './Header.css';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
+import {userWishlistSelect} from "../../widgets/wishlist-widget/model/selectors";
+import {cartSelect} from "../../widgets/cart-widget/model/selectors";
+import {getCart} from "../../widgets/cart-widget/model/effects";
+import {getWishlist} from "../../widgets/wishlist-widget/model/effects";
 
 const Header: React.FC = () => {
     const store = useSelector(storeSelect.path);
     const name = useSelector(storeSelect.name);
+    const customerId = useSelector(sessionSelect.id);
+    const dispatch = useDispatch();
+    const accessToken = useSelector(sessionSelect.accessToken);
+    const storeId = useSelector(storeSelect.id);
     const exists = useSelector(sessionSelect.exists);
+    const wishlistCount = useSelector(userWishlistSelect.wishlist).length;
+    const cartCount = useSelector(cartSelect.totalQuantity);
+
+    useEffect(() => {
+        if(exists) {
+            getCart({customerId, accessToken, storeId, dispatch});
+            getWishlist({customerId, accessToken, storeId, dispatch})
+        }
+    }, [accessToken, customerId, exists, storeId]);
 
     return (
         <div className="store-header">
@@ -25,19 +43,25 @@ const Header: React.FC = () => {
                 <Link to={`/${store}`}>Home</Link>
                 <Link to={`/${store}/browse`}>Browse</Link>
                 <Link to={`/${store}/contact`}>Contact</Link>
-                <Link to={`/${store}/about`}>About</Link>
             </nav>
 
             <div className="store-header-account">
                 <input type="text" placeholder="Search..." className="store-header-search"/>
-                <Link to={exists ? `/${store}/account` : `/${store}/login`} className={exists? "store-header-accounts-logged" : "store-header-accounts"}>
-                    <User/>
+                <Link to={exists ? `/${store}/account` : `/${store}/login`} className={"store-header-accounts"}>
+                    {exists ? <User/> : <Login/>}
                 </Link>
                 <Link to={`/${store}/wishlist`} className="store-header-accounts">
-                    <Heart/>
+                    <div className="store-header-icon-wrapper">
+                        <Heart />
+                        {wishlistCount > 0 && <span className="store-header-badge">{wishlistCount}</span>}
+                    </div>
                 </Link>
+
                 <Link to={`/${store}/cart`} className="store-header-accounts">
-                   <Cart/>
+                    <div className="store-header-icon-wrapper">
+                        <Cart />
+                        {cartCount > 0 && <span className="store-header-badge">{cartCount}</span>}
+                    </div>
                 </Link>
             </div>
         </div>

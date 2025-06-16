@@ -3,7 +3,6 @@ import "./Cart.css";
 import {getCart, updateCart} from "../../widgets/cart-widget/model/effects";
 import {useDispatch, useSelector} from "react-redux";
 import {sessionSelect} from "../../redux/core/session/selectors";
-import {Cart} from "../../widgets/cart-widget/model/types";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {useNavigate} from "react-router-dom";
 import {cartSelect} from "../../widgets/cart-widget/model/selectors";
@@ -17,13 +16,26 @@ const CartComponent: React.FC = () => {
     const cartItems = useSelector(cartSelect.cartItems);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [pendingQuantities, setPendingQuantities] = useState<Record<number, number>>({});
 
     useEffect(() => {
         getCart({customerId: id,storeId, accessToken, dispatch});
     }, [accessToken, id]);
 
-    const handleQuantityChange = (cartItem: Cart, newQuantity: number) => {
-        updateCart({storeId: storeId, quantity: newQuantity, productId: cartItem.productId, customerId: id, dispatch, accessToken});
+    const handleUpdateCart = () => {
+        Object.entries(pendingQuantities).forEach(([productId, quantity]) => {
+            const item = cartItems.find((i) => i.productId === Number(productId));
+            if (item && item.quantity !== quantity) {
+                updateCart({
+                    storeId,
+                    quantity,
+                    productId: item.productId,
+                    customerId: id,
+                    dispatch,
+                    accessToken,
+                });
+            }
+        });
     };
 
     const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -58,8 +70,13 @@ const CartComponent: React.FC = () => {
                                 <div className="cart-price">${item.price}</div>
                                 <div className="cart-quantity">
                                     <select
-                                        value={item.quantity}
-                                        onChange={(e) => handleQuantityChange(item, Number(e.target.value))}
+                                        value={pendingQuantities[item.productId] ?? item.quantity}
+                                        onChange={(e) =>
+                                            setPendingQuantities((prev) => ({
+                                                ...prev,
+                                                [item.productId]: Number(e.target.value),
+                                            }))
+                                        }
                                         className="cart-quantity-select"
                                     >
                                         {[0, 1, 2, 3, 4, 5].map((num) => (
@@ -74,8 +91,8 @@ const CartComponent: React.FC = () => {
                         ))}
                     </div>
                     <div className="cart-actions">
-                        <div className="cart-return-shop">Return To Shop</div>
-                        <div className="cart-update-cart">Update Cart</div>
+                        <div className="cart-return-shop" onClick={() => navigate(`/${store}/browse`)}>Return To Shop</div>
+                        <div className="cart-update-cart"  onClick={handleUpdateCart}>Update Cart</div>
                     </div>
                     <div className="cart-final">
                         <div className="cart-coupon-section">

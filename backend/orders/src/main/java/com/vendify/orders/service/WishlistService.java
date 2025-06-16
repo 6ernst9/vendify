@@ -35,12 +35,17 @@ public class WishlistService {
         );
     }
 
-    public Mono<CartItem> promoteWishlist(String id) {
-        return wishlistRepository.findById(id)
+    public Flux<CartItem> promoteWishlist(long id) {
+        return wishlistRepository.findByCustomerId(id)
                 .flatMap(wishlistItem -> {
-                    var cart = new CartItem(wishlistItem.getStoreId(), wishlistItem.getCustomerId(), wishlistItem.getProductId(), 1);
-                    return cartRepository.save(cart)
-                            .doOnSuccess(c -> wishlistRepository.deleteById(id));
+                    CartItem cartItem = new CartItem(
+                            wishlistItem.getStoreId(),
+                            wishlistItem.getCustomerId(),
+                            wishlistItem.getProductId(),
+                            1
+                    );
+                    return cartRepository.save(cartItem)
+                            .flatMap(saved -> wishlistRepository.deleteById(wishlistItem.getId()).thenReturn(saved));
                 });
     }
 

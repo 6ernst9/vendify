@@ -34,7 +34,7 @@
     font-family: var(--font-family), sans-serif;
 }
 
-.product-like {
+.product-like, .product-wishlisted {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -47,6 +47,13 @@
 }
 
 .product-like svg{
+    width: 24px;
+    height: 24px;
+    color: black;
+}
+
+.product-wishlisted svg {
+    color: #ff4747;
     width: 24px;
     height: 24px;
 }
@@ -105,5 +112,5 @@ h2 {
 .product-card-rating-stars svg {
     width: 16px;
     height: 16px;
-    fill: #f5a623;
+    fill: black;
 }

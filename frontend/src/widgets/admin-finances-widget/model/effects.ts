@@ -2,7 +2,7 @@ import {getProductsProps} from "../../home-widget/model/types";
 import {request} from "../../../util/request";
 import {ACCOUNTS_ANALYTICS_BASE_URL, ORDERS_ANALYTICS_BASE_URL} from "../../../util/constants";
 import {
-    setAverageOrderTrend,
+    setAverageOrderTrend, setCustomerOrders, setCustomerRatio, setCustomerRevenue,
     setOrdersPerDay,
     setProductPerformance, setProductRevenue,
     setQuickKPIs,
@@ -96,6 +96,60 @@ export const getTopSellingProducts = async ({storeId, accessToken, dispatch }: g
         }
     }).then(async (response) => {
         dispatch(setTopSellingProducts(response.data));
+    }).catch((error) => {
+        console.log("Error fetching stores ", error);
+    })
+}
+
+export const getCustomerRatio = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+    await request({
+        url: ORDERS_ANALYTICS_BASE_URL + '/get-customer-ratio/' + storeId,
+        method: 'GET',
+        headers: {
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'analytics.get-quick-kpis',
+            'Authorization' : 'Bearer ' + accessToken
+        }
+    }).then(async (response) => {
+        dispatch(setCustomerRatio(response.data));
+    }).catch((error) => {
+        console.log("Error fetching stores ", error);
+    })
+}
+
+export const getCustomerOrders = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+    await request({
+        url: ORDERS_ANALYTICS_BASE_URL + '/get-customer-orders/' + storeId,
+        method: 'GET',
+        headers: {
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'analytics.get-quick-kpis',
+            'Authorization' : 'Bearer ' + accessToken
+        }
+    }).then(async (response) => {
+        dispatch(setCustomerOrders(response.data));
+    }).catch((error) => {
+        console.log("Error fetching stores ", error);
+    })
+}
+
+export const getCustomerRevenue = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+    await request({
+        url: ORDERS_ANALYTICS_BASE_URL + '/get-customer-revenue/' + storeId,
+        method: 'GET',
+        headers: {
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'analytics.get-quick-kpis',
+            'Authorization' : 'Bearer ' + accessToken
+        }
+    }).then(async (response) => {
+        dispatch(setCustomerRevenue(response.data));
     }).catch((error) => {
         console.log("Error fetching stores ", error);
     })

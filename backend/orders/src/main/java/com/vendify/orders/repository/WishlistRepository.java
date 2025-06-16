@@ -9,4 +9,5 @@ public interface WishlistRepository extends ReactiveCrudRepository<WishlistItem,
     Flux<WishlistItem> findWishlistItemByCustomerId(long customerId);
     Mono<WishlistItem> findByCustomerIdAndProductIdAndStoreId(long productId, long customerId, String storeId);
     Flux<WishlistItem> findByStoreId(String storeId);
+    Flux<WishlistItem> findByCustomerId(long customerId);
 }

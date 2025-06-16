@@ -93,8 +93,25 @@
     color: black;
 }
 
-.store-header-accounts-logged svg{
-    height: 24px;
-    width: 24px;
-    color: var(--primary-color);
+.store-header-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.store-header-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background-color: #ff4d4f;
+    color: white;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: var(--font-family), sans-serif;
+    line-height: 1;
 }

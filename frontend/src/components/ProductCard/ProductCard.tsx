@@ -3,9 +3,14 @@ import './ProductCard.css';
 import {ReactComponent as Heart} from '../../assets/icons/heart.svg';
 import {ReactComponent as Star} from '../../assets/icons/star.svg';
 import {ReactComponent as EmptyStar} from '../../assets/icons/star-half.svg';
+import {ReactComponent as HeartFilled} from "../../assets/icons/heart-fill.svg";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
+import {userWishlistSelect} from "../../widgets/wishlist-widget/model/selectors";
+import {removeFromWishlist} from "../../widgets/wishlist-widget/model/effects";
+import {addToWishlist} from "../../widgets/product-widget/model/effects";
+import {sessionSelect} from "../../redux/core/session/selectors";
 
 interface ProductProps {
     id: number;
@@ -22,6 +27,13 @@ const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, 
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
     const sale = calculateSalePercentage(price, oldPrice);
+    const accessToken = useSelector(sessionSelect.accessToken);
+    const customerId = useSelector(sessionSelect.id);
+    const exists = useSelector(sessionSelect.exists);
+    const storeId = useSelector(storeSelect.id);
+    const dispatch = useDispatch();
+    const wishlistItems = useSelector(userWishlistSelect.wishlist);
+    const isWishlited = wishlistItems.filter((product) => product.id === id).length === 1;
 
     const calculateReviews = () => {
         const roundedStars: JSX.Element[] = [];
@@ -45,6 +57,18 @@ const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, 
         return title.substring(0, 23) + '...';
     };
 
+    const handleWishlist = () => {
+        if(exists){
+            if(isWishlited) {
+                removeFromWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+            } else {
+                addToWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+            }
+        } else {
+            navigate(`/${store}/login`);
+        }
+    }
+
     function calculateSalePercentage(price: number, oldPrice: number | undefined): number {
         if (oldPrice === 0 || oldPrice === undefined) return 0;
         return Math.round(((oldPrice - price) / oldPrice) * 100);
@@ -59,8 +83,8 @@ const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, 
                             <p>-{sale}%</p>
                     </div>
                 )}
-                <div className="product-like">
-                    <Heart/>
+                <div className={isWishlited ? "product-wishlisted" : "product-like"} onClick={handleWishlist}>
+                    {isWishlited ? <HeartFilled /> :  <Heart />}
                 </div>
             </div>
             <h2>{truncateTitle(name)}</h2>

@@ -21,6 +21,13 @@ export interface WishlistDelProps {
     dispatch: Dispatch;
 }
 
+export interface PromoteWishlist {
+    storeId: string;
+    customerId: number;
+    accessToken: string;
+    dispatch: Dispatch;
+}
+
 export interface WishlistItemResponse {
     id: string;
     storeId: string;

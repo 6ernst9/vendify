@@ -77,7 +77,7 @@
 .product-stars svg {
     width: 16px;
     height: 16px;
-    fill: #f5a623;
+    fill: black;
 }
 
 .product-reviews {
@@ -175,6 +175,13 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+.product-wishlist-icon-wishlisted {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: #ff4d4f;
 }
 
 .product-delivery-info {
