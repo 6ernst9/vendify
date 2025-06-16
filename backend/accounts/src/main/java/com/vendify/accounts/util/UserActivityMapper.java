@@ -9,7 +9,7 @@ public class UserActivityMapper {
             if (action.startsWith("view-product:")) {
                 String productId = action.split(":")[1];
                 return userLabel + " viewed product " + productId + ".";
-            }else if (action.startsWith("add-to-cart:")) {
+            } else if (action.startsWith("add-to-cart:")) {
                 String productId = action.split(":")[1];
                 return userLabel + " added product " + productId + " to cart.";
             } else if (action.startsWith("remove-from-cart:")) {

@@ -1,5 +1,6 @@
 import {StoreState} from "../store/types";
 
 export type Stores = {
-    stores: StoreState[]
+    stores: StoreState[],
+    loaded: boolean
 }

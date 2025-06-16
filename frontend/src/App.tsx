@@ -2,15 +2,12 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router} from "react-router-dom";
 import AppRoutes from "./AppRoutes";
-import useInjectTheme from './redux/hooks/useInjectTheme';
-import useStoreFromPath from "./redux/hooks/useStoreFromPath";
+import StoreInitializer from "./components/StoreInitializer/StoreInitializer";
 
 function App() {
-    useStoreFromPath();
-    useInjectTheme();
-
     return (
         <Router>
+            <StoreInitializer/>
             <AppRoutes/>
         </Router>
     )

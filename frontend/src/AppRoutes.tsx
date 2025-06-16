@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import AdminHomeWidget from "./widgets/admin-home-widget/AdminHomeWidget";
 import AdminStoreWidget from "./widgets/admin-store-widget/AdminStoreWidget";
 import AdminStoreCreateWidget from "./widgets/admin-store-create-widget/AdminStoreCreateWidget";
@@ -32,10 +32,12 @@ import AccountWidget from "./widgets/account-widget/AccountWidget";
 import AdminAnalyticsWidget from "./widgets/admin-analytics-widget/AdminAnalyticsWidget";
 import AdminFinancesWidget from "./widgets/admin-finances-widget/AdminFinancesWidget";
 import AdminLogsWidget from "./widgets/admin-logs-widget/AdminLogsWidget";
+import Loading from "./components/Loading/Loading";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
     const dispatch = useDispatch();
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         request({
@@ -43,8 +45,10 @@ const AppRoutes = () => {
             method: "GET"
         }).then((response) => {
             dispatch(setStores(response.data));
+            setLoaded(true);
         }).catch((error) => {
             console.error("Error fetching stores:", error);
+            setLoaded(true);
         });
     }, []);
 
@@ -71,7 +75,6 @@ const AppRoutes = () => {
 
         const dynamicStoreRoutes = stores.flatMap((store) => {
             const { path } = store;
-            console.log(path);
 
             return [
                 {
@@ -123,16 +126,26 @@ const AppRoutes = () => {
                     element: <SignUpWidget/>
                 },
                 {
+                    path: `/:path/*`,
+                    element: <NotFoundWidget/>
+                },
+                {
                     path: '/admin/company/:id',
                     element: <AdminStorePageWidget/>
                 }
             ];
         });
 
-        return [...adminRoutes, ...dynamicStoreRoutes, { path: "*", element: <NotFoundWidget /> }];
+        return [...adminRoutes, ...dynamicStoreRoutes];
     }, [stores]);
 
-    return useRoutes(routes);
+    const routing = useRoutes(routes);
+
+    if (!loaded) {
+        return <Loading/>;
+    } else {
+        return routing;
+    }
 };
 
 export default AppRoutes;

@@ -1,5 +1,6 @@
 import {Stores} from "./types";
 
 export const defaultStores: Stores = {
-    stores: []
+    stores: [],
+    loaded: false
 }

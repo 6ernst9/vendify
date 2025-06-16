@@ -11,7 +11,7 @@ html, body, #root {
 }
 
 :root {
-  --primary-color: red;
+  --primary-color: black;
   --background-color: white;
 
   --font-family: 'Inter', sans-serif;

@@ -8,6 +8,7 @@ const storeSlice = createSlice({
     reducers: {
         setStores: (state, action: PayloadAction<StoreState[]>) => {
             state.stores = action.payload;
+            state.loaded = true;
         },
     }
 });

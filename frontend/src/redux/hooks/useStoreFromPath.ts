@@ -3,27 +3,40 @@ import {useEffect} from "react";
 import {storesSelect} from "../core/stores/selectors";
 import {setCurrentStore} from "../core/store/reducers";
 import {storeSelect} from "../core/store/selectors";
+import {useNavigate} from "react-router-dom";
+
+const allowedPaths = [undefined,'admin', 'home', 'login', 'sign-up'];
 
 const useStoreFromPath = () => {
     const stores = useSelector(storesSelect.stores);
+    const loaded = useSelector(storesSelect.loaded);
     const currentPath = useSelector(storeSelect.path);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const pathname = window.location.pathname;
         const segments = pathname.split('/').filter(Boolean);
         const slug = segments[0];
-        console.log(slug);
 
         if (slug === currentPath) {
             return;
         }
 
-        const foundStore = stores.find((store) => store.path === slug);
-        if (foundStore) {
-            dispatch(setCurrentStore(foundStore));
+        if(allowedPaths.includes(slug)) {
+            return;
+        }
+
+        if(loaded){
+            const foundStore = stores.find((store) => store.path === slug);
+            if (foundStore) {
+                dispatch(setCurrentStore(foundStore));
+            } else {
+                console.log("Store not found:", slug);
+                navigate('/home')
+            }
         } else {
-            console.log("Store not found:", slug);
+            return;
         }
     }, [stores]);
 };
