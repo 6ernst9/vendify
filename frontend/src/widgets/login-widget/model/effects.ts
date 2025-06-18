@@ -14,7 +14,7 @@ export const login = async ({username, password, store, dispatch}: LoginProps) =
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
-            'X-FI-V-SESSION-ID': getOrCreateSessionId(),
+            'X-FI-V-SESSION-ID': getOrCreateSessionId(store),
             'X-FI-V-DEVICE': 'DESKTOP',
             'X-FI-V-PATH': 'auth.login'
         }

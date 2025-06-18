@@ -26,6 +26,16 @@ const Account: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const cancel = () => {
+        setEmail(mail);
+        setLastName(last);
+        setFirstName(first);
+        setPhoneNumber(phone);
+        setConfirmPassword("");
+        setCurrentPassword("");
+        setNewPassword("");
+    }
+
     const logout = () => {
         dispatch(endSession());
         navigate(`/${store}`)
@@ -57,7 +67,7 @@ const Account: React.FC = () => {
                 <div className="account-page-buttons">
                     <button className="logout-btn" onClick={logout}>Logout</button>
                     <div className="account-page-form-actions">
-                        <button className="cancel-btn">Cancel</button>
+                        <button className="cancel-btn" onClick={cancel}>Cancel</button>
                         <button className="save-btn">Save Changes</button>
                     </div>
                 </div>

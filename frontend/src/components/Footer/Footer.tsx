@@ -3,8 +3,6 @@ import {ReactComponent as Facebook} from "../../assets/icons/facebook.svg";
 import {ReactComponent as LinkedIn} from "../../assets/icons/linkedin.svg";
 import {ReactComponent as Instagram} from "../../assets/icons/instagram.svg";
 import {ReactComponent as Twitter} from "../../assets/icons/twitter.svg";
-import googleplay from '../../assets/img/google_play.png';
-import appstore from '../../assets/img/app_store.png';
 import qr from '../../assets/img/qr.png';
 import "./Footer.css";
 import {useNavigate} from "react-router-dom";
@@ -17,6 +15,9 @@ const Footer: React.FC = () => {
     const name = useSelector(storeSelect.name);
     const email = useSelector(storeSelect.email);
     const phone = useSelector(storeSelect.phone);
+    const facebook = useSelector(storeSelect.facebook);
+    const instagram = useSelector(storeSelect.instagram);
+    const twitter = useSelector(storeSelect.twitter);
 
     return (
         <footer className="footer">
@@ -60,26 +61,34 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className="footer-section">
-                    <h3>Download App</h3>
-                    <p className="footer-text">Save $3 with App New User Only</p>
+                    <h3>Check Us Out</h3>
+                    <p className="footer-text">Save $3 with New User Only</p>
                     <div className="footer-qr">
                         <img src={qr}/>
                     </div>
-                    <div className="footer-apps">
-                        <img src={googleplay} className="footer-app-icon"/>
-                        <img src={appstore} className="footer-app-icon"/>
-                    </div>
                     <div className="footer-socials">
-                        <Facebook/>
+                        <Facebook onClick={() => {
+                            if(facebook) {
+                                navigate(facebook);
+                            }
+                           }}/>
                         <LinkedIn/>
-                        <Twitter/>
-                        <Instagram/>
+                        <Twitter onClick={() => {
+                            if(twitter) {
+                                navigate(twitter);
+                            }
+                        }}/>
+                        <Instagram onClick={() => {
+                            if(instagram) {
+                                navigate(instagram);
+                            }
+                        }}/>
                     </div>
                 </div>
             </div>
 
             <div className="footer-bottom">
-                <p>© Copyright {name} 2025. All rights reserved.</p>
+                <p>© Copyright {name} 2025. © Copyright Vendify 2025. All rights reserved.</p>
             </div>
         </footer>
     );

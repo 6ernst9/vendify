@@ -23,4 +23,13 @@ public interface ProductsRepository extends ReactiveCrudRepository<Product, Long
 
     @Query("SELECT * FROM products WHERE store = :store AND category = :category")
     Flux<Product> findProductsByStoreAndCategory(String store, String category);
+
+    @Query("""
+        SELECT * FROM products
+        WHERE store = :store
+        AND category = :category
+        AND id <> :productId
+        LIMIT 6
+    """)
+    Flux<Product> findRelatedProducts(String store, String category, long productId);
 }

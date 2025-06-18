@@ -36,7 +36,12 @@ public class MongoDataConfig implements CommandLineRunner {
                 customerId = 6L;
             }
 
-            var productId = random.nextInt(10) + 1;
+            int productId;
+            if (storeId.equals("6839d4104106e209e93ea39c")) {
+                productId = 1 + random.nextInt(9);
+            } else {
+                productId = 10 + random.nextInt(9);
+            }
             var quantity = random.nextInt(3) + 1;
             var unitPrice = 20 + random.nextInt(100);
             var price = unitPrice * quantity;

@@ -13,10 +13,8 @@ interface ProductProps {
     name: string;
     price: number;
     oldPrice?: number;
-    stars: number;
     reviews: number;
     images: string[];
-    sale: number;
 }
 
 const WishlistProduct: React.FC<ProductProps> = ({id, name, price, oldPrice, images}) => {

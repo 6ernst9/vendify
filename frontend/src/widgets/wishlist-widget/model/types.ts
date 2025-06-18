@@ -37,4 +37,5 @@ export interface WishlistItemResponse {
 
 export interface WishlistType {
     wishlist: Product[];
+    hasPreloaded: boolean;
 }

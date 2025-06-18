@@ -1,5 +1,4 @@
 import React, {JSX, useState} from "react";
-import {ProductDetails} from "../../types/products";
 import {ReactComponent as Star} from "../../assets/icons/star.svg";
 import {ReactComponent as EmptyStar} from "../../assets/icons/star-half.svg";
 import {ReactComponent as Heart} from "../../assets/icons/heart.svg";
@@ -16,22 +15,31 @@ import {addToCart, addToWishlist} from "../../widgets/product-widget/model/effec
 import {useNavigate} from "react-router-dom";
 import {userWishlistSelect} from "../../widgets/wishlist-widget/model/selectors";
 import {removeFromWishlist} from "../../widgets/wishlist-widget/model/effects";
+import {currentProductSelect} from "../../widgets/product-widget/model/selectors";
 
-const Product: React.FC<ProductDetails> = ({id, name, price, reviews, description, images, category}) => {
+const Product: React.FC = () => {
+    const product = useSelector(currentProductSelect.product);
     const [quantity, setQuantity] = useState(1);
     const accessToken = useSelector(sessionSelect.accessToken);
     const customerId = useSelector(sessionSelect.id);
     const exists = useSelector(sessionSelect.exists);
     const wishlistItems = useSelector(userWishlistSelect.wishlist);
-    const isWishlited = wishlistItems.filter((product) => product.id === id).length === 1;
+    const isWishlited = wishlistItems.filter((p) => p.id === product.id).length === 1;
     const storeId = useSelector(storeSelect.id);
+    const sale = calculateSalePercentage(product.price, product.oldPrice);
+
     const store = useSelector(storeSelect.path);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    function calculateSalePercentage(price: number, oldPrice: number | undefined): number {
+        if (oldPrice === 0 || oldPrice === undefined) return 0;
+        return Math.round(((oldPrice - price) / oldPrice) * 100);
+    }
+
     const calculateReviews = () => {
         const roundedStars: JSX.Element[] = [];
-        const roundedReviews = Math.round(reviews);
+        const roundedReviews = Math.round(product.reviews);
 
         for (let i = 1; i <= 5; i++) {
             if (i <= roundedReviews) {
@@ -46,7 +54,7 @@ const Product: React.FC<ProductDetails> = ({id, name, price, reviews, descriptio
 
     const handleCart = () => {
         if(exists){
-            addToCart({storeId, customerId, quantity, accessToken, dispatch, productId: id});
+            addToCart({storeId, customerId, quantity, accessToken, dispatch, productId: product.id});
         } else {
             navigate(`/${store}/login`);
         }
@@ -55,9 +63,9 @@ const Product: React.FC<ProductDetails> = ({id, name, price, reviews, descriptio
     const handleWishlist = () => {
         if(exists){
             if(isWishlited) {
-                removeFromWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+                removeFromWishlist({storeId, customerId, accessToken, productId: product.id, dispatch});
             } else {
-                addToWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+                addToWishlist({storeId, customerId, accessToken, productId: product.id, dispatch});
             }
         } else {
             navigate(`/${store}/login`);
@@ -67,29 +75,36 @@ const Product: React.FC<ProductDetails> = ({id, name, price, reviews, descriptio
     return (
         <div className="product">
             <div className="product-category">
-                <p>{category} / {name}</p>
+                <p>{product.category} / {product.name}</p>
             </div>
             <div className="product-container">
                 <div className="product-images">
                     <div className="product-thumbnail-images">
-                        {images.map((img, index) => (
+                        {product.images.map((img, index) => (
                             <img key={index} src={img} className="product-thumbnail"/>
                         ))}
                     </div>
-                    <img src={images[0]} className="product-image"/>
+                    <img src={product.images[0]} className="product-image"/>
                 </div>
 
                 <div className="product-details">
-                    <h1 className="product-title">{name}</h1>
+                    <h1 className="product-title">{product.name}</h1>
                     <div className="product-rating">
                         <div className="product-stars">
                             {calculateReviews()}
                         </div>
-                        <div className="product-reviews">({reviews} Reviews)</div>
-                        <div className="product-stock-status">In Stock</div>
+                        <div className="product-reviews">({product.reviews})</div>
+                        {product.stock > 0 ? <div className="product-stock-status">In Stock</div> :
+                            <div className="product-out-stock-status">Out of Stock</div>}
+
                     </div>
-                    <p className="product-price">${price}</p>
-                    <p className="product-description">{description}</p>
+                    <div className="product-price-container">
+                        <p className={sale > 0? 'product-price-discounted' : 'product-price' }>{product.price}$</p>
+                        {sale > 0 &&
+                            <p className='product-price-normal discounted'>{product.oldPrice}$</p>
+                        }
+                    </div>
+                    <p className="product-description">{product.description}</p>
                     <div className="product-quantity-buttons">
                         <div className="product-quantity-selector">
                             <button onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}

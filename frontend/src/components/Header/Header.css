@@ -61,7 +61,7 @@
 }
 
 .store-header-search {
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: var(--button-radius);
     background-color: #ccc;
     color: black;

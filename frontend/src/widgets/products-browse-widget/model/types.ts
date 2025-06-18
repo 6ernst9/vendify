@@ -1,17 +1,5 @@
 import {Dispatch} from "redux";
-
-export type Product = {
-    id: number;
-    store: string;
-    name: string;
-    images: string[];
-    category: string;
-    sizes: string;
-    price: number;
-    description: string;
-    reviews: number;
-    stock: number;
-}
+import {Product} from "../../../types/products";
 
 export type Products = {
     products: Product[];

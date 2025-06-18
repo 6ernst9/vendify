@@ -5,11 +5,21 @@ import {useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {homeProductsSelect} from "../../widgets/home-widget/model/selectors";
+import BestSellingSkeleton from "./BestSellingSkeleton";
 
 const BestSelling: React.FC = () => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
     const products = useSelector(homeProductsSelect.bestSelling);
+    const hasPreloaded = useSelector(homeProductsSelect.hasPreloaded);
+
+    if(!hasPreloaded) {
+        return <BestSellingSkeleton/>
+    }
+
+    if(products.length === 0) {
+        return null;
+    }
 
     return (
         <div className="best-selling">

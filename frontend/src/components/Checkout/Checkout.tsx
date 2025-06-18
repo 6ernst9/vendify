@@ -17,7 +17,6 @@ const Checkout: React.FC = () => {
     const [paymentMethod, setPaymentMethod] = useState("cash");
 
     const [firstName, setFirstName] = useState('');
-    const [companyName, setCompanyName] = useState('');
     const [street, setStreet] = useState('');
     const [apartment, setApartment] = useState('');
     const [city, setCity] = useState('');
@@ -35,7 +34,6 @@ const Checkout: React.FC = () => {
     }, [accessToken, id]);
 
     const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value);
-    const handleCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setCompanyName(e.target.value);
     const handleStreetChange = (e: React.ChangeEvent<HTMLInputElement>) => setStreet(e.target.value);
     const handleApartmentChange = (e: React.ChangeEvent<HTMLInputElement>) => setApartment(e.target.value);
     const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value);
@@ -55,12 +53,8 @@ const Checkout: React.FC = () => {
                 <h2>Home / Checkout</h2>
                 <form>
                     <label>
-                        First Name*
+                        Full Name*
                         <input type="text" required value={firstName} onChange={handleFirstNameChange}/>
-                    </label>
-                    <label>
-                        Company Name
-                        <input type="text" value={companyName} onChange={handleCompanyNameChange}/>
                     </label>
                     <label>
                         Street Name*
@@ -93,7 +87,7 @@ const Checkout: React.FC = () => {
                 {cartItems.map((cartItem) =>
                     <div className="cart-item">
                         <img src={cartItem.img}/>
-                        <span>{cartItem.name}</span>
+                        <span>{cartItem.quantity} x {cartItem.name}</span>
                         <strong>${cartItem.price}</strong>
                     </div>
                 )}

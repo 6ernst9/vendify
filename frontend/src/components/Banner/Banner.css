@@ -23,6 +23,10 @@
     font-family: var(--font-family), sans-serif;
 }
 
+.banner-categories p:hover{
+    text-decoration: underline;
+}
+
 .banner-img-container{
     display: flex;
     justify-content: center;

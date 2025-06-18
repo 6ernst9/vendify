@@ -6,6 +6,7 @@ import {userWishlistSelect} from "../../widgets/wishlist-widget/model/selectors"
 import {storeSelect} from "../../redux/core/store/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {promoteWishlist} from "../../widgets/wishlist-widget/model/effects";
+import WishlistSkeleton from "./WishlistSkeleton";
 
 const Wishlist: React.FC = () => {
     const wishlist = useSelector(userWishlistSelect.wishlist);
@@ -13,12 +14,17 @@ const Wishlist: React.FC = () => {
     const customerId = useSelector(sessionSelect.id);
     const exists = useSelector(sessionSelect.exists);
     const storeId = useSelector(storeSelect.id);
+    const hasPreloaded = useSelector(userWishlistSelect.hasPreloaded);
     const dispatch = useDispatch();
 
     const moveToBag = () => {
         if(exists) {
             promoteWishlist({storeId, customerId, accessToken, dispatch});
         }
+    }
+
+    if(!hasPreloaded) {
+        return <WishlistSkeleton/>
     }
 
     return (

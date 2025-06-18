@@ -7,6 +7,10 @@ import {homeProductsSelect} from "../../widgets/home-widget/model/selectors";
 const NewArrivals: React.FC = () => {
     const products = useSelector(homeProductsSelect.newProducts);
 
+    if(products.length === 0) {
+        return null;
+    }
+
     return (
         <div className="new-arrivals">
             <div className="new-arrivals-header">

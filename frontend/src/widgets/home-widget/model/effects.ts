@@ -1,8 +1,9 @@
 import {request} from "../../../util/request";
 import {ORDERS_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
 import {setBestSellingProducts, setNewProducts, setSaleProducts} from "./reducers";
-import {getProductProps, getProductsProps, Product} from "./types";
+import {getProductProps, getProductsProps} from "./types";
 import {updateActivity} from "../../../util/session";
+import {Product} from "../../../types/products";
 
 export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
     await updateActivity("home", "view-home", storeId);
@@ -62,6 +63,7 @@ export const getBestSellingProducts = async ({storeId, accessToken, dispatch }: 
         dispatch(setBestSellingProducts(products));
     }).catch((error) => {
         console.log("Error fetching stores ", error);
+        dispatch(setBestSellingProducts([]));
     })
 }
 

@@ -31,6 +31,15 @@ public class ProductsService {
         return productsRepository.findDiscountedProductsByStore(storeId);
     }
 
+    public Flux<Product> getRelatedProducts(long id) {
+        return productsRepository.findById(id).flatMapMany(product -> {
+            return productsRepository.findRelatedProducts(
+                    product.getStore(),
+                    product.getCategory(),
+                    product.getId());
+        });
+    }
+
     public Flux<Product> getNewestProducts(String storeId) {
         return productsRepository.findNewestProductsByStore(storeId);
     }
@@ -65,7 +74,7 @@ public class ProductsService {
                             product.getReviews(),
                             product.getStock()
                     )
-            );
+            ).subscribe();
         });
     }
 }

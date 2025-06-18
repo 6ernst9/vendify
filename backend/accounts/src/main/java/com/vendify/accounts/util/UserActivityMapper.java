@@ -21,6 +21,9 @@ public class UserActivityMapper {
             } else if (action.startsWith("remove-from-wishlist:")) {
                 String productId = action.split(":")[1];
                 return userLabel + " removed product " + productId + " from wishlist.";
+            } else if (action.startsWith("search:")) {
+                String search = action.split(":")[1];
+                return userLabel + " searched " + search + ".";
             } else if (action.equals("login")) {
                 return userLabel + " logged in.";
             } else if (action.equals("sign-up")) {

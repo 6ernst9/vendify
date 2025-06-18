@@ -17,13 +17,13 @@ interface ProductProps {
     name: string;
     price: number;
     oldPrice?: number;
-    stars: number;
     reviews: number;
     images: string[];
     sale?: number;
+    stock: number;
 }
 
-const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, stars, reviews, images}) => {
+const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, reviews, images}) => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
     const sale = calculateSalePercentage(price, oldPrice);

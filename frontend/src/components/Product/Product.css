@@ -86,9 +86,24 @@
 }
 
 .product-stock-status {
-    color: green;
+    color: var(--primary-color);
     font-weight: bold;
     font-family: var(--font-family), sans-serif;
+}
+
+.product-out-stock-status {
+    color: black;
+    font-weight: bold;
+    font-family: var(--font-family), sans-serif;
+}
+
+.product-price-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
 }
 
 .product-price {
@@ -96,7 +111,23 @@
     color: black;
     font-weight: bold;
     font-family: var(--font-family), sans-serif;
-    margin-top: 10px;
+}
+
+.discounted {
+    text-decoration: line-through;
+}
+
+.product-price-discounted {
+    font-size: 26px;
+    color: #ff4747;
+    font-weight: bold;
+    font-family: var(--font-family), sans-serif;
+}
+
+.product-price-normal {
+    font-size: 24px;
+    color: #888;
+    font-family: var(--font-family), sans-serif;
 }
 
 .product-description {

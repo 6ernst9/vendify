@@ -33,6 +33,11 @@ public class ProductController {
         return productsService.getDiscountedProducts(storeId);
     }
 
+    @GetMapping("/get-related-products/{id}")
+    public Flux<Product> getRelatedProducts(@PathVariable long id) {
+        return productsService.getRelatedProducts(id);
+    }
+
     @GetMapping("/get-newest-products/{storeId}")
     public Flux<Product> getNewestProducts(@PathVariable String storeId) {
         return productsService.getNewestProducts(storeId);

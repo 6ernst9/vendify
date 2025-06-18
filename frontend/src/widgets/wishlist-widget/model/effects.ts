@@ -27,6 +27,7 @@ export const getWishlist = async ({customerId, storeId, accessToken, dispatch} :
         dispatch(setWishlistItems(wishlistItems));
     }).catch((error) => {
         console.error(error);
+        dispatch(setWishlistItems([]));
     })
 }
 

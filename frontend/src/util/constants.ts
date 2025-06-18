@@ -9,4 +9,4 @@ export const CART_BASE_URL = 'http://localhost:8083/api/cart';
 export const WISHLIST_BASE_URL = 'http://localhost:8083/api/wishlist';
 export const ORDERS_BASE_URL = 'http://localhost:8083/api/orders';
 
-export const COOKIE_KEY = 'X-FI-V-session-id';
+export const COOKIE_KEY = 'X-FI-V-SESSION-ID-';

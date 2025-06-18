@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import {useDispatch, useSelector} from "react-redux";
 import {productsSelect} from "../../widgets/products-browse-widget/model/selectors";
@@ -6,10 +6,18 @@ import {sessionSelect} from "../../redux/core/session/selectors";
 import {getAllProducts} from "../../widgets/products-browse-widget/model/effects";
 import {storeSelect} from "../../redux/core/store/selectors";
 import './BrowseProducts.css';
-import Skeleton from "react-loading-skeleton";
+import BrowseSkeleton from "./BrowseSkeleton";
+import {useSearchParams} from "react-router-dom";
+import {Product} from "../../types/products";
 
 const BrowseProducts: React.FC = () => {
+    const [searchParams] = useSearchParams();
+    const category = searchParams.get("category");
+    const search = searchParams.get("search");
+    const [title, setTitle] = useState('Browse');
+
     const products = useSelector(productsSelect.products);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const hasPreloaded = useSelector(productsSelect.hasPreloaded);
     const store = useSelector(storeSelect.id);
     const accessToken = useSelector(sessionSelect.accessToken);
@@ -18,29 +26,43 @@ const BrowseProducts: React.FC = () => {
     useEffect(() => {
         getAllProducts({store, accessToken, dispatch});
     }, [accessToken, store]);
+
+    useEffect(() => {
+        let result = products;
+
+        if (category) {
+            result = result.filter(p => p.category?.toLowerCase() === category.toLowerCase());
+            setTitle("Category / " + category);
+        } else if (search) {
+            result = result.filter(p =>
+                p.name.toLowerCase().includes(search.toLowerCase()) ||
+                p.description?.toLowerCase().includes(search.toLowerCase())
+            );
+            setTitle("Search / " + search)
+        }
+
+        setFilteredProducts(result);
+    }, [products, category, search]);
+
+    if(!hasPreloaded) {
+        return <BrowseSkeleton/>
+    }
     return (
         <div className="browse-container">
-            <h1 className="browse-title">Home / Browse</h1>
+            <h1 className="browse-title">Home / {title}</h1>
             <div className="browse-grid">
-                {hasPreloaded
-                    ? products.map(product => (
-                        <ProductCard
-                            id={product.id}
-                            key={product.id}
-                            name={product.name}
-                            price={product.price}
-                            stars={4.7}
-                            reviews={product.reviews}
-                            images={product.images}
-                        />
-                    ))
-                : [...Array(6)].map((_, i) => (
-                        <div className="product-card" key={i}>
-                            <Skeleton height={200}/>
-                            <Skeleton width="60%"/>
-                            <Skeleton width="40%"/>
-                        </div>
-                    ))}
+                {filteredProducts.map(product => (
+                    <ProductCard
+                        id={product.id}
+                        key={product.id}
+                        name={product.name}
+                        price={product.price}
+                        oldPrice={product.oldPrice}
+                        reviews={product.reviews}
+                        images={product.images}
+                        stock={product.stock}
+                    />
+                ))}
             </div>
         </div>
     );

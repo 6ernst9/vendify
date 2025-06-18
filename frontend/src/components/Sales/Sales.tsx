@@ -11,6 +11,10 @@ const Sales: React.FC = () => {
     const navigate = useNavigate();
     const products = useSelector(homeProductsSelect.saleProducts);
 
+    if(products.length === 0) {
+        return null;
+    }
+
     return (
         <div className="sales">
             <div className="sales-header">

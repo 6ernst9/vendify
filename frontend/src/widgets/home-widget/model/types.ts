@@ -1,20 +1,11 @@
 import {Dispatch} from "redux";
-
-export interface Product {
-    id: number;
-    name: string;
-    images: string[];
-    sale: number;
-    price: number;
-    oldPrice: number;
-    reviews: number;
-    stars: number;
-}
+import {Product} from "../../../types/products";
 
 export type Products = {
     news: Product[];
     sales: Product[];
     bestSelling: Product[];
+    hasPreloaded: boolean;
 }
 
 export type getProductsProps = {
