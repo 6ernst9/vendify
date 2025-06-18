@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import './Orders.css';
 import {useSelector} from "react-redux";
 import {adminOrderSelect} from "../../widgets/admin-orders-widget/model/selectors";
-import {formatNumber} from "../../util/numbers";
+import {formatNumber, formatShortDateWithTime} from "../../util/numbers";
+import {useNavigate} from "react-router-dom";
 
 const tabs = [
     { id: 'all', label: 'All' },
@@ -14,6 +15,7 @@ const tabs = [
 const Orders: React.FC = () => {
     const [activeTab, setActiveTab] = useState('all');
     const orders = useSelector(adminOrderSelect.orders);
+    const navigate = useNavigate();
 
     return (
         <div className="orders-container">
@@ -44,9 +46,8 @@ const Orders: React.FC = () => {
                 <table className="order-table">
                     <thead>
                     <tr>
-                        <th><input type="checkbox"/></th>
-                        <th>Order</th>
-                        <th>Date</th>
+                        <th>Order No.</th>
+                        <th>Date created</th>
                         <th>Customer</th>
                         <th>Products</th>
                         <th>Status</th>
@@ -56,9 +57,8 @@ const Orders: React.FC = () => {
                     <tbody>
                     {orders.map((order) => (
                         <tr key={order.id}>
-                            <td><input type="checkbox"/></td>
-                            <td className="order-id">#{order.id}</td>
-                            <td>{order.createdAt}</td>
+                            <td className="order-id" onClick={() => navigate(`/admin/orders/${order.id}`)}>#{order.id}</td>
+                            <td>{formatShortDateWithTime(order.createdAt)}</td>
                             <td>{order.customer}</td>
                             <td>{order.items.length} item{order.items.length > 1 ? 's' : ''}</td>
                             <td><span className='badge'>{order.status}</span></td>

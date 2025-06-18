@@ -22,6 +22,11 @@ public class OrderController {
         return orderService.getOrders(customerId);
     }
 
+    @GetMapping("/get-order-by-id/{id}")
+    public Mono<Order> getOrder(@PathVariable String id) {
+        return orderService.getOrderById(id);
+    }
+
     @GetMapping("/get-orders-by-store/{storeId}")
     public Flux<Order> getOrdersByStore(@PathVariable String storeId) {
         return orderService.getOrdersByStore(storeId);
@@ -38,7 +43,7 @@ public class OrderController {
         return orderService.createOrder(order);
     }
 
-    @PutMapping("/update-order/{orderId}/{status}")
+    @PutMapping("/update-status/{orderId}/{status}")
     public Mono<Order> updateStatus(@PathVariable String orderId,
                                     @PathVariable String status) {
         return orderService.updateStatus(orderId, OrderStatus.valueOf(status));

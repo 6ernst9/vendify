@@ -6,8 +6,9 @@ export interface AdminOrders {
 
 export interface Order {
     id: string;
-    customer: string;
+    customerId: number;
     items: OrderItem[];
+    img: string;
     status: string;
     price: number;
     createdAt: string;
@@ -18,6 +19,7 @@ export interface OrderResponse {
     customerId: number;
     items: OrderItem[];
     price: number;
+    storeId: string;
     status: string;
     createdAt: string;
 }

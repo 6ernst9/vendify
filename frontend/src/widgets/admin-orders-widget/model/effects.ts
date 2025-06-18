@@ -34,6 +34,34 @@ export const getOrders = async ({id, accessToken, dispatch }: getStoresProps) =>
     })
 }
 
+export const getOrders = async ({id, accessToken, dispatch }: getStoresProps) => {
+    await request({
+        url: STORES_BASE_URL + '/get-stores-by-owner/' + id,
+        method: 'GET',
+        headers: {
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'store.getStoresByOwner',
+            'Authorization' : 'Bearer ' + accessToken
+        }
+    }).then(async (response) => {
+        const stores: StoreState[] = response.data;
+        dispatch(setAdminStores(stores));
+
+        const ordersPromises = stores.map(store =>
+            getOrdersByStore({storeId: store.id, accessToken})
+        );
+
+        const allOrdersArrays = await Promise.all(ordersPromises);
+        const allOrders = allOrdersArrays.flat();
+
+        dispatch(setOrderItems(allOrders));
+    }).catch((error) => {
+        console.log("Error fetching stores ", error);
+    })
+}
+
 export const getOrdersByStore = async ({storeId, accessToken} :GetOrders): Promise<Order[]>=> {
     return await request({
         url: ORDERS_BASE_URL + '/get-orders-by-store/' + storeId,
@@ -54,6 +82,7 @@ export const getOrdersByStore = async ({storeId, accessToken} :GetOrders): Promi
                     id: orderItem.id,
                     customer: name,
                     items: orderItem.items,
+                    storeId: orderItem.storeId,
                     status: orderItem.status,
                     price: orderItem.price,
                     createdAt: orderItem.createdAt

@@ -16,6 +16,10 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
 
+    public Mono<Order> getOrderById(String id) {
+        return orderRepository.findById(id);
+    }
+
     public Flux<Order> getOrders(long customerId) {
         return orderRepository.findByCustomerId(customerId);
     }

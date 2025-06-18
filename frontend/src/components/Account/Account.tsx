@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {endSession} from "../../redux/core/session/reducers";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
+import {formatShortDate} from "../../util/numbers";
 
 const Account: React.FC = () => {
     const store = useSelector(storeSelect.path);
@@ -73,29 +74,42 @@ const Account: React.FC = () => {
                 </div>
             </div>
 
-            <h2 className="account-page-section-title">Your Orders</h2>
-            <table className="account-page-orders-table">
-                <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Items</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div className="account-page-orders-table">
+                <h2 className="account-page-section-title">Your Orders</h2>
                 {orders.map((o) => (
-                    <tr key={o.id}>
-                        <td>#{o.id}</td>
-                        <td>{o.items.length} items</td>
-                        <td>{o.createdAt}</td>
-                        <td>${o.price}</td>
-                        <td>{o.status}</td>
-                    </tr>
+                    // <tr key={o.id}>
+                    //     <td>Order No. #{o.id}</td>
+                    //     <td>{o.items.length} items</td>
+                    //     <td>Order date: {o.createdAt}</td>
+                    //     <td>Total: {o.price}$</td>
+                    //     <td>Status: {o.status}</td>
+                    // </tr>
+                    <div className="account-page-order">
+                        <div className="account-page-order-header">
+                            <h3>Order No. #{o.id}</h3>
+                            <button className="save-btn">View order</button>
+                        </div>
+                        <div className="account-page-order-bottom">
+                            <div className="account-page-order-product-container">
+                                <img src={o.img}/>
+                                <p>{o.items.length} items</p>
+                            </div>
+                            <div className="account-page-order-product-container">
+                                <h4>Date ordered</h4>
+                                <p>{formatShortDate(o.createdAt)}</p>
+                            </div>
+                            <div className="account-page-order-product-container">
+                                <h4>Total</h4>
+                                <p>{o.price}$</p>
+                            </div>
+                            <div className="account-page-order-product-container">
+                                <h4>Status</h4>
+                                <p>{o.status}</p>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-                </tbody>
-            </table>
+            </div>
         </div>
     )
 }

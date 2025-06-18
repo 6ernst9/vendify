@@ -77,6 +77,11 @@
 
 .order-id {
     font-weight: bold;
+    cursor: pointer;
+}
+
+.order-id:hover {
+    color: #1255cb;
 }
 
 .orders-tab-button {

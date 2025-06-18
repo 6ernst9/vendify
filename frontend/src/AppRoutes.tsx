@@ -33,6 +33,7 @@ import AdminAnalyticsWidget from "./widgets/admin-analytics-widget/AdminAnalytic
 import AdminFinancesWidget from "./widgets/admin-finances-widget/AdminFinancesWidget";
 import AdminLogsWidget from "./widgets/admin-logs-widget/AdminLogsWidget";
 import Loading from "./components/Loading/Loading";
+import AdminOrderWidget from "./widgets/admin-order-widget/AdminOrderWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -66,6 +67,7 @@ const AppRoutes = () => {
             { path: "/admin/company", element: <AdminStoreWidget /> },
             { path: "/admin/company/create", element: <AdminStoreCreateWidget /> },
             { path: "/admin/orders", element: <AdminOrdersWidget /> },
+            { path: "/admin/orders/:orderId", element: <AdminOrderWidget /> },
             { path: "/admin/deals", element: <AdminDealsWidget /> },
             { path: "/admin/deals/create", element: <AdminDealsCreateWidget /> },
             { path: "/admin/products", element: <AdminProductsWidget /> },

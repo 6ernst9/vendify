@@ -15,9 +15,9 @@
 }
 
 .account-page-section-title {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--title-color);
-    margin: 0;
+    margin-bottom: 10px;
     font-family: var(--font-family), sans-serif;
 }
 
@@ -100,22 +100,56 @@
 
 .account-page-orders-table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
 }
 
-.account-page-orders-table th,
-.account-page-orders-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
+.account-page-order {
+    width: 100%;
+    padding: 15px 0;
+    gap: 10px;
+    border-top: 1px solid #c4c4c4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.account-page-orders-table th {
+.account-page-order-header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.account-page-order-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.account-page-order-product-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.account-page-order-product-container p{
     color: var(--title-color);
+    font-size: 18px;
 }
 
-.account-page-orders-table td {
-    color: var(--text-secondary-color);
-    cursor: pointer;
+.account-page-order-product-container img{
+    aspect-ratio: 1;
+    width: 250px;
+    height: 250px;
+}
+
+.account-page-order-product-container h4{
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--title-color);
 }

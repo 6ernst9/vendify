@@ -50,20 +50,20 @@ public class UserActivityMapper {
         }
 
         if (page != null) {
-            if (page.equals("/home")) {
+            if (page.equals("home")) {
                 return userLabel + " visited the homepage.";
-            } else if (page.equals("/browse")) {
+            } else if (page.equals("browse")) {
                 return userLabel + " browsed products.";
-            } else if (page.startsWith("/product:")) {
+            } else if (page.startsWith("product:")) {
                 String productId = page.split(":")[1];
                 return userLabel + " viewed product " + productId + ".";
-            } else if (page.equals("/checkout")) {
+            } else if (page.equals("checkout")) {
                 return userLabel + " entered checkout.";
-            } else if (page.equals("/cart")) {
+            } else if (page.equals("cart")) {
                 return userLabel + " viewed their cart.";
-            } else if (page.equals("/wishlist")) {
+            } else if (page.equals("wishlist")) {
                 return userLabel + " viewed their wishlist.";
-            } else if (page.startsWith("/search")) {
+            } else if (page.startsWith("search")) {
                 return userLabel + " performed a search.";
             }
         }
