@@ -29,17 +29,6 @@ public class AccountController {
         return user;
     }
 
-    @GetMapping("/get-user-by-username/{storeId}/{username}")
-    @WMTSecurityMapping(path = "get-user-by-username")
-    public Mono<User> getUserByUsername(@PathVariable String storeId,
-                                        @PathVariable String username){
-        log.info("Performing GET /get-user-by-username call. Input: username={}", username);
-        var user = accountService.getUserByUsername(storeId, username)
-                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for username " + username)));
-        log.info("Performed GET /get-user-by-username call. Input: username={}. Output={}", username, user);
-        return user;
-    }
-
     @GetMapping("/get-user-by-email/{storeId}/{email}")
     @WMTSecurityMapping(path = "get-user-by-email")
     public Mono<User> getUserByEmail(@PathVariable String storeId,

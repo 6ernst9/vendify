@@ -8,13 +8,12 @@ import NewArrivals from "../../components/NewArrival/NewArrivals";
 import Benefits from "../../components/Benefits/Benefits";
 import Footer from "../../components/Footer/Footer";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../redux/store";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {getBestSellingProducts, getDiscountedProducts, getNewestProducts} from "./model/effects";
 
 const HomeWidget: React.FC = () => {
-    const name = useSelector((state: RootState) => state.store.name);
+    const name = useSelector(storeSelect.name);
     const id = useSelector(storeSelect.id);
     const accessToken = useSelector(sessionSelect.accessToken);
     const dispatch = useDispatch();

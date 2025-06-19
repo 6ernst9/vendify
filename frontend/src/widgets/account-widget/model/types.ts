@@ -1,4 +1,5 @@
 import {Dispatch} from "redux";
+import {Address} from "../../checkout-widget/model/types";
 
 export interface AdminOrders {
     orders: Order[];
@@ -8,6 +9,7 @@ export interface Order {
     id: string;
     customerId: number;
     items: OrderItem[];
+    address: Address;
     img: string;
     status: string;
     price: number;
@@ -19,6 +21,7 @@ export interface OrderResponse {
     customerId: number;
     items: OrderItem[];
     price: number;
+    address: Address;
     storeId: string;
     status: string;
     createdAt: string;

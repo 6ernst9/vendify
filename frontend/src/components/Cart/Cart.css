@@ -12,7 +12,7 @@
     font-weight: bold;
     font-size: 18px;
     font-family: var(--font-family), sans-serif;
-    color: gray;
+    color: var(--text-secondary-color);
 }
 
 .cart-empty-message {
@@ -61,13 +61,14 @@
     display: flex;
     justify-content: space-between;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--text-secondary-color);
     border-radius: 5px;
 }
 
 .cart-header {
     font-weight: bold;
     font-family: var(--font-family), sans-serif;
+    color: var(--title-color);
 }
 
 .cart-header-item {
@@ -90,6 +91,11 @@
     width: 50px;
     height: 50px;
     border-radius: 5px;
+}
+
+.cart-item p{
+    color: var(--title-color);
+    font-size: 18px;
 }
 
 .cart-remove-btn {
@@ -125,7 +131,8 @@
 
 .cart-return-shop, .cart-update-cart {
     padding: 10px 40px;
-    border: 1px solid #000;
+    border: 1px solid var(--title-color);
+    color: var(--title-color);
     background: none;
     cursor: pointer;
     border-radius: var(--button-radius);
@@ -134,8 +141,8 @@
 }
 
 .cart-return-shop:hover, .cart-update-cart:hover {
-    background: black;
-    color: white;
+    background: var(--title-color);
+    color: var(--background-color);
 }
 
 .cart-final {
@@ -157,6 +164,16 @@
     border: 1px solid black;
     border-radius: var(--button-radius);
     font-family: var(--font-family), sans-serif;
+}
+
+.cart-summary h3 {
+    font-weight: bold;
+    color: var(--title-color);
+    font-size: 20px;
+}
+.cart-summary p {
+    color: var(--title-color);
+    font-size: 18px;
 }
 
 .cart-apply-coupon {
@@ -196,7 +213,7 @@
     padding: 5px 0;
     font-size: 16px;
     font-family: var(--font-family), sans-serif;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--text-secondary-color);
 }
 
 .cart-checkout-btn {

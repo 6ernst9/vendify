@@ -16,13 +16,12 @@ const SignUp: React.FC = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSignUp = async () => {
         console.log('Sign Up', {firstName, lastName, email, phoneNumber, password});
-        await register({firstName, lastName, email, username, phoneNumber, password, store: storeId, dispatch});
+        await register({firstName, lastName, email, phoneNumber, password, store: storeId, dispatch});
         navigate(`/${store}/home`);
     };
 
@@ -50,13 +49,6 @@ const SignUp: React.FC = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="customer-signup-input"
-                />
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
                     className="customer-signup-input"
                 />
                 <input

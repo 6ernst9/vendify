@@ -1,14 +1,15 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import './Company.css';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {ReactComponent as Search} from "../../assets/icons/search.svg";
 
-import {StoreState} from "../../redux/core/store/types";
 import {setCurrentAdminStore} from "../../widgets/admin-store-page-widget/model/reducers";
 import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
 import {getStores} from "../../widgets/admin-store-widget/model/effects";
 import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
+import {StoreProp} from "../../widgets/admin-store-widget/model/types";
+import {formatNumber} from "../../util/numbers";
 
 const Company: React.FC = () => {
     const navigate = useNavigate();
@@ -18,11 +19,31 @@ const Company: React.FC = () => {
     const accessToken = useSelector(adminSessionSelect.accessToken);
     const stores = useSelector(userStoresSelect.stores);
 
+    const [storesFiltered, setStores] = useState(stores);
+
+    useEffect(() => {
+        setStores(stores);
+    }, [stores]);
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let result = stores;
+        const search = e.target.value;
+
+        if(search !== undefined && search !== '') {
+            result = result.filter(p =>
+                p.name.toLowerCase().includes(search.toLowerCase()) ||
+                p.path?.toLowerCase().includes(search.toLowerCase())
+            );
+        }
+
+        setStores(result);
+    }
+
     useEffect(() => {
         getStores({id, accessToken, dispatch});
     }, [accessToken, id]);
 
-    const selectStore = (store: StoreState) => {
+    const selectStore = (store: StoreProp) => {
         dispatch(setCurrentAdminStore(store));
         navigate(`/admin/company/${store.id}`)
     }
@@ -43,21 +64,21 @@ const Company: React.FC = () => {
             <div className="company-search">
                 <div className="company-search-bar">
                     <Search/>
-                    <input type="text" placeholder="Search stores..."/>
+                    <input type="text" placeholder="Search stores..." onChange={handleSearch}/>
                 </div>
-                <p>{stores.length} stores</p>
+                <p>{storesFiltered.length} stores</p>
             </div>
-            {stores.length === 0 && (
+            {storesFiltered.length === 0 && (
                 <div className="company-empty-container">
                     <h2>You haven’t created a store yet</h2>
                     <p>To start selling your products, you need to create your store profile.</p>
                 </div>
             )}
-            {stores.length !== 0 && (
+            {storesFiltered.length !== 0 && (
                 <table className="company-table">
                     <thead>
                     <tr>
-                        <th>Store</th>
+                        <th>Store No.</th>
                         <th>Name</th>
                         <th>Path</th>
                         <th>Customers</th>
@@ -66,14 +87,14 @@ const Company: React.FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {stores.map((store) => (
+                    {storesFiltered.map((store) => (
                         <tr key={store.name}>
                             <td className="store-id" onClick ={() => selectStore(store)}>#{store.id}</td>
                             <td>{store.name}</td>
                             <td className="highlighted-text">/{store.path}</td>
-                            <td>245</td>
-                            <td>21</td>
-                            <td className="total">3,232,21$</td>
+                            <td>{store.customers}</td>
+                            <td>{store.orderNo}</td>
+                            <td className="total">{formatNumber(store.revenue)}$</td>
                         </tr>
                     ))}
                     </tbody>

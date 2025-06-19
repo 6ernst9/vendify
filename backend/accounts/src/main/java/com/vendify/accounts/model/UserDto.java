@@ -8,7 +8,6 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class UserDto {
-    private final String username;
     private final String firstName;
     private final String lastName;
     private final String email;

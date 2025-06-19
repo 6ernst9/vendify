@@ -4,16 +4,16 @@ export type RegisterProps = {
     email: string;
     firstName: string;
     lastName: string;
-    username: string;
     password: string;
     phoneNumber: string;
     store: string;
     dispatch: Dispatch;
 }
 
-export type getAccountByUsername = {
-    username: string;
+export type getAccountByEmail = {
+    email: string;
     accessToken: string;
+    refreshToken: string;
     store: string;
     dispatch: Dispatch;
 }

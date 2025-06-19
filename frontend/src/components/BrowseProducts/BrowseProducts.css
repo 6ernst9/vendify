@@ -11,12 +11,13 @@
 .browse-title {
     font-weight: bold;
     font-size: 18px;
-    color: gray;
+    color: var(--text-secondary-color);
 }
 
 .browse-grid {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 0));
+    justify-content: start;
     width: 100%;
 }

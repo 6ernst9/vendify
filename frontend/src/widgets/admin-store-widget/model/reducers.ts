@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {defaultStores} from "./defaultState";
-import {StoreState} from "../../../redux/core/store/types";
+import {StoreProp} from "./types";
 
 const storeSlice = createSlice({
     name: 'userStoresState',
     initialState: defaultStores,
     reducers: {
-        setAdminStores: (state, action: PayloadAction<StoreState[]>) => {
+        setAdminStores: (state, action: PayloadAction<StoreProp[]>) => {
             state.stores = action.payload;
         },
     }

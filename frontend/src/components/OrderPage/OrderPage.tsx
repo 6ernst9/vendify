@@ -27,6 +27,7 @@ const OrderPage: React.FC = () => {
     const status = useSelector(adminOrderSelect.status);
     const price = useSelector(adminOrderSelect.price);
     const items = useSelector(adminOrderSelect.items);
+    const address = useSelector(adminOrderSelect.address);
 
     const handleStatusChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         await updateStatus({id, status: e.target.value, accessToken, dispatch})
@@ -37,14 +38,14 @@ const OrderPage: React.FC = () => {
             <div className="order-page-header">
                 <h1>Order:{id}</h1>
                 <div className="order-page-header-buttons">
-                    <div className="order-page-configuration-header-button">
-                        Edit
+                    <div className="order-page-header-button" onClick={() => navigate("/admin/orders")}>
+                        Back
                     </div>
                 </div>
             </div>
             <div className="order-page-configuration-container">
                 <div className="order-page-configuration-header">
-                    <h1>General configuration</h1>
+                    <h1>General info</h1>
                 </div>
                 <div className="order-page-configuration-content">
                     <h1>ID</h1>
@@ -75,27 +76,58 @@ const OrderPage: React.FC = () => {
                     <h1>Status</h1>
                     <select className="order-page-select" onChange={handleStatusChange}>
                         {statuses.map((stat) => {
-                            return <option selected={stat.toUpperCase() === status} value={stat.toUpperCase()}>{stat}</option>
+                            return <option selected={stat.toUpperCase() === status}
+                                           value={stat.toUpperCase()}>{stat}</option>
                         })}
                     </select>
                 </div>
-                <hr className="order-page-divider"/>
-                <div className="order-page-table-content">
-                    <h1>Products</h1>
-                    <table className="order-page-table">
-                        <tbody>
-                        {items.map((product) => (
-                            <tr key={product.id}>
-                                <td>No. #{product.id}</td>
-                                <td><img src={product.images[0]}/></td>
-                                <td>{product.name}</td>
-                                <td>{product.price}$</td>
-                                <td>{product.quantity} pieces</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+            </div>
+            <div className="order-page-configuration-container">
+                <div className="order-page-configuration-header">
+                    <h1>Address</h1>
                 </div>
+                <div className="order-page-configuration-content">
+                    <h1>Phone</h1>
+                    <p>{address.phoneNumber}</p>
+                </div>
+                <hr className="order-page-divider"/>
+                <div className="order-page-configuration-content">
+                    <h1>Street</h1>
+                    <p>{address.street}</p>
+                </div>
+                <hr className="order-page-divider"/>
+                <div className="order-page-configuration-content">
+                    <h1>Apartment No.</h1>
+                    <p>{address.apartment}</p>
+                </div>
+                <hr className="order-page-divider"/>
+                <div className="order-page-configuration-content">
+                    <h1>City</h1>
+                    <p>{address.city}</p>
+                </div>
+                <hr className="order-page-divider"/>
+                <div className="order-page-configuration-content">
+                    <h1>Zip Code</h1>
+                    <p>{address.zipCode}</p>
+                </div>
+            </div>
+            <div className="order-page-configuration-container">
+                <div className="order-page-configuration-header">
+                    <h1>Products</h1>
+                </div>
+                <table className="order-page-table">
+                    <tbody>
+                    {items.map((product) => (
+                        <tr key={product.id}>
+                            <td>No. #{product.id}</td>
+                            <td><img src={product.images[0]}/></td>
+                            <td>{product.name}</td>
+                            <td>{product.price}$</td>
+                            <td>{product.quantity} pieces</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     )

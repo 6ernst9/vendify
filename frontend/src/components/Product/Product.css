@@ -12,7 +12,7 @@
     font-weight: bold;
     font-size: 18px;
     font-family: var(--font-family), sans-serif;
-    color: gray;
+    color: var(--text-secondary-color);
 }
 
 .product-container {
@@ -58,6 +58,7 @@
 .product-title {
     font-size: 24px;
     font-weight: bold;
+    color: var(--title-color);
     font-family: var(--font-family), sans-serif;
 }
 
@@ -77,11 +78,12 @@
 .product-stars svg {
     width: 16px;
     height: 16px;
-    fill: black;
+    fill: var(--title-color);
 }
 
 .product-reviews {
     font-size: 14px;
+    color: var(--text-secondary-color);
     font-family: var(--font-family), sans-serif;
 }
 
@@ -108,7 +110,7 @@
 
 .product-price {
     font-size: 26px;
-    color: black;
+    color: var(--title-color);
     font-weight: bold;
     font-family: var(--font-family), sans-serif;
 }
@@ -126,14 +128,14 @@
 
 .product-price-normal {
     font-size: 24px;
-    color: #888;
+    color: var(--title-color);
     font-family: var(--font-family), sans-serif;
 }
 
 .product-description {
     font-size: 14px;
     font-family: var(--font-family), sans-serif;
-    color: #555;
+    color: var(--text-secondary-color);
     margin-top: 10px;
 }
 
@@ -152,7 +154,7 @@
 }
 
 .product-quantity-btn {
-    background-color: #eee;
+    background-color: var(--background-color);
     padding: 10px;
     cursor: pointer;
     border: none;
@@ -166,6 +168,10 @@
     justify-content: center;
 }
 
+.product-quantity p{
+    color: var(--title-color);
+}
+
 .plus-btn {
     background-color: var(--primary-color);
 }
@@ -173,6 +179,7 @@
 .product-quantity-btn svg {
     width: 20px;
     height: 20px;
+    color: var(--title-color);
 }
 
 .plus-btn svg {
@@ -196,7 +203,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ccc;
+    border: 1px solid var(--text-secondary-color);
     border-radius: var(--button-radius);
     width: 40px;
     height: 40px;
@@ -206,6 +213,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+    color: var(--title-color);
 }
 
 .product-wishlist-icon-wishlisted {
@@ -217,7 +225,7 @@
 
 .product-delivery-info {
     margin-top: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--text-secondary-color);
     border-radius: var(--button-radius);
     padding: 20px;
     display: flex;
@@ -235,7 +243,7 @@
 .product-delivery-title {
     font-size: 18px;
     font-weight: bold;
-    color: black;
+    color: var(--title-color);
     font-family: var(--font-family), sans-serif;
 }
 
@@ -246,13 +254,18 @@
     gap: 5px;
 }
 
+.product-delivery-text p {
+    color: var(--title-color);
+}
+
 .product-delivery-link {
     font-size: 16px;
     font-family: var(--font-family), sans-serif;
-    color: black;
+    color: var(--title-color);
 }
 
 .product-delivery-icon {
     font-size: 20px;
+    color: var(--title-color);
     font-family: var(--font-family), sans-serif;
 }

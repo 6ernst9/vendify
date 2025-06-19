@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public interface OrderRepository extends ReactiveCrudRepository<Order, String> {
-    Flux<Order> findByCustomerId(long customerId);
-    Flux<Order> findByStoreId(String storeId);
+    Flux<Order> findByCustomerIdOrderByCreatedAtDesc(long customerId);
+    Flux<Order> findByStoreIdOrderByCreatedAtDesc(String storeId);
 
     @Aggregation(pipeline = {
             "{ $match: { storeId: ?0 } }",

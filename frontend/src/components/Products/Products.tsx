@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Products.css';
 import {ReactComponent as Search} from "../../assets/icons/search.svg";
 import {useSelector} from "react-redux";
@@ -15,7 +15,26 @@ const tabs = [
 const Products: React.FC = () => {
     const [activeTab, setActiveTab] = useState('all');
     const products = useSelector(userProductsSelect.products);
+    const [productsFiltered, setProducts] = useState(products);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setProducts(products);
+    }, [products]);
+    
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let result = products;
+        const search = e.target.value;
+        
+        if(search !== undefined && search !== '') {
+            result = result.filter(p =>
+                p.name.toLowerCase().includes(search.toLowerCase()) ||
+                p.description?.toLowerCase().includes(search.toLowerCase())
+            );
+        }
+        
+        setProducts(result);
+    }
 
     return (
         <div className="products-container">
@@ -39,21 +58,24 @@ const Products: React.FC = () => {
             <div className="products-search">
                 <div className="products-search-bar">
                     <Search/>
-                    <input type="text" className="search-bar" placeholder="Search products..."/>
+                    <input
+                        type="text"
+                        className="search-bar"
+                        placeholder="Search products..."
+                        onChange={handleSearch}/>
                 </div>
-                <p>{products.length} products</p>
+                <p>{productsFiltered.length} products</p>
             </div>
-            {products.length === 0 && (
+            {productsFiltered.length === 0 && (
                 <div className="product-empty-container">
                     <h2>You haven’t created a product yet</h2>
                     <p>To start selling fast, you need to create your products.</p>
                 </div>
             )}
-            {products.length !== 0 && (
+            {productsFiltered.length !== 0 && (
                 <table className="products-table">
                     <thead>
                     <tr>
-                        <th><input type="checkbox"/></th>
                         <th>Id</th>
                         <th>Product</th>
                         <th>Name</th>
@@ -63,9 +85,8 @@ const Products: React.FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {products.map((product) => (
+                    {productsFiltered.map((product) => (
                         <tr key={product.id}>
-                            <td><input type="checkbox"/></td>
                             <td>#{product.id}</td>
                             <td><img src={product.images[0]}/></td>
                             <td>{product.name}</td>

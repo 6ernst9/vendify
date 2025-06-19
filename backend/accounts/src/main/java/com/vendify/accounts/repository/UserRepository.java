@@ -7,9 +7,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface UserRepository extends ReactiveCrudRepository<User, Long> {
-    @Query("SELECT * FROM users WHERE store_id = :storeId AND username = :username")
-    Mono<User> findUserByUsername(String storeId, String username);
-
     @Query("SELECT * FROM users WHERE store_id = :storeId AND email = :email")
     Mono<User> findUserByEmail(String storeId, String email);
 

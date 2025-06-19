@@ -57,7 +57,7 @@
 .sales-title-button p {
     font-size: 18px;
     padding: 0 30px;
-    color: white;
+    color: var(--title-color);
     font-family: var(--font-family), sans-serif;
 }
 
@@ -72,6 +72,11 @@
     font-size: 30px;
     font-weight: bold;
     font-family: var(--font-family), sans-serif;
+    color: var(--title-color);
+}
+
+.sales-title-timer-container p {
+    color: var(--title-color);
 }
 
 .sales-title-timer-points{

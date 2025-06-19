@@ -62,6 +62,7 @@ export const getCart = async ({customerId, storeId, accessToken, dispatch} :GetC
         dispatch(setCartItems(fullCartItems));
     }).catch((error) => {
         console.error(error);
+        dispatch(setCartItems([]));
     })
 }
 

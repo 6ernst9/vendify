@@ -12,6 +12,7 @@ const orderSlice = createSlice({
             state.items = action.payload.items;
             state.price = action.payload.price;
             state.status = action.payload.status;
+            state.address = action.payload.address;
             state.storeId = action.payload.storeId;
             state.createdAt =action.payload.createdAt;
             state.store = action.payload.store;

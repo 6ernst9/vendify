@@ -1,4 +1,5 @@
 import {Dispatch} from "redux";
+import {Address} from "../../checkout-widget/model/types";
 
 export type getStoreProps = {
     id: string;
@@ -18,6 +19,7 @@ export interface Order {
     id: string;
     customerId: number;
     items: OrderProduct[];
+    address: Address;
     status: string;
     price: number;
     createdAt: string;

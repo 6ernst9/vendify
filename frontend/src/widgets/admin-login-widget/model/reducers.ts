@@ -14,8 +14,8 @@ const loginSlice = createSlice({
             state.logged = false;
             if(action.payload.includes('Incorrect password')){
                 state.error = 'Incorrect password';
-            } else if(action.payload.includes('Invalid username, email or phone number')){
-                state.error = 'Invalid username, email or phone number';
+            } else if(action.payload.includes('Invalid email or phone number')){
+                state.error = 'Invalid email or phone number';
             } else {
                 state.error = 'Something went wrong'
             }
@@ -29,10 +29,8 @@ const loginSlice = createSlice({
         },
         registrationFailure: (state, action: PayloadAction<string>) => {
             state.logged = false;
-            if(action.payload.includes('Username, email or phone number already used by another account')){
-                state.error = 'Username, email or phone number already used by another account';
-                } else if(action.payload.includes('Username is required')){
-                state.error = 'Username is required';
+            if(action.payload.includes('Email or phone number already used by another account')){
+                state.error = 'Email or phone number already used by another account';
             } else if(action.payload.includes('Password is required')){
                 state.error = 'Password is required';
             } else if(action.payload.includes('Password must be at least 8 characters long')) {
@@ -52,7 +50,7 @@ const loginSlice = createSlice({
             }
         },
         logout: (state) => {
-            localStorage.removeItem('session');
+            localStorage.removeItem('admin-session');
             state = defaultAuth;
         }
     }

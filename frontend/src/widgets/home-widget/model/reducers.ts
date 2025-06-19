@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {defaultProducts} from "./defaultState";
 import {Product} from "../../../types/products";
+import {Sales} from "./types";
 
 const homeProductsSlice = createSlice({
     name: 'homeProductsState',
@@ -13,7 +14,7 @@ const homeProductsSlice = createSlice({
         setNewProducts: (state, action: PayloadAction<Product[]>) => {
             state.news = action.payload;
         },
-        setSaleProducts: (state, action: PayloadAction<Product[]>) => {
+        setSaleProducts: (state, action: PayloadAction<Sales>) => {
             state.sales = action.payload;
         },
     }

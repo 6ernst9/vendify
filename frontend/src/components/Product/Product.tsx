@@ -111,7 +111,9 @@ const Product: React.FC = () => {
                                     className="product-quantity-btn">
                                 <Minus/>
                             </button>
-                            <div className="product-quantity">{quantity}</div>
+                            <div className="product-quantity">
+                                <p>{quantity}</p>
+                            </div>
                             <button onClick={() => setQuantity(quantity + 1)} className="product-quantity-btn plus-btn">
                                 <Plus/>
                             </button>

@@ -33,11 +33,8 @@ public class AuthService {
         if(ValidationUtils.isEmail(placeHolder)) {
             userMono = accountService.getUserByEmail(storeId, placeHolder)
                     .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for email " + placeHolder)));
-        } else if(ValidationUtils.isPhoneNumber(placeHolder)) {
-            userMono = accountService.getUserByPhoneNumber(storeId, placeHolder);
         } else {
-            userMono = accountService.getUserByUsername(storeId, placeHolder)
-                    .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for username " + placeHolder)));
+            userMono = accountService.getUserByPhoneNumber(storeId, placeHolder);
         }
 
         return userMono.flatMap(user -> {
@@ -46,8 +43,13 @@ public class AuthService {
                 return Mono.error(new InvalidCredentials("Invalid password", "Account's password doesn't match"));
             }
 
+            if(!user.getStoreId().equals(storeId)) {
+                log.error("Invalid storeId for user {}", user.getId());
+                return Mono.error(new UserNotFoundException("User not found", "User not found for email " + placeHolder));
+            }
+
             return sessionRepository.findLatestByUser(sessionId).flatMap(session -> {
-                var accessToken = jwtGenerator.generateAccessToken(user.getUsername(), session.getId());
+                var accessToken = jwtGenerator.generateAccessToken(user.getEmail(), session.getId());
                 var refreshToken = jwtGenerator.generateRefreshToken();
 
                 session.setAccessToken(accessToken);
@@ -55,7 +57,7 @@ public class AuthService {
                 session.setUserId(user.getId());
                 return sessionRepository.save(session).then(Mono.just(new LoginResponse(user.getId(), accessToken, refreshToken)));
             }).switchIfEmpty(sessionRepository.save(new Session(user.getId(), storeId, sessionId, "", "")).flatMap(session -> {
-                var accessToken = jwtGenerator.generateAccessToken(user.getUsername(), session.getId());
+                var accessToken = jwtGenerator.generateAccessToken(user.getEmail(), session.getId());
                 var refreshToken = jwtGenerator.generateRefreshToken();
 
                 session.setAccessToken(accessToken);
@@ -67,7 +69,6 @@ public class AuthService {
 
     public Mono<LoginResponse> register(String sessionId, UserDto userDto) {
         var emailUser = accountService.getUserByEmail(userDto.getStoreId(), userDto.getEmail());
-        var usernameUser = accountService.getUserByUsername(userDto.getStoreId(), userDto.getUsername());
         var phoneNumberUser = accountService.getUserByPhoneNumber(userDto.getStoreId(), userDto.getPhoneNumber());
 
         return emailUser.flatMap(user -> {
@@ -75,18 +76,14 @@ public class AuthService {
                 return Mono.error(new UserConflictException("Invalid email", "User with email already exists"));
             }
             return Mono.empty();
-        }).then(usernameUser.flatMap(user -> {
-            if(user != null){
-                return Mono.error(new UserConflictException("Invalid username", "User with username already exists"));
-            }
-            return Mono.empty();
-        })).then(phoneNumberUser.flatMap(user -> {
+        }).then(phoneNumberUser.flatMap(user -> {
             if(user != null){
                 return Mono.error(new UserConflictException("Invalid phone number", "User with phone number already exists"));
             }
             return Mono.empty();
-        })).then(accountService.addUser(userDto).flatMap(user -> sessionRepository.save(new Session(user.getId(), user.getStoreId(), sessionId, "", "")).flatMap(session -> {
-            var accessToken = jwtGenerator.generateAccessToken(user.getUsername(), session.getId());
+        })).then(accountService.addUser(userDto)
+                .flatMap(user -> sessionRepository.save(new Session(user.getId(), user.getStoreId(), sessionId, "", "")).flatMap(session -> {
+            var accessToken = jwtGenerator.generateAccessToken(user.getEmail(), session.getId());
             var refreshToken = jwtGenerator.generateRefreshToken();
 
             session.setAccessToken(accessToken);

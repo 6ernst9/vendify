@@ -1,16 +1,16 @@
 import {loginFailure, loginSuccess, logout} from "./reducers";
 import {getSessionState, LoginProps} from "./types";
 import {continueSession, endSession, startSession} from "../../../redux/core/adminSession/reducers";
-import {getAccountByUsername} from "../../admin-sign-up-widget/model/types";
+import {getAccountByEmail} from "../../admin-sign-up-widget/model/types";
 import {ACCOUNTS_BASE_URL, AUTH_BASE_URL} from "../../../util/constants";
 import {request} from "../../../util/request";
 import {getOrCreateSessionId} from "../../../util/session";
 
-export const login = async ({username, password, dispatch}: LoginProps) => {
+export const login = async ({email, password, dispatch}: LoginProps) => {
     await request({
         url: AUTH_BASE_URL + '/login/0',
         method: 'POST',
-        data: {placeholder: username, password},
+        data: {placeholder: email, password},
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
@@ -21,7 +21,7 @@ export const login = async ({username, password, dispatch}: LoginProps) => {
     }).then((response) => {
         dispatch(loginSuccess(response.data));
         getAccount({
-            username,
+            email: email,
             accessToken: response.data.accessToken,
             refreshToken: response.data.refreshToken,
             dispatch})
@@ -47,16 +47,16 @@ export const logOut = async ({id, dispatch}: getSessionState) => {
     })
 }
 
-export const getAccount = async({username, accessToken, refreshToken, dispatch} : getAccountByUsername) => {
+export const getAccount = async({email, accessToken, refreshToken, dispatch} : getAccountByEmail) => {
     await request({
-        url: ACCOUNTS_BASE_URL + '/get-user-by-username/0/' + username,
+        url: ACCOUNTS_BASE_URL + '/get-user-by-email/0/' + email,
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',
             'X-FI-V-DEVICE': 'DESKTOP',
-            'X-FI-V-PATH': 'account.get-user-by-username'
+            'X-FI-V-PATH': 'account.get-user-by-email'
         }
     }).then((response) => {
         dispatch(startSession({

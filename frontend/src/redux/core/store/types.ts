@@ -1,4 +1,4 @@
-type Theme = {
+export type Theme = {
     primaryColor: string;
     backgroundColor: string;
     titleColor: string;
@@ -9,7 +9,7 @@ type Theme = {
     navbarStyle: 'solid' | 'blur';
 };
 
-type ContactLinks = {
+export type ContactLinks = {
     email: string;
     phone: string;
     facebook?: string;

@@ -13,8 +13,6 @@ public class User {
     @Id
     private long id;
     @NonNull
-    private String username;
-    @NonNull
     private String firstName;
     @NonNull
     private String lastName;
@@ -27,8 +25,7 @@ public class User {
     @NonNull
     private String storeId;
 
-    public User(@NonNull String username, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String phoneNumber, @NonNull String storeId) {
-        this.username = username;
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String phoneNumber, @NonNull String storeId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

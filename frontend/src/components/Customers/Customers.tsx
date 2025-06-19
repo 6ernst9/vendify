@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Customers.css';
 import {ReactComponent as Search} from "../../assets/icons/search.svg";
 import {useSelector} from "react-redux";
@@ -6,6 +6,26 @@ import {adminCustomersSelect} from "../../widgets/admin-customers-widget/model/s
 
 const Customers: React.FC = () => {
     const customers = useSelector(adminCustomersSelect.customers);
+    const [customersFiltered, setCustomers] = useState(customers);
+
+    useEffect(() => {
+        setCustomers(customers);
+    }, [customers]);
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let result = customers;
+        const search = e.target.value;
+
+        if(search !== undefined && search !== '') {
+            result = result.filter(p =>
+                p.firstName.toLowerCase().includes(search.toLowerCase()) ||
+                p.lastName?.toLowerCase().includes(search.toLowerCase()) ||
+                p.email?.toLowerCase().includes(search.toLowerCase())
+            );
+        }
+
+        setCustomers(result);
+    }
 
     return (
         <div className="customers-container">
@@ -15,9 +35,13 @@ const Customers: React.FC = () => {
             <div className="customers-search">
                 <div className="customers-search-bar">
                     <Search/>
-                    <input type="text" className="search-bar" placeholder="Search customers..."/>
+                    <input
+                        type="text"
+                        className="search-bar"
+                        onChange={handleSearch}
+                        placeholder="Search customers..."/>
                 </div>
-                <p>{customers.length} customers</p>
+                <p>{customersFiltered.length} customers</p>
             </div>
             <table className="customers-table">
                 <thead>
@@ -31,7 +55,7 @@ const Customers: React.FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {customers.map((customer) => (
+                {customersFiltered.map((customer) => (
                     <tr key={customer.id}>
                         <td><input type="checkbox"/></td>
                         <td>#{customer.id}</td>

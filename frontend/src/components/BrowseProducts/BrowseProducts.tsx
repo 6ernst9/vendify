@@ -39,6 +39,8 @@ const BrowseProducts: React.FC = () => {
                 p.description?.toLowerCase().includes(search.toLowerCase())
             );
             setTitle("Search / " + search)
+        } else {
+            setTitle("Browse");
         }
 
         setFilteredProducts(result);

@@ -19,6 +19,7 @@ import {updateActivity} from "../../util/session";
 const Header: React.FC = () => {
     const store = useSelector(storeSelect.path);
     const name = useSelector(storeSelect.name);
+    const logo = useSelector(storeSelect.logo);
     const customerId = useSelector(sessionSelect.id);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Header: React.FC = () => {
     return (
         <div className="store-header">
             <Link to={`/${store}`} className="store-header-logo">
+                {logo !== '' && <img src={logo}/>}
                 <h2>{name}</h2>
             </Link>
 

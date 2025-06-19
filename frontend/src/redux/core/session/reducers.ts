@@ -1,10 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { defaultSession } from "./defaultState";
-import { User } from "./types";
+import {UserSession} from "./types";
+
+const getSessionKey = () => {
+    const path = window.location.pathname.split('/');
+    const storeId = path[1];
+    return `session-${storeId}`;
+};
 
 const loadSession = () => {
     try {
-        const serializedSession = localStorage.getItem('session');
+        const key = getSessionKey();
+        const serializedSession = localStorage.getItem(key);
         if (serializedSession === null) return defaultSession;
         return JSON.parse(serializedSession);
     } catch (e) {
@@ -16,27 +23,34 @@ const sessionSlice = createSlice({
     name: 'sessionState',
     initialState: loadSession(),
     reducers: {
-        startSession: (state, action: PayloadAction<User>) => {
+        startSession: (state, action: PayloadAction<UserSession>) => {
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
-            state.username = action.payload.username;
             state.email = action.payload.email;
             state.id = action.payload.id;
             state.phoneNumber = action.payload.phoneNumber;
-            localStorage.setItem('session', JSON.stringify(state));
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
+            localStorage.setItem(getSessionKey(), JSON.stringify(state));
         },
-        continueSession: (state, action: PayloadAction<User>) => {
+        continueSession: (state, action: PayloadAction<UserSession>) => {
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
-            state.username = action.payload.username;
             state.email = action.payload.email;
             state.id = action.payload.id;
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
             state.phoneNumber = action.payload.phoneNumber;
-            localStorage.setItem('session', JSON.stringify(state));
+            state.storeId = action.payload.storeId;
+            localStorage.setItem(getSessionKey(), JSON.stringify(state));
         },
         endSession: (state) => {
-            localStorage.removeItem('session');
-            state = defaultSession
+            localStorage.removeItem(getSessionKey());
+            state.firstName = defaultSession.firstName;
+            state.lastName = defaultSession.lastName;
+            state.email = defaultSession.email;
+            state.id = defaultSession.id;
+            state.phoneNumber = defaultSession.phoneNumber;
         }
     }
 });

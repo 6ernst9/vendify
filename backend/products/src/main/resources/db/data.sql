@@ -19,6 +19,6 @@ INSERT INTO products (id, store, name, images, category, sizes, price, old_price
                                                                                                                    (18, '6839d4104106e209e93ea39d', 'Product 18', '{https://firebasestorage.googleapis.com/v0/b/isproject-6332b.appspot.com/o/products%2Fiphone-13-pro-silver.jpg?alt=media&token=4c85d07d-c464-4c23-b107-32d6030910c7}', 'Clothing', '{}', 113.5, NULL, 'Description for Product 18', 4.0, 12);
 
 INSERT INTO sales (id, name, store, percentage, product_ids, end_date)
-VALUES (1, 'Spring Sale', '6839d4104106e209e93ea39c', 20.0, '{1,2,3}', '2025-06-06T00:00:00');
+VALUES (1, 'Spring Sale', '6839d4104106e209e93ea39c', 20.0, '{1,2,3}', '2025-06-30T00:00:00');
 INSERT INTO sales (id, name, store, percentage, product_ids, end_date)
-VALUES (2, 'Budget Blast', '6839d4104106e209e93ea39d', 15.0, '{10,11,12}', '2025-06-06T00:00:00');
+VALUES (2, 'Budget Blast', '6839d4104106e209e93ea39d', 15.0, '{10,11,12}', '2025-06-30T00:00:00');

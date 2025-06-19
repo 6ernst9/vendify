@@ -2,8 +2,7 @@ import {request} from "../../../util/request";
 import {PRODUCTS_BASE_URL, STORES_BASE_URL} from "../../../util/constants";
 import {setAdminProducts} from "./reducers";
 import {getProductsProps, Product} from "./types";
-import {getStoresProps} from "../../admin-store-widget/model/types";
-import {StoreState} from "../../../redux/core/store/types";
+import {getStoresProps, StoreProp} from "../../admin-store-widget/model/types";
 import {setAdminStores} from "../../admin-store-widget/model/reducers";
 
 export const getProducts = async ({id, accessToken, dispatch }: getStoresProps) => {
@@ -18,7 +17,7 @@ export const getProducts = async ({id, accessToken, dispatch }: getStoresProps) 
             'Authorization' : 'Bearer ' + accessToken
         }
     }).then(async (response) => {
-        const stores: StoreState[] = response.data;
+        const stores: StoreProp[] = response.data;
         dispatch(setAdminStores(stores));
 
         const productPromises = stores.map((store) =>

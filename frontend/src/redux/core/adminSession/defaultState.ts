@@ -1,12 +1,12 @@
-import {UserSession} from "./types";
+import {UserSession} from "../session/types";
 
 export const defaultSession: UserSession = {
     accessToken: '',
     refreshToken: '',
     firstName: '',
     lastName: '',
-    username: '',
     email: '',
     id: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    storeId: ''
 }

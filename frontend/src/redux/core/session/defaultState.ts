@@ -5,8 +5,8 @@ export const defaultSession: UserSession = {
     refreshToken: '',
     firstName: '',
     lastName: '',
-    username: '',
     email: '',
     id: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    storeId: ''
 }

@@ -92,18 +92,12 @@ const Checkout: React.FC = () => {
                     </div>
                 )}
                 <hr/>
-                <div className="summary-row">Subtotal: <span>${subtotal}</span></div>
+                <div className="summary-row">Subtotal: <span>{subtotal}$</span></div>
                 <div className="summary-row">Shipping: <span>Free</span></div>
-                <div className="summary-row total">Total: <span>${subtotal}</span></div>
+                <hr/>
+                <div className="summary-row total">Total: <span>{subtotal}$</span></div>
 
                 <div className="payment-methods">
-                    <label>
-                        <input type="radio" name="payment" value="bank"
-                               checked={paymentMethod === "bank"}
-                               onChange={() => setPaymentMethod("bank")}
-                        />
-                        Bank
-                    </label>
                     <label>
                         <input type="radio" name="payment" value="cash"
                                checked={paymentMethod === "cash"}
@@ -113,8 +107,8 @@ const Checkout: React.FC = () => {
                     </label>
                     <div className="payment-icons">
                         <img src="https://img.icons8.com/color/48/visa.png" alt="Visa"/>
-                        <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard" />
-                        <img src="https://img.icons8.com/color/48/amex.png" alt="Amex" />
+                        <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard"/>
+                        <img src="https://img.icons8.com/color/48/amex.png" alt="Amex"/>
                     </div>
                 </div>
 

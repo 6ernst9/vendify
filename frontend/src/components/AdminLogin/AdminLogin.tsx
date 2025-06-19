@@ -10,14 +10,14 @@ const AdminLogin: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [username, setUsername] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)
+    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)
     const handlePassChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)
 
     const handleSubmit = async () => {
-        await login({username, password, dispatch});
+        await login({email: email, password, dispatch});
     };
 
     return (
@@ -30,12 +30,12 @@ const AdminLogin: React.FC = () => {
                 <h2 className="admin-login-title">Login</h2>
                 <form className="admin-login-form">
                     <label className="admin-login-label">
-                        Username
+                        Email
                         <input
                             type="text"
                             className="admin-login-input"
                             onChange={handleEmailChange}
-                            placeholder="Your username"/>
+                            placeholder="Your email"/>
                     </label>
 
                     <label className="admin-login-label">

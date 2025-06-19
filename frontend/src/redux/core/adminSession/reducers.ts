@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { defaultSession } from "./defaultState";
-import {User, UserSession} from "./types";
+import {UserSession} from "../session/types";
 
 const loadSession = () => {
     try {
-        const serializedSession = localStorage.getItem('adminSession');
+        const serializedSession = localStorage.getItem('admin-session');
         if (serializedSession === null) return defaultSession;
         return JSON.parse(serializedSession);
     } catch (e) {
@@ -19,27 +19,27 @@ const sessionSlice = createSlice({
         startSession: (state, action: PayloadAction<UserSession>) => {
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
-            state.username = action.payload.username;
             state.email = action.payload.email;
             state.id = action.payload.id;
             state.phoneNumber = action.payload.phoneNumber;
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
-            localStorage.setItem('adminSession', JSON.stringify(state));
+            state.storeId = action.payload.storeId;
+            localStorage.setItem('admin-session', JSON.stringify(state));
         },
         continueSession: (state, action: PayloadAction<UserSession>) => {
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
-            state.username = action.payload.username;
             state.email = action.payload.email;
             state.id = action.payload.id;
             state.phoneNumber = action.payload.phoneNumber;
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
-            localStorage.setItem('adminSession', JSON.stringify(state));
+            state.storeId = action.payload.storeId;
+            localStorage.setItem('admin-session', JSON.stringify(state));
         },
         endSession: (state) => {
-            localStorage.removeItem('adminSession');
+            localStorage.removeItem('admin-session');
             state = defaultSession
         }
     }

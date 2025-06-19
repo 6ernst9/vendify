@@ -52,13 +52,13 @@ public class JwtGenerator implements Serializable {
         return expiration.before(new Date());
     }
 
-    public String generateAccessToken(String username, Long sessionId) {
+    public String generateAccessToken(String email, Long sessionId) {
         var claims = new HashMap<String, Object>();
         claims.put("sessionId", sessionId);
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(username)
+                .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + idpProperties.getValidity().accessToken().toMillis()))
                 .signWith(SignatureAlgorithm.HS512, idpProperties.getSecrets().access()).compact();
@@ -75,9 +75,9 @@ public class JwtGenerator implements Serializable {
     }
 
     public Boolean validateToken(String token) {
-        var username = getUsernameFromToken(token);
+        var email = getUsernameFromToken(token);
         var sessionId = getSessionFromToken(token);
 
-        return (!username.isEmpty() && sessionId != null && !isTokenExpired(token));
+        return (!email.isEmpty() && sessionId != null && !isTokenExpired(token));
     }
 }

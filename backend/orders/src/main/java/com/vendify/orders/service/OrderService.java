@@ -21,11 +21,11 @@ public class OrderService {
     }
 
     public Flux<Order> getOrders(long customerId) {
-        return orderRepository.findByCustomerId(customerId);
+        return orderRepository.findByCustomerIdOrderByCreatedAtDesc(customerId);
     }
 
     public Flux<Order> getOrdersByStore(String storeId) {
-        return orderRepository.findByStoreId(storeId);
+        return orderRepository.findByStoreIdOrderByCreatedAtDesc(storeId);
     }
 
     public Mono<Order> createOrder(OrderDTO orderDTO) {

@@ -3,7 +3,6 @@ export type User = {
     firstName:string;
     lastName:string;
     email: string;
-    username: string,
     phoneNumber: string,
     store: string;
     lastLogged: string;
@@ -14,7 +13,6 @@ export type UserResponse = {
     firstName:string;
     lastName:string;
     email: string;
-    username: string,
     phoneNumber: string,
 }
 

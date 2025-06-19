@@ -5,7 +5,6 @@ export const adminSessionSelect = ({
     refreshToken: (state: RootState) => state.adminSession.refreshToken,
     id: (state: RootState) => state.adminSession.id,
     email: (state: RootState) => state.adminSession.email,
-    username: (state: RootState) => state.adminSession.username,
     firstName: (state: RootState) => state.adminSession.firstName,
     lastName: (state: RootState) => state.adminSession.lastName,
     phoneNumber: (state: RootState) => state.adminSession.phoneNumber,

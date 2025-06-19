@@ -30,12 +30,12 @@
 }
 
 .benefit-card h2 {
-    color: black;
+    color: var(--title-color);
     font-size: 20px;
     font-weight: bold;
 }
 
 .benefit-card p {
-    color: black;
+    color: var(--title-color);
     font-size: 18px;
 }

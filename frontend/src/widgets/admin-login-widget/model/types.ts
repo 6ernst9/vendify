@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 
 export type LoginProps = {
-    username: string;
+    email: string;
     password: string;
     dispatch: Dispatch;
 }

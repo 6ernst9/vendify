@@ -19,10 +19,6 @@ public class AccountService {
         return userRepository.findById(id);
     }
 
-    public Mono<User> getUserByUsername(String storeId, String username){
-        return userRepository.findUserByUsername(storeId, username);
-    }
-
     public Mono<User> getUserByEmail(String storeId, String email){
         return userRepository.findUserByEmail(storeId, email);
     }
@@ -38,7 +34,6 @@ public class AccountService {
     public Mono<User> addUser(UserDto userDto) {
         return userRepository.save(
                 new User(
-                        userDto.getUsername(),
                         userDto.getFirstName(),
                         userDto.getLastName(),
                         userDto.getEmail(),

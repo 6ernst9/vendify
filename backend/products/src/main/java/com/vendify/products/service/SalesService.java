@@ -19,4 +19,8 @@ public class SalesService {
         return saleRepository.save(sale)
                 .then(productsRepository.applyDiscountToProducts(saleDTO.getPercentage() / 100, saleDTO.getProductIds()));
     }
+
+    public Mono<Sale> getSale(String storeId) {
+        return saleRepository.findNextActiveSaleByStore(storeId);
+    }
 }

@@ -19,7 +19,7 @@ const Login: React.FC = () => {
 
     const handleLogin = async () => {
         console.log('Login', {emailOrPhone, password});
-        await login({username: emailOrPhone, password, store: storeId, dispatch});
+        await login({email: emailOrPhone, password, store: storeId, dispatch});
         navigate(`/${store}/home`);
     };
 

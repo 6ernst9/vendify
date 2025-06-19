@@ -7,6 +7,8 @@ import {endSession} from "../../redux/core/session/reducers";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {formatShortDate} from "../../util/numbers";
+import {setCartItems} from "../../widgets/cart-widget/model/reducers";
+import {setWishlistItems} from "../../widgets/wishlist-widget/model/reducers";
 
 const Account: React.FC = () => {
     const store = useSelector(storeSelect.path);
@@ -39,6 +41,8 @@ const Account: React.FC = () => {
 
     const logout = () => {
         dispatch(endSession());
+        dispatch(setCartItems([]));
+        dispatch(setWishlistItems([]));
         navigate(`/${store}`)
     }
     return (
@@ -77,13 +81,6 @@ const Account: React.FC = () => {
             <div className="account-page-orders-table">
                 <h2 className="account-page-section-title">Your Orders</h2>
                 {orders.map((o) => (
-                    // <tr key={o.id}>
-                    //     <td>Order No. #{o.id}</td>
-                    //     <td>{o.items.length} items</td>
-                    //     <td>Order date: {o.createdAt}</td>
-                    //     <td>Total: {o.price}$</td>
-                    //     <td>Status: {o.status}</td>
-                    // </tr>
                     <div className="account-page-order">
                         <div className="account-page-order-header">
                             <h3>Order No. #{o.id}</h3>
@@ -92,7 +89,7 @@ const Account: React.FC = () => {
                         <div className="account-page-order-bottom">
                             <div className="account-page-order-product-container">
                                 <img src={o.img}/>
-                                <p>{o.items.length} items</p>
+                                <p>{o.items.reduce((total, item) => total + item.quantity, 0)} items</p>
                             </div>
                             <div className="account-page-order-product-container">
                                 <h4>Date ordered</h4>

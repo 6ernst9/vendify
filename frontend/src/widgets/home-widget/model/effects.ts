@@ -1,9 +1,10 @@
 import {request} from "../../../util/request";
-import {ORDERS_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
+import {ORDERS_BASE_URL, PRODUCTS_BASE_URL, SALES_BASE_URL} from "../../../util/constants";
 import {setBestSellingProducts, setNewProducts, setSaleProducts} from "./reducers";
 import {getProductProps, getProductsProps} from "./types";
 import {updateActivity} from "../../../util/session";
 import {Product} from "../../../types/products";
+import {Deal} from "../../admin-deals-create-widget/model/types";
 
 export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
     await updateActivity("home", "view-home", storeId);
@@ -18,9 +19,32 @@ export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: g
             'Authorization' : 'Bearer ' + accessToken
         }
     }).then(async (response) => {
-        dispatch(setSaleProducts(response.data));
+        const products: Product[] = response.data;
+        const deal = await getDiscount({storeId, accessToken, dispatch});
+        dispatch(setSaleProducts({
+            products, sale: deal
+        }));
     }).catch((error) => {
         console.log("Error fetching stores ", error);
+    })
+}
+
+export const getDiscount = async ({storeId, accessToken }: getProductsProps) : Promise<Deal> => {
+    return await request({
+        url: SALES_BASE_URL + '/get-sales/' + storeId,
+        method: 'GET',
+        headers: {
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'products.get-discounted-products',
+            'Authorization' : 'Bearer ' + accessToken
+        }
+    }).then(async (response) => {
+        return response.data;
+    }).catch((error) => {
+        console.log("Error fetching sale ", error);
+        return null;
     })
 }
 

@@ -80,10 +80,6 @@
     text-align: left;
 }
 
-.company-table td {
-    cursor: pointer;
-}
-
 .total {
     font-weight: bold;
 }
@@ -132,6 +128,7 @@
 
 .store-id{
     font-weight: bold;
+    cursor: pointer;
     color: black;
 }
 

@@ -11,7 +11,7 @@
 .account-page-title {
     font-weight: bold;
     font-size: 18px;
-    color: gray;
+    color: var(--text-secondary-color);
 }
 
 .account-page-section-title {
@@ -82,7 +82,7 @@
 .cancel-btn {
     background: none;
     border: 1px solid #d3d3d3;
-    color: #333;
+    color: var(--text-secondary-color);
     padding: 10px 20px;
     border-radius: 6px;
     cursor: pointer;
@@ -144,8 +144,8 @@
 
 .account-page-order-product-container img{
     aspect-ratio: 1;
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
 }
 
 .account-page-order-product-container h4{

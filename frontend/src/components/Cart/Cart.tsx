@@ -20,7 +20,7 @@ const CartComponent: React.FC = () => {
 
     useEffect(() => {
         getCart({customerId: id,storeId, accessToken, dispatch});
-    }, [accessToken, id]);
+    }, [accessToken, id, storeId]);
 
     const handleUpdateCart = () => {
         Object.entries(pendingQuantities).forEach(([productId, quantity]) => {
@@ -65,9 +65,13 @@ const CartComponent: React.FC = () => {
                             <div key={item.id} className="cart-item">
                                 <div className="cart-product">
                                     <img src={item.img} className="cart-product-image"/>
-                                    <div className="cart-product-name">{item.name}</div>
+                                    <div className="cart-product-name">
+                                        <p>{item.name}</p>
+                                    </div>
                                 </div>
-                                <div className="cart-price">${item.price}</div>
+                                <div className="cart-price">
+                                    <p>${item.price}</p>
+                                </div>
                                 <div className="cart-quantity">
                                     <select
                                         value={pendingQuantities[item.productId] ?? item.quantity}
@@ -86,7 +90,9 @@ const CartComponent: React.FC = () => {
                                         ))}
                                     </select>
                                 </div>
-                                <div className="cart-subtotal">${item.price * item.quantity}</div>
+                                <div className="cart-subtotal">
+                                    <p>${item.price * item.quantity}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -109,16 +115,16 @@ const CartComponent: React.FC = () => {
                         <div className="cart-summary">
                             <h3>Cart Total</h3>
                             <div className="cart-summary-item">
-                                <div className="cart-summary-label">Subtotal:</div>
-                                <div className="cart-summary-value">${subtotal}</div>
+                                <p>Subtotal:</p>
+                                <p>${subtotal}</p>
                             </div>
                             <div className="cart-summary-item">
-                                <div className="cart-summary-label">Shipping:</div>
-                                <div className="cart-summary-value">Free</div>
+                                <p>Shipping:</p>
+                                <p>Free</p>
                             </div>
                             <div className="cart-summary-item">
-                                <div className="cart-summary-label">Total:</div>
-                                <div className="cart-summary-value">${subtotal}</div>
+                                <p>Total:</p>
+                                <p>${subtotal}</p>
                             </div>
                             <button className="cart-checkout-btn" onClick={() => navigate(`/${store}/checkout`)}>Proceed
                                 to checkout

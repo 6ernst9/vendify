@@ -52,7 +52,7 @@ public class MongoDataConfig implements CommandLineRunner {
             var order = new Order(
                     storeId,
                     customerId,
-                    new Address("Street " + i, "City", "Region", "0000", "07000000" + i),
+                    new Address("Street " + i, "City", "01", "07000000" + i, "00000"),
                     price,
                     List.of(new OrderItem((long) productId, quantity)),
                     OrderStatus.PLACED,

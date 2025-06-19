@@ -4,6 +4,7 @@ export const storeSelect = ({
     id: (state: RootState) => state.store.id,
     path: (state: RootState) => state.store.path,
     name: (state: RootState) => state.store.name,
+    logo: (state: RootState) => state.store.logo,
     theme: (state: RootState) => state.store.theme,
     categories: (state: RootState) => state.store.categories,
     primaryColor: (state: RootState) => state.store.theme.primaryColor,

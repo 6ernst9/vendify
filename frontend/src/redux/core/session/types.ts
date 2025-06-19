@@ -6,14 +6,14 @@ export type UserSession = {
     lastName: string;
     email: string;
     phoneNumber: string;
-    username: string;
+    storeId: string;
 }
 
 export type User = {
     id: string,
     firstName:string;
     lastName:string;
-    email: string;
-    username: string,
+    email: string
     phoneNumber: string
+    storeId: string;
 }
