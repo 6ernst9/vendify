@@ -36,11 +36,11 @@ export const getOrder = async ({id, accessToken, dispatch }: getStoreProps) => {
             store: store.name
         }));
     }).catch((error) => {
-        console.log("Error fetching store");
+        console.log("Error fetching store", error);
     })
 }
 
-export const updateStatus = async ({id, status, accessToken, dispatch }: updateProps) => {
+export const updateStatus = async ({id, status, accessToken }: updateProps) => {
     await request({
         url: ORDERS_BASE_URL + '/update-status/' + id + '/' + status,
         method: 'PUT',
@@ -58,7 +58,7 @@ export const updateStatus = async ({id, status, accessToken, dispatch }: updateP
     })
 }
 
-const getStore = async ({id, accessToken, dispatch }: getStoreProps): Promise<StoreState> => {
+const getStore = async ({id, accessToken }: getStoreProps): Promise<StoreState> => {
     return await request({
         url: STORES_BASE_URL + '/get-store-by-id/' + id,
         method: 'GET',
@@ -72,7 +72,7 @@ const getStore = async ({id, accessToken, dispatch }: getStoreProps): Promise<St
     }).then((response) => {
         return response.data;
     }).catch((error) => {
-        console.log("Error fetching store");
+        console.log("Error fetching store", error);
         return null;
     })
 }
