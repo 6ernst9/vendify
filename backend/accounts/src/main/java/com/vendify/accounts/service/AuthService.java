@@ -32,15 +32,16 @@ public class AuthService {
         Mono<User> userMono;
         if(ValidationUtils.isEmail(placeHolder)) {
             userMono = accountService.getUserByEmail(storeId, placeHolder)
-                    .switchIfEmpty(Mono.error(new UserNotFoundException("User not found", "User not found for email " + placeHolder)));
+                    .switchIfEmpty(Mono.error(new UserNotFoundException("Invalid email or phone number", "User not found for email " + placeHolder)));
         } else {
-            userMono = accountService.getUserByPhoneNumber(storeId, placeHolder);
+            userMono = accountService.getUserByPhoneNumber(storeId, placeHolder)
+                    .switchIfEmpty(Mono.error(new UserNotFoundException("Invalid email or phone number", "Invalid phone number " + placeHolder)));
         }
 
         return userMono.flatMap(user -> {
             if(!user.getPassword().equals(password)) {
-                log.error("Invalid password for user {}", user.getId());
-                return Mono.error(new InvalidCredentials("Invalid password", "Account's password doesn't match"));
+                log.error("Incorrect password for user {}", user.getId());
+                return Mono.error(new InvalidCredentials("Incorrect password", "Account's password doesn't match"));
             }
 
             if(!user.getStoreId().equals(storeId)) {

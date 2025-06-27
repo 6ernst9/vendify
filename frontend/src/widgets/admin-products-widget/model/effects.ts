@@ -1,11 +1,12 @@
 import {request} from "../../../util/request";
 import {PRODUCTS_BASE_URL, STORES_BASE_URL} from "../../../util/constants";
 import {setAdminProducts} from "./reducers";
-import {getProductsProps, Product} from "./types";
-import {getStoresProps, StoreProp} from "../../admin-store-widget/model/types";
+import {Product} from "./types";
+import {StoreProp} from "../../admin-store-widget/model/types";
 import {setAdminStores} from "../../admin-store-widget/model/reducers";
+import {Dispatch} from "redux";
 
-export const getProducts = async ({id, accessToken, dispatch }: getStoresProps) => {
+export const getProducts = async (id: number, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: STORES_BASE_URL + '/get-stores-by-owner/' + id,
         method: 'GET',
@@ -21,7 +22,7 @@ export const getProducts = async ({id, accessToken, dispatch }: getStoresProps) 
         dispatch(setAdminStores(stores));
 
         const productPromises = stores.map((store) =>
-            getProductsByStore({store: store.id, accessToken})
+            getProductsByStore( store.id, accessToken)
         );
 
         const allProductsArrays = await Promise.all(productPromises);
@@ -33,7 +34,7 @@ export const getProducts = async ({id, accessToken, dispatch }: getStoresProps) 
     })
 }
 
-export const getProductsByStore = async ({store, accessToken }: getProductsProps): Promise<Product[]> => {
+export const getProductsByStore = async (store: string, accessToken: string): Promise<Product[]> => {
     return await request({
         url: PRODUCTS_BASE_URL + '/get-products-by-store/' + store,
         method: 'GET',

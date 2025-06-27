@@ -23,9 +23,9 @@ const HomeWidget: React.FC = () => {
     }, [name]);
 
     useEffect(() => {
-        getDiscountedProducts({storeId: id, accessToken, dispatch});
-        getNewestProducts({storeId: id, accessToken, dispatch});
-        getBestSellingProducts({storeId: id, accessToken, dispatch});
+        getDiscountedProducts(id, accessToken, dispatch);
+        getNewestProducts(id, accessToken, dispatch);
+        getBestSellingProducts(id, accessToken, dispatch);
     }, [accessToken, id]);
 
     return (

@@ -9,7 +9,8 @@ export const defaultState: ProductState = {
         reviews: 0,
         description: '',
         images: [],
-        stock: 0
+        stock: 0,
+        noReviews: 0,
     },
     related: [],
     hasPreloaded: false

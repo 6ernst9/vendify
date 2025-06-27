@@ -3,12 +3,15 @@ package com.vendify.orders.controller;
 import com.vendify.orders.model.Order;
 import com.vendify.orders.model.OrderDTO;
 import com.vendify.orders.model.OrderStatus;
+import com.vendify.orders.model.RateItem;
 import com.vendify.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -39,8 +42,14 @@ public class OrderController {
     }
 
     @PostMapping("/create-order")
-    public Mono<Order> createOrder(@RequestBody OrderDTO order) {
+    public Mono<Void> createOrder(@RequestBody OrderDTO order) {
         return orderService.createOrder(order);
+    }
+
+    @PostMapping("/rate-order/{storeId}")
+    public Mono<Void> rateOrder(@PathVariable String storeId,
+                                @RequestBody List<RateItem> items) {
+        return orderService.rateOrder(storeId, items).then(Mono.empty());
     }
 
     @PutMapping("/update-status/{orderId}/{status}")

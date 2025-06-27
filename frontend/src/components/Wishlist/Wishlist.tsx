@@ -20,7 +20,7 @@ const Wishlist: React.FC = () => {
     const store = useSelector(storeSelect.path);
 
     const moveToBag = () => {
-        promoteWishlist({storeId, customerId, accessToken, dispatch});
+        promoteWishlist(storeId, customerId, accessToken, dispatch);
     }
 
     if(!hasPreloaded) {

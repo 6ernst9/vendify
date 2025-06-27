@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Analytics.css';
 import {useDispatch, useSelector} from "react-redux";
 import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
@@ -39,7 +39,7 @@ const Analytics: React.FC = () => {
     const tabs = stores.map((store) => {
         return {id: store.id, label: store.name}
     });
-    const [activeTab, setActiveTab] = useState(stores[0].id);
+    const [activeTab, setActiveTab] = useState('');
     const sessionPerHour = useSelector(adminAnalyticsSelect.sessionCount);
     const sessionTypes = useSelector(adminAnalyticsSelect.sessionType);
     const quickKPIs = useSelector(adminAnalyticsSelect.quickKPIs);
@@ -52,15 +52,21 @@ const Analytics: React.FC = () => {
 
     const handleChangeStore = async (id: string) => {
         setActiveTab(id);
-        await getSessionCount({accessToken, storeId: id, dispatch});
-        await getQuickKPIs({accessToken, storeId: id, dispatch});
-        await getAvgSessions({accessToken, storeId: id, dispatch});
-        await getMostWishlistedProducts({accessToken, storeId: id, dispatch});
-        await getMostViewedProducts({accessToken, storeId: id, dispatch});
-        await getMostCartedProducts({accessToken, storeId: id, dispatch});
-        await getMostActiveUsers({accessToken, storeId: id, dispatch});
-        await getMostVisitedPages({accessToken, storeId: id, dispatch});
+        await getSessionCount(id, accessToken, dispatch);
+        await getQuickKPIs(id, accessToken, dispatch);
+        await getAvgSessions(id, accessToken, dispatch);
+        await getMostWishlistedProducts(id, accessToken, dispatch);
+        await getMostViewedProducts(id, accessToken, dispatch);
+        await getMostCartedProducts(id, accessToken, dispatch);
+        await getMostActiveUsers(id, accessToken, dispatch);
+        await getMostVisitedPages(id, accessToken, dispatch);
     }
+
+    useEffect(() => {
+        if(stores.length > 0) {
+            setActiveTab(stores[0].id);
+        }
+    }, [stores]);
 
     return (
         <div className="analytics">

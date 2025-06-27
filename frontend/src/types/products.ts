@@ -6,6 +6,7 @@ export interface Product {
     oldPrice?: number;
     description: string;
     reviews: number;
+    noReviews: number;
     images: string[];
     stock: number;
 }

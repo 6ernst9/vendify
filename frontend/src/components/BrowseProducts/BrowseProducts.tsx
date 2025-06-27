@@ -24,7 +24,7 @@ const BrowseProducts: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getAllProducts({store, accessToken, dispatch});
+        getAllProducts(store, accessToken, dispatch);
     }, [accessToken, store]);
 
     useEffect(() => {
@@ -61,6 +61,7 @@ const BrowseProducts: React.FC = () => {
                         price={product.price}
                         oldPrice={product.oldPrice}
                         reviews={product.reviews}
+                        noReviews={product.noReviews}
                         images={product.images}
                         stock={product.stock}
                     />

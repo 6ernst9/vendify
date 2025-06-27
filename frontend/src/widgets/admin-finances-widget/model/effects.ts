@@ -1,4 +1,3 @@
-import {getProductsProps} from "../../home-widget/model/types";
 import {request} from "../../../util/request";
 import {ACCOUNTS_ANALYTICS_BASE_URL, ORDERS_ANALYTICS_BASE_URL} from "../../../util/constants";
 import {
@@ -10,8 +9,9 @@ import {
     setTopSellingProducts
 } from "./reducers";
 import {ProductPerformance, ProductSalesMetrics, ProductViewsMetrics} from "./types";
+import {Dispatch} from "redux";
 
-export const getQuickKPIs = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getQuickKPIs = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-quick-kpis/' + storeId,
         method: 'GET',
@@ -29,7 +29,7 @@ export const getQuickKPIs = async ({storeId, accessToken, dispatch }: getProduct
     })
 }
 
-export const getAverageOrder = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getAverageOrder = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-average-order-value/' + storeId,
         method: 'GET',
@@ -47,7 +47,7 @@ export const getAverageOrder = async ({storeId, accessToken, dispatch }: getProd
     })
 }
 
-export const getRevenuePerDay = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getRevenuePerDay =  async (storeId: string, accessToken: string, dispatch: Dispatch)=> {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-revenue-per-day/' + storeId,
         method: 'GET',
@@ -65,7 +65,7 @@ export const getRevenuePerDay = async ({storeId, accessToken, dispatch }: getPro
     })
 }
 
-export const getOrdersPerDay = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getOrdersPerDay =  async (storeId: string, accessToken: string, dispatch: Dispatch)=> {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-orders-per-day/' + storeId,
         method: 'GET',
@@ -83,7 +83,7 @@ export const getOrdersPerDay = async ({storeId, accessToken, dispatch }: getProd
     })
 }
 
-export const getTopSellingProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getTopSellingProducts =  async (storeId: string, accessToken: string, dispatch: Dispatch)=> {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-top-selling-products/' + storeId,
         method: 'GET',
@@ -101,7 +101,7 @@ export const getTopSellingProducts = async ({storeId, accessToken, dispatch }: g
     })
 }
 
-export const getCustomerRatio = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getCustomerRatio =  async (storeId: string, accessToken: string, dispatch: Dispatch)=> {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-customer-ratio/' + storeId,
         method: 'GET',
@@ -119,7 +119,7 @@ export const getCustomerRatio = async ({storeId, accessToken, dispatch }: getPro
     })
 }
 
-export const getCustomerOrders = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getCustomerOrders =  async (storeId: string, accessToken: string, dispatch: Dispatch)=> {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-customer-orders/' + storeId,
         method: 'GET',
@@ -137,7 +137,7 @@ export const getCustomerOrders = async ({storeId, accessToken, dispatch }: getPr
     })
 }
 
-export const getCustomerRevenue = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getCustomerRevenue =  async (storeId: string, accessToken: string, dispatch: Dispatch)=> {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-customer-revenue/' + storeId,
         method: 'GET',
@@ -155,7 +155,7 @@ export const getCustomerRevenue = async ({storeId, accessToken, dispatch }: getP
     })
 }
 
-export const getProductRevenue = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getProductRevenue =  async (storeId: string, accessToken: string, dispatch: Dispatch)=> {
     await request({
         url: ORDERS_ANALYTICS_BASE_URL + '/get-product-revenue/' + storeId,
         method: 'GET',
@@ -173,7 +173,7 @@ export const getProductRevenue = async ({storeId, accessToken, dispatch }: getPr
     })
 }
 
-export const getProductPerformance = async ({storeId, accessToken, dispatch,}: getProductsProps) => {
+export const getProductPerformance = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     try {
         const [viewsRes, salesRes] = await Promise.all([
             request<ProductViewsMetrics[]>({

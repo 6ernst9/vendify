@@ -13,7 +13,7 @@ const AdminOrdersWidget: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getOrders({id, accessToken, dispatch});
+        getOrders(id, accessToken, dispatch);
     }, [accessToken, dispatch, id]);
 
     return (

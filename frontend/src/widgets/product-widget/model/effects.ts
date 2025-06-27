@@ -1,12 +1,12 @@
-import {AddToCart, AddToWishlist, GetProductById} from "./types";
 import {request} from "../../../util/request";
 import {CART_BASE_URL, PRODUCTS_BASE_URL, WISHLIST_BASE_URL} from "../../../util/constants";
 import {updateActivity} from "../../../util/session";
 import {getWishlist} from "../../wishlist-widget/model/effects";
 import {getCart} from "../../cart-widget/model/effects";
 import {setProduct, setRelatedItems} from "./reducers";
+import {Dispatch} from "redux";
 
-export const addToCart = async ({storeId, productId, customerId, quantity, dispatch, accessToken} :AddToCart) => {
+export const addToCart = async (storeId: string, productId: number, customerId: number, quantity: number, dispatch: Dispatch, accessToken: string) => {
     await updateActivity("product:" + productId, "add-to-cart:" + productId, storeId);
     await request({
         url: CART_BASE_URL + '/add-to-cart',
@@ -20,13 +20,14 @@ export const addToCart = async ({storeId, productId, customerId, quantity, dispa
             'X-FI-V-PATH': 'cart.add-to-cart'
         }
     }).then((response) => {
-        getCart({customerId, accessToken, dispatch, storeId});
+        console.debug(response.data);
+        getCart(customerId, storeId, accessToken, dispatch);
     }).catch((error) => {
         console.error(error);
     })
 }
 
-export const addToWishlist = async ({storeId, productId, customerId, accessToken, dispatch} :AddToWishlist) => {
+export const addToWishlist = async (storeId: string, productId: number, customerId: number, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("product:" + productId, "add-to-wishlist:"+ productId, storeId);
     await request({
         url: WISHLIST_BASE_URL + '/add-to-wishlist',
@@ -40,13 +41,13 @@ export const addToWishlist = async ({storeId, productId, customerId, accessToken
             'X-FI-V-PATH': 'wishlist.add-to-wishlist'
         }
     }).then(() => {
-        getWishlist({customerId, accessToken, storeId, dispatch});
+        getWishlist(customerId, storeId, accessToken, dispatch);
     }).catch((error) => {
         console.error(error);
     })
 }
 
-export const getProductById = async ({ productId, storeId, accessToken, dispatch }: GetProductById) => {
+export const getProductById = async (productId: number, storeId: string, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("product:" + productId, "view-product:" + productId, storeId)
     try {
         const response = await request({
@@ -66,7 +67,7 @@ export const getProductById = async ({ productId, storeId, accessToken, dispatch
     }
 };
 
-export const getRelatedProducts = async ({ productId, accessToken, dispatch }: GetProductById) => {
+export const getRelatedProducts = async (productId: number, accessToken: string, dispatch: Dispatch) => {
     try {
         const response = await request({
             url: `${PRODUCTS_BASE_URL}/get-related-products/${productId}`,

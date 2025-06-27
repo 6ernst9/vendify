@@ -1,10 +1,5 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import './Dashboards.css';
-import {ReactComponent as Up} from "../../assets/icons/arrow-up-right.svg";
-import {ReactComponent as Down} from "../../assets/icons/arrow-down-right.svg";
-import {ReactComponent as Order} from "../../assets/icons/list.svg";
-import {ReactComponent as Product} from "../../assets/icons/archive.svg";
-import {ReactComponent as Company} from "../../assets/icons/building.svg";
 // @ts-ignore
 import {
     ResponsiveContainer,
@@ -15,21 +10,65 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 import {adminHomeSelect} from "../../widgets/admin-home-widget/model/selectors";
-import {getSessionCount, getTotalSessions} from "../../widgets/admin-home-widget/model/effects";
+import {
+    getHomeKPIs,
+    getOrdersByStore,
+    getSessionCount,
+    getTopSellingProducts,
+    getTotalSessions
+} from "../../widgets/admin-home-widget/model/effects";
 import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
+import {getLogs} from "../../widgets/admin-logs-widget/model/effects";
+import {highlightLog} from "../Logs/Logs";
+import {formatNumber} from "../../util/numbers";
 
 const Dashboards: React.FC = () => {
     const name = useSelector(adminSessionSelect.firstName);
+    const logsRef = useRef<HTMLDivElement>(null);
+    const [logs, setLogs] = useState<string[]>([]);
     const accessToken = useSelector(adminSessionSelect.accessToken);
     const stores = useSelector(userStoresSelect.stores);
     const dispatch = useDispatch();
     const sessionPerHour = useSelector(adminHomeSelect.sessionCount);
     const totalSessions = useSelector(adminHomeSelect.totalSessions);
+    const topSelling = useSelector(adminHomeSelect.topProducts);
+    const recentOrders = useSelector(adminHomeSelect.recentOrders);
+    const quickKPIs = useSelector(adminHomeSelect.quickKPIs);
+
+    const tabs = stores.map((store) => {
+        return {id: store.id, label: store.name}
+    });
+    const [activeTab, setActiveTab] = useState('');
+
+    const handleChangeStore = async (id: string) => {
+        setActiveTab(id);
+        await getSessionCount(id, accessToken, dispatch);
+        await getTotalSessions(id, accessToken, dispatch);
+        await getTopSellingProducts(id, accessToken, dispatch);
+        await getOrdersByStore(id, accessToken, dispatch);
+        await getHomeKPIs(id, accessToken, dispatch);
+        fetchLogs(id);
+    }
+
+    const fetchLogs = (id: string) => {
+        if(stores.length > 0) {
+            getLogs( id, accessToken, dispatch).then((logs) => setLogs(logs));
+        }
+        logsRef.current?.scrollTo({
+            top: logsRef.current.scrollHeight,
+            behavior: "smooth",
+        });
+    };
 
     useEffect(() => {
         if(stores.length > 0) {
-            getSessionCount({accessToken, storeId: stores[0].id, dispatch});
-            getTotalSessions({accessToken,  storeId: stores[0].id, dispatch});
+            setActiveTab(stores[0].id)
+            fetchLogs(stores[0].id);
+            getSessionCount(stores[0].id, accessToken, dispatch);
+            getTotalSessions(stores[0].id, accessToken, dispatch);
+            getTopSellingProducts(stores[0].id, accessToken, dispatch);
+            getOrdersByStore(stores[0].id, accessToken, dispatch);
+            getHomeKPIs(stores[0].id, accessToken, dispatch);
         }
     }, [accessToken, stores]);
 
@@ -40,17 +79,24 @@ const Dashboards: React.FC = () => {
                     <h1>Overview</h1>
                     <p>Welcome back, {name}! Here’s a quick look at how your store is performing today.</p>
                 </div>
+                <div className="analytics-tabs">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.id}
+                            onClick={() => handleChangeStore(tab.id)}
+                            className={`analytics-tab-button ${activeTab === tab.id ? 'active' : ''}`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
                 <div className="dashboard-widgets">
-                    <h2>Today's summary</h2>
+                    <h2>Quick summary</h2>
                     <div className="dashboard-stats">
                         <div className="dashboard-stat-card">
                             <p className="dashboard-stat-label">Total Sessions</p>
                             <div className="dashboard-stat-value-container">
                                 <p className="dashboard-stat-value">{totalSessions}</p>
-                                <div className="dashboard-stat-increase">
-                                    <Up/>
-                                    <p>1%</p>
-                                </div>
                             </div>
                             <ResponsiveContainer width="100%" height={200}>
                                 <AreaChart data={sessionPerHour}>
@@ -100,11 +146,7 @@ const Dashboards: React.FC = () => {
                             <div className="dashboard-stat-card">
                                 <p className="dashboard-stat-label">Total Sales</p>
                                 <div className="dashboard-stat-value-container">
-                                    <p className="dashboard-single-stat-value">24,222.50$</p>
-                                    <div className="dashboard-single-stat-increase">
-                                        <Up/>
-                                        <p>3%</p>
-                                    </div>
+                                    <p className="dashboard-single-stat-value">{formatNumber(quickKPIs[0])}$</p>
                                 </div>
                             </div>
                         </div>
@@ -112,31 +154,26 @@ const Dashboards: React.FC = () => {
                             <div className="dashboard-stat-card">
                                 <p className="dashboard-stat-label">Total Orders</p>
                                 <div className="dashboard-stat-value-container">
-                                    <p className="dashboard-single-stat-value">56</p>
-                                    <div className="dashboard-single-stat-increase decrease">
-                                        <Down/>
-                                        <p>2%</p>
-                                    </div>
+                                    <p className="dashboard-single-stat-value">{formatNumber(quickKPIs[1])}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="dashboard-to-do">
-                    <h3>Things to do</h3>
-                    <div className="dashboard-to-do-cards">
-                        <div className="dashboard-to-do-card">
-                            <Order/>
-                            <p>10 orders to fulfill</p>
+                    <div className="dashboard-to-do-header">
+                        <h3>Activity</h3>
+                        <div className="live-container">
+                            <h3>Live</h3>
+                            <div className="recording-indicator"/>
                         </div>
-                        <div className="dashboard-to-do-card">
-                            <Product/>
-                            <p>3 products to re-stock</p>
-                        </div>
-                        <div className="dashboard-to-do-card">
-                            <Company/>
-                            <p>Add banner to homepage</p>
-                        </div>
+                    </div>
+                    <div className="dashboards-logs-container" ref={logsRef}>
+                    {logs.map((log) => (
+                            <>
+                                {highlightLog(log)}
+                            </>
+                        ))}
                     </div>
                 </div>
                 <div className="dashboards-top">
@@ -145,23 +182,19 @@ const Dashboards: React.FC = () => {
                         <table className="dashboard-top-table">
                             <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Product No.</th>
                                 <th>Total Sales</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td className="dashboard-table-name">Wireless Headphones</td>
-                                <td>1,250</td>
-                            </tr>
-                            <tr>
-                                <td className="dashboard-table-name">Laptop Stand</td>
-                                <td>924</td>
-                            </tr>
-                            <tr>
-                                <td className="dashboard-table-name">Bluetooth Speaker</td>
-                                <td>721</td>
-                            </tr>
+                            {topSelling.map((top, index) => {
+                                if (index < 3) {
+                                    return (<tr>
+                                        <td className="dashboard-table-name">#{top.productId}</td>
+                                        <td>{formatNumber(top.totalSold)}</td>
+                                    </tr>)
+                                }
+                            })}
                             </tbody>
                         </table>
                     </div>
@@ -170,23 +203,19 @@ const Dashboards: React.FC = () => {
                         <table className="dashboard-top-table">
                             <thead>
                             <tr>
-                                <th>Customer</th>
+                                <th>Customer No.</th>
                                 <th>Total Price</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td className="dashboard-table-name">Ariana Johns</td>
-                                <td>240.00$</td>
-                            </tr>
-                            <tr>
-                                <td className="dashboard-table-name">Henry Barber</td>
-                                <td>1,180.00$</td>
-                            </tr>
-                            <tr>
-                                <td className="dashboard-table-name">Duke Dennis</td>
-                                <td>139.93$</td>
-                            </tr>
+                            {recentOrders.map((top, index) => {
+                                if (index < 3) {
+                                    return (<tr>
+                                        <td className="dashboard-table-name">#{top.customerId}</td>
+                                        <td>{formatNumber(top.price)}$</td>
+                                    </tr>)
+                                }
+                            })}
                             </tbody>
                         </table>
                     </div>

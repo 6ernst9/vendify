@@ -1,10 +1,10 @@
 import {request} from "../../../util/request";
 import {PRODUCTS_BASE_URL} from "../../../util/constants";
 import {setPreloaded, setProducts} from "./reducers";
-import {getProductsProps} from "./types";
 import {updateActivity} from "../../../util/session";
+import {Dispatch} from "redux";
 
-export const getAllProducts = async ({store, accessToken, dispatch }: getProductsProps) => {
+export const getAllProducts = async (store: string, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("browse", "view-all-products", store);
     await request({
         url: PRODUCTS_BASE_URL + '/get-products-by-store/' + store,

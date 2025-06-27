@@ -23,7 +23,7 @@ const AdminSignUp: React.FC = () => {
     const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)
 
     const handleSubmit = async () => {
-        await register({password, email, firstName, lastName, phoneNumber, dispatch});
+        await register(email, password, firstName, lastName, phoneNumber, dispatch);
     };
 
     return (

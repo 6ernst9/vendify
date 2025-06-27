@@ -1,17 +1,3 @@
-import {Dispatch} from "redux";
-
-export interface GetCart {
-    storeId: string;
-    customerId: number;
-    accessToken: string;
-    dispatch: Dispatch;
-}
-
-export interface GetProduct {
-    productId: number;
-    accessToken: string;
-}
-
 export interface CartItem {
     id: string;
     storeId: string;

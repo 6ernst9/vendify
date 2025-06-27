@@ -5,7 +5,7 @@ import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 import {getLogs} from "../../widgets/admin-logs-widget/model/effects";
 import './Logs.css';
 
-const highlightLog = (log: string) => {
+export const highlightLog = (log: string) => {
     const timestampRegex = /^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]/;
     const timestamp = log.match(timestampRegex)?.[0] || "";
 
@@ -25,7 +25,7 @@ const Logs: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getLogs({storeId: stores[0].id, dispatch, accessToken}).then((logs) => setLogs(logs));
+        getLogs(stores[0].id, accessToken, dispatch).then((logs) => setLogs(logs));
     }, [accessToken, stores]);
     
     const tabs = stores.map((store) => {
@@ -35,7 +35,7 @@ const Logs: React.FC = () => {
 
     const handleChangeStore = async (id: string) => {
         setActiveTab(id);
-        getLogs({accessToken, storeId: id, dispatch}).then((logs) => setLogs(logs));
+        getLogs(id, accessToken, dispatch).then((logs) => setLogs(logs));
     }
     
     return (

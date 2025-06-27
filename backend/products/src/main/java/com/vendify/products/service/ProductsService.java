@@ -1,5 +1,6 @@
 package com.vendify.products.service;
 
+import com.vendify.products.model.OrderItem;
 import com.vendify.products.model.Product;
 import com.vendify.products.model.ProductDto;
 import com.vendify.products.repository.ProductsRepository;
@@ -32,12 +33,10 @@ public class ProductsService {
     }
 
     public Flux<Product> getRelatedProducts(long id) {
-        return productsRepository.findById(id).flatMapMany(product -> {
-            return productsRepository.findRelatedProducts(
-                    product.getStore(),
-                    product.getCategory(),
-                    product.getId());
-        });
+        return productsRepository.findById(id).flatMapMany(product -> productsRepository.findRelatedProducts(
+                product.getStore(),
+                product.getCategory(),
+                product.getId()));
     }
 
     public Flux<Product> getNewestProducts(String storeId) {
@@ -51,30 +50,52 @@ public class ProductsService {
                         product.getName(),
                         product.getImages(),
                         product.getCategory(),
-                        product.getSizes(),
                         product.getPrice(),
                         product.getDescription(),
                         product.getReviews(),
+                        product.getNoReviews(),
                         product.getStock()
                 )
         );
     }
 
     public void addProducts(List<ProductDto> products) {
-         products.forEach(product -> {
-             productsRepository.save(
-                    new Product(
-                            product.getStore(),
-                            product.getName(),
-                            product.getImages(),
-                            product.getCategory(),
-                            product.getSizes(),
-                            product.getPrice(),
-                            product.getDescription(),
-                            product.getReviews(),
-                            product.getStock()
-                    )
-            ).subscribe();
+         products.forEach(product -> productsRepository.save(
+                new Product(
+                        product.getStore(),
+                        product.getName(),
+                        product.getImages(),
+                        product.getCategory(),
+                        product.getPrice(),
+                        product.getDescription(),
+                        product.getReviews(),
+                        product.getNoReviews(),
+                        product.getStock()
+                )
+        ).subscribe());
+    }
+
+    public Mono<Void> updateStock(List<OrderItem> items) {
+        return Flux.fromIterable(items)
+                .flatMap(item ->
+                        productsRepository.findById(item.productId())
+                                .flatMap(product -> {
+                                    product.setStock(product.getStock() - item.quantity());
+                                    return productsRepository.save(product).then();
+                                })
+                )
+                .then();
+    }
+
+    public Mono<Product> updateRating(int review, long productId) {
+        return productsRepository.findById(productId).flatMap(product -> {
+            var reviews = product.getReviews() * product.getNoReviews() + review;
+            var noReviews = product.getNoReviews() + 1;
+            var newReview = reviews / noReviews;
+
+            product.setReviews(newReview);
+            product.setNoReviews(noReviews);
+            return productsRepository.save(product);
         });
     }
 }

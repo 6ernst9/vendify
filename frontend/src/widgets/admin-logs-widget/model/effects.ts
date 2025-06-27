@@ -1,8 +1,8 @@
-import {getProductsProps} from "../../home-widget/model/types";
 import {request} from "../../../util/request";
 import {ACCOUNTS_ANALYTICS_BASE_URL} from "../../../util/constants";
+import {Dispatch} from "redux";
 
-export const getLogs = async ({storeId, accessToken, dispatch }: getProductsProps): Promise<string[]> => {
+export const getLogs = async (storeId: string, accessToken: string, dispatch: Dispatch): Promise<string[]> => {
     return await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/logs/' + storeId,
         method: 'GET',

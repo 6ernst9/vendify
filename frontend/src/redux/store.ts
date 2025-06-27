@@ -19,6 +19,7 @@ import adminAnalyticsReducer from '../widgets/admin-analytics-widget/model/reduc
 import adminFinancesReducer from '../widgets/admin-finances-widget/model/reducers';
 import currentProductReducer from '../widgets/product-widget/model/reducers';
 import adminCurrentOrderReducer from '../widgets/admin-order-widget/model/reducers';
+import userCurrentOrderReducer from '../widgets/order-info-widget/model/reducers';
 
 const rootReducer = {
     stores: storesReducer,
@@ -40,7 +41,8 @@ const rootReducer = {
     adminAnalytics: adminAnalyticsReducer,
     adminFinances: adminFinancesReducer,
     currentProduct: currentProductReducer,
-    adminOrder: adminCurrentOrderReducer
+    adminOrder: adminCurrentOrderReducer,
+    userOrder: userCurrentOrderReducer
 }
 export const store = configureStore({
     reducer: rootReducer,

@@ -1,12 +1,12 @@
 import {request} from "../../../util/request";
-import {STORES_BASE_URL} from "../../../util/constants";
-import {getStoresProps} from "./types";
+import {STORES_BASE_URL} from "../../../util/constants"
 import {setAdminStores} from "./reducers";
 import {StoreState} from "../../../redux/core/store/types";
 import {getUsersByStore} from "../../admin-customers-widget/model/effects";
 import {getOrdersByStore} from "../../admin-orders-widget/model/effects";
+import {Dispatch} from "redux";
 
-export const getStores = async ({id, accessToken, dispatch }: getStoresProps) => {
+export const getStores = async (id: number, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: STORES_BASE_URL + '/get-stores-by-owner/' + id,
         method: 'GET',
@@ -21,8 +21,8 @@ export const getStores = async ({id, accessToken, dispatch }: getStoresProps) =>
         const stores: StoreState[] = response.data;
         const storesProps = await Promise.all(
             stores.map(async (storeProp) => {
-                const users = await getUsersByStore({accessToken, store: storeProp.id});
-                const orders = await getOrdersByStore({accessToken, storeId: storeProp.id});
+                const users = await getUsersByStore(storeProp.id, accessToken);
+                const orders = await getOrdersByStore(storeProp.id, accessToken);
                 return {
                     ...storeProp,
                     customers: users.length,

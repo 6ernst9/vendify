@@ -22,20 +22,20 @@ const AdminAnalyticsWidget: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getStores({id, accessToken, dispatch});
+        getStores(id, accessToken, dispatch);
     }, [id, accessToken]);
 
     useEffect(() => {
         if(stores.length > 0) {
-            getSessionCount({accessToken, storeId: stores[0].id, dispatch});
-            getQuickKPIs({accessToken, storeId: stores[0].id, dispatch});
-            getSessionRatio({accessToken, storeId: stores[0].id, dispatch});
-            getAvgSessions({accessToken, storeId: stores[0].id, dispatch});
-            getMostWishlistedProducts({accessToken, storeId: stores[0].id, dispatch});
-            getMostViewedProducts({accessToken, storeId: stores[0].id, dispatch});
-            getMostCartedProducts({accessToken, storeId: stores[0].id, dispatch});
-            getMostActiveUsers({accessToken, storeId: stores[0].id, dispatch});
-            getMostVisitedPages({accessToken, storeId: stores[0].id, dispatch});
+            getSessionCount(stores[0].id, accessToken, dispatch);
+            getQuickKPIs(stores[0].id, accessToken, dispatch);
+            getSessionRatio(stores[0].id, accessToken, dispatch);
+            getAvgSessions(stores[0].id, accessToken, dispatch);
+            getMostWishlistedProducts(stores[0].id, accessToken, dispatch);
+            getMostViewedProducts(stores[0].id, accessToken, dispatch);
+            getMostCartedProducts(stores[0].id, accessToken, dispatch);
+            getMostActiveUsers(stores[0].id, accessToken, dispatch);
+            getMostVisitedPages(stores[0].id, accessToken, dispatch);
         }
     }, [accessToken, stores]);
     return (

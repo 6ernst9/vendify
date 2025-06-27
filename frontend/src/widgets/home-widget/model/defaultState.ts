@@ -9,7 +9,8 @@ export const defaultProducts: Products = {
             percentage: 0,
             productIds: [],
             endDate: '',
-            store: ''
+            store: '',
+            status: ''
         }
     },
     news: [],

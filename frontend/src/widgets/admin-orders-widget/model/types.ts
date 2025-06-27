@@ -22,17 +22,7 @@ export interface OrderResponse {
     createdAt: string;
 }
 
-export interface GetAccount {
-    customerId: number;
-    accessToken: string;
-}
-
 export interface OrderItem {
     quantity: number;
     productId: number;
-}
-
-export interface GetOrders {
-    storeId: string;
-    accessToken: string;
 }

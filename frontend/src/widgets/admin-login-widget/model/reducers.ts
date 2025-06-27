@@ -21,7 +21,7 @@ const loginSlice = createSlice({
             }
         },
         changePage: (state) => {
-            state.error = null;
+            state.error = ''
         },
         registrationSuccess: (state,action: PayloadAction<LoginResponse>) => {
             state.logged = true;

@@ -1,5 +1,3 @@
-import {Dispatch} from "redux";
-
 export type Product = {
     id: number;
     store: string;
@@ -15,9 +13,4 @@ export type Product = {
 
 export type Products = {
     products: Product[];
-}
-
-export type getProductsProps = {
-    store: string;
-    accessToken: string;
 }

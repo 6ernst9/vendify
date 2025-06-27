@@ -24,7 +24,13 @@
     margin-bottom: 4px;
 }
 
-.login-box p {
+.customer-login-error {
+    color: #ff4d4f;
+    font-size: 16px;
+    font-family: var(--font-family), sans-serif;
+}
+
+.login-details {
     font-size: 16px;
     color: var(--text-secondary-color);
     margin-bottom: 16px;

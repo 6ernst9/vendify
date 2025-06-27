@@ -32,8 +32,8 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         if(exists) {
-            getCart({customerId, accessToken, storeId, dispatch});
-            getWishlist({customerId, accessToken, storeId, dispatch})
+            getCart(customerId, storeId, accessToken, dispatch);
+            getWishlist(customerId, storeId, accessToken, dispatch)
         }
     }, [accessToken, customerId, exists, storeId]);
 

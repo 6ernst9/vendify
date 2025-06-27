@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import "./Checkout.css";
-import {getCart, placeOrder} from "../../widgets/checkout-widget/model/effects";
-import {useDispatch, useSelector} from "react-redux";
+import {getCart, getCoupon, placeOrder} from "../../widgets/checkout-widget/model/effects";
+import {useSelector} from "react-redux";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {Cart} from "../../widgets/cart-widget/model/types";
 import {useNavigate} from "react-router-dom";
+import {formatNumber} from "../../util/numbers";
+import {Deal} from "../../widgets/admin-deals-create-widget/model/types";
 
 const Checkout: React.FC = () => {
     const accessToken = useSelector(sessionSelect.accessToken);
@@ -23,14 +25,38 @@ const Checkout: React.FC = () => {
     const [zip, setZip] = useState('');
     const [phone, setPhone] = useState('');
     const [saveInfo, setSaveInfo] = useState(true);
-    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const initialSubtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const [subtotal, setSubtotal] = useState(initialSubtotal);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-    const [couponCode, setCouponCode] = useState('');
+    const [couponCode, setCouponCode] = useState<undefined | string>();
+    const [coupon, setCoupon] = useState<Deal>();
+
+    const applyCoupon = async () => {
+        const coupon = await getCoupon(couponCode || '', storeId, accessToken);
+
+        if (coupon && coupon.productIds && coupon.percentage) {
+            setCoupon(coupon);
+            const discounted = cartItems.reduce((sum, item) => {
+                if (coupon.productIds.includes(item.productId)) {
+                    const discountedPrice = item.price * (1 - coupon.percentage / 100);
+                    return sum + discountedPrice * item.quantity;
+                }
+                return sum + item.price * item.quantity;
+            }, 0);
+
+            setSubtotal(discounted);
+        }
+    }
+
+    const removeCoupon = async () => {
+       setCoupon(undefined);
+       setCouponCode('');
+       setSubtotal(initialSubtotal);
+    }
 
     useEffect(() => {
-        getCart({customerId: id, storeId, accessToken, dispatch}).then((response) => setCartItems(response));
+        getCart(id, storeId, accessToken).then((response) => setCartItems(response));
     }, [accessToken, id]);
 
     const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value);
@@ -43,7 +69,7 @@ const Checkout: React.FC = () => {
     const handleCouponChange = (e: React.ChangeEvent<HTMLInputElement>) => setCouponCode(e.target.value);
 
     const handlePlaceOrder = async () => {
-        placeOrder({customerId: id, storeId, price: subtotal, address: {street, city, apartment, phoneNumber: phone, zipCode: zip}, accessToken})
+        placeOrder(id, storeId, couponCode || '', subtotal, {street, city, apartment, phoneNumber: phone, zipCode: zip}, accessToken)
             .then(() => navigate(`/${store}`))
     }
 
@@ -86,16 +112,17 @@ const Checkout: React.FC = () => {
             <div className="checkout-summary">
                 {cartItems.map((cartItem) =>
                     <div className="cart-item">
-                        <img src={cartItem.img}/>
+                        <img src={cartItem.img} alt={cartItem.name}/>
                         <span>{cartItem.quantity} x {cartItem.name}</span>
-                        <strong>${cartItem.price}</strong>
+                        <strong>${formatNumber(cartItem.price)}</strong>
                     </div>
                 )}
                 <hr/>
-                <div className="summary-row">Subtotal: <span>{subtotal}$</span></div>
+                <div className="summary-row">Subtotal: <span>{formatNumber(subtotal)}$</span></div>
                 <div className="summary-row">Shipping: <span>Free</span></div>
+                {coupon && (<div className="summary-row">Coupon: <span>-{formatNumber(initialSubtotal - subtotal)}</span></div>)}
                 <hr/>
-                <div className="summary-row total">Total: <span>{subtotal}$</span></div>
+                <div className="summary-row total">Total: <span>{formatNumber(subtotal)}$</span></div>
 
                 <div className="payment-methods">
                     <label>
@@ -114,7 +141,9 @@ const Checkout: React.FC = () => {
 
                 <div className="coupon-row">
                     <input type="text" placeholder="Coupon Code" value={couponCode} onChange={handleCouponChange}/>
-                    <button className="apply-btn">Apply Coupon</button>
+                    <button className="apply-btn" onClick={coupon? removeCoupon : applyCoupon}>
+                        {coupon? 'Remove Coupon' : 'Apply Coupon'}
+                    </button>
                 </div>
 
                 <button className="place-order-btn" onClick={handlePlaceOrder}>Place Order</button>

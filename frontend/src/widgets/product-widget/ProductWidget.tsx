@@ -27,8 +27,8 @@ const ProductWidget: React.FC = () => {
 
     useEffect(() => {
         if(productId !== undefined && productId !== '') {
-            getProductById({productId: productId || '', storeId, accessToken, dispatch});
-            getRelatedProducts({productId: productId || '', storeId, accessToken, dispatch});
+            getProductById(Number(productId), storeId, accessToken, dispatch);
+            getRelatedProducts(Number(productId), storeId, accessToken);
         }
     }, [accessToken, productId, storeId]);
 

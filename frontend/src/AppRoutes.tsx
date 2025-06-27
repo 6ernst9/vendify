@@ -34,6 +34,7 @@ import AdminFinancesWidget from "./widgets/admin-finances-widget/AdminFinancesWi
 import AdminLogsWidget from "./widgets/admin-logs-widget/AdminLogsWidget";
 import Loading from "./components/Loading/Loading";
 import AdminOrderWidget from "./widgets/admin-order-widget/AdminOrderWidget";
+import OrderInfoWidget from "./widgets/order-info-widget/OrderInfoWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -126,6 +127,10 @@ const AppRoutes = () => {
                 {
                     path: `/:path/sign-up`,
                     element: <SignUpWidget/>
+                },
+                {
+                    path: `/:path/order/:orderId`,
+                    element: <OrderInfoWidget/>
                 },
                 {
                     path: `/:path/*`,

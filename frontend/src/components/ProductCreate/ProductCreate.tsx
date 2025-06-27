@@ -25,7 +25,6 @@ const ProductCreate: React.FC = () => {
     const [productCategory, setProductCategory] = useState('');
     const [productDescription, setProductDescription] = useState('');
     const [productImages, setProductImages] = useState<string[]>([]);
-    const [productSizes, setProductSizes] = useState('');
     const [productPrice, setProductPrice] = useState('');
     const [productStock, setProductStock] = useState('');
 
@@ -54,29 +53,15 @@ const ProductCreate: React.FC = () => {
     const handleProductStoreChange = (e: React.ChangeEvent<HTMLSelectElement>) => setProductStore(e.target.value);
     const handleProductCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => setProductCategory(e.target.value);
     const handleProductDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => setProductDescription(e.target.value);
-    const handleProductSizesChange = (e: React.ChangeEvent<HTMLInputElement>) => setProductSizes(e.target.value);
     const handleProductPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => setProductPrice(e.target.value);
     const handleProductStockChange = (e: React.ChangeEvent<HTMLInputElement>) => setProductStock(e.target.value);
 
-    const handleSubmit = () => {
-        const newProduct = {
-            name: productName,
-            store: productStore,
-            category: productCategory,
-            description: productDescription,
-            images: productImages,
-            sizes: productSizes.split(','),
-            price: parseFloat(productPrice),
-            stock: parseInt(productStock, 10),
-            accessToken,
-            dispatch
-        };
-
-        createProduct(newProduct);
+    const handleSubmit = async () => {
+        await createProduct(productName, productStore, productImages, productDescription, productCategory, parseFloat(productPrice), parseInt(productStock, 10), accessToken);
     };
 
     useEffect(() => {
-        getStores({id, accessToken, dispatch});
+        getStores(id, accessToken, dispatch);
     }, [accessToken, id]);
 
     return (
@@ -137,10 +122,6 @@ const ProductCreate: React.FC = () => {
                             })}
                         </ul>
                     )}
-                </div>
-                <div className="product-create-selector">
-                    <h1>Sizes</h1>
-                    <input type="text" onChange={handleProductSizesChange}/>
                 </div>
                 <div className="product-create-selector">
                     <h1>Price</h1>

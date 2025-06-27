@@ -14,9 +14,9 @@ public class ProductDto {
     private final String name;
     private final List<String> images;
     private final String category;
-    private final List<String> sizes;
     private final double price;
     private final String description;
     private final double reviews;
+    private final int noReviews;
     private final int stock;
 }

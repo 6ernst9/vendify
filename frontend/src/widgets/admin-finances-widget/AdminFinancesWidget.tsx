@@ -24,21 +24,21 @@ const AdminFinancesWidget: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getStores({id, accessToken, dispatch});
+        getStores(id, accessToken, dispatch);
     }, [id, accessToken]);
 
     useEffect(() => {
         if(stores.length > 0) {
-            getQuickKPIs({accessToken, storeId: stores[0].id, dispatch});
-            getAverageOrder({accessToken, storeId: stores[0].id, dispatch});
-            getRevenuePerDay({accessToken, storeId: stores[0].id, dispatch});
-            getOrdersPerDay({accessToken, storeId: stores[0].id, dispatch});
-            getProductRevenue({accessToken, storeId: stores[0].id, dispatch});
-            getTopSellingProducts({accessToken, storeId: stores[0].id, dispatch});
-            getProductPerformance({accessToken, storeId: stores[0].id, dispatch});
-            getCustomerOrders({accessToken, storeId: stores[0].id, dispatch});
-            getCustomerRevenue({accessToken, storeId: stores[0].id, dispatch});
-            getCustomerRatio({accessToken, storeId: stores[0].id, dispatch});
+            getQuickKPIs(stores[0].id, accessToken, dispatch);
+            getAverageOrder(stores[0].id, accessToken, dispatch);
+            getRevenuePerDay(stores[0].id, accessToken, dispatch);
+            getOrdersPerDay(stores[0].id, accessToken, dispatch);
+            getProductRevenue(stores[0].id, accessToken, dispatch);
+            getTopSellingProducts(stores[0].id, accessToken, dispatch);
+            getProductPerformance(stores[0].id, accessToken, dispatch);
+            getCustomerOrders(stores[0].id, accessToken, dispatch);
+            getCustomerRevenue(stores[0].id, accessToken, dispatch);
+            getCustomerRatio(stores[0].id, accessToken, dispatch);
         }
     }, [accessToken, stores]);
     return (

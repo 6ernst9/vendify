@@ -39,6 +39,12 @@ public interface OrderRepository extends ReactiveCrudRepository<Order, String> {
 
     @Aggregation(pipeline = {
             "{ $match: { storeId: ?0 } }",
+            "{ $count: 'orderCount' }"
+    })
+    Mono<Long> getOrdersCount(String storeId);
+
+    @Aggregation(pipeline = {
+            "{ $match: { storeId: ?0 } }",
             "{ $group: { _id: null, averagePrice: { $avg: '$price' } } }",
             "{ $project: { _id: 0, averagePrice: 1 } }"
     })

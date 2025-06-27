@@ -57,7 +57,7 @@
 .sales-title-button p {
     font-size: 18px;
     padding: 0 30px;
-    color: var(--title-color);
+    color: white;
     font-family: var(--font-family), sans-serif;
 }
 

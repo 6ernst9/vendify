@@ -1,14 +1,13 @@
 import React, {useState} from "react";
 import './CompanyCreate.css';
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {createStore} from "../../widgets/admin-store-create-widget/model/effects";
 import {uploadImageToFirebase} from "../../util/upload";
 import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 
 const CompanyCreate: React.FC = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const accessToken = useSelector(adminSessionSelect.accessToken);
     const id = useSelector(adminSessionSelect.id);
 
@@ -69,11 +68,10 @@ const CompanyCreate: React.FC = () => {
 
     const handleSubmit = async () => {
         await createStore(
-            {
                 name,
-                owner: id,
+                id,
                 path,
-                theme: {
+                {
                     primaryColor,
                     titleColor,
                     backgroundColor,
@@ -85,12 +83,11 @@ const CompanyCreate: React.FC = () => {
                 },
                 banner,
                 logo,
-                contactLinks: {
+                {
                     email, phone, instagram, facebook, twitter
                 },
-                accessToken,
-                dispatch
-            });
+                accessToken
+            );
         navigate("/admin/home");
     }
     return (

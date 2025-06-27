@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Finances.css';
 import {useDispatch, useSelector} from "react-redux";
 import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
@@ -39,7 +39,7 @@ const Finances: React.FC = () => {
     const tabs = stores.map((store) => {
         return {id: store.id, label: store.name}
     });
-    const [activeTab, setActiveTab] = useState(stores[0].id);
+    const [activeTab, setActiveTab] = useState('');
     const quickKPIs = useSelector(adminFinancesSelect.quickKPIs);
     const revenuePerDay = useSelector(adminFinancesSelect.revenuePerDay);
     const ordersPerDay = useSelector(adminFinancesSelect.ordersPerDay);
@@ -53,17 +53,23 @@ const Finances: React.FC = () => {
 
     const handleChangeStore = async (id: string) => {
         setActiveTab(id);
-        await getQuickKPIs({accessToken, storeId: id, dispatch});
-        await getAverageOrder({accessToken, storeId: id, dispatch});
-        await getRevenuePerDay({accessToken, storeId: id, dispatch});
-        await getOrdersPerDay({accessToken, storeId: id, dispatch});
-        await getTopSellingProducts({accessToken, storeId: id, dispatch});
-        await getProductRevenue({accessToken, storeId: id, dispatch});
-        await getProductPerformance({accessToken, storeId: id, dispatch});
-        await getCustomerRatio({accessToken, storeId: id, dispatch});
-        await getCustomerOrders({accessToken, storeId: id, dispatch});
-        await getCustomerRevenue({accessToken, storeId: id, dispatch});
+        await getQuickKPIs(id, accessToken, dispatch);
+        await getAverageOrder(id, accessToken, dispatch);
+        await getRevenuePerDay(id, accessToken, dispatch);
+        await getOrdersPerDay(id, accessToken, dispatch);
+        await getTopSellingProducts(id, accessToken, dispatch);
+        await getProductRevenue(id, accessToken, dispatch);
+        await getProductPerformance(id, accessToken, dispatch);
+        await getCustomerRatio(id, accessToken, dispatch);
+        await getCustomerOrders(id, accessToken, dispatch);
+        await getCustomerRevenue(id, accessToken, dispatch);
     }
+
+    useEffect(() => {
+        if(stores.length > 0) {
+            setActiveTab(stores[0].id);
+        }
+    }, [stores]);
 
     return (
         <div className="finances">

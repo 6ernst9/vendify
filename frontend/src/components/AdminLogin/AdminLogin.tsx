@@ -17,7 +17,7 @@ const AdminLogin: React.FC = () => {
     const handlePassChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)
 
     const handleSubmit = async () => {
-        await login({email: email, password, dispatch});
+        await login(email, password, dispatch);
     };
 
     return (

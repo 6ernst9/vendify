@@ -18,12 +18,13 @@ interface ProductProps {
     price: number;
     oldPrice?: number;
     reviews: number;
+    noReviews: number;
     images: string[];
     sale?: number;
     stock: number;
 }
 
-const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, reviews, images}) => {
+const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, reviews, noReviews, images}) => {
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
     const sale = calculateSalePercentage(price, oldPrice);
@@ -60,9 +61,9 @@ const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, reviews
     const handleWishlist = () => {
         if(exists){
             if(isWishlited) {
-                removeFromWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+                removeFromWishlist(storeId, customerId, id, accessToken, dispatch);
             } else {
-                addToWishlist({storeId, customerId, accessToken, productId: id, dispatch});
+                addToWishlist(storeId, id, customerId, accessToken, dispatch);
             }
         } else {
             navigate(`/${store}/login`);
@@ -98,7 +99,7 @@ const ProductCard: React.FC<ProductProps> = ({id, name, price, oldPrice, reviews
                 <div className="product-card-rating-stars">
                     {calculateReviews()}
                 </div>
-                <p>({reviews})</p>
+                <p>({noReviews})</p>
             </div>
         </div>
     )

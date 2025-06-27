@@ -1,12 +1,12 @@
-import {Cart, CartItem, GetCart, GetProduct} from "./types";
+import {Cart, CartItem} from "./types";
 import {request} from "../../../util/request";
 import {CART_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
 import {Product} from "../../../types/products";
-import {AddToCart} from "../../product-widget/model/types";
 import {setCartItems} from "./reducers";
 import {updateActivity} from "../../../util/session";
+import {Dispatch} from "redux";
 
-export const updateCart = async ({storeId, productId, customerId, quantity, dispatch, accessToken} :AddToCart) => {
+export const updateCart = async (storeId: string, productId: number, customerId: number, quantity: number, dispatch: Dispatch, accessToken: string) => {
     if(quantity === 0) {
         await updateActivity("cart", "remove-from-cart:" + productId, storeId);
     } else {
@@ -26,13 +26,13 @@ export const updateCart = async ({storeId, productId, customerId, quantity, disp
         }
     }).then((response) => {
         console.log(response.data);
-        getCart({customerId, storeId, accessToken, dispatch});
+        getCart(customerId, storeId, accessToken, dispatch);
     }).catch((error) => {
         console.error(error);
     })
 }
 
-export const getCart = async ({customerId, storeId, accessToken, dispatch} :GetCart) => {
+export const getCart = async (customerId: number, storeId: string, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("cart", "view-cart", storeId);
     await request({
         url: CART_BASE_URL + '/get-cart/' + customerId,
@@ -48,7 +48,7 @@ export const getCart = async ({customerId, storeId, accessToken, dispatch} :GetC
         const cartItems: CartItem[] = response.data;
         const fullCartItems: Cart[] = await Promise.all(
             cartItems.map(async (cartItem) => {
-                const product = await getProduct({productId: cartItem.productId, accessToken});
+                const product = await getProduct(cartItem.productId, accessToken);
                 return {
                     id: cartItem.id,
                     productId: cartItem.productId,
@@ -66,7 +66,7 @@ export const getCart = async ({customerId, storeId, accessToken, dispatch} :GetC
     })
 }
 
-export const getProduct = async({productId, accessToken}: GetProduct): Promise<Product> => {
+export const getProduct = async(productId: number, accessToken: string): Promise<Product> => {
     return await request({
         url: PRODUCTS_BASE_URL + '/get-product-by-id/' + productId,
         method: 'GET',

@@ -6,17 +6,13 @@ import {ReactComponent as Search} from "../../assets/icons/search.svg";
 
 import {setCurrentAdminStore} from "../../widgets/admin-store-page-widget/model/reducers";
 import {userStoresSelect} from "../../widgets/admin-store-widget/model/selectors";
-import {getStores} from "../../widgets/admin-store-widget/model/effects";
-import {adminSessionSelect} from "../../redux/core/adminSession/selectors";
 import {StoreProp} from "../../widgets/admin-store-widget/model/types";
 import {formatNumber} from "../../util/numbers";
 
 const Company: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
-    const id = useSelector(adminSessionSelect.id);
-    const accessToken = useSelector(adminSessionSelect.accessToken);
+
     const stores = useSelector(userStoresSelect.stores);
 
     const [storesFiltered, setStores] = useState(stores);
@@ -38,10 +34,6 @@ const Company: React.FC = () => {
 
         setStores(result);
     }
-
-    useEffect(() => {
-        getStores({id, accessToken, dispatch});
-    }, [accessToken, id]);
 
     const selectStore = (store: StoreProp) => {
         dispatch(setCurrentAdminStore(store));

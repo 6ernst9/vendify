@@ -23,8 +23,8 @@ public class AnalyticsService {
         var ldt = LocalDate.now().atStartOfDay();
         var date = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
 
-        var totalRevenue = orderRepository.getTotalRevenue(storeId).defaultIfEmpty(0.0);;
-        var todayRevenue = orderRepository.getRevenueToday(storeId, date).defaultIfEmpty(0.0);;
+        var totalRevenue = orderRepository.getTotalRevenue(storeId).defaultIfEmpty(0.0);
+        var todayRevenue = orderRepository.getRevenueToday(storeId, date).defaultIfEmpty(0.0);
         var todayOrders = orderRepository.getOrdersToday(storeId, date).defaultIfEmpty(0L);
         var avgOrder = orderRepository.getAverageOrderValue(storeId).defaultIfEmpty(0.0);
 
@@ -36,6 +36,19 @@ public class AnalyticsService {
                     var avgOrderValue = tuple.getT4();
 
                     return Flux.just(revenueTotal, revenueToday, ordersToday, avgOrderValue);
+                });
+    }
+
+    public Flux<Double> getHomeKPIs(String storeId) {
+        var totalRevenue = orderRepository.getTotalRevenue(storeId).defaultIfEmpty(0.0);
+        var totalOrders = orderRepository.getOrdersCount(storeId).defaultIfEmpty(0L);
+
+        return Mono.zip(totalRevenue, totalOrders)
+                .flatMapMany(tuple -> {
+                    var revenueTotal = tuple.getT1();
+                    var orders = (double)tuple.getT2();
+
+                    return Flux.just(revenueTotal, orders);
                 });
     }
 

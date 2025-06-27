@@ -1,9 +1,9 @@
 import {request} from "../../../util/request";
 import {STORES_BASE_URL} from "../../../util/constants";
-import {getStoreProps} from "./types";
 import {setCurrentAdminStore} from "./reducers";
+import {Dispatch} from "redux";
 
-export const getStore = async ({id, accessToken, dispatch }: getStoreProps) => {
+export const getStore = async (id: string, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: STORES_BASE_URL + '/get-store-by-id/' + id,
         method: 'GET',

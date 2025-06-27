@@ -1,8 +1,8 @@
 import {request} from "../../../util/request";
 import {STORES_BASE_URL} from "../../../util/constants";
-import {StoreProps} from "./types";
+import {ContactLinks, Theme} from "../../../redux/core/store/types";
 
-export const createStore = async ({name, owner, path, theme, banner, logo, contactLinks, accessToken, dispatch }: StoreProps) => {
+export const createStore = async (name: string, owner: number, path: string, theme: Theme, banner: string, logo: string, contactLinks: ContactLinks, accessToken: string) => {
     await request({
         url: STORES_BASE_URL+ '/add-store',
         method: 'POST',
@@ -15,8 +15,8 @@ export const createStore = async ({name, owner, path, theme, banner, logo, conta
             'Authorization' : 'Bearer ' + accessToken
         }
     }).then((response) => {
-
+        console.debug(response.data)
     }).catch((error) => {
-
+        console.error(error);
     })
 }

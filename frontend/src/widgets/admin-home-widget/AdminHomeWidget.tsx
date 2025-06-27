@@ -17,7 +17,7 @@ const AdminHomeWidget: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        getStores({id, accessToken, dispatch});
+        getStores(id, accessToken, dispatch);
     }, [id, accessToken]);
 
     return (

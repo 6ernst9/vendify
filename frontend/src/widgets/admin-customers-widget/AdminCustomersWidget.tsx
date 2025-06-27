@@ -13,7 +13,7 @@ const AdminCustomersWidget: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getCustomers({id, dispatch, accessToken});
+        getCustomers(id, accessToken, dispatch);
     }, [accessToken, dispatch, id]);
     
     return (

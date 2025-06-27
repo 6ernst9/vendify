@@ -18,7 +18,6 @@ const statuses = [
 const OrderPage: React.FC = () => {
     const navigate = useNavigate();
     const accessToken = useSelector(sessionSelect.accessToken);
-    const dispatch = useDispatch();
 
     const customerId = useSelector(adminOrderSelect.customerId);
     const id = useSelector(adminOrderSelect.id);
@@ -30,7 +29,7 @@ const OrderPage: React.FC = () => {
     const address = useSelector(adminOrderSelect.address);
 
     const handleStatusChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-        await updateStatus({id, status: e.target.value, accessToken, dispatch})
+        await updateStatus(id, e.target.value, accessToken)
     }
 
     return (

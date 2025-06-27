@@ -54,7 +54,7 @@ const Product: React.FC = () => {
 
     const handleCart = () => {
         if(exists){
-            addToCart({storeId, customerId, quantity, accessToken, dispatch, productId: product.id});
+            addToCart(storeId, product.id, customerId, quantity, dispatch, accessToken);
         } else {
             navigate(`/${store}/login`);
         }
@@ -63,9 +63,9 @@ const Product: React.FC = () => {
     const handleWishlist = () => {
         if(exists){
             if(isWishlited) {
-                removeFromWishlist({storeId, customerId, accessToken, productId: product.id, dispatch});
+                removeFromWishlist(storeId, customerId, product.id, accessToken, dispatch);
             } else {
-                addToWishlist({storeId, customerId, accessToken, productId: product.id, dispatch});
+                addToWishlist(storeId, product.id, customerId, accessToken, dispatch);
             }
         } else {
             navigate(`/${store}/login`);
@@ -81,10 +81,10 @@ const Product: React.FC = () => {
                 <div className="product-images">
                     <div className="product-thumbnail-images">
                         {product.images.map((img, index) => (
-                            <img key={index} src={img} className="product-thumbnail"/>
+                            <img key={index} src={img} className="product-thumbnail" alt={product.name}/>
                         ))}
                     </div>
-                    <img src={product.images[0]} className="product-image"/>
+                    <img src={product.images[0]} className="product-image" alt={product.name}/>
                 </div>
 
                 <div className="product-details">
@@ -93,7 +93,7 @@ const Product: React.FC = () => {
                         <div className="product-stars">
                             {calculateReviews()}
                         </div>
-                        <div className="product-reviews">({product.reviews})</div>
+                        <div className="product-reviews">({product.noReviews})</div>
                         {product.stock > 0 ? <div className="product-stock-status">In Stock</div> :
                             <div className="product-out-stock-status">Out of Stock</div>}
 
@@ -106,7 +106,7 @@ const Product: React.FC = () => {
                     </div>
                     <p className="product-description">{product.description}</p>
                     <div className="product-quantity-buttons">
-                        <div className="product-quantity-selector">
+                        {product.stock > 0 && (<div className="product-quantity-selector">
                             <button onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
                                     className="product-quantity-btn">
                                 <Minus/>
@@ -114,12 +114,12 @@ const Product: React.FC = () => {
                             <div className="product-quantity">
                                 <p>{quantity}</p>
                             </div>
-                            <button onClick={() => setQuantity(quantity + 1)} className="product-quantity-btn plus-btn">
+                            <button onClick={() => setQuantity(quantity === product.stock ? quantity : quantity + 1)}
+                                    className="product-quantity-btn plus-btn">
                                 <Plus/>
                             </button>
-                        </div>
-
-                        <div className="product-buy-now" onClick={handleCart}>Add to cart</div>
+                        </div>)}
+                        {product.stock > 0 && (<div className="product-buy-now" onClick={handleCart}>Add to cart</div>)}
                         <div className="product-wishlist-container" onClick={handleWishlist}>
                             {isWishlited ? <HeartFilled className="product-wishlist-icon-wishlisted"/> :  <Heart className="product-wishlist-icon"/>}
                         </div>

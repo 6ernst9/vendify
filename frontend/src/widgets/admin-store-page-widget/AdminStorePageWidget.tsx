@@ -16,7 +16,7 @@ const AdminStorePageWidget: React.FC = () => {
     const accessToken = useSelector(adminSessionSelect.accessToken);
     
     useEffect(() => {
-        getStore({id, accessToken, dispatch})
+        getStore(id, accessToken, dispatch)
     }, [accessToken, id])
 
     return (

@@ -1,16 +1,17 @@
-import {Cart, CartItem, GetCart, GetProduct} from "../../cart-widget/model/types";
+import {Cart, CartItem} from "../../cart-widget/model/types";
 import {request} from "../../../util/request";
-import {CART_BASE_URL, ORDERS_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
+import {CART_BASE_URL, ORDERS_BASE_URL, PRODUCTS_BASE_URL, SALES_BASE_URL} from "../../../util/constants";
 import {Product} from "../../../types/products";
-import {PlaceOrder} from "./types";
+import {Address} from "./types";
 import {updateActivity} from "../../../util/session";
+import {Deal} from "../../admin-deals-create-widget/model/types";
 
-export const placeOrder = async ({customerId, storeId, price, address, accessToken}: PlaceOrder) => {
+export const placeOrder = async (customerId: number, storeId: string, coupon: string, price: number, address: Address, accessToken: string) => {
     await updateActivity("checkout", "place-order", storeId);
     await request({
         url: ORDERS_BASE_URL + '/create-order',
         method: 'POST',
-        data: {customerId, storeId, price, address},
+        data: {customerId, storeId, coupon, price, address},
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'X-FI-V-IP' : '127.0.0',
@@ -24,7 +25,27 @@ export const placeOrder = async ({customerId, storeId, price, address, accessTok
         console.error(error);
     })
 }
-export const getCart = async ({customerId, storeId, accessToken} :GetCart) => {
+
+export const getCoupon = async (code: string, storeId: string, accessToken: string): Promise<Deal> => {
+    return await request({
+        url: SALES_BASE_URL + '/get-coupon/' + code + '/' + storeId,
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'X-FI-V-IP' : '127.0.0',
+            'X-FI-V-SITE-ID': 'COM',
+            'X-FI-V-DEVICE': 'DESKTOP',
+            'X-FI-V-PATH': 'orders.create-order'
+        }
+    }).then((response) => {
+        return response.data;
+    }).catch((error) => {
+        console.error(error);
+        return null;
+    })
+}
+
+export const getCart = async (customerId: number, storeId: string, accessToken: string) => {
     await updateActivity("checkout", "view-checkout", storeId);
     return await request({
         url: CART_BASE_URL + '/get-cart/' + customerId,
@@ -40,7 +61,7 @@ export const getCart = async ({customerId, storeId, accessToken} :GetCart) => {
         const cartItems: CartItem[] = response.data;
         const fullCartItems: Cart[] = await Promise.all(
             cartItems.map(async (cartItem) => {
-                const product = await getProduct({productId: cartItem.productId, accessToken});
+                const product = await getProduct(cartItem.productId, accessToken);
                 return {
                     id: cartItem.id,
                     productId: cartItem.productId,
@@ -58,7 +79,7 @@ export const getCart = async ({customerId, storeId, accessToken} :GetCart) => {
     })
 }
 
-export const getProduct = async({productId, accessToken}: GetProduct): Promise<Product> => {
+export const getProduct = async(productId: number, accessToken: string): Promise<Product> => {
     return await request({
         url: PRODUCTS_BASE_URL + '/get-product-by-id/' + productId,
         method: 'GET',

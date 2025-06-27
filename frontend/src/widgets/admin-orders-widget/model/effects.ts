@@ -1,11 +1,12 @@
 import {request} from "../../../util/request";
 import {ACCOUNTS_BASE_URL, ORDERS_BASE_URL, STORES_BASE_URL} from "../../../util/constants";
 import {setOrderItems} from "./reducers";
-import {GetAccount, GetOrders, Order, OrderResponse} from "./types";
-import {getStoresProps, StoreProp} from "../../admin-store-widget/model/types";
+import {Order, OrderResponse} from "./types";
+import {StoreProp} from "../../admin-store-widget/model/types";
 import {setAdminStores} from "../../admin-store-widget/model/reducers";
+import {Dispatch} from "redux";
 
-export const getOrders = async ({id, accessToken, dispatch }: getStoresProps) => {
+export const getOrders = async (id: number, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: STORES_BASE_URL + '/get-stores-by-owner/' + id,
         method: 'GET',
@@ -21,7 +22,7 @@ export const getOrders = async ({id, accessToken, dispatch }: getStoresProps) =>
         dispatch(setAdminStores(stores));
 
         const ordersPromises = stores.map(store =>
-            getOrdersByStore({storeId: store.id, accessToken})
+            getOrdersByStore(store.id, accessToken)
         );
 
         const allOrdersArrays = await Promise.all(ordersPromises);
@@ -33,7 +34,7 @@ export const getOrders = async ({id, accessToken, dispatch }: getStoresProps) =>
     })
 }
 
-export const getOrdersByStore = async ({storeId, accessToken} :GetOrders): Promise<Order[]>=> {
+export const getOrdersByStore = async (storeId: string, accessToken: string): Promise<Order[]>=> {
     return await request({
         url: ORDERS_BASE_URL + '/get-orders-by-store/' + storeId,
         method: 'GET',
@@ -48,7 +49,7 @@ export const getOrdersByStore = async ({storeId, accessToken} :GetOrders): Promi
         const orders: OrderResponse[] = response.data;
         const fullOrders: Order[] = await Promise.all(
             orders.map(async (orderItem) => {
-                const name = await getCustomerName({customerId: orderItem.customerId, accessToken});
+                const name = await getCustomerName(orderItem.customerId, accessToken);
                 return {
                     id: orderItem.id,
                     customer: name,
@@ -66,7 +67,7 @@ export const getOrdersByStore = async ({storeId, accessToken} :GetOrders): Promi
     })
 }
 
-export const getCustomerName = async({customerId, accessToken}: GetAccount): Promise<string> => {
+export const getCustomerName = async(customerId: number, accessToken: string): Promise<string> => {
     return await request({
         url: ACCOUNTS_BASE_URL + '/get-user-by-id/' + customerId,
         method: 'GET',

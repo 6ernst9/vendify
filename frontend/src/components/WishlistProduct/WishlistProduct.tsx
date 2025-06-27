@@ -39,12 +39,12 @@ const WishlistProduct: React.FC<ProductProps> = ({id, name, price, oldPrice, ima
     }
 
     const removeWishlist = () => {
-        removeFromWishlist({storeId, productId : id, customerId, accessToken, dispatch});
+        removeFromWishlist(storeId, customerId, id, accessToken, dispatch);
     }
 
     const toCart = () => {
-        addToCart({customerId, productId: id, quantity: 1, accessToken, storeId, dispatch});
-        removeFromWishlist({storeId, productId : id, customerId, accessToken, dispatch});
+        addToCart(storeId, id, customerId, 1, dispatch, accessToken);
+        removeFromWishlist(storeId, customerId, id, accessToken, dispatch);
     }
 
     return (

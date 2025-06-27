@@ -1,5 +1,6 @@
 package com.vendify.products.controller;
 
+import com.vendify.products.model.OrderItem;
 import com.vendify.products.model.Product;
 import com.vendify.products.model.ProductDto;
 import com.vendify.products.model.ResponseDto;
@@ -14,7 +15,6 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
@@ -75,5 +75,21 @@ public class ProductController {
         productsService.addProducts(product);
         log.info("Performed POST /add-products call. Input: products={}", product);
         return Mono.just(new ResponseDto("product_added", "Products added successfully."));
+    }
+
+    @PutMapping("/update-stock")
+    public Mono<ResponseDto> updateStock(@RequestBody List<OrderItem> items){
+        log.info("Performing PUT /update-stock call. Input: items={}", items);
+        var res = productsService.updateStock(items);
+        log.info("Performed PUT /update-stock call. Input: items={}", items);
+        return res.then(Mono.just(new ResponseDto("stock_updated", "Product stock updated successfully.")));
+    }
+
+    @PutMapping("/rate/{productId}/{review}")
+    public Mono<ResponseDto> rate(@PathVariable long productId, @PathVariable int review){
+        log.info("Performing PUT /rate call. Input: productId={}, review={}", productId, review);
+        var res = productsService.updateRating(review, productId);
+        log.info("Performed PUT /rate call. Input: productId={}, review={}", productId, review);
+        return res.then(Mono.just(new ResponseDto("review_updated", "Product review updated successfully.")));
     }
 }

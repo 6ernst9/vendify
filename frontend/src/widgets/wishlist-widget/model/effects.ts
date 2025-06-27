@@ -1,12 +1,13 @@
-import {GetCart, GetProduct, PromoteWishlist, WishlistDelProps, WishlistItemResponse} from "./types";
+import {WishlistItemResponse} from "./types";
 import {request} from "../../../util/request";
 import {PRODUCTS_BASE_URL, WISHLIST_BASE_URL} from "../../../util/constants";
 import {Product} from "../../../types/products";
 import {setWishlistItems} from "./reducers";
 import {updateActivity} from "../../../util/session";
 import {getCart} from "../../cart-widget/model/effects";
+import {Dispatch} from "redux";
 
-export const getWishlist = async ({customerId, storeId, accessToken, dispatch} :GetCart) => {
+export const getWishlist = async (customerId: number, storeId: string, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("wishlist", "view-wishlist", storeId);
     await request({
         url: WISHLIST_BASE_URL + '/get-wishlist/' + customerId,
@@ -22,7 +23,7 @@ export const getWishlist = async ({customerId, storeId, accessToken, dispatch} :
         const wishlistItemResponses: WishlistItemResponse[] = response.data;
         const wishlistItems: Product[] = await Promise.all(
             wishlistItemResponses.map(async (wishlistItem) => {
-                return await getProduct({productId: wishlistItem.productId, accessToken});
+                return await getProduct(wishlistItem.productId, accessToken);
             }));
         dispatch(setWishlistItems(wishlistItems));
     }).catch((error) => {
@@ -31,7 +32,7 @@ export const getWishlist = async ({customerId, storeId, accessToken, dispatch} :
     })
 }
 
-export const removeFromWishlist = async ({storeId, customerId, productId, accessToken, dispatch} :WishlistDelProps) => {
+export const removeFromWishlist = async (storeId: string, customerId: number, productId: number, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("wishlist", "remove-from-wishlist:" + productId, storeId)
     await request({
         url: WISHLIST_BASE_URL + '/remove-from-wishlist/' + customerId + '/' + storeId + '/' + productId,
@@ -45,13 +46,13 @@ export const removeFromWishlist = async ({storeId, customerId, productId, access
         }
     }).then((response) => {
         console.log(response.data);
-        getWishlist({customerId, accessToken, storeId, dispatch});
+        getWishlist(customerId, accessToken, storeId, dispatch);
     }).catch((error) => {
         console.error(error);
     });
 }
 
-export const promoteWishlist = async ({storeId, customerId, accessToken, dispatch} :PromoteWishlist) => {
+export const promoteWishlist = async (storeId: string, customerId: number, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("wishlist", "add-all-to-cart", storeId)
     await request({
         url: WISHLIST_BASE_URL + '/promote-wishlist/' + customerId,
@@ -64,14 +65,15 @@ export const promoteWishlist = async ({storeId, customerId, accessToken, dispatc
             'X-FI-V-PATH': 'wishlist.remove-from-wishlist'
         }
     }).then((response) => {
-        getWishlist({customerId, accessToken, storeId, dispatch});
-        getCart({customerId, accessToken, storeId, dispatch});
+        console.debug(response.data);
+        getWishlist(customerId, accessToken, storeId, dispatch);
+        getCart(customerId, accessToken, storeId, dispatch);
     }).catch((error) => {
         console.error(error);
     });
 }
 
-export const getProduct = async({productId, accessToken}: GetProduct): Promise<Product> => {
+export const getProduct = async(productId: number, accessToken: string): Promise<Product> => {
     return await request({
         url: PRODUCTS_BASE_URL + '/get-product-by-id/' + productId,
         method: 'GET',

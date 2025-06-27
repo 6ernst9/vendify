@@ -55,22 +55,37 @@ const CompanyPage: React.FC = () => {
                 </div>
                 <div className="company-page-configuration-content">
                     <h1>Primary color</h1>
-                    <p>{theme.primaryColor}</p>
+                    <div className="company-page-configuration-colors">
+                        <div className="company-configuration-color"
+                             style={{backgroundColor: theme.primaryColor}}/>
+                        <p>{theme.primaryColor}</p>
+                    </div>
                 </div>
                 <hr className="company-page-divider"/>
                 <div className="company-page-configuration-content">
                     <h1>Background color</h1>
-                    <p>{theme.backgroundColor}</p>
+                    <div className="company-page-configuration-colors">
+                        <div className="company-configuration-color"
+                             style={{backgroundColor: theme.backgroundColor}}/>
+                        <p>{theme.backgroundColor}</p>
+                    </div>
                 </div>
                 <hr className="company-page-divider"/>
                 <div className="company-page-configuration-content">
                     <h1>Title color</h1>
-                    <p>{theme.titleColor}</p>
+                    <div className="company-page-configuration-colors">
+                        <div className="company-configuration-color"
+                             style={{backgroundColor: theme.titleColor}}/>
+                        <p>{theme.titleColor}</p>
+                    </div>
                 </div>
                 <hr className="company-page-divider"/>
                 <div className="company-page-configuration-content">
                     <h1>Text color</h1>
-                    <p>{theme.textSecondaryColor}</p>
+                    <div className="company-page-configuration-colors">
+                        <div className="company-configuration-color" style={{ backgroundColor: theme.textSecondaryColor }}/>
+                        <p>{theme.textSecondaryColor}</p>
+                    </div>
                 </div>
                 <hr className="company-page-divider"/>
                 <div className="company-page-configuration-content">

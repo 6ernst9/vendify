@@ -1,4 +1,3 @@
-import {getProductsProps} from "../../home-widget/model/types";
 import {request} from "../../../util/request";
 import {ACCOUNTS_ANALYTICS_BASE_URL, PRODUCTS_BASE_URL} from "../../../util/constants";
 import {
@@ -10,10 +9,10 @@ import {
     setSessionType
 } from "./reducers";
 import {AvgSessionResponse, ProductAction, SessionCountResponse, SessionRatio, SessionRatioResponse} from "./types";
-import {GetProduct} from "../../cart-widget/model/types";
 import {Product} from "../../../types/products";
+import {Dispatch} from "redux";
 
-export const getSessionCount = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getSessionCount = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-sessions-per-hour/' + storeId,
         method: 'GET',
@@ -38,7 +37,7 @@ export const getSessionCount = async ({storeId, accessToken, dispatch }: getProd
     })
 }
 
-export const getAvgSessions = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getAvgSessions = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-avg-duration/' + storeId,
         method: 'GET',
@@ -57,7 +56,7 @@ export const getAvgSessions = async ({storeId, accessToken, dispatch }: getProdu
     })
 }
 
-export const getSessionRatio = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getSessionRatio = async (storeId: string, accessToken: string, dispatch: Dispatch)  => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-session-ratio/' + storeId,
         method: 'GET',
@@ -80,7 +79,7 @@ export const getSessionRatio = async ({storeId, accessToken, dispatch }: getProd
     })
 }
 
-export const getQuickKPIs = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getQuickKPIs = async (storeId: string, accessToken: string, dispatch: Dispatch)  => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-quick-kpis/' + storeId,
         method: 'GET',
@@ -98,7 +97,7 @@ export const getQuickKPIs = async ({storeId, accessToken, dispatch }: getProduct
     })
 }
 
-export const getMostVisitedPages = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getMostVisitedPages = async (storeId: string, accessToken: string, dispatch: Dispatch)  => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-most-visited-pages/' + storeId,
         method: 'GET',
@@ -116,7 +115,7 @@ export const getMostVisitedPages = async ({storeId, accessToken, dispatch }: get
     })
 }
 
-export const getMostActiveUsers = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getMostActiveUsers = async (storeId: string, accessToken: string, dispatch: Dispatch)  => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-most-active-users/' + storeId,
         method: 'GET',
@@ -134,7 +133,7 @@ export const getMostActiveUsers = async ({storeId, accessToken, dispatch }: getP
     })
 }
 
-export const getMostViewedProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getMostViewedProducts = async (storeId: string, accessToken: string, dispatch: Dispatch)  => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-most-viewed-products/' + storeId,
         method: 'GET',
@@ -148,7 +147,7 @@ export const getMostViewedProducts = async ({storeId, accessToken, dispatch }: g
     }).then(async (response) => {
         const actions: ProductAction[] = response.data;
         const data = await Promise.all(actions.map(async (action) => {
-            const product = await getProduct({productId: Number(action.product), accessToken});
+            const product = await getProduct(Number(action.product), accessToken);
             return {
                 productId: Number(action.product),
                 name: product.name,
@@ -161,7 +160,7 @@ export const getMostViewedProducts = async ({storeId, accessToken, dispatch }: g
     })
 }
 
-export const getMostCartedProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getMostCartedProducts = async (storeId: string, accessToken: string, dispatch: Dispatch)  => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-most-added-to-cart-products/' + storeId,
         method: 'GET',
@@ -175,7 +174,7 @@ export const getMostCartedProducts = async ({storeId, accessToken, dispatch }: g
     }).then(async (response) => {
         const actions: ProductAction[] = response.data;
         const data = await Promise.all(actions.map(async (action) => {
-            const product = await getProduct({productId: Number(action.product), accessToken});
+            const product = await getProduct(Number(action.product), accessToken);
             return {
                 productId: Number(action.product),
                 name: product.name,
@@ -188,7 +187,7 @@ export const getMostCartedProducts = async ({storeId, accessToken, dispatch }: g
     })
 }
 
-export const getMostWishlistedProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getMostWishlistedProducts = async (storeId: string, accessToken: string, dispatch: Dispatch)  => {
     await request({
         url: ACCOUNTS_ANALYTICS_BASE_URL + '/get-most-added-to-wishlist-products/' + storeId,
         method: 'GET',
@@ -202,7 +201,7 @@ export const getMostWishlistedProducts = async ({storeId, accessToken, dispatch 
     }).then(async (response) => {
         const actions: ProductAction[] = response.data;
         const data = await Promise.all(actions.map(async (action) => {
-            const product = await getProduct({productId: Number(action.product), accessToken});
+            const product = await getProduct(Number(action.product), accessToken);
             return {
                 productId: Number(action.product),
                 name: product.name,
@@ -215,7 +214,7 @@ export const getMostWishlistedProducts = async ({storeId, accessToken, dispatch 
     })
 }
 
-export const getProduct = async({productId, accessToken}: GetProduct): Promise<Product> => {
+const getProduct = async (productId: number, accessToken: string): Promise<Product> => {
     return await request({
         url: PRODUCTS_BASE_URL + '/get-product-by-id/' + productId,
         method: 'GET',

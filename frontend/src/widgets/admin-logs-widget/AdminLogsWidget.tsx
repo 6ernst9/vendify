@@ -14,7 +14,7 @@ const AdminLogsWidget: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getStores({id, accessToken, dispatch});
+        getStores(id, accessToken, dispatch);
     }, [id, accessToken]);
 
     return (

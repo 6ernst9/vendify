@@ -16,7 +16,7 @@ const AccountWidget: React.FC = () => {
     const id = useSelector(sessionSelect.id);
 
     useEffect(() => {
-        getOrdersByCustomer({id, storeId, accessToken, dispatch});
+        getOrdersByCustomer(id, storeId, dispatch, accessToken);
     }, [accessToken, storeId, dispatch, id]);
 
     useEffect(() => {

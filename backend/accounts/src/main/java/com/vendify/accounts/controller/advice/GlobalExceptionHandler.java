@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@ControllerAdvice
+@ControllerAdvice(annotations = RestController.class)
 public class GlobalExceptionHandler {
     @ExceptionHandler(SecurityException.class)
     public ResponseEntity<ResponseDto> handleSecurity(SecurityException exception) {

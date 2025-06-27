@@ -13,7 +13,7 @@ const AdminProductsWidget: React.FC = () => {
     const id = useSelector(adminSessionSelect.id);
 
     useEffect(() => {
-        getProducts({id, dispatch, accessToken});
+        getProducts(id, accessToken, dispatch);
     }, [accessToken, dispatch, id]);
 
     return (

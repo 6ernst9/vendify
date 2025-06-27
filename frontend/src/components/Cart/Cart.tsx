@@ -6,6 +6,7 @@ import {sessionSelect} from "../../redux/core/session/selectors";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {useNavigate} from "react-router-dom";
 import {cartSelect} from "../../widgets/cart-widget/model/selectors";
+import {formatNumber} from "../../util/numbers";
 
 const CartComponent: React.FC = () => {
     const [coupon, setCoupon] = useState("");
@@ -19,21 +20,21 @@ const CartComponent: React.FC = () => {
     const [pendingQuantities, setPendingQuantities] = useState<Record<number, number>>({});
 
     useEffect(() => {
-        getCart({customerId: id,storeId, accessToken, dispatch});
+        getCart(id, storeId, accessToken, dispatch);
     }, [accessToken, id, storeId]);
 
     const handleUpdateCart = () => {
         Object.entries(pendingQuantities).forEach(([productId, quantity]) => {
             const item = cartItems.find((i) => i.productId === Number(productId));
             if (item && item.quantity !== quantity) {
-                updateCart({
+                updateCart(
                     storeId,
                     quantity,
-                    productId: item.productId,
-                    customerId: id,
+                    item.productId,
+                    id,
                     dispatch,
                     accessToken,
-                });
+                );
             }
         });
     };
@@ -70,7 +71,7 @@ const CartComponent: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="cart-price">
-                                    <p>${item.price}</p>
+                                    <p>${formatNumber(item.price)}</p>
                                 </div>
                                 <div className="cart-quantity">
                                     <select
@@ -91,7 +92,7 @@ const CartComponent: React.FC = () => {
                                     </select>
                                 </div>
                                 <div className="cart-subtotal">
-                                    <p>${item.price * item.quantity}</p>
+                                    <p>${formatNumber(item.price * item.quantity)}</p>
                                 </div>
                             </div>
                         ))}
@@ -116,7 +117,7 @@ const CartComponent: React.FC = () => {
                             <h3>Cart Total</h3>
                             <div className="cart-summary-item">
                                 <p>Subtotal:</p>
-                                <p>${subtotal}</p>
+                                <p>${formatNumber(subtotal)}</p>
                             </div>
                             <div className="cart-summary-item">
                                 <p>Shipping:</p>
@@ -124,7 +125,7 @@ const CartComponent: React.FC = () => {
                             </div>
                             <div className="cart-summary-item">
                                 <p>Total:</p>
-                                <p>${subtotal}</p>
+                                <p>${formatNumber(subtotal)}</p>
                             </div>
                             <button className="cart-checkout-btn" onClick={() => navigate(`/${store}/checkout`)}>Proceed
                                 to checkout

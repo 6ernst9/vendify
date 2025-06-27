@@ -2,11 +2,11 @@ import {request} from "../../../util/request";
 import {SALES_BASE_URL} from "../../../util/constants";
 import {AddDeal} from "./types";
 
-export const createDeal = async ({name, percentage, endDate, store, productIds, accessToken }: AddDeal) => {
+export const createDeal = async ({name, percentage, code, category, endDate, store, productIds, accessToken }: AddDeal) => {
     await request({
         url: SALES_BASE_URL + '/create-sale',
         method: 'POST',
-        data: {name, percentage, endDate, store, productIds},
+        data: {name, percentage, code, category, endDate, store, productIds},
         headers: {
             'X-FI-V-IP' : '127.0.0',
             'X-FI-V-SITE-ID': 'COM',

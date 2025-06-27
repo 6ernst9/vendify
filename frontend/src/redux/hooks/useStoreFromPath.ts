@@ -6,7 +6,7 @@ import {storeSelect} from "../core/store/selectors";
 import {useNavigate} from "react-router-dom";
 import setFavicon from "../../util/store";
 
-const allowedPaths = [undefined,'admin', 'home', 'login', 'sign-up'];
+const allowedPaths = [undefined, 'admin', 'home', 'login', 'sign-up'];
 
 const useStoreFromPath = () => {
     const stores = useSelector(storesSelect.stores);

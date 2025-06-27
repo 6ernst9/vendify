@@ -1,12 +1,12 @@
 import {request} from "../../../util/request";
 import {ORDERS_BASE_URL, PRODUCTS_BASE_URL, SALES_BASE_URL} from "../../../util/constants";
 import {setBestSellingProducts, setNewProducts, setSaleProducts} from "./reducers";
-import {getProductProps, getProductsProps} from "./types";
 import {updateActivity} from "../../../util/session";
 import {Product} from "../../../types/products";
 import {Deal} from "../../admin-deals-create-widget/model/types";
+import {Dispatch} from "redux";
 
-export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getDiscountedProducts = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     await updateActivity("home", "view-home", storeId);
     await request({
         url: PRODUCTS_BASE_URL + '/get-discounted-products/' + storeId,
@@ -20,7 +20,7 @@ export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: g
         }
     }).then(async (response) => {
         const products: Product[] = response.data;
-        const deal = await getDiscount({storeId, accessToken, dispatch});
+        const deal = await getDiscount(storeId, accessToken);
         dispatch(setSaleProducts({
             products, sale: deal
         }));
@@ -29,7 +29,7 @@ export const getDiscountedProducts = async ({storeId, accessToken, dispatch }: g
     })
 }
 
-export const getDiscount = async ({storeId, accessToken }: getProductsProps) : Promise<Deal> => {
+export const getDiscount = async (storeId: string, accessToken: string) : Promise<Deal> => {
     return await request({
         url: SALES_BASE_URL + '/get-sales/' + storeId,
         method: 'GET',
@@ -48,7 +48,7 @@ export const getDiscount = async ({storeId, accessToken }: getProductsProps) : P
     })
 }
 
-export const getNewestProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getNewestProducts = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: PRODUCTS_BASE_URL + '/get-newest-products/' + storeId,
         method: 'GET',
@@ -66,7 +66,7 @@ export const getNewestProducts = async ({storeId, accessToken, dispatch }: getPr
     })
 }
 
-export const getBestSellingProducts = async ({storeId, accessToken, dispatch }: getProductsProps) => {
+export const getBestSellingProducts = async (storeId: string, accessToken: string, dispatch: Dispatch) => {
     await request({
         url: ORDERS_BASE_URL + '/get-best-selling-orders/' + storeId + '/6',
         method: 'GET',
@@ -81,7 +81,7 @@ export const getBestSellingProducts = async ({storeId, accessToken, dispatch }: 
         const ids: number[] = response.data;
         const products = await Promise.all(
             ids.map(async (productId) => {
-                return await getProductById({ id: productId, accessToken });
+                return await getProductById(productId, accessToken);
             })
         );
         dispatch(setBestSellingProducts(products));
@@ -91,7 +91,7 @@ export const getBestSellingProducts = async ({storeId, accessToken, dispatch }: 
     })
 }
 
-export const getProductById = async ({id, accessToken}: getProductProps): Promise<Product> => {
+export const getProductById = async (id: number, accessToken: string): Promise<Product> => {
     return await request({
         url: PRODUCTS_BASE_URL + '/get-product-by-id/' + id,
         method: 'GET',

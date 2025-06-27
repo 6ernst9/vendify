@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {endSession} from "../../redux/core/session/reducers";
 import {storeSelect} from "../../redux/core/store/selectors";
 import {sessionSelect} from "../../redux/core/session/selectors";
-import {formatShortDate} from "../../util/numbers";
+import {formatNumber, formatShortDate} from "../../util/numbers";
 import {setCartItems} from "../../widgets/cart-widget/model/reducers";
 import {setWishlistItems} from "../../widgets/wishlist-widget/model/reducers";
 
@@ -84,7 +84,7 @@ const Account: React.FC = () => {
                     <div className="account-page-order">
                         <div className="account-page-order-header">
                             <h3>Order No. #{o.id}</h3>
-                            <button className="save-btn">View order</button>
+                            <button className="save-btn" onClick={() => navigate(`/${store}/order/${o.id}`)}>View order</button>
                         </div>
                         <div className="account-page-order-bottom">
                             <div className="account-page-order-product-container">
@@ -97,7 +97,7 @@ const Account: React.FC = () => {
                             </div>
                             <div className="account-page-order-product-container">
                                 <h4>Total</h4>
-                                <p>{o.price}$</p>
+                                <p>{formatNumber(o.price)}$</p>
                             </div>
                             <div className="account-page-order-product-container">
                                 <h4>Status</h4>

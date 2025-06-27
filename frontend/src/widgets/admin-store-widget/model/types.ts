@@ -1,14 +1,7 @@
 import {ContactLinks, Theme} from "../../../redux/core/store/types";
-import {Dispatch} from "redux";
 
 export type Stores = {
     stores: StoreProp[]
-}
-
-export type getStoresProps = {
-    id: number,
-    accessToken: string,
-    dispatch: Dispatch;
 }
 
 export type StoreProp = {

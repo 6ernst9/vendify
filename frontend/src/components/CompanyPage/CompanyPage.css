@@ -105,6 +105,13 @@
     gap: 10px;
 }
 
+.company-configuration-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #6B7280;
+}
+
 .company-page-configuration-color {
     padding: 4px 8px;
     border-radius: 12px;

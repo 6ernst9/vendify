@@ -21,22 +21,22 @@ public class Product {
     private String name;
     private List<String> images;
     private String category;
-    private List<String> sizes;
     private double price;
     private double oldPrice;
     private String description;
     private double reviews;
+    private int noReviews;
     private int stock;
 
-    public Product(String store, String name, List<String> images, String category, List<String> sizes, double price, String description, double reviews, int stock) {
+    public Product(String store, String name, List<String> images, String category, double price, String description, double reviews, int noReviews, int stock) {
         this.store = store;
         this.name = name;
         this.images = images;
         this.category = category;
-        this.sizes = sizes;
         this.price = price;
         this.description = description;
         this.reviews = reviews;
+        this.noReviews = noReviews;
         this.stock = stock;
     }
 }

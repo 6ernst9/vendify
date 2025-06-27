@@ -22,6 +22,11 @@ public class AnalyticsController {
         return analyticsService.getQuickKPIs(storeId);
     }
 
+    @GetMapping("/get-home-kpis/{storeId}")
+    public Flux<Double> getHomeKPIs(@PathVariable String storeId) {
+        return analyticsService.getHomeKPIs(storeId);
+    }
+
     @GetMapping("/get-revenue-per-day/{storeId}")
     public Flux<RevenuePerDay> getRevenuePerDay(@PathVariable String storeId) {
         return analyticsService.getRevenuePerDay(storeId);

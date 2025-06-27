@@ -1,19 +1,4 @@
-import {Dispatch} from "redux";
 import {Address} from "../../checkout-widget/model/types";
-
-export type getStoreProps = {
-    id: string;
-    accessToken: string;
-    dispatch: Dispatch;
-}
-
-
-export type updateProps = {
-    id: string;
-    status: string;
-    accessToken: string;
-    dispatch: Dispatch;
-}
 
 export interface Order {
     id: string;

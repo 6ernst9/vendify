@@ -16,7 +16,7 @@ const AdminOrderWidget: React.FC = () => {
     const accessToken = useSelector(adminSessionSelect.accessToken);
     
     useEffect(() => {
-        getOrder({id, accessToken, dispatch})
+        getOrder(id, accessToken, dispatch)
     }, [accessToken, id])
 
     return (
