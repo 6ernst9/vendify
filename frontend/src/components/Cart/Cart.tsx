@@ -29,9 +29,9 @@ const CartComponent: React.FC = () => {
             if (item && item.quantity !== quantity) {
                 updateCart(
                     storeId,
-                    quantity,
                     item.productId,
                     id,
+                    quantity,
                     dispatch,
                     accessToken,
                 );

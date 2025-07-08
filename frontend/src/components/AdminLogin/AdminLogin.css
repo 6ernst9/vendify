@@ -95,6 +95,12 @@
     transition: background 0.2s ease;
 }
 
+.admin-login-error {
+    color: #ff4d4f;
+    font-size: 16px;
+    font-family: var(--font-family), sans-serif;
+}
+
 .admin-login-forgot {
     font-size: 16px;
     color: white;

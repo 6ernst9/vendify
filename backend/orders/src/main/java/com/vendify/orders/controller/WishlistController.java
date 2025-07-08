@@ -22,24 +22,27 @@ public class WishlistController {
     @GetMapping("/get-wishlist/{customerId}")
     public Flux<WishlistItem> getWishlist(@PathVariable long customerId) {
         log.info("Performing GET /get-wishlist call. Input: customerId={}", customerId);
-        var wishlistItems = wishlistService.getWishlist(customerId);
-        log.info("Performed GET /get-wishlist call. Input: customerId={}, Output: wishlist={}", customerId, wishlistItems);
-        return wishlistItems;
+        return wishlistService.getWishlist(customerId)
+                .collectList()
+                .doOnNext(list ->  log.info("Performed GET /get-wishlist call. Input: customerId={}, Output: wishlist={}", customerId, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-wishlist-by-store/{storeId}")
     public Mono<Map<Long, List<WishlistItem>>> getWishlistByStoreForAdmin(@PathVariable String storeId) {
         log.info("Performing GET /get-wishlist-by-store call. Input: storeId={}", storeId);
-        var wishlists = wishlistService.getAllWishlistsByStoreGroupedByCustomer(storeId);
-        log.info("Performed GET /get-wishlist-by-store call. Input: storeId={}, Output: wishlistItems={}", storeId, wishlists);
-        return wishlists;
+        return wishlistService.getAllWishlistsByStoreGroupedByCustomer(storeId)
+                .flatMap(wishlistItems -> {
+                    log.info("Performed GET /get-wishlist-by-store call. Input: storeId={}, Output: wishlistItems={}", storeId, wishlistItems);
+                    return Mono.just(wishlistItems);
+                });
     }
 
     @PostMapping("/add-to-wishlist")
     public Mono<String> addToWishlist(@RequestBody Wishlist wishlist) {
         log.info("Performing POST /add-to-wishlist. Input: wishlist={}", wishlist);
         var wishlistItem = wishlistService.addWishlist(wishlist);
-        log.info("Performed POST /add-to-wishlist. Input: wishlist={}. Output: wishlistItem = {}", wishlist, wishlistItem);
+        log.info("Performed POST /add-to-wishlist. Input: wishlist={}.", wishlist);
         return wishlistItem.then(Mono.just("Wishlist item added successfully"));
     }
 
@@ -47,7 +50,7 @@ public class WishlistController {
     public Mono<String> promoteWishlist(@PathVariable long id) {
         log.info("Performing POST /promote-wishlist. Input: wishlist={}", id);
         var wishlistItem = wishlistService.promoteWishlist(id);
-        log.info("Performed POST /promote-wishlist. Input: wishlist={}. Output: cartItem = {}", id, wishlistItem);
+        log.info("Performed POST /promote-wishlist. Input: wishlist={}.", id);
         return wishlistItem.then(Mono.just("Wishlist item promoted successfully"));
     }
 

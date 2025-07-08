@@ -22,28 +22,48 @@ public class OrderController {
 
     @GetMapping("/get-orders/{customerId}")
     public Flux<Order> getOrders(@PathVariable long customerId) {
-        return orderService.getOrders(customerId);
+        log.info("Performing GET /get-orders call. Input: customerId={}", customerId);
+        return orderService.getOrders(customerId)
+                .collectList()
+                .doOnNext(list ->  log.info("Performed GET /get-orders call. Input: customerId={}, Output: orders={}", customerId, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-order-by-id/{id}")
     public Mono<Order> getOrder(@PathVariable String id) {
-        return orderService.getOrderById(id);
+        log.info("Performing GET /get-order-by-id call. Input: id={}", id);
+        return orderService.getOrderById(id)
+                .flatMap(order -> {
+                    log.info("Performed GET /get-order-by-id call. Input: id={}. Output: order={}", id, order);
+                    return Mono.just(order);
+                });
     }
 
     @GetMapping("/get-orders-by-store/{storeId}")
     public Flux<Order> getOrdersByStore(@PathVariable String storeId) {
-        return orderService.getOrdersByStore(storeId);
+        log.info("Performing GET /get-orders-by-store call. Input: storeId={}", storeId);
+        return orderService.getOrdersByStore(storeId)
+                .collectList()
+                .doOnNext(list ->  log.info("Performed GET /get-orders-by-store call. Input: storeId={}, Output: orders={}", storeId, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-best-selling-orders/{storeId}/{limit}")
     public Flux<Long> getOrdersByStore(@PathVariable String storeId,
                                         @PathVariable int limit) {
-        return orderService.getTopSellingProductIds(storeId, limit);
+        log.info("Performing GET /get-best-selling-orders call. Input: storeId={}", storeId);
+        return orderService.getTopSellingProductIds(storeId, limit)
+                .collectList()
+                .doOnNext(list ->  log.info("Performed GET get-best-selling-orders call. Input: storeId={}, Output: products={}", storeId, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @PostMapping("/create-order")
     public Mono<Void> createOrder(@RequestBody OrderDTO order) {
-        return orderService.createOrder(order);
+        log.info("Performing POST /create-order call. Input: order={}", order);
+        var res = orderService.createOrder(order);
+        log.info("Performed POST /create-order call. Input: order={}", order);
+        return res.then(Mono.empty());
     }
 
     @PostMapping("/rate-order/{storeId}")
@@ -53,13 +73,19 @@ public class OrderController {
     }
 
     @PutMapping("/update-status/{orderId}/{status}")
-    public Mono<Order> updateStatus(@PathVariable String orderId,
+    public Mono<String> updateStatus(@PathVariable String orderId,
                                     @PathVariable String status) {
-        return orderService.updateStatus(orderId, OrderStatus.valueOf(status));
+        log.info("Performing UPDATE /update-status call. Input: id={}, status={}", orderId, status);
+        var res = orderService.updateStatus(orderId, OrderStatus.valueOf(status));
+        log.info("Performed UPDATE /update-status call. Input: id={}, status={}", orderId, status);
+        return res.then(Mono.just("Status updated successfully"));
     }
 
     @DeleteMapping("/delete-order/{orderId}")
     public Mono<Void> deleteOrder(@PathVariable String orderId) {
-        return orderService.deleteOrder(orderId);
+        log.info("Performing DELETE /delete-order call. Input: id={}", orderId);
+        var res = orderService.deleteOrder(orderId);
+        log.info("Performed DELETE /delete-order call. Input: id={}", orderId);
+        return res.then(Mono.empty());
     }
 }

@@ -5,8 +5,10 @@ import "./QuickStart.css";
 import photo from '../../assets/img/photo2.jpg';
 // @ts-ignore
 import photo2 from '../../assets/img/photo.jpeg';
+import {useNavigate} from "react-router-dom";
 
 const QuickStart: React.FC = () => {
+    const navigate = useNavigate();
     return (
         <div className="quick-start-section">
             <h2>Start selling in no time. <span className="different-text">Launch your store in under a minute.</span></h2>
@@ -36,7 +38,7 @@ const QuickStart: React.FC = () => {
                     </ul>
 
                     <div className="quick-start-button-container">
-                        <div className="pill-button">Launch now</div>
+                        <div className="pill-button" onClick={() => navigate('/sign-up')}>Launch now</div>
                     </div>
                 </div>
             </div>

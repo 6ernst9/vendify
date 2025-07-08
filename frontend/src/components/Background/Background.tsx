@@ -2,8 +2,11 @@ import React from "react";
 // @ts-ignore
 import video from '../../assets/video/banner.mp4';
 import './Background.css';
+import {useNavigate} from "react-router-dom";
 
 const Background: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="homepage-background">
             <video
@@ -22,11 +25,13 @@ const Background: React.FC = () => {
                     global empire</h2>
                 <p>Dream big, build fast, and grow faster <br/> with Vendify.</p>
                 <div className="homepage-background-buttons">
-                    <div className="homepage-background-trial-button">
-                        Start free trial
+                    <div className="homepage-background-trial-button"
+                         onClick={() => navigate('/sign-up')}>
+                        Start here
                     </div>
-                    <div className="homepage-background-plans-button">
-                        View plans
+                    <div className="homepage-background-plans-button"
+                         onClick={() => navigate('/solutions')}>
+                        View stores
                     </div>
                 </div>
             </div>

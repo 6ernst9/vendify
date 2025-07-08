@@ -16,7 +16,7 @@ const loadSession = () => {
         return JSON.parse(serializedSession);
     } catch (e) {
         return defaultSession;
-    }
+    }   
 };
 
 const sessionSlice = createSlice({

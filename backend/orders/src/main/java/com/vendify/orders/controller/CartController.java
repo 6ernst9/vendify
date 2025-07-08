@@ -22,24 +22,27 @@ public class CartController {
     @GetMapping("/get-cart/{customerId}")
     public Flux<CartItem> getCart(@PathVariable long customerId) {
         log.info("Performing GET /get-cart call. Input: customerId={}", customerId);
-        var cartItems = cartService.getCart(customerId);
-        log.info("Performed GET /get-cart call. Input: customerId={}, Output: cartItems={}", customerId, cartItems);
-        return cartItems;
+        return cartService.getCart(customerId)
+                .collectList()
+                .doOnNext(list ->  log.info("Performed GET /get-cart call. Input: customerId={}, Output: orders={}", customerId, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-carts-by-store/{storeId}")
     public Mono<Map<Long, List<CartItem>>> getCartsByStoreForAdmin(@PathVariable String storeId) {
         log.info("Performing GET /get-carts-by-store call. Input: storeId={}", storeId);
-        var carts = cartService.getAllCartsByStoreGroupedByCustomer(storeId);
-        log.info("Performed GET /get-cart call. Input: storeId={}, Output: cartItems={}", storeId, carts);
-        return carts;
+        return cartService.getAllCartsByStoreGroupedByCustomer(storeId)
+                .flatMap(carts -> {
+                    log.info("Performed GET /get-cart call. Input: storeId={}, Output: cartItems={}", storeId, carts);
+                    return Mono.just(carts);
+                });
     }
 
     @PostMapping("/add-to-cart")
     public Mono<String> addToCart(@RequestBody Cart cart) {
         log.info("Performing POST /add-to-cart. Input: cart={}", cart);
         var cartItem = cartService.addToCart(cart.getCustomerId(), cart.getStoreId(), cart.getProductId(), cart.getQuantity());
-        log.info("Performed POST /add-to-cart. Input: cart={}. Output: cartItem = {}", cart, cartItem);
+        log.info("Performed POST /add-to-cart. Input: cart={}.", cart);
         return cartItem.then(Mono.just("Cart item added successfully"));
     }
 
@@ -47,7 +50,7 @@ public class CartController {
     public Mono<String> updateQuantity(@RequestBody Cart cart) {
         log.info("Performing PUT /update-cart. Input: cart={}", cart);
         var cartItem = cartService.updateQuantity(cart.getCustomerId(), cart.getStoreId(), cart.getProductId(), cart.getQuantity());
-        log.info("Performed PUT /update-cart. Input: cart={}. Output: cartItem={}", cart, cartItem);
+        log.info("Performed PUT /update-cart. Input: cart={}.", cart);
         return cartItem.then(Mono.just("Cart item updated successfully"));
     }
 

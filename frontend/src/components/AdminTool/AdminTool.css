@@ -27,6 +27,13 @@
     color: white;
 }
 
+.homepage-admin-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .homepage-admin-tool-container {
     display: flex;
     margin: 20px;
@@ -53,6 +60,8 @@
 }
 
 .homepage-admin-tool-text-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 5vw;
     margin-top:  -20px;
     margin-bottom: 20px;

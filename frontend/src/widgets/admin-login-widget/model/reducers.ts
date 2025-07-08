@@ -20,6 +20,10 @@ const loginSlice = createSlice({
                 state.error = 'Something went wrong'
             }
         },
+        setError: (state, action: PayloadAction<string>) => {
+            state.logged = false;
+            state.error = action.payload;
+        },
         changePage: (state) => {
             state.error = ''
         },
@@ -56,5 +60,5 @@ const loginSlice = createSlice({
     }
 });
 
-export const { loginSuccess, registrationSuccess, registrationFailure, loginFailure, changePage, logout } = loginSlice.actions;
+export const { loginSuccess, registrationSuccess, registrationFailure, loginFailure, changePage, logout, setError } = loginSlice.actions;
 export default loginSlice.reducer;

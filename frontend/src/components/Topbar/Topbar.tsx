@@ -25,7 +25,7 @@ const Topbar: React.FC = () => {
                 <p onClick={() => navigate('/login')}>Log in</p>
                 <div className="homepage-trial-button"
                      onClick={() => navigate('/sign-up')}>
-                    Start free trial
+                    Start here
                 </div>
             </div>
         </div>

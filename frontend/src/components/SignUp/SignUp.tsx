@@ -4,17 +4,16 @@ import {register} from "../../widgets/sign-up-widget/model/effects";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import {storeSelect} from "../../redux/core/store/selectors";
-import {useNavigate} from "react-router-dom";
 import {authSelect} from "../../widgets/admin-login-widget/model/selectors";
-import {changePage} from "../../widgets/admin-login-widget/model/reducers";
+import {changePage, setError} from "../../widgets/admin-login-widget/model/reducers";
+import {useNavigate} from "react-router-dom";
 
 const SignUp: React.FC = () => {
     const storeId = useSelector((state: RootState) => state.store.id);
     const errorMsg = useSelector(authSelect.authError);
     const store = useSelector(storeSelect.path);
-
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -27,8 +26,11 @@ const SignUp: React.FC = () => {
     }, []);
 
     const handleSignUp = async () => {
-        await register(email, password, firstName, lastName, storeId, phoneNumber, dispatch);
-        navigate(`/${store}/home`);
+        if(email !== '' && password !== '' && firstName !== '' && lastName !== '' && phoneNumber !== '') {
+            await register(email, password, firstName, lastName, storeId, phoneNumber, dispatch);
+        } else {
+            dispatch(setError("Fields cannot be empty"));
+        }
     };
 
     return (
@@ -73,7 +75,10 @@ const SignUp: React.FC = () => {
                 />
                 {errorMsg !== '' && errorMsg !== 'NO-ERROR' && <p className="customer-signup-error">{errorMsg}</p>}
                 <button className="customer-signup-button" onClick={handleSignUp}>Sign Up</button>
-                <a href={`/${store}/login`} className="customer-signup-forgot">Already have an account?</a>
+                <div onClick={() => {
+                    dispatch(setError('NO-ERROR'));
+                    navigate(`/${store}/login`);
+                }}  className="customer-signup-forgot">Already have an account?</div>
             </div>
         </div>
     );

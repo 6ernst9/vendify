@@ -12,6 +12,8 @@ import {setWishlistItems} from "../../widgets/wishlist-widget/model/reducers";
 
 const Account: React.FC = () => {
     const store = useSelector(storeSelect.path);
+    const [error, setError] = useState('');
+
     const first = useSelector(sessionSelect.firstName);
     const last = useSelector(sessionSelect.lastName);
     const mail = useSelector(sessionSelect.email);
@@ -37,6 +39,14 @@ const Account: React.FC = () => {
         setConfirmPassword("");
         setCurrentPassword("");
         setNewPassword("");
+    }
+
+    const update = () => {
+        if(email !== mail && firstName!== first && lastName !== last && phoneNumber !== phone && currentPassword!== '' && newPassword!== '' && confirmPassword !== '') {
+
+        } else {
+            setError('Fields cannot be empty');
+        }
     }
 
     const logout = () => {
@@ -68,12 +78,13 @@ const Account: React.FC = () => {
                     <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                            placeholder="Confirm New Password"/>
                 </div>
+                {error && error !== '' && <p className="account-error">{error}</p>}
 
                 <div className="account-page-buttons">
                     <button className="logout-btn" onClick={logout}>Logout</button>
                     <div className="account-page-form-actions">
                         <button className="cancel-btn" onClick={cancel}>Cancel</button>
-                        <button className="save-btn">Save Changes</button>
+                        <button className="save-btn" onClick={update}>Save Changes</button>
                     </div>
                 </div>
             </div>

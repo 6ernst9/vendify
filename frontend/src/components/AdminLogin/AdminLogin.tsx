@@ -4,11 +4,14 @@ import './AdminLogin.css';
 import {ReactComponent as Logo} from "../../assets/icons/colored-logo.svg";
 import {useNavigate} from "react-router-dom";
 import {login} from "../../widgets/admin-login-widget/model/effects";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setError} from "../../widgets/admin-login-widget/model/reducers";
+import {authSelect} from "../../widgets/admin-login-widget/model/selectors";
 
 const AdminLogin: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const errorMsg = useSelector(authSelect.authError);
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -17,7 +20,11 @@ const AdminLogin: React.FC = () => {
     const handlePassChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)
 
     const handleSubmit = async () => {
-        await login(email, password, dispatch);
+        if(email !== '' && password !== '') {
+            await login(email, password, dispatch);
+        } else {
+            dispatch(setError("Fields cannot be empty"));
+        }
     };
 
     return (
@@ -47,10 +54,14 @@ const AdminLogin: React.FC = () => {
                             placeholder="Your password"/>
                     </label>
 
+                    {errorMsg !== '' && errorMsg !== 'NO-ERROR' && <p className="admin-login-error">{errorMsg}</p>}
                     <div className="admin-login-button" onClick={handleSubmit}>Login</div>
                 </form>
             </div>
-            <div className="admin-login-forgot" onClick={() => navigate('/sign-up')}>Don't have an account?</div>
+            <div className="admin-login-forgot" onClick={() => {
+                dispatch(setError('NO-ERROR'));
+                navigate('/sign-up');
+            }}>Don't have an account?</div>
         </div>
     )
 }

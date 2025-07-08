@@ -19,12 +19,12 @@ const Checkout: React.FC = () => {
     const [paymentMethod, setPaymentMethod] = useState("cash");
 
     const [firstName, setFirstName] = useState('');
+    const [error, setError] = useState('');
     const [street, setStreet] = useState('');
     const [apartment, setApartment] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
     const [phone, setPhone] = useState('');
-    const [saveInfo, setSaveInfo] = useState(true);
     const initialSubtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const [subtotal, setSubtotal] = useState(initialSubtotal);
     const navigate = useNavigate();
@@ -65,12 +65,15 @@ const Checkout: React.FC = () => {
     const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value);
     const handleZipChange = (e: React.ChangeEvent<HTMLInputElement>) => setZip(e.target.value);
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value);
-    const handleSaveInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => setSaveInfo(e.target.checked);
     const handleCouponChange = (e: React.ChangeEvent<HTMLInputElement>) => setCouponCode(e.target.value);
 
     const handlePlaceOrder = async () => {
-        placeOrder(id, storeId, couponCode || '', subtotal, {street, city, apartment, phoneNumber: phone, zipCode: zip}, accessToken)
-            .then(() => navigate(`/${store}`))
+        if(firstName !== '' && street !== '' && city !== '' && zip !== '' && phone !== '' ) {
+            placeOrder(id, storeId, couponCode || '', subtotal, {street, city, apartment, phoneNumber: phone, zipCode: zip}, accessToken)
+                .then(() => navigate(`/${store}`))
+        } else {
+            setError('Fields cannot be empty');
+        }
     }
 
     return (
@@ -102,10 +105,7 @@ const Checkout: React.FC = () => {
                         Phone Number*
                         <input type="text" required value={phone} onChange={handlePhoneChange}/>
                     </label>
-                    <label className="save-info">
-                        <input type="checkbox" checked={saveInfo} onChange={handleSaveInfoChange}/>
-                        Save this information for faster check-out next time
-                    </label>
+                    {error && error !== '' && <p className="checkout-error">{error}</p>}
                 </form>
             </div>
 

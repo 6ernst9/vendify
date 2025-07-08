@@ -79,6 +79,12 @@
     font-weight: 500;
 }
 
+.account    -error {
+    color: #ff4d4f;
+    font-size: 16px;
+    font-family: var(--font-family), sans-serif;
+}
+
 .cancel-btn {
     background: none;
     border: 1px solid #d3d3d3;

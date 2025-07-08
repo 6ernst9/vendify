@@ -3,19 +3,18 @@ import './Login.css';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import {login} from "../../widgets/login-widget/model/effects";
-import {useNavigate} from "react-router-dom";
 import {storeSelect} from "../../redux/core/store/selectors";
-import {changePage} from "../../widgets/admin-login-widget/model/reducers";
+import {changePage, setError} from "../../widgets/admin-login-widget/model/reducers";
 import {authSelect} from "../../widgets/admin-login-widget/model/selectors";
+import {useNavigate} from "react-router-dom";
 
 const Login: React.FC = () => {
     const name = useSelector((state: RootState) => state.store.name);
     const storeId = useSelector((state: RootState) => state.store.id);
     const store = useSelector(storeSelect.path);
     const errorMsg = useSelector(authSelect.authError);
-
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [emailOrPhone, setEmailOrPhone] = useState('');
     const [password, setPassword] = useState('');
@@ -24,14 +23,12 @@ const Login: React.FC = () => {
         dispatch(changePage());
     }, []);
 
-    useEffect(() => {
-        if(errorMsg === 'NO-ERROR') {
-            navigate(`/${store}/home`);
-        }
-    }, [store, errorMsg]);
-
     const handleLogin = async () => {
-        await login(emailOrPhone, password, storeId, dispatch);
+        if(emailOrPhone !== '' && password !== '') {
+            await login(emailOrPhone, password, storeId, dispatch);
+        } else {
+            dispatch(setError("Fields cannot be empty"));
+        }
     };
 
     return (
@@ -57,7 +54,10 @@ const Login: React.FC = () => {
                 {errorMsg !== '' && errorMsg !== 'NO-ERROR' && <p className="customer-login-error">{errorMsg}</p>}
                 <div className="customer-login-actions">
                     <button className="customer-login-button" onClick={handleLogin}>Log In</button>
-                    <a href={`/${store}/sign-up`} className="customer-login-forgot">Don't have an account?</a>
+                    <div onClick={() => {
+                        dispatch(setError('NO-ERROR'));
+                        navigate(`/${store}/sign-up`);
+                    }} className="customer-login-forgot">Don't have an account?</div>
                 </div>
             </div>
         </div>

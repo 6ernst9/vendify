@@ -124,6 +124,12 @@
     cursor: pointer;
 }
 
+.checkout-error {
+    color: #ff4d4f;
+    font-size: 16px;
+    font-family: var(--font-family), sans-serif;
+}
+
 .place-order-btn {
     width: 100%;
     background-color: var(--primary-color);

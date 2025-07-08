@@ -23,41 +23,57 @@ public class ProductController {
     @GetMapping("/get-product-by-id/{id}")
     public Mono<Product> getProductById(@PathVariable long id){
         log.info("Performing GET /get-product-by-id call. Input: id={}", id);
-        var product = productsService.getProductById(id);
-        log.info("Performed GET /get-product-by-id call. Input: id={}. Output={}", id, product);
-        return product;
+        return productsService.getProductById(id)
+                .flatMap(product -> {
+                    log.info("Performed GET /get-product-by-id call. Input: id={}. Output={}", id, product);
+                    return Mono.just(product);
+                });
     }
 
     @GetMapping("/get-discounted-products/{storeId}")
     public Flux<Product> getDiscountedProducts(@PathVariable String storeId) {
-        return productsService.getDiscountedProducts(storeId);
+        log.info("Performing GET /get-discounted-products call. Input: storeId={}", storeId);
+        return productsService.getDiscountedProducts(storeId)
+                .collectList()
+                .doOnNext(list ->  log.info("Performing GET /get-discounted-products call. Input: storeId={}. Output: products={}", storeId, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-related-products/{id}")
     public Flux<Product> getRelatedProducts(@PathVariable long id) {
-        return productsService.getRelatedProducts(id);
+        log.info("Performing GET /get-related-products call. Input: id={}", id);
+        return productsService.getRelatedProducts(id)
+                .collectList()
+                .doOnNext(list ->  log.info("Performing GET /get-related-products call. Input: id={}. Output: products={}", id, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-newest-products/{storeId}")
     public Flux<Product> getNewestProducts(@PathVariable String storeId) {
-        return productsService.getNewestProducts(storeId);
+        log.info("Performing GET /get-newest-products call. Input: storeId={}", storeId);
+        return productsService.getNewestProducts(storeId)
+                .collectList()
+                .doOnNext(list ->  log.info("Performing GET /get-newest-products call. Input: storeId={}. Output: products={}", storeId, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-products-by-store/{store}")
     public Flux<Product> getProductsByStore(@PathVariable String store){
         log.info("Performing GET /get-products-by-store call. Input: store={}", store);
-        var products = productsService.getAllStoreProducts(store);
-        log.info("Performed GET get-products-by-store call. Input: store={}. Output={}", store, products);
-        return products;
+        return productsService.getAllStoreProducts(store)
+                .collectList()
+                .doOnNext(list -> log.info("Performed GET get-products-by-store call. Input: store={}. Output={}", store, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @GetMapping("/get-products-by-store-and-category/{store}/{category}")
     public Flux<Product> getProductsByStoreAndCategory(@PathVariable String store,
                                             @PathVariable String category) {
         log.info("Performing GET /get-products-by-store-and-category call. Input: store={}, category={}", store, category);
-        var products = productsService.getAllStoreProductsByCategory(store, category);
-        log.info("Performed GET get-products-by-store-and-category call. Input: store={}, category={}. Output={}", store, category, products);
-        return products;
+        return productsService.getAllStoreProductsByCategory(store, category)
+                .collectList()
+                .doOnNext(list -> log.info("Performed GET /get-products-by-store-and-category call. Input: store={}, category={}. Output={}", store, category, list))
+                .flatMapMany(Flux::fromIterable);
     }
 
     @PostMapping("/add-product")
