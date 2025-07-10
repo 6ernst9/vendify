@@ -23,7 +23,7 @@ export const updateStore = async (id: string, name: string, owner: number, path:
 
 export const deleteStore = async (id: string, accessToken: string) => {
     await request({
-        url: STORES_BASE_URL+ '/delete-store/' + id,
+        url: STORES_BASE_URL + '/delete-store/' + id,
         method: 'DELETE',
         headers: {
             'X-FI-V-IP' : '127.0.0',

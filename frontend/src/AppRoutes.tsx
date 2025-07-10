@@ -39,6 +39,8 @@ import AdminStoreEditWidget from "./widgets/admin-edit-store/AdminStoreEdit";
 import AdminProductEditWidget from "./widgets/admin-product-edit-widget/AdminProductEditWidget";
 import AdminProductPageWidget from "./widgets/admin-product-page-widget/AdminProductPageWidget";
 import AdminDealPageWidget from "./widgets/admin-deal-page-widget/AdminDealPageWidget";
+import AdminAccountPageWidget from "./widgets/admin-account-page-widget/AdminAccountPageWidget";
+import AdminAccountEditWidget from "./widgets/admin-account-edit-widget/AdminAccountEditWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -66,6 +68,8 @@ const AppRoutes = () => {
             { path: "/sign-up", element: <AdminSignUpWidget /> },
             { path: "/admin", element: <AdminHomeWidget /> },
             { path: "/admin/home", element: <AdminHomeWidget /> },
+            { path: "/admin/account", element: <AdminAccountPageWidget /> },
+            { path: "/admin/account/edit", element: <AdminAccountEditWidget /> },
             { path: "/admin/analytics", element: <AdminAnalyticsWidget /> },
             { path: "/admin/finances", element: <AdminFinancesWidget /> },
             { path: "/admin/logs", element: <AdminLogsWidget /> },

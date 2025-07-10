@@ -40,7 +40,14 @@ const sessionSlice = createSlice({
         },
         endSession: (state) => {
             localStorage.removeItem('admin-session');
-            state = defaultSession
+            localStorage.removeItem('X-FI-V-SESSION-ID-0');
+            state.accessToken = defaultSession.accessToken;
+            state.refreshToken = defaultSession.refreshToken;
+            state.id = defaultSession.id;
+            state.email = defaultSession.email;
+            state.phoneNumber = defaultSession.phoneNumber;
+            state.firstName = defaultSession.firstName;
+            state.lastName = defaultSession.lastName;
         }
     }
 });

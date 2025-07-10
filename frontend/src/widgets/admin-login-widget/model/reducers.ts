@@ -54,8 +54,8 @@ const loginSlice = createSlice({
             }
         },
         logout: (state) => {
-            localStorage.removeItem('admin-session');
-            state = defaultAuth;
+            state.error = defaultAuth.error;
+            state.logged = defaultAuth.logged;
         }
     }
 });

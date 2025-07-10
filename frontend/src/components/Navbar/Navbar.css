@@ -50,6 +50,14 @@
     gap: 15px;
 }
 
+.navbar-user-info span{
+     cursor: pointer;
+ }
+
+.navbar-user-info span:hover{
+    text-decoration: underline;
+}
+
 .navbar-user-info svg {
     cursor: pointer;
     width: 24px;
