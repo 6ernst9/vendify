@@ -93,6 +93,14 @@ public class ProductController {
         return Mono.just(new ResponseDto("product_added", "Products added successfully."));
     }
 
+    @PutMapping("/update-product")
+    public Mono<ResponseDto> updateProduct(@RequestBody Product product){
+        log.info("Performing PUT /update-product call. Input: product={}", product);
+        var res = productsService.updateProduct(product);
+        log.info("Performed PUT /update-product call. Input: product={}",product);
+        return res.then(Mono.just(new ResponseDto("product_updated", "Product updated successfully.")));
+    }
+
     @PutMapping("/update-stock")
     public Mono<ResponseDto> updateStock(@RequestBody List<OrderItem> items){
         log.info("Performing PUT /update-stock call. Input: items={}", items);
@@ -107,5 +115,13 @@ public class ProductController {
         var res = productsService.updateRating(review, productId);
         log.info("Performed PUT /rate call. Input: productId={}, review={}", productId, review);
         return res.then(Mono.just(new ResponseDto("review_updated", "Product review updated successfully.")));
+    }
+
+    @DeleteMapping("/delete-product/{id}")
+    public Mono<ResponseDto> deleteProduct(@PathVariable long id){
+        log.info("Performing DELETE /delete-product call. Input: id={}", id);
+        var res = productsService.deleteProduct(id);
+        log.info("Performed DELETE /delete-product call. Input: id={}",id);
+        return res.then(Mono.just(new ResponseDto("product_deleted", "Product deleted successfully.")));
     }
 }

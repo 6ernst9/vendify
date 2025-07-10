@@ -1,30 +1,20 @@
 import React, {useState} from "react";
 import './Deals.css';
 import {useNavigate} from "react-router-dom";
-
-const discounts = [
-    { id: 1, name: "Spring Sale", code: "SPRING20", percentage: 20, productsAffected: 12 },
-    { id: 2, name: "Holiday Special", code: "HOLIDAY25", percentage: 25, productsAffected: 8 },
-    { id: 3, name: "Clearance", code: "CLEAR50", percentage: 50, productsAffected: 5 },
-    { id: 4, name: "VIP Discount", code: "VIP15", percentage: 15, productsAffected: 20 },
-    { id: 5, name: "New Customer", code: "WELCOME10", percentage: 10, productsAffected: 30 },
-    { id: 6, name: "Summer Blowout", code: "SUMMER30", percentage: 30, productsAffected: 7 },
-    { id: 7, name: "Back to School", code: "SCHOOL10", percentage: 10, productsAffected: 18 },
-    { id: 8, name: "Flash Deal", code: "FLASH40", percentage: 40, productsAffected: 3 },
-    { id: 9, name: "Weekend Offer", code: "WEEKEND5", percentage: 5, productsAffected: 50 },
-    { id: 10, name: "Limited Time", code: "LIMITED35", percentage: 35, productsAffected: 4 }
-];
+import {useSelector} from "react-redux";
+import {adminDealsSelect} from "../../widgets/admin-deals-widget/model/selectors";
 
 const tabs = [
     { id: 'all', label: 'All' },
     { id: 'active', label: 'Active' },
-    { id: 'schedules', label: 'Scheduled'},
+    { id: 'coupons', label: 'Coupons'},
     { id: 'expired', label: 'Expired' }
 ];
 
 const Deals: React.FC = () => {
     const [activeTab, setActiveTab] = useState('all');
     const navigate = useNavigate();
+    const deals = useSelector(adminDealsSelect.sales);
 
     return (
         <div className='deals-container'>
@@ -48,7 +38,6 @@ const Deals: React.FC = () => {
             <table className="deals-table">
                 <thead>
                 <tr>
-                    <th><input type="checkbox"/></th>
                     <th>Id</th>
                     <th>Name</th>
                     <th>Code</th>
@@ -57,14 +46,13 @@ const Deals: React.FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {discounts.map((discount) => (
+                {deals.map((discount) => (
                     <tr key={discount.id}>
-                        <td><input type="checkbox"/></td>
-                        <td>#{discount.id}</td>
+                        <td className="deal-id" onClick={() => navigate(`/admin/deals/${discount.id}`)}>#{discount.id}</td>
                         <td>{discount.name}</td>
-                        <td>{discount.code}</td>
-                        <td>{discount.percentage}$</td>
-                        <td>{discount.productsAffected}</td>
+                        <td>{discount.code || 'NOT A COUPON'}</td>
+                        <td>{discount.percentage}%</td>
+                        <td>{discount.productIds.length}</td>
                     </tr>
                 ))}
                 </tbody>

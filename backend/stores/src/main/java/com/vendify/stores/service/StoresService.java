@@ -35,9 +35,27 @@ public class StoresService {
         );
     }
 
+    public Mono<Store> updateStore(Store storeDto) {
+        return storesRepository.findById(storeDto.getId())
+                .flatMap(store -> {
+                    store.setName(storeDto.getName());
+                    store.setLogo(storeDto.getLogo());
+                    store.setPath(storeDto.getPath());
+                    store.setBanner(storeDto.getBanner());
+                    store.setTheme(storeDto.getTheme());
+                    store.setContactLinks(storeDto.getContactLinks());
+                    return storesRepository.save(store);
+                });
+    }
+
     public Mono<Store> getStoreById(String id){
         return storesRepository.findById(id)
                 .switchIfEmpty(Mono.error(new RuntimeException("Store not found")));
+    }
+
+    public Mono<Void> deleteStore(String id){
+        return storesRepository.findById(id)
+                .flatMap(store -> storesRepository.deleteById(store.getId()));
     }
 
     public Mono<Store> getStoreByName(String path){

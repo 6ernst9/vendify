@@ -9,6 +9,12 @@ const Banner: React.FC = () => {
     const categories = useSelector(storeSelect.categories);
     const navigate = useNavigate();
     const store = useSelector(storeSelect.path);
+    const banner = useSelector(storeSelect.banner);
+
+    if(banner === '') {
+        return null;
+    }
+
     return (
         <div className="banner">
             <div className="banner-categories">

@@ -11,6 +11,8 @@ const CompanyCreate: React.FC = () => {
     const accessToken = useSelector(adminSessionSelect.accessToken);
     const id = useSelector(adminSessionSelect.id);
 
+    const [error, setError] = useState('');
+
     const [name, setStoreName] = useState('');
     const [path, setStorePath] = useState('');
 
@@ -67,7 +69,8 @@ const CompanyCreate: React.FC = () => {
     const handleInstagramChange = (e: React.ChangeEvent<HTMLInputElement>) => setInstagram(e.target.value);
 
     const handleSubmit = async () => {
-        await createStore(
+        if(name !== '' && path !== '') {
+            await createStore(
                 name,
                 id,
                 path,
@@ -88,7 +91,10 @@ const CompanyCreate: React.FC = () => {
                 },
                 accessToken
             );
-        navigate("/admin/home");
+            navigate("/admin/home");
+        } else {
+            setError('Fields cannot be empty');
+        }
     }
     return (
         <div className="company-create-container">

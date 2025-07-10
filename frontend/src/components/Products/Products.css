@@ -144,3 +144,13 @@
 .product-empty-container p {
     font-size: 18px;
 }
+
+.product-id{
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+.product-id:hover{
+    color: #1255cb;
+}

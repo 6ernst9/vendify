@@ -1,5 +1,6 @@
 package com.vendify.products.controller;
 
+import com.vendify.products.model.ResponseDto;
 import com.vendify.products.model.Sale;
 import com.vendify.products.model.SaleDTO;
 import com.vendify.products.service.SalesService;
@@ -24,6 +25,11 @@ public class SaleController {
         return salesService.getSale(storeId);
     }
 
+    @GetMapping("/get-sale-by-id/{id}")
+    public Mono<Sale> getSaleById(@PathVariable long id) {
+        return salesService.getSaleById(id);
+    }
+
     @GetMapping("/get-deals/{storeId}")
     public Flux<Sale> getSales(@PathVariable String storeId) {
         return salesService.getSales(storeId);
@@ -39,5 +45,10 @@ public class SaleController {
     public Mono<Sale> applyCoupon(@PathVariable String storeId,
                                   @PathVariable String code) {
         return salesService.applyCoupon(code, storeId);
+    }
+
+    @DeleteMapping("/delete-sale/{id}")
+    public Mono<ResponseDto> deleteSale(@PathVariable long id) {
+        return salesService.deleteSale(id).then(Mono.just(new ResponseDto("sale_deleted", "Sale deleted successfully")));
     }
 }

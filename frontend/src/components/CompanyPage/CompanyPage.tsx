@@ -22,7 +22,7 @@ const CompanyPage: React.FC = () => {
             <div className="company-page-header">
                 <h1>Company:{name}</h1>
                 <div className="company-page-header-buttons">
-                    <div className="company-page-configuration-header-button">
+                    <div className="company-page-configuration-header-button" onClick={() => navigate(`/admin/company/edit/${id}`)}>
                         Edit
                     </div>
                     <div className="company-page-header-button" onClick={() => navigate('/admin/company')}>

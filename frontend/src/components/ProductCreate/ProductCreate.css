@@ -22,6 +22,42 @@
     cursor: pointer;
 }
 
+.product-create-header,
+.product-create-configuration-header{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-create-header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-create-configuration-header-button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid #1255cb;
+    background: none;
+    color: #1255cb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.product-create-configuration-delete-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #ff4d4f;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .product-create-slider {
     width: 200px;
     cursor: pointer;

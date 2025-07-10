@@ -1,21 +1,23 @@
 import React, {useEffect, useState} from "react";
 import "./Checkout.css";
-import {getCart, getCoupon, placeOrder} from "../../widgets/checkout-widget/model/effects";
-import {useSelector} from "react-redux";
+import {getCoupon, placeOrder} from "../../widgets/checkout-widget/model/effects";
+import {useDispatch, useSelector} from "react-redux";
 import {sessionSelect} from "../../redux/core/session/selectors";
 import {storeSelect} from "../../redux/core/store/selectors";
-import {Cart} from "../../widgets/cart-widget/model/types";
 import {useNavigate} from "react-router-dom";
 import {formatNumber} from "../../util/numbers";
 import {Deal} from "../../widgets/admin-deals-create-widget/model/types";
+import {cartSelect} from "../../widgets/cart-widget/model/selectors";
+import {getCart} from "../../widgets/cart-widget/model/effects";
 
 const Checkout: React.FC = () => {
     const accessToken = useSelector(sessionSelect.accessToken);
     const storeId = useSelector(storeSelect.id);
     const store = useSelector(storeSelect.path);
     const id = useSelector(sessionSelect.id);
-    const [cartItems, setCartItems] = useState<Cart[]>([]);
-    
+    const cartItems = useSelector(cartSelect.cartItems);
+    const dispatch = useDispatch();
+
     const [paymentMethod, setPaymentMethod] = useState("cash");
 
     const [firstName, setFirstName] = useState('');
@@ -25,8 +27,6 @@ const Checkout: React.FC = () => {
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
     const [phone, setPhone] = useState('');
-    const initialSubtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const [subtotal, setSubtotal] = useState(initialSubtotal);
     const navigate = useNavigate();
 
     const [couponCode, setCouponCode] = useState<undefined | string>();
@@ -49,15 +49,18 @@ const Checkout: React.FC = () => {
         }
     }
 
-    const removeCoupon = async () => {
-       setCoupon(undefined);
-       setCouponCode('');
-       setSubtotal(initialSubtotal);
-    }
-
     useEffect(() => {
-        getCart(id, storeId, accessToken).then((response) => setCartItems(response));
-    }, [accessToken, id]);
+        getCart(id, storeId, accessToken, dispatch);
+    }, [accessToken, id, storeId]);
+
+    const initialSubtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const [subtotal, setSubtotal] = useState(initialSubtotal);
+
+    const removeCoupon = async () => {
+        setCoupon(undefined);
+        setCouponCode('');
+        setSubtotal(initialSubtotal);
+    }
 
     const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value);
     const handleStreetChange = (e: React.ChangeEvent<HTMLInputElement>) => setStreet(e.target.value);
@@ -118,11 +121,11 @@ const Checkout: React.FC = () => {
                     </div>
                 )}
                 <hr/>
-                <div className="summary-row">Subtotal: <span>{formatNumber(subtotal)}$</span></div>
+                <div className="summary-row">Subtotal: <span>{formatNumber(initialSubtotal)}$</span></div>
                 <div className="summary-row">Shipping: <span>Free</span></div>
                 {coupon && (<div className="summary-row">Coupon: <span>-{formatNumber(initialSubtotal - subtotal)}</span></div>)}
                 <hr/>
-                <div className="summary-row total">Total: <span>{formatNumber(subtotal)}$</span></div>
+                <div className="summary-row total">Total: <span>{formatNumber(initialSubtotal)}$</span></div>
 
                 <div className="payment-methods">
                     <label>

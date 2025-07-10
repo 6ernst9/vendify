@@ -87,7 +87,7 @@ const Products: React.FC = () => {
                     <tbody>
                     {productsFiltered.map((product) => (
                         <tr key={product.id}>
-                            <td>#{product.id}</td>
+                            <td className="product-id" onClick={() => navigate(`/admin/products/${product.id}`)}>#{product.id}</td>
                             <td><img src={product.images[0]}/></td>
                             <td>{product.name}</td>
                             <td><span className='badge'>active</span></td>

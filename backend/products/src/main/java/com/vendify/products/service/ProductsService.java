@@ -75,6 +75,25 @@ public class ProductsService {
         ).subscribe());
     }
 
+    public Mono<Product> updateProduct(Product productDto) {
+        return productsRepository.findById(productDto.getId())
+                .flatMap(product -> {
+                    product.setStock(productDto.getStock());
+                    product.setPrice(productDto.getPrice());
+                    product.setDescription(productDto.getDescription());
+                    product.setStore(productDto.getStore());
+                    product.setCategory(productDto.getCategory());
+                    product.setImages(productDto.getImages());
+                    product.setName(productDto.getName());
+                    return productsRepository.save(product);
+                });
+    }
+
+    public Mono<Void> deleteProduct(long id) {
+        return productsRepository.findById(id)
+                .flatMap(product -> productsRepository.deleteById(id));
+    }
+
     public Mono<Void> updateStock(List<OrderItem> items) {
         return Flux.fromIterable(items)
                 .flatMap(item ->

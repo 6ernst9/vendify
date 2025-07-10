@@ -35,6 +35,10 @@ import AdminLogsWidget from "./widgets/admin-logs-widget/AdminLogsWidget";
 import Loading from "./components/Loading/Loading";
 import AdminOrderWidget from "./widgets/admin-order-widget/AdminOrderWidget";
 import OrderInfoWidget from "./widgets/order-info-widget/OrderInfoWidget";
+import AdminStoreEditWidget from "./widgets/admin-edit-store/AdminStoreEdit";
+import AdminProductEditWidget from "./widgets/admin-product-edit-widget/AdminProductEditWidget";
+import AdminProductPageWidget from "./widgets/admin-product-page-widget/AdminProductPageWidget";
+import AdminDealPageWidget from "./widgets/admin-deal-page-widget/AdminDealPageWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -70,10 +74,13 @@ const AppRoutes = () => {
             { path: "/admin/orders", element: <AdminOrdersWidget /> },
             { path: "/admin/orders/:orderId", element: <AdminOrderWidget /> },
             { path: "/admin/deals", element: <AdminDealsWidget /> },
+            { path: "/admin/deals/:dealId", element: <AdminDealPageWidget /> },
             { path: "/admin/deals/create", element: <AdminDealsCreateWidget /> },
             { path: "/admin/products", element: <AdminProductsWidget /> },
             { path: "/admin/products/create", element: <AdminProductCreateWidget /> },
             { path: "/admin/customers", element: <AdminCustomersWidget /> },
+            { path: "/admin/products/:productId", element: <AdminProductPageWidget /> },
+            { path: "/admin/products/edit/:productId", element: <AdminProductEditWidget /> },
         ];
 
         const dynamicStoreRoutes = stores.flatMap((store) => {
@@ -139,6 +146,10 @@ const AppRoutes = () => {
                 {
                     path: '/admin/company/:id',
                     element: <AdminStorePageWidget/>
+                },
+                {
+                    path: '/admin/company/edit/:id',
+                    element: <AdminStoreEditWidget/>
                 }
             ];
         });

@@ -69,3 +69,13 @@
     border-bottom: 4px solid #1255cb;
     font-weight: 600;
 }
+
+.deal-id{
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+.deal-id:hover{
+    color: #1255cb;
+}

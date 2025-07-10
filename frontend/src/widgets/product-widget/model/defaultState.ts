@@ -11,6 +11,7 @@ export const defaultState: ProductState = {
         images: [],
         stock: 0,
         noReviews: 0,
+        store: '',
     },
     related: [],
     hasPreloaded: false

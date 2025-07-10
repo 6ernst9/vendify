@@ -39,20 +39,14 @@ public class StoresController {
     public Mono<ResponseDto> addStore(@RequestBody StoreDto storeDto){
         return storesService.addStore(storeDto).then(Mono.just(new ResponseDto("store_created", "Store created successfully")));
     }
-//
-//    @PutMapping("/change-path")
-//    public Mono<ResponseDto> changePath(@RequestBody String path){}
-//    @PutMapping("/change-name")
-//    public Mono<ResponseDto> changeName(@RequestBody String name){}
-//    @PutMapping("/change-theme")
-//    public Mono<ResponseDto> changeTheme(@RequestBody Theme theme){}
-//    @PutMapping("/change-contact-links")
-//    public Mono<ResponseDto> changeContactLinks(@RequestBody ContactLinks contactLinks){}
-//    @PutMapping("/change-banner")
-//    public Mono<ResponseDto> changeBanner(@RequestBody String banner){}
-//
-//    @DeleteMapping("/delete-store/{id}")
-//    public Mono<ResponseDto> deleteStore(@PathVariable long id){
-//
-//    }
+
+    @PutMapping("/update-store")
+    public Mono<ResponseDto> updateStore(@RequestBody Store storeDto){
+        return storesService.updateStore(storeDto).then(Mono.just(new ResponseDto("store_updated", "Store updated successfully")));
+    }
+
+    @DeleteMapping("/delete-store/{id}")
+    public Mono<ResponseDto> deleteStore(@PathVariable String id){
+        return storesService.deleteStore(id).then(Mono.just(new ResponseDto("store_deleted", "Store deleted successfully")));
+    }
 }

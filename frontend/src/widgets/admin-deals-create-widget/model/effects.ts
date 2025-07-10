@@ -1,8 +1,7 @@
 import {request} from "../../../util/request";
 import {SALES_BASE_URL} from "../../../util/constants";
-import {AddDeal} from "./types";
 
-export const createDeal = async ({name, percentage, code, category, endDate, store, productIds, accessToken }: AddDeal) => {
+export const createDeal = async (name: string, percentage: number, code: string | undefined, category: string, endDate: string, store: string, productIds: number[], accessToken: string) => {
     await request({
         url: SALES_BASE_URL + '/create-sale',
         method: 'POST',

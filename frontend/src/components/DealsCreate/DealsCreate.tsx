@@ -17,7 +17,7 @@ const DealsCreate: React.FC = () => {
     const [products, setProducts] = useState(userProducts);
     const [selectedProductIds, setSelectedProductIds] = useState<number[]>([]);
     const [category, setCategory] = useState<string>('');
-    const [store, setStore] = useState<string>('');
+    const [store, setStore] = useState<string>(storeId);
     const stores = useSelector(userStoresSelect.stores);
     const [code, setCode] = useState<string | undefined>();
     const [name, setName] = useState('');
@@ -25,20 +25,21 @@ const DealsCreate: React.FC = () => {
     const [endDate, setEndDate] = useState('');
 
     const handleSubmit = async () => {
-        await createDeal({
+        await createDeal(
             name,
             percentage,
+            code,
             category,
             endDate,
-            code,
-            productIds: selectedProductIds,
-            store: storeId,
+            store,
+            selectedProductIds,
             accessToken
-        });
+        );
         navigate("/admin/deals");
     };
 
     const changeStore = async (id: string) => {
+        setStore(id);
         const productz = await getProductsByStore(id, accessToken);
         setProducts(productz);
     }
@@ -89,7 +90,6 @@ const DealsCreate: React.FC = () => {
                     <select
                         value={store}
                         onChange={(e) => {
-                            setStore(e.target.value);
                             changeStore(e.target.value);
                         }}
                         className="sales-create-select"

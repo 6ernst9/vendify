@@ -1,5 +1,6 @@
 package com.vendify.products.model;
 
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Product {
     private List<String> images;
     private String category;
     private double price;
+    @Nullable
     private double oldPrice;
     private String description;
     private double reviews;

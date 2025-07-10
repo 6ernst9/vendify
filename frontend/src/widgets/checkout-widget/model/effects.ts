@@ -72,6 +72,7 @@ export const getCart = async (customerId: number, storeId: string, accessToken: 
                     price: product.price
                 }
             }));
+        console.log(fullCartItems);
         return fullCartItems;
     }).catch((error) => {
         console.error(error);

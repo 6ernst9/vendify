@@ -76,8 +76,17 @@ public class SalesService {
                 .switchIfEmpty(Mono.empty());
     }
 
+    public Mono<Sale> getSaleById(long id) {
+        return saleRepository.findById(id)
+                .switchIfEmpty(Mono.empty());
+    }
 
     public Flux<Sale> getSales(String storeId) {
         return saleRepository.findSalesByStore(storeId);
+    }
+
+    public Mono<Void> deleteSale(long id) {
+        return saleRepository.findById(id)
+                .flatMap(sale -> saleRepository.deleteById(id));
     }
 }

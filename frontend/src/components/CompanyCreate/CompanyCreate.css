@@ -14,11 +14,47 @@
     align-items: center;
 }
 
-.company-create-header-button{
+.company-page-header,
+.company-configuration-header{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-page-header-button {
     padding: 10px 20px;
     border-radius: 20px;
     background-color: #1255cb;
     color: white;
+    cursor: pointer;
+}
+
+.company-page-header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.company-page-configuration-header-button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid #1255cb;
+    background: none;
+    color: #1255cb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.company-page-configuration-delete-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #ff4d4f;
+    color: white;
+    font-weight: bold;
     cursor: pointer;
 }
 
