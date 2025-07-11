@@ -133,3 +133,10 @@
     color: white;
     cursor: pointer;
 }
+
+@media (max-width: 870px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

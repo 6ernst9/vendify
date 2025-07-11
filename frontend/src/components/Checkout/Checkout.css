@@ -1,6 +1,7 @@
 .checkout-container {
     display: flex;
     justify-content: space-around;
+    flex-direction: row;
     width: calc(100vw - 80px);
     margin: 20px 40px 0 40px;
     align-items: flex-start;
@@ -77,6 +78,7 @@
 .cart-item img {
     width: 60px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .summary-row {
@@ -140,4 +142,24 @@
     margin-top: 20px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+@media (max-width: 1150px) {
+    .checkout-container {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .checkout-summary {
+        max-width: none;
+        width: calc(100% - 80px);
+        padding: 0;
+        border: none;
+    }
+
+    .checkout-form {
+        width: calc(100% - 80px);
+        max-width: none;
+    }
 }

@@ -26,8 +26,8 @@ public class MongoDataConfig implements CommandLineRunner {
         var contactLinks2 = new ContactLinks("support@essentials.com", "0712345678", "fb", "tw", "insta");
         var theme2 = new Theme("#ff0000", "#ffffff", "#000000", "#6b7280", "Roboto", "6px", "10px", "blur");
 
-        var exclusiveStore = new Store("6839d4104106e209e93ea39c", 1L, "Exclusive", "https://firebasestorage.googleapis.com/v0/b/isproject-6332b.appspot.com/o/logos%2Fzalando.png?alt=media&token=1e3d8af6-e004-4c3c-a29b-29e76d828f9e", "exclusive", "banner.png", List.of("Electronics", "Beauty", "Fashion", "Fragrances"), theme1, contactLinks1);
-        var essentialsStore = new Store("6839d4104106e209e93ea39d", 1L, "Essentials", "https://firebasestorage.googleapis.com/v0/b/isproject-6332b.appspot.com/o/logos%2Flogo.png?alt=media&token=0f415675-8de9-40f9-8bf0-f8bc3821f9ce", "essentials", "banner.png", List.of("Electronics", "Beauty", "Fashion", "Fragrances"), theme2, contactLinks2);
+        var exclusiveStore = new Store("6839d4104106e209e93ea39c", 1L, "Exclusive", "https://firebasestorage.googleapis.com/v0/b/isproject-6332b.appspot.com/o/logos%2Fzalando.png?alt=media&token=1e3d8af6-e004-4c3c-a29b-29e76d828f9e", "exclusive", null, List.of("Electronics", "Beauty", "Fashion", "Fragrances"), theme1, contactLinks1);
+        var essentialsStore = new Store("6839d4104106e209e93ea39d", 1L, "Essentials", "https://firebasestorage.googleapis.com/v0/b/isproject-6332b.appspot.com/o/logos%2Flogo.png?alt=media&token=0f415675-8de9-40f9-8bf0-f8bc3821f9ce", "essentials", null, List.of("Electronics", "Beauty", "Fashion", "Fragrances"), theme2, contactLinks2);
 
         var initFlow = mongoTemplate.dropCollection(Store.class)
                 .thenMany(mongoTemplate.insertAll(List.of(exclusiveStore, essentialsStore)))

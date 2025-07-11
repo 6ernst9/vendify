@@ -91,6 +91,7 @@
     width: 50px;
     height: 50px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .cart-item p{
@@ -226,4 +227,16 @@
     font-family: var(--font-family), sans-serif;
     border-radius: var(--button-radius);
     margin-top: 10px;
+}
+
+@media (max-width: 1150px) {
+    .cart-final{
+        flex-direction: column;
+    }
+
+    .cart-summary,
+    .cart-coupon-section{
+        width: calc(100vw - 100px);
+        min-width: auto;
+    }
 }

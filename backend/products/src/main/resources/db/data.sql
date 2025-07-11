@@ -19,6 +19,6 @@ INSERT INTO products (store, name, images, category, price, old_price, descripti
                                                                                                                    ( '6839d4104106e209e93ea39d', 'Adidas Yeezy', '{https://firebasestorage.googleapis.com/v0/b/isproject-6332b.appspot.com/o/products%2Fchicago.jpg?alt=media&token=4c3fb605-f2a6-4ae4-b55e-03d3b5dc8bf5}', 'Clothing',  113.5, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, velit nec eleifend varius, tortor lacus aliquam quam, vitae fermentum elit urna et justo. Curabitur vitae sapien non nunc volutpat suscipit. Integer convallis, metus sit amet convallis dapibus, nulla neque tincidunt est, vitae suscipit justo tortor ac urna. Aenean ut nulla ac velit faucibus placerat.', 4.0, 12, 12);
 
 INSERT INTO sales (name, code, store, status, percentage, product_ids, end_date)
-VALUES ( 'Spring Sale', NULL, '6839d4104106e209e93ea39c', 'ACTIVE', 20.0, '{1,2,3}', '2025-06-30T00:00:00');
+VALUES ( 'Spring Sale', NULL, '6839d4104106e209e93ea39c', 'ACTIVE', 20.0, '{1,2,3}', '2025-07-20T00:00:00');
 INSERT INTO sales (name, code, store, status , percentage, product_ids, end_date)
-VALUES ( 'Budget Blast', NULL, '6839d4104106e209e93ea39d', 'ACTIVE',15.0, '{10,11,12}', '2025-06-30T00:00:00');
+VALUES ( 'Budget Blast', NULL, '6839d4104106e209e93ea39d', 'ACTIVE',15.0, '{10,11,12}', '2025-07-2  0T00:00:00');

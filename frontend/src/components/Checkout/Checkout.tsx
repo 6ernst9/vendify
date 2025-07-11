@@ -115,7 +115,7 @@ const Checkout: React.FC = () => {
             <div className="checkout-summary">
                 {cartItems.map((cartItem) =>
                     <div className="cart-item">
-                        <img src={cartItem.img} alt={cartItem.name}/>
+                        <img onClick={() => navigate(`/${store}/product/${cartItem.id}`)} src={cartItem.img} alt={cartItem.name}/>
                         <span>{cartItem.quantity} x {cartItem.name}</span>
                         <strong>${formatNumber(cartItem.price)}</strong>
                     </div>

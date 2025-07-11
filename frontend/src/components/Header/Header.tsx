@@ -21,9 +21,13 @@ const Header: React.FC = () => {
     const name = useSelector(storeSelect.name);
     const logo = useSelector(storeSelect.logo);
     const customerId = useSelector(sessionSelect.id);
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
+    const [menuOpen, setMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+
     const accessToken = useSelector(sessionSelect.accessToken);
     const storeId = useSelector(storeSelect.id);
     const exists = useSelector(sessionSelect.exists);
@@ -49,13 +53,17 @@ const Header: React.FC = () => {
                 <h2>{name}</h2>
             </Link>
 
-            <nav className="store-header-navbar">
+            <button className="store-header-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+                ☰
+            </button>
+
+            <nav className={`store-header-navbar ${menuOpen ? 'open' : ''}`}>
                 <Link to={`/${store}/home`}>Home</Link>
                 <Link to={`/${store}/browse`}>Browse</Link>
                 <Link to={`/${store}/contact`}>Contact</Link>
             </nav>
 
-            <div className="store-header-account">
+            <div className={`store-header-account ${menuOpen ? 'open' : ''}`}>
                 <input
                     type="text"
                     value={searchQuery}
@@ -72,14 +80,14 @@ const Header: React.FC = () => {
                 </Link>
                 <Link to={`/${store}/wishlist`} className="store-header-accounts">
                     <div className="store-header-icon-wrapper">
-                        <Heart />
+                        <Heart/>
                         {wishlistCount > 0 && <span className="store-header-badge">{wishlistCount}</span>}
                     </div>
                 </Link>
 
                 <Link to={`/${store}/cart`} className="store-header-accounts">
                     <div className="store-header-icon-wrapper">
-                        <Cart />
+                        <Cart/>
                         {cartCount > 0 && <span className="store-header-badge">{cartCount}</span>}
                     </div>
                 </Link>

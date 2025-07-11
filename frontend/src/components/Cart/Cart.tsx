@@ -65,7 +65,7 @@ const CartComponent: React.FC = () => {
                         {cartItems.map((item) => (
                             <div key={item.id} className="cart-item">
                                 <div className="cart-product">
-                                    <img src={item.img} className="cart-product-image"/>
+                                    <img onClick={() => navigate(`/${item}/product/${item.id}`)} src={item.img} className="cart-product-image"/>
                                     <div className="cart-product-name">
                                         <p>{item.name}</p>
                                     </div>

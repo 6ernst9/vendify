@@ -39,5 +39,31 @@
 .banner-img {
     width: calc(100vw - 280px);
     height: auto;
-    aspect-ratio: initial;
+    aspect-ratio: 16/9;
+}
+
+@media (max-width: 870px) {
+    .banner {
+        flex-direction: column-reverse;
+    }
+
+    .banner-categories {
+        display: flex;
+        height: auto;
+        width: 100vw;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    .banner-img-container{
+        padding: 0;
+    }
+
+    .banner-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
 }

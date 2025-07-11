@@ -85,3 +85,9 @@
     font-size: 20px;
     margin-bottom: 5px;
 }
+
+@media (max-width: 870px) {
+    .sales-title-timer {
+        display: none;
+    }
+}
