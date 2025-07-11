@@ -1,5 +1,4 @@
 import React from "react";
-import image from '../../assets/img/banner.png';
 import './Banner.css';
 import {useSelector} from "react-redux";
 import {storeSelect} from "../../redux/core/store/selectors";
@@ -11,7 +10,7 @@ const Banner: React.FC = () => {
     const store = useSelector(storeSelect.path);
     const banner = useSelector(storeSelect.banner);
 
-    if(banner === '') {
+    if(banner === null || banner === '') {
         return null;
     }
 
@@ -21,7 +20,7 @@ const Banner: React.FC = () => {
                 {categories.map((category) => <p onClick={() => navigate(`/${store}/browse?category=${category}`)}>{category}</p>)}
             </div>
             <div className="banner-img-container">
-                <img src={image} className="banner-img"/>
+                <img src={banner} className="banner-img"/>
             </div>
         </div>
     )

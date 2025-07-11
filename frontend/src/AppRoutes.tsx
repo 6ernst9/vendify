@@ -41,6 +41,7 @@ import AdminProductPageWidget from "./widgets/admin-product-page-widget/AdminPro
 import AdminDealPageWidget from "./widgets/admin-deal-page-widget/AdminDealPageWidget";
 import AdminAccountPageWidget from "./widgets/admin-account-page-widget/AdminAccountPageWidget";
 import AdminAccountEditWidget from "./widgets/admin-account-edit-widget/AdminAccountEditWidget";
+import TermsWidget from "./widgets/terms-widget/TermsWidget";
 
 const AppRoutes = () => {
     const stores = useSelector(storesSelect.stores);
@@ -126,6 +127,10 @@ const AppRoutes = () => {
                 {
                     path: `/:path/contact`,
                     element: <ContactWidget />
+                },
+                {
+                    path: `/:path/terms`,
+                    element: <TermsWidget />
                 },
                 {
                     path: `/:path/login`,

@@ -16,9 +16,9 @@ const Topbar: React.FC = () => {
             </Link>
 
             <nav className="homepage-topbar-navbar">
-                <Link to="/solutions">Solutions</Link>
-                <Link to="/pricing">Pricing</Link>
-                <Link to="/contact">About</Link>
+                <Link to="/home">Solutions</Link>
+                <Link to="/home">Pricing</Link>
+                <Link to="/home">About</Link>
             </nav>
 
             <div className="homepage-topbar-buttons">

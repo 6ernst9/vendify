@@ -53,9 +53,9 @@ const Footer: React.FC = () => {
                 <div className="footer-section">
                     <h3>Quick Link</h3>
                     <ul className="footer-list">
-                        <li onClick={() => navigate(`/${store}/privacy`)}>Privacy Policy</li>
+                        <li onClick={() => navigate(`/${store}/terms`)}>Privacy Policy</li>
                         <li onClick={() => navigate(`/${store}/terms`)}>Terms Of Use</li>
-                        <li onClick={() => navigate(`/${store}/faq`)}>FAQ</li>
+                        <li onClick={() => navigate(`/${store}/terms`)}>FAQ</li>
                         <li onClick={() => navigate(`/${store}/contact`)}>Contact</li>
                     </ul>
                 </div>

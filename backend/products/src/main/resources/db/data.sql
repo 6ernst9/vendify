@@ -21,4 +21,4 @@ INSERT INTO products (store, name, images, category, price, old_price, descripti
 INSERT INTO sales (name, code, store, status, percentage, product_ids, end_date)
 VALUES ( 'Spring Sale', NULL, '6839d4104106e209e93ea39c', 'ACTIVE', 20.0, '{1,2,3}', '2025-07-20T00:00:00');
 INSERT INTO sales (name, code, store, status , percentage, product_ids, end_date)
-VALUES ( 'Budget Blast', NULL, '6839d4104106e209e93ea39d', 'ACTIVE',15.0, '{10,11,12}', '2025-07-2  0T00:00:00');
+VALUES ( 'Budget Blast', NULL, '6839d4104106e209e93ea39d', 'ACTIVE',15.0, '{10,11,12}', '2025-07-20T00:00:00');
