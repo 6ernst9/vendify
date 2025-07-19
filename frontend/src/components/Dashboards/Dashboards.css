@@ -1,0 +1,279 @@
+.dashboard {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    flex-shrink: 0;
+    overflow-y: visible;
+}
+
+.dashboard h1 {
+    margin-bottom: 10px;
+}
+
+.dashboard-header{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.dashboard-widgets {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.dashboard-widgets h2{
+    font-size: 20px;
+    color: black;
+}
+
+.dashboard-stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.dashboard-to-do-header {
+    width: 100%;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.live-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
+.recording-indicator {
+    width: 14px;
+    height: 14px;
+    background-color: #00E88F;
+    border-radius: 50%;
+    animation: pulse 1s infinite ease-in-out;
+}
+
+.dashboard-stat-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.dashboard-single-stat-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-stat-label {
+    font-size: 18px;
+    color: #6B7280;
+}
+
+.dashboard-stat-value-container,
+.dashboard-single-stat-value-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dashboard-stat-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.dashboard-single-stat-value {
+    font-size: 36px;
+    font-weight: 400;
+    color: black;
+}
+
+.dashboard-stat-increase,
+.dashboard-single-stat-increase{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: limegreen;
+}
+
+.dashboard-stat-increase svg{
+    width: 15px;
+    height: 15px;
+}
+
+.dashboard-single-stat-increase svg{
+    width: 35px;
+    height: 35px;
+}
+
+.dashboard-stat-increase p{
+    font-size: 18px;
+}
+
+.dashboard-single-stat-increase p{
+    font-size: 36px;
+}
+
+.decrease {
+    color: darkred;
+}
+
+.dashboards-top {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.dashboard-top-card{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    padding: 20px;
+}
+
+.dashboard-top-card h3{
+    color: black;
+    font-size: 20px;
+}
+
+.dashboard-top-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+.dashboard-top-table th {
+    text-align: left;
+    font-size: 18px;
+    color: black;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.dashboard-top-table td {
+    padding: 15px 0;
+    font-size: 16px;
+    color: black;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.dashboard-table-name{
+    font-weight: bold;
+}
+
+.dashboard-to-do{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.dashboard-to-do h3{
+    font-size: 20px;
+    color: black;
+}
+
+.dashboard-to-do-cards{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.dashboard-to-do-card svg{
+    width: 20px;
+    height: 20px;
+    color: #1255cb;
+}
+
+.dashboard-to-do-card p{
+    font-size: 18px;
+}
+
+.dashboard-to-do-card{
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    padding: 10px;
+    gap: 10px;
+}
+
+.dashboards-logs-container {
+    flex:1;
+    width: calc(100% - 40px);
+    overflow-y: auto;
+    height: 150px;
+    max-height: 150px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 0 16px;
+    border: 1px solid #d9d9d9;
+}
+
+.log-entry {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.log-entry p{
+    color: #d9d9d9;
+}
+
+.log-timestamp {
+    color: #AB47BC;
+    margin-right: 10px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+
+

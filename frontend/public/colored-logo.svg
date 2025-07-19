@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100%" height="100%" viewBox="0 0 720 624" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <defs>
+    <linearGradient id="blueGreenGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0024a7" />
+        <stop offset="100%" stop-color="#00E88F" />
+    </linearGradient>
+  </defs>
+
+    <g transform="matrix(0.24,0,0,0.24,-36.1917,-92.8061)">
+    <g id="top" transform="matrix(0.99287,0,0,0.973534,44.3317,17.9844)">
+      <path
+              d="M1617.2,3046.02l-1509.97,-2667.28l3019.93,0l-278.56,492.063l-1905.69,-0l137.49,242.87l1630.71,-0l-257.616,455.066l-557.12,0l0.551,-0.972l-559.464,-0l279.732,494.132l140.8,-248.716l557.12,-0l-697.92,1232.84Z"
+              fill="url(#blueGreenGradient)"
+      />
+    </g>
+  </g>
+</svg>

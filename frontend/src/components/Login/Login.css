@@ -1,0 +1,80 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--background-color);
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--background-color);
+    padding: 32px 24px;
+    border-radius: 8px;
+    border: 1px solid var(--text-secondary-color);
+    width: 320px;
+}
+
+.login-box h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--title-color);
+    margin-bottom: 4px;
+}
+
+.customer-login-error {
+    color: #ff4d4f;
+    font-size: 16px;
+    font-family: var(--font-family), sans-serif;
+}
+
+.login-details {
+    font-size: 16px;
+    color: var(--text-secondary-color);
+    margin-bottom: 16px;
+}
+
+.customer-login-input {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+}
+
+.customer-login-input:focus {
+    border-bottom: var(--primary-color);
+}
+
+.customer-login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.customer-login-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.customer-login-button:hover {
+    background-color: var(--primary-color);
+}
+
+.customer-login-forgot {
+    color:  var(--primary-color);
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.customer-login-forgot:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,125 @@
+.contact-container {
+    width: calc(100vw - 80px);
+    margin: 20px 40px 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+}
+
+.contact-container p{
+    color: var(--title-color);
+}
+
+.contact-category {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: var(--font-family), sans-serif;
+    color: var(--text-secondary-color);
+}
+
+.contact-table {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+}
+
+.contact-call, .contact-write {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.contact-write {
+    margin-bottom: 20px;
+}
+
+.contact-call-header, .contact-write-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-call-header p, .contact-write-header p {
+    font-size: 18px;
+    color: var(--title-color);
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.contact-icon svg {
+    color: white;
+    width: 24px;
+    height: 24px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 20px;
+}
+
+.contact-form-header{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-message-form {
+    width: calc(100% - 20px);
+    min-height: 100px;
+    resize: none;
+}
+
+.contact-send-message {
+    padding: 10px 40px;
+    border: none;
+    background: var(--primary-color);;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: var(--button-radius);
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #ccc;
+    color: gray;
+    border: none;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border: none;
+    outline: none;
+}
+
+.contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: gray;
+}

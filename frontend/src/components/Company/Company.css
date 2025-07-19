@@ -1,0 +1,137 @@
+.company-container {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.company-header,
+.company-configuration-header{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-header-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #1255cb;
+    color: white;
+    cursor: pointer;
+}
+
+.company-header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.company-header h1 {
+    margin-bottom: 20px;
+}
+
+.company-empty-container {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.company-empty-container h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: black;
+}
+
+.company-empty-container p {
+    font-size: 18px;
+}
+
+.company-configuration-header-button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid #1255cb;
+    background: none;
+    color: #1255cb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.highlighted-text {
+    color: #0024a7;
+}
+
+.company-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.company-table th,
+.company-table td {
+    padding: 12px;
+    border-bottom: 1px solid #d3d3d3;
+    text-align: left;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.company-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-search p{
+    font-size: 18px;
+    color: #6B7280;
+}
+
+.company-search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    width: 300px;
+    padding: 10px;
+    height: 25px;
+    outline: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+.company-search-bar svg {
+    width: 24px;
+    height: 24px;
+    color: #1255cb;
+}
+
+.company-search-bar input{
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
+}
+
+.company-search-bar input::placeholder{
+    color: #6B7280;
+}
+
+.store-id{
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+.store-id:hover{
+    color: #1255cb;
+}

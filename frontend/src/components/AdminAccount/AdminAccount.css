@@ -1,0 +1,90 @@
+.admin-account-page-container {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-account-page-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.admin-account-page-header h1 {
+    color: #001944;
+    font-weight: normal;
+}
+
+.admin-account-page-header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.admin-account-page-header-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #1255cb;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.admin-account-page-configuration-header-button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid #1255cb;
+    background: none;
+    color: #1255cb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-account-page-info-container {
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-account-page-section {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+}
+
+.admin-account-page-section h1 {
+    font-size: 18px;
+}
+
+.admin-account-page-section p {
+    font-size: 18px;
+}
+
+.admin-account-page-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #d3d3d3;
+    border: none;
+}
+
+.admin-account-page-bottom {
+    display: flex;
+    width: auto;
+    margin-top: 20px;
+}
+
+.admin-account-page-configuration-delete-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #ff4d4f;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

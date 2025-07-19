@@ -1,0 +1,108 @@
+.admin-login-box {
+    width: 100%;
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.admin-login-container {
+    padding: 40px 30px;
+    border-radius: 10px;
+    background: white;
+    text-align: center;
+    gap: 20px;
+    width: 360px;
+}
+
+.admin-login-logo {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-login-logo h2{
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+.admin-login-logo svg{
+    width: 24px;
+    height: 24px;
+}
+
+.admin-login-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #0024a7, #00E88F);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.admin-login-title {
+    font-size: 24px;
+    color: #001944;
+    margin: 0;
+}
+
+.admin-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.admin-login-label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
+.admin-login-input {
+    margin-top: 6px;
+    padding: 10px 14px;
+    border: 1px solid #d3d3d3;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.admin-login-input:focus {
+    outline: none;
+    border-color: #1255cb;
+}
+
+.admin-login-button {
+    background: #1255cb;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s ease;
+}
+
+.admin-login-error {
+    color: #ff4d4f;
+    font-size: 16px;
+    font-family: var(--font-family), sans-serif;
+}
+
+.admin-login-forgot {
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}

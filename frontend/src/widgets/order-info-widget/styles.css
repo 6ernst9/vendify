@@ -1,0 +1,8 @@
+.order-widget {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    padding-top: 80px;
+}

@@ -1,0 +1,142 @@
+.footer {
+    background-color: black;
+    color: white;
+    padding: 40px 40px;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.footer-section h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-subtitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.footer-text {
+    font-size: 16px;
+    color: #bbb;
+    margin: 5px 0;
+}
+
+.footer-subscribe {
+    display: flex;
+    align-items: center;
+    border: 1px solid #555;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.footer-input {
+    flex: 1;
+    padding: 8px;
+    background: transparent;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.footer-input::placeholder {
+    color: #bbb;
+}
+
+.footer-button {
+    background-color: #555;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-list li {
+    font-size: 16px;
+    color: #bbb;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.footer-list li:hover {
+    color: white;
+}
+
+.footer-qr {
+    background-color: white;
+    aspect-ratio: 1;
+    max-width: 80px;
+}
+
+.footer-qr img {
+    width: 80px;
+}
+
+.footer-apps {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.footer-app-icon {
+    width: 120px;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    font-size: 18px;
+    color: #bbb;
+    text-align: center;
+}
+
+.footer-socials {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.footer-socials svg {
+    width: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 870px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

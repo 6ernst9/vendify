@@ -1,0 +1,81 @@
+.deals-container {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.deals-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deals-header h1{
+    margin-bottom: 20px;
+}
+
+.deals-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.deals-table th,
+.deals-table td {
+    padding: 12px;
+    border-bottom: 1px solid #d3d3d3;
+    text-align: left;
+}
+
+.deals-table img{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.deals-header-button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #1255cb;
+    color: white;
+    cursor: pointer;
+}
+.deals-tabs {
+    display: flex;
+    border-bottom: 1px solid #d3d3d3;
+    margin-bottom: 20px;
+}
+
+.deals-tab-button {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    margin-right: 16px;
+    font-size: 16px;
+    color: #6B7280;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.deals-tab-button:hover {
+    color: #001944;
+}
+
+.deals-tab-button.active {
+    color: #001944;
+    border-bottom: 4px solid #1255cb;
+    font-weight: 600;
+}
+
+.deal-id{
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+.deal-id:hover{
+    color: #1255cb;
+}

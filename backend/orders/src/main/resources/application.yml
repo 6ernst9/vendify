@@ -1,0 +1,12 @@
+server:
+  port: 8083
+
+spring:
+  data:
+    mongodb:
+      database: vendify
+      host: localhost
+      port: 27017
+
+products:
+  url: http://localhost:8082

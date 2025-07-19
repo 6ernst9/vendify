@@ -1,0 +1,91 @@
+.skeleton-page {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 20px;
+    height: 100vh;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.skeleton-store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    padding: 0 40px;
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+.skeleton-store-header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skeleton-store-header-navbar {
+    display: flex;
+    gap: 30px;
+}
+
+.skeleton-store-header-account {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.skeleton-banner {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: calc(100vw - 80px);
+    gap: 40px;
+    margin: 50px 40px 0;
+}
+
+.skeleton-banner-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 600px;
+    width: 200px;
+    padding: 40px 0;
+}
+
+.skeleton-banner-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0 0 0;
+    flex-grow: 1;
+}
+
+.skeleton-banner-img {
+    width: 100%;
+    height: 600px;
+}
+
+.skeleton-flash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 20px;
+}
+
+.skeleton-flash-cards {
+    margin: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skeleton-card {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}

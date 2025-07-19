@@ -1,0 +1,65 @@
+.navbar {
+    width: calc(100% - 310px);
+    height: 80px;
+    background: #001944;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px  0 20px;
+    position: fixed;
+    flex-shrink: 0;
+    top: 0;
+    right: 0;
+    z-index: 3;
+}
+
+.navbar-search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    width: 300px;
+    padding: 10px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.15);
+    outline: 1px solid white;
+    border-radius: 5px;
+}
+
+.navbar-search-bar svg {
+    width: 24px;
+    height: 24px;
+}
+
+.navbar-search-bar input{
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.navbar-search-bar input::placeholder{
+    color: white;
+}
+
+.navbar-user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-user-info span{
+     cursor: pointer;
+ }
+
+.navbar-user-info span:hover{
+    text-decoration: underline;
+}
+
+.navbar-user-info svg {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}

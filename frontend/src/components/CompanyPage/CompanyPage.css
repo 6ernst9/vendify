@@ -1,0 +1,123 @@
+.company-page-container {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.company-page-header,
+.company-configuration-header{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-page-header-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #1255cb;
+    color: white;
+    cursor: pointer;
+}
+
+.company-page-header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.company-page-header h1 {
+    margin-bottom: 20px;
+    color: #001944;
+    font-weight: normal;
+}
+
+.company-page-configuration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+}
+
+.company-page-configuration-header h1{
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #001944;
+    font-weight: normal;
+}
+
+.company-page-configuration-header-button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid #1255cb;
+    background: none;
+    color: #1255cb;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.company-page-configuration-content{
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+}
+
+.company-page-configuration-content h1{
+    font-size: 18px;
+}
+
+.company-page-configuration-content p{
+    font-size: 18px;
+}
+
+.highlighted-text{
+    color: #1255cb;
+    cursor: pointer;
+}
+
+.highlighted-text:hover{
+    color: #001944;
+}
+
+.company-page-divider {
+    width: 100%;
+    margin: 10px 0;
+    border: none;
+    height: 1px;
+    background-color: #d3d3d3;
+}
+
+.company-page-configuration-colors {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+}
+
+.company-configuration-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #6B7280;
+}
+
+.company-page-configuration-color {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    background-color: #d1ecf1;
+    color: #0c5460;
+}

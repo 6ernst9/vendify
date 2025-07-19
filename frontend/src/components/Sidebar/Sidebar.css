@@ -1,0 +1,85 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(to bottom, #001944 0px, #001944 90px, #0024a7 100%);
+    color: white;
+    position: fixed;
+    flex-shrink: 0;
+    left: 0;
+    top: 0;
+    padding: 20px;
+}
+
+.sidebar-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.sidebar-header svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.sidebar-logo {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sidebar-logo h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 5px;
+}
+
+.sidebar-logo svg {
+    width: 35px;
+    height: 35px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar ul li:hover,
+.sidebar .active {
+    background: rgba(255, 255, 255, 0.15);
+    outline: 1px solid white;
+    border-radius: 5px;
+}
+
+.sidebar .active,
+.sidebar .active svg{
+    color: #00E88F;
+}
+
+.sidebar-li-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    gap: 15px;
+}
+
+.sidebar-li-container svg {
+    color: white;
+    width: 24px;
+    height: 24px;
+}
